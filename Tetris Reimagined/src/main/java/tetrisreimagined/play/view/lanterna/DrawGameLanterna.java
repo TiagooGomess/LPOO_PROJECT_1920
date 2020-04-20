@@ -8,4 +8,6 @@ public class DrawGameLanterna {
     public DrawGameLanterna(Screen screen) {
         this.screen = screen;
     }
+
+
 }
