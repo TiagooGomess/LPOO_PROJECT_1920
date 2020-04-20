@@ -1,6 +1,7 @@
 package tetrisreimagined.play.model;
 
 public abstract class Element {
+
     private Position position;
 
     public Element(int x, int y) {
