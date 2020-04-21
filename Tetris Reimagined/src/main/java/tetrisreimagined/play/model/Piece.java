@@ -18,4 +18,24 @@ public abstract class Piece {
     public List<Block> getBlocks() {
         return this.blocks;
     }
+
+    public void moveLeft() {
+        for (Block block: this.blocks)
+            block.moveLeft();
+    }
+
+    public void moveRight() {
+        for (Block block: this.blocks)
+            block.moveRight();
+    }
+
+    public void moveUp() {
+        for (Block block: this.blocks)
+            block.moveUp();
+    }
+
+    public void moveDown() {
+        for (Block block: this.blocks)
+            block.moveDown();
+    }
 }

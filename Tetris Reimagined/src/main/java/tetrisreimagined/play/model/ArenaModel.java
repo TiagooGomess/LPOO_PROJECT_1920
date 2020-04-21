@@ -14,7 +14,11 @@ public class ArenaModel extends Observable<ArenaModel> {
         this.pieces = new ArrayList<>();
         addPiece(new ZBlock());
 
-
+        for (Piece piece: pieces) {
+            piece.moveDown();
+            piece.moveRight();
+            piece.moveRight();
+        }
     }
 
     public List<Piece> getPieces() {
