@@ -9,10 +9,13 @@ public class ArenaModel extends Observable<ArenaModel> {
     // Only represents data
 
     private List<Piece> pieces;
+    private Piece currentPiece;
 
     public ArenaModel() {
         this.pieces = new ArrayList<>();
         addPiece(new ZBlock());
+
+        this.currentPiece = new SBlock();
 
         for (Piece piece: pieces) {
             piece.moveDown();
@@ -23,6 +26,10 @@ public class ArenaModel extends Observable<ArenaModel> {
 
     public List<Piece> getPieces() {
         return pieces;
+    }
+
+    public Piece getCurrentPiece() {
+        return currentPiece;
     }
 
     public void addPiece(Piece piece) {

@@ -50,9 +50,7 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         try {
             this.screen.clear();
 
-            for (Piece piece: arena.getPieces()) {
-                drawPiece(piece);
-            }
+            drawPiece(arena.getCurrentPiece());
 
             this.screen.refresh();
         } catch (IOException e) {

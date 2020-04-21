@@ -14,24 +14,30 @@ public class ArenaController {
         this.arena = arena;
     }
 
-    public void start() throws IOException {
+    public boolean start() throws IOException {
         Observer.COMMAND command;
 
         do {
+            gui.drawAll(arena); // provisório
+
             command = gui.getCommand();
 
-            if (command == Observer.COMMAND.UP)
-                // arena.setHeroPosition(arena.getHeroPosition().up());
-                System.out.println("MOVE UP");
+            //if (command == Observer.COMMAND.UP)
+                //this.arena.getCurrentPiece().moveUp();
+
             if (command == Observer.COMMAND.RIGHT)
-                System.out.println("MOVE RIGHT");
-            // arena.setHeroPosition(arena.getHeroPosition().right());
-            if (command == Observer.COMMAND.DOWN)
-                System.out.println("MOVE DOWN");
-            // arena.setHeroPosition(arena.getHeroPosition().down());
+                this.arena.getCurrentPiece().moveRight();
+
+            //if (command == Observer.COMMAND.DOWN)
+                //this.arena.getCurrentPiece().moveDown();
+
             if (command == Observer.COMMAND.LEFT)
-                System.out.println("MOVE LEFT");
-            // arena.setHeroPosition(arena.getHeroPosition().left());
+                this.arena.getCurrentPiece().moveLeft();
+
+            this.arena.getCurrentPiece().moveDown();
+
         } while (command != Observer.COMMAND.EOF);
+
+        return false;
     }
 }

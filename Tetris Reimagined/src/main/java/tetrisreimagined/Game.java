@@ -13,9 +13,11 @@ public class Game {
         ArenaModel arena = new ArenaModel();
         GameViewLanterna gui = new GameViewLanterna(60, 30);
         arena.addObserver(gui);
-        gui.drawAll(arena);
+
         ArenaController controller = new ArenaController(gui, arena);
         controller.start();
+
+        gui.drawAll(arena);
     }
 
 }
