@@ -5,8 +5,8 @@ public class Block {
     private Position position;
     private Color color;
 
-    public Block(int x, int y, Color color) {
-        this.position = new Position(x, y);
+    public Block(Position position, Color color) {
+        this.position = position;
         this.color = color;
     }
 

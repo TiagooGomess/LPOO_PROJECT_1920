@@ -1,9 +1,8 @@
 package tetrisreimagined;
 
-import com.googlecode.lanterna.screen.Screen;
+import tetrisreimagined.play.gui.lantern.GameViewLanterna;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.rules.ArenaController;
-import tetrisreimagined.play.view.lanterna.GameViewLanterna;
 
 import java.io.IOException;
 
@@ -14,7 +13,7 @@ public class Game {
         ArenaModel arena = new ArenaModel();
         GameViewLanterna gui = new GameViewLanterna(60, 30);
         arena.addObserver(gui);
-
+        gui.drawAll(arena);
         ArenaController controller = new ArenaController(gui, arena);
         controller.start();
     }

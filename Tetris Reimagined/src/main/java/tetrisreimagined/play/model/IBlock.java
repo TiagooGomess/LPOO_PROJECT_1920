@@ -6,11 +6,12 @@ public class IBlock extends Piece {
 
     public IBlock() {
         super();
-        this.color = new Color("blue", "codigodeazul");
-        blocks.add(new Block(0, 0, this.color));
-        blocks.add(new Block(1, 0, this.color));
-        blocks.add(new Block(2, 0, this.color));
-        blocks.add(new Block(3, 0, this.color));
+        this.color = new Color("cyan", "#00FFFF");
+
+        blocks.add(new Block(new Position(0, 0), this.color));
+        blocks.add(new Block(new Position(0, 1), this.color));
+        blocks.add(new Block(new Position(0, 2), this.color));
+        blocks.add(new Block(new Position(0, 3), this.color));
     }
 
 

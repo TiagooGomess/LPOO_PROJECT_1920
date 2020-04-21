@@ -1,10 +1,7 @@
 package tetrisreimagined.play.rules;
 
-import com.googlecode.lanterna.input.KeyType;
 import tetrisreimagined.play.model.ArenaModel;
-import tetrisreimagined.play.observer.Observable;
 import tetrisreimagined.play.observer.Observer;
-import tetrisreimagined.play.view.lanterna.GameViewLanterna;
 
 import java.io.IOException;
 
