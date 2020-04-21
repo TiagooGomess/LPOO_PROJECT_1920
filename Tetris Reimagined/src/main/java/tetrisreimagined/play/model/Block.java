@@ -1,11 +1,13 @@
 package tetrisreimagined.play.model;
 
-public abstract class Element {
+public class Block {
 
     private Position position;
+    private Color color;
 
-    public Element(int x, int y) {
+    public Block(int x, int y, Color color) {
         this.position = new Position(x, y);
+        this.color = color;
     }
 
     public Position getPosition() {
@@ -14,5 +16,13 @@ public abstract class Element {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }
