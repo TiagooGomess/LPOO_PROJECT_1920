@@ -14,30 +14,38 @@ public class ArenaController {
         this.arena = arena;
     }
 
-    public boolean start() throws IOException {
+    public void start() throws IOException, InterruptedException {
         Observer.COMMAND command;
 
+        int counter = 0;
+
         do {
+
+            if (counter++ == 10) { // mudar para velocidade da peça
+                makeCurrentPieceFall();
+                counter = 0;
+            }
+
+            Thread.sleep(10); // mudar para velocidade da peça
+
             gui.drawAll(arena); // provisório
 
             command = gui.getCommand();
 
-            //if (command == Observer.COMMAND.UP)
-                //this.arena.getCurrentPiece().moveUp();
+            if (command == Observer.COMMAND.NULL)
+                continue;
 
             if (command == Observer.COMMAND.RIGHT)
                 this.arena.getCurrentPiece().moveRight();
 
-            //if (command == Observer.COMMAND.DOWN)
-                //this.arena.getCurrentPiece().moveDown();
-
             if (command == Observer.COMMAND.LEFT)
                 this.arena.getCurrentPiece().moveLeft();
 
-            this.arena.getCurrentPiece().moveDown();
-
         } while (command != Observer.COMMAND.EOF);
 
-        return false;
+    }
+
+    public void makeCurrentPieceFall() {
+        this.arena.getCurrentPiece().moveDown();
     }
 }

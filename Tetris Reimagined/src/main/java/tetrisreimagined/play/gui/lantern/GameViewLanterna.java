@@ -71,14 +71,20 @@ public class GameViewLanterna implements Observer<ArenaModel> {
     }
 
     @Override
-    public COMMAND getCommand() throws IOException {
+    public COMMAND getCommand() throws IOException, InterruptedException {
+
         while (true) {
-            KeyStroke key = screen.readInput();
+
+            KeyStroke key = screen.pollInput();
+
+            if (key == null) { return COMMAND.NULL; }
+
             if (key.getKeyType() == KeyType.ArrowUp) return COMMAND.UP;
             if (key.getKeyType() == KeyType.ArrowRight) return COMMAND.RIGHT;
             if (key.getKeyType() == KeyType.ArrowDown) return COMMAND.DOWN;
             if (key.getKeyType() == KeyType.ArrowLeft) return COMMAND.LEFT;
             if (key.getKeyType() == KeyType.EOF) return COMMAND.EOF;
+
         }
     }
 
