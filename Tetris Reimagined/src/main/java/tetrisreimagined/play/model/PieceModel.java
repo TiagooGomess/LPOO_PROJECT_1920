@@ -22,7 +22,7 @@ public abstract class PieceModel {
     }
 
     public Position getPosition() { // posição do bloco com menor x e y, quando a peça não está rodada
-        return this.position;
+        return this.blocks.get(0).getPosition();
     }
 
     public int getWidth() {

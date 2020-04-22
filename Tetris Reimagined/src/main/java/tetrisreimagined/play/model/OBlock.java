@@ -12,6 +12,9 @@ public class OBlock extends PieceModel {
         this.blocks.add(new Block(new Position(0, 1), this.color));
         this.blocks.add(new Block(new Position(1, 0), this.color));
         this.blocks.add(new Block(new Position(1, 1), this.color));
+
+        this.width = 2;
+        this.height = 2;
     }
 
 

@@ -20,7 +20,7 @@ public class ArenaController {
     public void start() throws IOException, InterruptedException {
         Observer.COMMAND command;
 
-        int counter = 0, levelDifficulty = 40;
+        int counter = 0, levelDifficulty = 2;
         long begTime = 0, endTime = 0, elapsedTime = 0;
 
         do {
@@ -43,12 +43,15 @@ public class ArenaController {
                 continue;
 
             if (command == Observer.COMMAND.RIGHT)
+                if (canGoRight())
                 this.currentPieceController.moveRight();
 
             if (command == Observer.COMMAND.LEFT)
+                if (canGoLeft())
                 this.currentPieceController.moveLeft();
 
             if (command == Observer.COMMAND.DOWN)
+                if (canGoDown())
                 this.currentPieceController.moveDown();
 
         } while (command != Observer.COMMAND.EOF);
@@ -68,22 +71,21 @@ public class ArenaController {
     }
 
     public void makeCurrentPieceFall() {
-        if (verifyPieceLimit())
+        if (canGoDown())
             this.currentPieceController.moveDown();
-        else
-            System.out.println("lose");
+
     }
 
-    public boolean verifyPieceLimit() { // TODO
-
-        if (this.currentPieceController.getPieceModel().getPosition().getX() + this.currentPieceController.getPieceModel().getWidth() > gui.getWidth())
-            return false;
-
-        if (this.currentPieceController.getPieceModel().getPosition().getY() + this.currentPieceController.getPieceModel().getHeight() > gui.getHeight())
-            return false;
-
-        System.out.println("X: " + this.currentPieceController.getPieceModel().getPosition().getX());
-
-        return true;
+    public boolean canGoRight() {
+        return this.currentPieceController.getPieceModel().getPosition().getX() + this.currentPieceController.getPieceModel().getWidth() < gui.getWidth();
     }
+
+    public boolean canGoLeft() {
+        return this.currentPieceController.getPieceModel().getPosition().getX() > 0;
+    }
+
+    public boolean canGoDown() {
+        return this.currentPieceController.getPieceModel().getPosition().getY() + this.currentPieceController.getPieceModel().getHeight() < gui.getHeight();
+    }
+
 }

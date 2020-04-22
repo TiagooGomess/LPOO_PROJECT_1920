@@ -13,7 +13,7 @@ public class ArenaModel extends Observable<ArenaModel> {
 
     public ArenaModel() {
         this.pieceModels = new ArrayList<>();
-        addPiece(new IBlock()); // just for test
+        addPiece(new ZBlock()); // just for test
 
         this.currentPieceModel = pieceModels.get(0);
     }

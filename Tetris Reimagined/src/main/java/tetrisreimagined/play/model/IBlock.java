@@ -11,8 +11,6 @@ public class IBlock extends PieceModel {
         blocks.add(new Block(new Position(2, 0), this.color));
         blocks.add(new Block(new Position(3, 0), this.color));
 
-        this.position = blocks.get(0).getPosition();
-
         this.width = 4;
         this.height = 1;
 
