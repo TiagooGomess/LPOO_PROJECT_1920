@@ -7,6 +7,7 @@ public abstract class PieceModel {
 
     // Names of pieces:
     // https://tetris.fandom.com/wiki/Tetromino
+    // https://www.quora.com/What-are-the-different-blocks-in-Tetris-called-Is-there-a-specific-name-for-each-block
 
     protected List<Block> blocks;
     protected Color color;

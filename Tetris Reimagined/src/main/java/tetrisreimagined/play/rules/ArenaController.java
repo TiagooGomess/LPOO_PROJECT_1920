@@ -60,11 +60,7 @@ public class ArenaController {
             if (command == Observer.COMMAND.DOWN) {
                 if (canGoDown())
                     this.currentPieceController.moveDown();
-                else
-                    pieceTouchedGroud = true;
             }
-
-
 
         } while (command != Observer.COMMAND.EOF);
 
@@ -72,7 +68,10 @@ public class ArenaController {
 
     private int tryMoveDown(int counter, int levelDifficulty) {
         if (counter++ == levelDifficulty) { // mudar para velocidade da peça
-            makeCurrentPieceFall();
+            if (canGoDown())
+                makeCurrentPieceFall();
+            else
+                pieceTouchedGroud = true;
             counter = 0;
         }
         return counter;
