@@ -41,6 +41,14 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         }
     }
 
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
     @Override
     public void changed(ArenaModel arena) {
         drawAll(arena);
@@ -64,10 +72,9 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         }
     }
 
-    public void drawBlock(Block block) { // change this later
-        graphics.setForegroundColor(TextColor.Factory.fromString(block.getColor().getCode()));
-        graphics.enableModifiers(SGR.BOLD);
-        graphics.putString(new TerminalPosition(block.getPosition().getX(), block.getPosition().getY()), "X");
+    public void drawBlock(Block block) {
+        graphics.setBackgroundColor(TextColor.Factory.fromString(block.getColor().getCode()));
+        graphics.putString(new TerminalPosition(block.getPosition().getX(), block.getPosition().getY()), " ");
     }
 
     @Override

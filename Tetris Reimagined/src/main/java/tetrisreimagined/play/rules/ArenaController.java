@@ -49,6 +49,22 @@ public class ArenaController {
     }
 
     public void makeCurrentPieceFall() {
-        this.currentPieceController.moveDown();
+        if (verifyPieceLimit())
+            this.currentPieceController.moveDown();
+        else
+            System.out.println("lose");
+    }
+
+    public boolean verifyPieceLimit() { // TODO
+
+        if (this.currentPieceController.getPieceModel().getPosition().getX() + this.currentPieceController.getPieceModel().getWidth() > gui.getWidth())
+            return false;
+
+        if (this.currentPieceController.getPieceModel().getPosition().getY() + this.currentPieceController.getPieceModel().getHeight() > gui.getHeight())
+            return false;
+
+        System.out.println("X: " + this.currentPieceController.getPieceModel().getPosition().getX());
+
+        return true;
     }
 }

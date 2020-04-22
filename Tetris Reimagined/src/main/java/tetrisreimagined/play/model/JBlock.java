@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class JBlock extends PieceModel {
 
     public JBlock() {
-        this.blocks = new ArrayList<>();
+        super();
         this.color = new Color("blue", "#0000FF");
 
         this.blocks.add(new Block(new Position(0, 0), this.color));
@@ -13,4 +13,8 @@ public class JBlock extends PieceModel {
         this.blocks.add(new Block(new Position(1, 1), this.color));
         this.blocks.add(new Block(new Position(2, 1), this.color));
     }
+
+
+
+
 }

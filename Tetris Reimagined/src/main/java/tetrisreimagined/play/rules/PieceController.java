@@ -11,6 +11,10 @@ public class PieceController {
         this.pieceModel = pieceModel;
     }
 
+    public PieceModel getPieceModel() {
+        return pieceModel;
+    }
+
     public void moveLeft() {
         for (Block block: this.pieceModel.getBlocks())
             block.moveLeft();
@@ -25,5 +29,6 @@ public class PieceController {
         for (Block block: this.pieceModel.getBlocks())
             block.moveDown();
     }
+
 
 }
