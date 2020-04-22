@@ -1,6 +1,7 @@
 package tetrisreimagined.play.rules;
 
 import tetrisreimagined.play.model.ArenaModel;
+import tetrisreimagined.play.model.PieceModel;
 import tetrisreimagined.play.observer.Observer;
 
 import java.io.IOException;
@@ -8,10 +9,12 @@ import java.io.IOException;
 public class ArenaController {
     private Observer<ArenaModel> gui; // In this case GameViewLanterna
     private ArenaModel arena;
+    private PieceController currentPieceController;
 
     public ArenaController(Observer<ArenaModel> gui, ArenaModel arena) {
         this.gui = gui;
         this.arena = arena;
+        this.currentPieceController = new PieceController(this.arena.getCurrentPieceModel());
     }
 
     public void start() throws IOException, InterruptedException {
@@ -36,16 +39,16 @@ public class ArenaController {
                 continue;
 
             if (command == Observer.COMMAND.RIGHT)
-                this.arena.getCurrentPiece().moveRight();
+                this.currentPieceController.moveRight();
 
             if (command == Observer.COMMAND.LEFT)
-                this.arena.getCurrentPiece().moveLeft();
+                this.currentPieceController.moveLeft();
 
         } while (command != Observer.COMMAND.EOF);
 
     }
 
     public void makeCurrentPieceFall() {
-        this.arena.getCurrentPiece().moveDown();
+        this.currentPieceController.moveDown();
     }
 }

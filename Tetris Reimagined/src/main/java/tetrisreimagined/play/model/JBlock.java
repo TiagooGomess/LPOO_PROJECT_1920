@@ -2,7 +2,7 @@ package tetrisreimagined.play.model;
 
 import java.util.ArrayList;
 
-public class JBlock extends Piece {
+public class JBlock extends PieceModel {
 
     public JBlock() {
         this.blocks = new ArrayList<>();

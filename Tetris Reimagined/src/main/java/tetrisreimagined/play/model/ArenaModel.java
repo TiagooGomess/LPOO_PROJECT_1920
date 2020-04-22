@@ -8,32 +8,26 @@ import java.util.List;
 public class ArenaModel extends Observable<ArenaModel> {
     // Only represents data
 
-    private List<Piece> pieces;
-    private Piece currentPiece;
+    private List<PieceModel> pieceModels;
+    private PieceModel currentPieceModel;
 
     public ArenaModel() {
-        this.pieces = new ArrayList<>();
-        addPiece(new ZBlock());
+        this.pieceModels = new ArrayList<>();
+        addPiece(new SBlock());
 
-        this.currentPiece = new SBlock();
-
-        for (Piece piece: pieces) {
-            piece.moveDown();
-            piece.moveRight();
-            piece.moveRight();
-        }
+        this.currentPieceModel = pieceModels.get(0);
     }
 
-    public List<Piece> getPieces() {
-        return pieces;
+    public List<PieceModel> getPieceModels() {
+        return pieceModels;
     }
 
-    public Piece getCurrentPiece() {
-        return currentPiece;
+    public PieceModel getCurrentPieceModel() {
+        return currentPieceModel;
     }
 
-    public void addPiece(Piece piece) {
-        this.pieces.add(piece);
+    public void addPiece(PieceModel pieceModel) {
+        this.pieceModels.add(pieceModel);
     }
 
 }

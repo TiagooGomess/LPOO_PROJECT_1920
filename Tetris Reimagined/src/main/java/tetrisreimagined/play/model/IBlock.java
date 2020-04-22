@@ -1,8 +1,6 @@
 package tetrisreimagined.play.model;
 
-import java.util.ArrayList;
-
-public class IBlock extends Piece {
+public class IBlock extends PieceModel {
 
     public IBlock() {
         super();

@@ -14,7 +14,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
-import tetrisreimagined.play.model.Piece;
+import tetrisreimagined.play.model.PieceModel;
 import tetrisreimagined.play.observer.Observer;
 
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         try {
             this.screen.clear();
 
-            drawPiece(arena.getCurrentPiece());
+            drawPiece(arena.getCurrentPieceModel());
 
             this.screen.refresh();
         } catch (IOException e) {
@@ -58,8 +58,8 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         }
     }
 
-    public void drawPiece(Piece piece) {
-        for (Block block: piece.getBlocks()) {
+    public void drawPiece(PieceModel pieceModel) {
+        for (Block block: pieceModel.getBlocks()) {
             drawBlock(block);
         }
     }
