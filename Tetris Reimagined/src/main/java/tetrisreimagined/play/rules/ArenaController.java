@@ -20,20 +20,24 @@ public class ArenaController {
     public void start() throws IOException, InterruptedException {
         Observer.COMMAND command;
 
-        int counter = 0;
+        int counter = 0, levelDifficulty = 40;
+        long begTime = 0, endTime = 0, elapsedTime = 0;
 
         do {
+            counter = tryMoveDown(counter, levelDifficulty);
 
-            if (counter++ == 10) { // mudar para velocidade da peça
-                makeCurrentPieceFall();
-                counter = 0;
-            }
+            endTime = System.currentTimeMillis();
+            if(notFirstIteration(begTime))
+                elapsedTime = endTime - begTime;
 
-            Thread.sleep(10); // mudar para velocidade da peça
+            Thread.sleep(30 - elapsedTime); // mudar para velocidade da peça
+            begTime = System.currentTimeMillis();
 
             gui.drawAll(arena); // provisório
 
             command = gui.getCommand();
+
+            // Observer.COMMAND UP -> Rotation
 
             if (command == Observer.COMMAND.NULL)
                 continue;
@@ -44,8 +48,23 @@ public class ArenaController {
             if (command == Observer.COMMAND.LEFT)
                 this.currentPieceController.moveLeft();
 
+            if (command == Observer.COMMAND.DOWN)
+                this.currentPieceController.moveDown();
+
         } while (command != Observer.COMMAND.EOF);
 
+    }
+
+    private int tryMoveDown(int counter, int levelDifficulty) {
+        if (counter++ == levelDifficulty) { // mudar para velocidade da peça
+            makeCurrentPieceFall();
+            counter = 0;
+        }
+        return counter;
+    }
+
+    private boolean notFirstIteration(long begTime) {
+        return begTime != 0;
     }
 
     public void makeCurrentPieceFall() {
