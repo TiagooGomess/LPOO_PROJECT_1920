@@ -1,7 +1,5 @@
 package tetrisreimagined.play.model;
 
-import java.util.ArrayList;
-
 public class ZBlock extends PieceModel {
 
     public ZBlock() {

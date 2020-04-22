@@ -1,7 +1,7 @@
 package tetrisreimagined.play.rules;
 
 import tetrisreimagined.play.model.ArenaModel;
-import tetrisreimagined.play.model.PieceModel;
+import tetrisreimagined.play.model.IBlock;
 import tetrisreimagined.play.observer.Observer;
 
 import java.io.IOException;
@@ -10,6 +10,8 @@ public class ArenaController {
     private Observer<ArenaModel> gui; // In this case GameViewLanterna
     private ArenaModel arena;
     private PieceController currentPieceController;
+    private boolean pieceTouchedGroud = false;
+    int pieceNum = 0;
 
     public ArenaController(Observer<ArenaModel> gui, ArenaModel arena) {
         this.gui = gui;
@@ -33,6 +35,11 @@ public class ArenaController {
             Thread.sleep(30 - elapsedTime); // mudar para velocidade da peça
             begTime = System.currentTimeMillis();
 
+            if (pieceTouchedGroud) {
+                nextPiece();
+                pieceTouchedGroud = false;
+            }
+
             gui.drawAll(arena); // provisório
 
             command = gui.getCommand();
@@ -44,15 +51,20 @@ public class ArenaController {
 
             if (command == Observer.COMMAND.RIGHT)
                 if (canGoRight())
-                this.currentPieceController.moveRight();
+                    this.currentPieceController.moveRight();
 
             if (command == Observer.COMMAND.LEFT)
                 if (canGoLeft())
-                this.currentPieceController.moveLeft();
+                    this.currentPieceController.moveLeft();
 
-            if (command == Observer.COMMAND.DOWN)
+            if (command == Observer.COMMAND.DOWN) {
                 if (canGoDown())
-                this.currentPieceController.moveDown();
+                    this.currentPieceController.moveDown();
+                else
+                    pieceTouchedGroud = true;
+            }
+
+
 
         } while (command != Observer.COMMAND.EOF);
 
@@ -86,6 +98,11 @@ public class ArenaController {
 
     public boolean canGoDown() {
         return this.currentPieceController.getPieceModel().getPosition().getY() + this.currentPieceController.getPieceModel().getHeight() < gui.getHeight();
+    }
+
+    public void nextPiece() {
+        this.currentPieceController = new PieceController(arena.getPieceModels().get(++pieceNum));
+        this.arena.setCurrentPieceModel(arena.getPieceModels().get(pieceNum));
     }
 
 }
