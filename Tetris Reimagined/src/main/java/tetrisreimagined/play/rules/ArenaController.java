@@ -31,7 +31,7 @@ public class ArenaController {
             if(notFirstIteration(begTime))
                 elapsedTime = endTime - begTime;
 
-            Thread.sleep(30 - elapsedTime); // mudar para velocidade da peça
+            Thread.sleep(35 - elapsedTime); // mudar para velocidade da peça
             begTime = System.currentTimeMillis();
 
             if (pieceTouchedGroud) {
