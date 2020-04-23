@@ -3,7 +3,7 @@ package tetrisreimagined.play.rules;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.PieceModel;
 
-public class PieceController {
+public abstract class PieceController {
 
     private PieceModel pieceModel;
 
@@ -30,7 +30,9 @@ public class PieceController {
             block.moveDown();
     }
 
+    public abstract void rotateClockwise();
 
+    public abstract void rotateCounterClockwise();
 
 
 }

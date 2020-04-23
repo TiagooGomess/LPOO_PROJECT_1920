@@ -1,7 +1,5 @@
 package tetrisreimagined.play.gui.lantern;
 
-
-import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -60,8 +58,6 @@ public class GameViewLanterna implements Observer<ArenaModel> {
 
             drawPiece(arena.getCurrentPieceModel());
 
-//            for (PieceModel pieceModel: arena.getPieceModels())
-//                drawPiece(pieceModel);
             for (Block block: arena.getArenaBlocks())
                 drawBlock(block);
 

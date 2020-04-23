@@ -119,27 +119,33 @@ public class ArenaController {
         PieceModel newPiece;
         switch (nexBlockNum) {
             case 0:
-                newPiece = new IBlock();
+                newPiece = new IBlockModel();
+                this.currentPieceController = new IBlockController(newPiece);
                 break;
             case 1:
-                newPiece = new JBlock();
+                newPiece = new JBlockModel();
+                this.currentPieceController = new JBlockController(newPiece);
                 break;
             case 2:
-                newPiece = new LBlock();
+                newPiece = new LBlockModel();
+                this.currentPieceController = new LBlockController(newPiece);
                 break;
             case 3:
-                newPiece = new OBlock();
+                newPiece = new OBlockModel();
+                this.currentPieceController = new OBlockController(newPiece);
                 break;
             case 4:
-                newPiece = new SBlock();
+                newPiece = new SBlockModel();
+                this.currentPieceController = new SBlockController(newPiece);
                 break;
             case 5:
-                newPiece = new TBlock();
+                newPiece = new TBlockModel();
+                this.currentPieceController = new TBlockController(newPiece);
                 break;
             default:
-                newPiece = new ZBlock();
+                newPiece = new ZBlockModel();
+                this.currentPieceController = new ZBlockController(newPiece);
         }
-        this.currentPieceController = new PieceController(newPiece);
         this.arena.setCurrentPieceModel(newPiece);
     }
 

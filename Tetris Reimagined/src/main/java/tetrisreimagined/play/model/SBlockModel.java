@@ -1,8 +1,8 @@
 package tetrisreimagined.play.model;
 
-public class SBlock extends PieceModel {
+public class SBlockModel extends PieceModel {
 
-    public SBlock() {
+    public SBlockModel() {
         super();
         this.color = new Color("limegreen", "#32CD32");
 

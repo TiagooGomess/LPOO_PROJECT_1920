@@ -1,8 +1,8 @@
 package tetrisreimagined.play.model;
 
-public class ZBlock extends PieceModel {
+public class ZBlockModel extends PieceModel {
 
-    public ZBlock() {
+    public ZBlockModel() {
         super();
         this.color = new Color("red", "#FF0000");
 

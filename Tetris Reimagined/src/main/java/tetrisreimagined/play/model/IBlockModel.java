@@ -1,8 +1,8 @@
 package tetrisreimagined.play.model;
 
-public class IBlock extends PieceModel {
+public class IBlockModel extends PieceModel {
 
-    public IBlock() {
+    public IBlockModel() {
         super();
         this.color = new Color("cyan", "#00FFFF");
 
