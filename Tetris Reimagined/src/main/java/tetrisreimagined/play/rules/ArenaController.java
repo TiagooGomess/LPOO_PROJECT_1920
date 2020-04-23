@@ -87,17 +87,17 @@ public class ArenaController {
     }
 
     public boolean canGoRight() {
-        if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition())) return false;
+        if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition().right())) return false;
         return this.currentPieceController.getPieceModel().getPosition().getX() + this.currentPieceController.getPieceModel().getWidth() < gui.getWidth();
     }
 
     public boolean canGoLeft() {
-        if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition())) return false;
+        if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition().left())) return false;
         return this.currentPieceController.getPieceModel().getPosition().getX() > 0;
     }
 
     public boolean canGoDown() {
-        if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition())) return false;
+        if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition().down())) return false;
         return this.currentPieceController.getPieceModel().getPosition().getY() + this.currentPieceController.getPieceModel().getHeight() < gui.getHeight();
     }
 
