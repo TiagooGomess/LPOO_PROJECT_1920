@@ -22,8 +22,19 @@ public abstract class PieceModel {
         return this.blocks;
     }
 
-    public Position getPosition() { // posição do bloco com menor x e y, quando a peça não está rodada
-        return this.blocks.get(0).getPosition();
+    public Position getPosition() { // posição do bloco com menor x e y (TODO mudar isto (just for test))
+        //return this.blocks.get(0).getPosition();
+        int minX = Integer.MAX_VALUE, minY = Integer.MAX_VALUE;
+
+        for (Block block: blocks) {
+            if (block.getPosition().getX() < minX)
+                minX = block.getPosition().getX();
+            if (block.getPosition().getY() < minY)
+                minY = block.getPosition().getY();
+        }
+
+        return new Position(minX, minY);
+
     }
 
     public int getWidth() {
