@@ -1,22 +1,21 @@
 package tetrisreimagined.play.rules;
 
-import tetrisreimagined.play.model.ArenaModel;
-import tetrisreimagined.play.model.IBlock;
+import tetrisreimagined.play.model.*;
 import tetrisreimagined.play.observer.Observer;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class ArenaController {
     private Observer<ArenaModel> gui; // In this case GameViewLanterna
     private ArenaModel arena;
     private PieceController currentPieceController;
     private boolean pieceTouchedGroud = false;
-    int pieceNum = 0;
 
     public ArenaController(Observer<ArenaModel> gui, ArenaModel arena) {
         this.gui = gui;
         this.arena = arena;
-        this.currentPieceController = new PieceController(this.arena.getCurrentPieceModel());
+        nextPiece();
     }
 
     public void start() throws IOException, InterruptedException {
@@ -88,20 +87,61 @@ public class ArenaController {
     }
 
     public boolean canGoRight() {
+        if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition())) return false;
         return this.currentPieceController.getPieceModel().getPosition().getX() + this.currentPieceController.getPieceModel().getWidth() < gui.getWidth();
     }
 
     public boolean canGoLeft() {
+        if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition())) return false;
         return this.currentPieceController.getPieceModel().getPosition().getX() > 0;
     }
 
     public boolean canGoDown() {
+        if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition())) return false;
         return this.currentPieceController.getPieceModel().getPosition().getY() + this.currentPieceController.getPieceModel().getHeight() < gui.getHeight();
     }
 
     public void nextPiece() {
-        this.currentPieceController = new PieceController(arena.getPieceModels().get(++pieceNum));
-        this.arena.setCurrentPieceModel(arena.getPieceModels().get(pieceNum));
+        Random rand = new Random();
+        int nexBlockNum = rand.nextInt(7); // random int in range 0 to 6
+        PieceModel newPiece;
+        switch (nexBlockNum) {
+            case 0:
+                newPiece = new IBlock();
+                break;
+            case 1:
+                newPiece = new JBlock();
+                break;
+            case 2:
+                newPiece = new LBlock();
+                break;
+            case 3:
+                newPiece = new OBlock();
+                break;
+            case 4:
+                newPiece = new SBlock();
+                break;
+            case 5:
+                newPiece = new TBlock();
+                break;
+            default:
+                newPiece = new ZBlock();
+        }
+        this.arena.addPiece(newPiece);
+        this.currentPieceController = new PieceController(newPiece);
+    }
+
+    public boolean positionHasBlock(Position position) {
+
+        for (PieceModel pieceModel: arena.getPieceModels()) {
+            if (pieceModel != currentPieceController.getPieceModel())
+                for (Block block: pieceModel.getBlocks()) {
+                    if (block.getPosition().equals(position))
+                        return true;
+                }
+        }
+
+        return false;
     }
 
 }
