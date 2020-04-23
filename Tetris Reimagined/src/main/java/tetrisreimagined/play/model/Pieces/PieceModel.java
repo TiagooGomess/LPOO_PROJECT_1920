@@ -1,4 +1,8 @@
-package tetrisreimagined.play.model;
+package tetrisreimagined.play.model.Pieces;
+
+import tetrisreimagined.play.model.Block;
+import tetrisreimagined.play.model.Color;
+import tetrisreimagined.play.model.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +15,7 @@ public abstract class PieceModel {
 
     protected List<Block> blocks;
     protected Color color;
+    protected int sizeOfBoundingBox;
 
     public PieceModel() {
         this.blocks = new ArrayList<>();
@@ -18,6 +23,10 @@ public abstract class PieceModel {
 
     public List<Block> getBlocks() {
         return this.blocks;
+    }
+
+    public int getSizeOfBoundingBox() {
+        return sizeOfBoundingBox;
     }
 
     public Position getMinXPosition() {

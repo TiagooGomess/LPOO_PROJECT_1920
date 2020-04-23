@@ -1,7 +1,8 @@
-package tetrisreimagined.play.rules;
+package tetrisreimagined.play.rules.Pieces;
 
 import tetrisreimagined.play.model.Block;
-import tetrisreimagined.play.model.PieceModel;
+import tetrisreimagined.play.model.Pieces.PieceModel;
+import tetrisreimagined.play.model.Position;
 
 public abstract class PieceController {
 
@@ -30,9 +31,19 @@ public abstract class PieceController {
             block.moveDown();
     }
 
-    public abstract void rotateClockwise();
+    // http://tech.migge.io/2017/02/07/tetris-rotations/
+    public void rotateClockwise() {
+        for (Block block: this.pieceModel.getBlocks()) {
+            int newX = 2 - (block.getPosition().getY() - (pieceModel.getSizeOfBoundingBox() - 4));
+            int newY = block.getPosition().getX();
 
-    public abstract void rotateCounterClockwise();
+            block.setPosition(new Position(newX, newY));
+        }
+    }
+
+    public void rotateCounterClockwise() {
+
+    }
 
 
 }

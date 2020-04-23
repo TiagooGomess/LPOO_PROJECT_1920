@@ -1,7 +1,9 @@
 package tetrisreimagined.play.rules;
 
 import tetrisreimagined.play.model.*;
+import tetrisreimagined.play.model.Pieces.*;
 import tetrisreimagined.play.observer.Observer;
+import tetrisreimagined.play.rules.Pieces.*;
 
 import java.io.IOException;
 import java.util.Random;
@@ -44,6 +46,10 @@ public class ArenaController {
             command = gui.getCommand();
 
             // Observer.COMMAND UP -> Rotation
+
+            if (command == Observer.COMMAND.UP) {
+                this.currentPieceController.rotateClockwise();
+            }
 
             if (command == Observer.COMMAND.NULL)
                 continue;
