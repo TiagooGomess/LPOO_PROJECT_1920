@@ -69,8 +69,12 @@ public class ArenaController {
         if (counter++ == levelDifficulty) { // mudar para velocidade da peça
             if (canGoDown())
                 makeCurrentPieceFall();
-            else
+            else {
                 pieceTouchedGroud = true;
+                this.arena.addPiece(currentPieceController.getPieceModel()); // quando a peça toca no chão ou noutra
+                                                                             // peça, passa-se a interpretar a peça na
+                                                                             // arena como um conjunto de blocos
+            }
             counter = 0;
         }
         return counter;
@@ -83,22 +87,22 @@ public class ArenaController {
     public void makeCurrentPieceFall() {
         if (canGoDown())
             this.currentPieceController.moveDown();
-
     }
 
-    public boolean canGoRight() {
+    public boolean canGoRight() { // TODO not finished yet (change getPosition to check all positions os blocks)
         if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition().right())) return false;
-        return this.currentPieceController.getPieceModel().getPosition().getX() + this.currentPieceController.getPieceModel().getWidth() < gui.getWidth();
+        return this.currentPieceController.getPieceModel().getMaxX() + 1 < gui.getWidth();
     }
 
-    public boolean canGoLeft() {
+    public boolean canGoLeft() { // TODO not finished yet (change getPosition to check all positions os blocks)
         if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition().left())) return false;
-        return this.currentPieceController.getPieceModel().getPosition().getX() > 0;
+        return this.currentPieceController.getPieceModel().getMinX() > 0;
     }
 
-    public boolean canGoDown() {
+    public boolean canGoDown() { // TODO not finished yet (change getPosition to check all positions os blocks)
         if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition().down())) return false;
-        return this.currentPieceController.getPieceModel().getPosition().getY() + this.currentPieceController.getPieceModel().getHeight() < gui.getHeight();
+        return this.currentPieceController.getPieceModel().getMaxY() + 1 < gui.getHeight();
+
     }
 
     public void nextPiece() {
@@ -127,18 +131,15 @@ public class ArenaController {
             default:
                 newPiece = new ZBlock();
         }
-        this.arena.addPiece(newPiece);
         this.currentPieceController = new PieceController(newPiece);
+        this.arena.setCurrentPieceModel(newPiece);
     }
 
     public boolean positionHasBlock(Position position) {
 
-        for (PieceModel pieceModel: arena.getPieceModels()) {
-            if (pieceModel != currentPieceController.getPieceModel())
-                for (Block block: pieceModel.getBlocks()) {
-                    if (block.getPosition().equals(position))
-                        return true;
-                }
+        for (Block block: arena.getArenaBlocks()) {
+            if (block.getPosition().equals(position))
+                return true;
         }
 
         return false;

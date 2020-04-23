@@ -22,19 +22,16 @@ public abstract class PieceModel {
         return this.blocks;
     }
 
-    public Position getPosition() { // posição do bloco com menor x e y (TODO mudar isto (just for test))
-        //return this.blocks.get(0).getPosition();
+    public Position getPosition() { // posição do bloco com menor x e y (TODO delete this shit (just for test))
+
         int minX = Integer.MAX_VALUE, minY = Integer.MAX_VALUE;
 
         for (Block block: blocks) {
-            if (block.getPosition().getX() < minX)
-                minX = block.getPosition().getX();
-            if (block.getPosition().getY() < minY)
-                minY = block.getPosition().getY();
+            minX = Math.min(minX, block.getPosition().getX());
+            minY = Math.min(minY, block.getPosition().getY());
         }
 
         return new Position(minX, minY);
-
     }
 
     public int getWidth() {
@@ -43,5 +40,39 @@ public abstract class PieceModel {
 
     public int getHeight() {
         return this.height;
+    }
+
+    public int getMinX() {
+        int minX = Integer.MAX_VALUE;
+
+        for (Block block: blocks)
+            minX = Math.min(minX, block.getPosition().getX());
+
+        return minX;
+    }
+
+    public int getMaxX() {
+        int maxX = Integer.MIN_VALUE;
+
+        for (Block block: blocks)
+            maxX = Math.max(maxX, block.getPosition().getX());
+
+        return maxX;
+    }
+
+    public int getMaxY() {
+        int maxY = Integer.MIN_VALUE;
+
+        for (Block block: blocks)
+            maxY = Math.max(maxY, block.getPosition().getY());
+
+        return maxY;
+    }
+
+    public List<Position> getPositions() {
+        List<Position> positions = new ArrayList<>();
+        for (Block block: blocks)
+            positions.add(block.getPosition());
+        return positions;
     }
 }
