@@ -15,8 +15,6 @@ public class SBlock extends PieceModel {
         this.blocks.add(new Block(new Position(4, 0), this.color));
         this.blocks.add(new Block(new Position(5, 0), this.color));
 
-        this.width = 3;
-        this.height = 1;
     }
 
 

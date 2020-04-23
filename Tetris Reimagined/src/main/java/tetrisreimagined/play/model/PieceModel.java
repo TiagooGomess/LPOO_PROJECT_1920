@@ -11,8 +11,6 @@ public abstract class PieceModel {
 
     protected List<Block> blocks;
     protected Color color;
-    protected Position position;
-    protected int width, height;
 
     public PieceModel() {
         this.blocks = new ArrayList<>();
@@ -22,57 +20,47 @@ public abstract class PieceModel {
         return this.blocks;
     }
 
-    public Position getPosition() { // posição do bloco com menor x e y (TODO delete this shit (just for test))
+    public Position getMinXPosition() {
 
-        int minX = Integer.MAX_VALUE, minY = Integer.MAX_VALUE;
+        int minX = Integer.MAX_VALUE;
+        Position position = null; // nunca vai ficar null
 
         for (Block block: blocks) {
-            minX = Math.min(minX, block.getPosition().getX());
-            minY = Math.min(minY, block.getPosition().getY());
+            if (block.getPosition().getX() < minX) {
+                minX = block.getPosition().getX();
+                position = new Position(minX, block.getPosition().getY());
+            }
         }
 
-        return new Position(minX, minY);
+        return position;
     }
 
-    public int getWidth() {
-        return this.width;
-    }
-
-    public int getHeight() {
-        return this.height;
-    }
-
-    public int getMinX() {
-        int minX = Integer.MAX_VALUE;
-
-        for (Block block: blocks)
-            minX = Math.min(minX, block.getPosition().getX());
-
-        return minX;
-    }
-
-    public int getMaxX() {
+    public Position getMaxXPosition() {
         int maxX = Integer.MIN_VALUE;
+        Position position = null;
 
-        for (Block block: blocks)
-            maxX = Math.max(maxX, block.getPosition().getX());
+        for (Block block: blocks) {
+            if (block.getPosition().getX() > maxX) {
+                maxX = block.getPosition().getX();
+                position = new Position(maxX, block.getPosition().getY());
+            }
+        }
 
-        return maxX;
+        return position;
     }
 
-    public int getMaxY() {
+    public Position getMaxYPosition() {
         int maxY = Integer.MIN_VALUE;
+        Position position = null;
 
-        for (Block block: blocks)
-            maxY = Math.max(maxY, block.getPosition().getY());
+        for (Block block: blocks) {
+            if (block.getPosition().getY() > maxY) {
+                maxY = block.getPosition().getY();
+                position = new Position(block.getPosition().getX(), maxY);
+            }
+        }
 
-        return maxY;
+        return position;
     }
 
-    public List<Position> getPositions() {
-        List<Position> positions = new ArrayList<>();
-        for (Block block: blocks)
-            positions.add(block.getPosition());
-        return positions;
-    }
 }

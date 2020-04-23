@@ -15,8 +15,6 @@ public class LBlock extends PieceModel {
         this.blocks.add(new Block(new Position(2, 1), this.color));
         this.blocks.add(new Block(new Position(3, 1), this.color));
 
-        this.width = 6;
-        this.height = 2;
     }
 
 

@@ -15,8 +15,6 @@ public class JBlock extends PieceModel {
         this.blocks.add(new Block(new Position(4, 1), this.color));
         this.blocks.add(new Block(new Position(5, 1), this.color));
 
-        this.width = 6;
-        this.height = 2;
     }
 
 

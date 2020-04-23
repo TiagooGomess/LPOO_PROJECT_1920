@@ -15,8 +15,6 @@ public class TBlock extends PieceModel {
         this.blocks.add(new Block(new Position(2, 0), this.color));
         this.blocks.add(new Block(new Position(3, 0), this.color));
 
-        this.width = 6;
-        this.height = 1;
     }
 
 

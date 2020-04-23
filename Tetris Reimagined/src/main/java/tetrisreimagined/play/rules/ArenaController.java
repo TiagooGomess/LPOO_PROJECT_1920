@@ -89,20 +89,28 @@ public class ArenaController {
             this.currentPieceController.moveDown();
     }
 
-    public boolean canGoRight() { // TODO not finished yet (change getPosition to check all positions os blocks)
-        if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition().right())) return false;
-        return this.currentPieceController.getPieceModel().getMaxX() + 1 < gui.getWidth();
+    public boolean canGoRight() {
+        for (Block block: this.currentPieceController.getPieceModel().getBlocks()) {
+            if (positionHasBlock(block.getPosition().right()))
+                return false;
+        }
+        return this.currentPieceController.getPieceModel().getMaxXPosition().getX() + 1 < gui.getWidth();
     }
 
-    public boolean canGoLeft() { // TODO not finished yet (change getPosition to check all positions os blocks)
-        if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition().left())) return false;
-        return this.currentPieceController.getPieceModel().getMinX() > 0;
+    public boolean canGoLeft() {
+        for (Block block: this.currentPieceController.getPieceModel().getBlocks()) {
+            if (positionHasBlock(block.getPosition().left()))
+                return false;
+        }
+        return this.currentPieceController.getPieceModel().getMinXPosition().getX() > 0;
     }
 
-    public boolean canGoDown() { // TODO not finished yet (change getPosition to check all positions os blocks)
-        if (positionHasBlock(this.currentPieceController.getPieceModel().getPosition().down())) return false;
-        return this.currentPieceController.getPieceModel().getMaxY() + 1 < gui.getHeight();
-
+    public boolean canGoDown() {
+        for (Block block: this.currentPieceController.getPieceModel().getBlocks()) {
+            if (positionHasBlock(block.getPosition().down()))
+                return false;
+        }
+        return this.currentPieceController.getPieceModel().getMaxYPosition().getY() + 1 < gui.getHeight();
     }
 
     public void nextPiece() {
