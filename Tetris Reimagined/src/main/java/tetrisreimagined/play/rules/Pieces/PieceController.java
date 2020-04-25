@@ -3,13 +3,16 @@ package tetrisreimagined.play.rules.Pieces;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
+import tetrisreimagined.play.rules.PieceTransform;
 
 public class PieceController {
 
     private PieceModel pieceModel;
+    private PieceTransform pieceTransform;
 
     public PieceController(PieceModel pieceModel) {
         this.pieceModel = pieceModel;
+        pieceTransform = new PieceTransform();
     }
 
     public PieceModel getPieceModel() {
@@ -33,29 +36,37 @@ public class PieceController {
 
     // http://tech.migge.io/2017/02/07/tetris-rotations/
     public void rotateClockwise() {
-        /*for (Block block: this.pieceModel.getBlocks()) {
-            int newX = 2 - (block.getPosition().getY() - (pieceModel.getSizeOfBoundingBox() - 4));
-            int newY = block.getPosition().getX();
+        int xLenght = (this.pieceModel.getMaxXPosition().getX() - this.pieceModel.getMinXPosition().getX()) + 1;
+        int yLenght = (this.pieceModel.getMaxYPosition().getY() -  this.pieceModel.getMinYPosition().getY()) + 1;
 
-            block.setPosition(new Position(newX, newY));
-        }*/
-        int yUp = this.pieceModel.getMinYPosition().getY();
-        int xLeft = this.pieceModel.getMinXPosition().getX();
+        int[][] occupiedBlock = new int[yLenght][xLenght];
 
-        System.out.println("xLeft: " + xLeft);
-        System.out.println("yUp: " + yUp);
+        int initialX = this.pieceModel.getMinXPosition().getX();
+        int initialY = this.pieceModel.getMinYPosition().getY();
 
-        for (Block block: this.pieceModel.getBlocks()) {
+        System.out.println(initialX);
+        System.out.println(initialY);
 
-            // Move piece to origin
-            Position origPos = new Position(block.getPosition().getX() - xLeft,block.getPosition().getY() - yUp);
-
-            // Rotate 90º
-            origPos = new Position(-origPos.getY() + xLeft, origPos.getX() + yUp);
-
-            // Move piece back to initial place
-            block.setPosition(origPos);
+        int tempY = initialY;
+        for(int row = 0; row < yLenght; row++) {
+            int tempX = initialX;
+            for(int col = 0; col < xLenght; col++) {
+                occupiedBlock[row][col] = pieceTransform.getBlockId(new Position(tempX, tempY), this.pieceModel.getBlocks());
+                tempX++;
+            }
+            tempY++;
         }
+
+        /*for(int row = 0; row < yLenght; row++) {
+            for(int col = 0; col < xLenght; col++)
+                System.out.print(occupiedBlock[row][col] + " ");
+            System.out.println();
+        }*/
+
+        int[][] transposedOccupied = pieceTransform.transposeMatrix(occupiedBlock, yLenght, xLenght);
+
+        int[][] finalMatrixRotated = pieceTransform.reverseRowsOrder(transposedOccupied, xLenght, yLenght);
+
     }
 
     public void rotateCounterClockwise() {
