@@ -44,6 +44,21 @@ public abstract class PieceModel {
         return position;
     }
 
+    public Position getMinYPosition() {
+
+        int minY = Integer.MAX_VALUE;
+        Position position = null; // nunca vai ficar null
+
+        for (Block block: blocks) {
+            if (block.getPosition().getY() < minY) {
+                minY = block.getPosition().getY();
+                position = new Position(block.getPosition().getX(), minY);
+            }
+        }
+
+        return position;
+    }
+
     public Position getMaxXPosition() {
         int maxX = Integer.MIN_VALUE;
         Position position = null;

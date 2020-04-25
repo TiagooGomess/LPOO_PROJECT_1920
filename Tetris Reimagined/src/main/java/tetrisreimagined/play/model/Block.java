@@ -25,20 +25,4 @@ public class Block {
     public void setColor(Color color) {
         this.color = color;
     }
-
-    public void moveLeft() {
-        this.position = position.left();
-    }
-
-    public void moveRight() {
-        this.position = position.right();
-    }
-
-    public void moveUp() {
-        this.position = position.up();
-    }
-
-    public void moveDown() {
-        this.position = position.down();
-    }
 }
