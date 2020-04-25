@@ -23,7 +23,7 @@ public class ArenaController {
     public void start() throws IOException, InterruptedException {
         Observer.COMMAND command;
 
-        int counter = 0, levelDifficulty = 2;
+        int counter = 0, levelDifficulty = 10;
         long begTime = 0, endTime = 0, elapsedTime = 0;
 
         do {
@@ -36,10 +36,10 @@ public class ArenaController {
             Thread.sleep(35 - elapsedTime); // mudar para velocidade da peça
             begTime = System.currentTimeMillis();
 
-            if (pieceTouchedGroud) {
+            /*if (pieceTouchedGroud) {
                 nextPiece();
                 pieceTouchedGroud = false;
-            }
+            }*/
 
             gui.drawAll(arena); // provisório
 
@@ -50,9 +50,6 @@ public class ArenaController {
             if (command == Observer.COMMAND.UP) {
                 this.currentPieceController.rotateClockwise();
             }
-
-            if (command == Observer.COMMAND.NULL)
-                continue;
 
             if (command == Observer.COMMAND.RIGHT)
                 if (canGoRight())
@@ -126,32 +123,26 @@ public class ArenaController {
         switch (nexBlockNum) {
             case 0:
                 newPiece = new IBlockModel();
-                this.currentPieceController = new IBlockController(newPiece);
                 break;
             case 1:
                 newPiece = new JBlockModel();
-                this.currentPieceController = new JBlockController(newPiece);
                 break;
             case 2:
                 newPiece = new LBlockModel();
-                this.currentPieceController = new LBlockController(newPiece);
                 break;
             case 3:
                 newPiece = new OBlockModel();
-                this.currentPieceController = new OBlockController(newPiece);
                 break;
             case 4:
                 newPiece = new SBlockModel();
-                this.currentPieceController = new SBlockController(newPiece);
                 break;
             case 5:
                 newPiece = new TBlockModel();
-                this.currentPieceController = new TBlockController(newPiece);
                 break;
             default:
                 newPiece = new ZBlockModel();
-                this.currentPieceController = new ZBlockController(newPiece);
         }
+        this.currentPieceController = new PieceController(newPiece);
         this.arena.setCurrentPieceModel(newPiece);
     }
 
@@ -164,5 +155,4 @@ public class ArenaController {
 
         return false;
     }
-
 }
