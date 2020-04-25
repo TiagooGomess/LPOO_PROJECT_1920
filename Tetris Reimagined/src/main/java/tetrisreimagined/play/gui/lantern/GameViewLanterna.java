@@ -1,22 +1,26 @@
 package tetrisreimagined.play.gui.lantern;
 
-
-import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
+import com.googlecode.lanterna.gui2.WindowBasedTextGUI;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.ansi.UnixTerminal;
+import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
-import tetrisreimagined.play.model.Piece;
+import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.observer.Observer;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class GameViewLanterna implements Observer<ArenaModel> {
@@ -41,6 +45,14 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         }
     }
 
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
     @Override
     public void changed(ArenaModel arena) {
         drawAll(arena);
@@ -50,7 +62,10 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         try {
             this.screen.clear();
 
-            drawPiece(arena.getCurrentPiece());
+            drawPiece(arena.getCurrentPieceModel());
+
+            for (Block block: arena.getArenaBlocks())
+                drawBlock(block);
 
             this.screen.refresh();
         } catch (IOException e) {
@@ -58,27 +73,32 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         }
     }
 
-    public void drawPiece(Piece piece) {
-        for (Block block: piece.getBlocks()) {
+    public void drawPiece(PieceModel pieceModel) {
+        for (Block block: pieceModel.getBlocks()) {
             drawBlock(block);
         }
     }
 
-    public void drawBlock(Block block) { // change this later
-        graphics.setForegroundColor(TextColor.Factory.fromString(block.getColor().getCode()));
-        graphics.enableModifiers(SGR.BOLD);
-        graphics.putString(new TerminalPosition(block.getPosition().getX(), block.getPosition().getY()), "X");
+    public void drawBlock(Block block) {
+        graphics.setBackgroundColor(TextColor.Factory.fromString(block.getColor().getCode()));
+        graphics.putString(new TerminalPosition(block.getPosition().getX(), block.getPosition().getY()), " ");
     }
 
     @Override
-    public COMMAND getCommand() throws IOException {
+    public COMMAND getCommand() throws IOException, InterruptedException {
+
         while (true) {
-            KeyStroke key = screen.readInput();
+
+            KeyStroke key = screen.pollInput();
+
+            if (key == null) { return COMMAND.NULL; }
+
             if (key.getKeyType() == KeyType.ArrowUp) return COMMAND.UP;
             if (key.getKeyType() == KeyType.ArrowRight) return COMMAND.RIGHT;
             if (key.getKeyType() == KeyType.ArrowDown) return COMMAND.DOWN;
             if (key.getKeyType() == KeyType.ArrowLeft) return COMMAND.LEFT;
             if (key.getKeyType() == KeyType.EOF) return COMMAND.EOF;
+
         }
     }
 

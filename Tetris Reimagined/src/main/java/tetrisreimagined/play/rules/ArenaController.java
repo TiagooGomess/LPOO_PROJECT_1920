@@ -1,25 +1,30 @@
 package tetrisreimagined.play.rules;
 
-import tetrisreimagined.play.model.ArenaModel;
+import tetrisreimagined.play.model.*;
+import tetrisreimagined.play.model.Pieces.*;
 import tetrisreimagined.play.observer.Observer;
+import tetrisreimagined.play.rules.Pieces.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class ArenaController {
     private Observer<ArenaModel> gui; // In this case GameViewLanterna
     private ArenaModel arena;
+    private PieceController currentPieceController;
+    private boolean pieceTouchedGroud = false;
 
     public ArenaController(Observer<ArenaModel> gui, ArenaModel arena) {
         this.gui = gui;
         this.arena = arena;
+        nextPiece();
     }
 
-    public boolean start() throws IOException {
+    public void start() throws IOException, InterruptedException {
         Observer.COMMAND command;
 
-<<<<<<< HEAD
-        do {
-=======
         int counter = 0, levelDifficulty = 10;
         long begTime = 0, endTime = 0, elapsedTime = 0;
 
@@ -33,42 +38,37 @@ public class ArenaController {
             Thread.sleep(35 - elapsedTime); // mudar para velocidade da peça
             begTime = System.currentTimeMillis();
 
-            /*if (pieceTouchedGroud) {
+            if (pieceTouchedGroud) {
                 nextPiece();
                 pieceTouchedGroud = false;
-            }*/
+                checkIfScore();
+            }
 
->>>>>>> a546aebf8ec0828ad4123a4359496e4762f35b54
             gui.drawAll(arena); // provisório
 
             command = gui.getCommand();
 
-<<<<<<< HEAD
-            //if (command == Observer.COMMAND.UP)
-                //this.arena.getCurrentPiece().moveUp();
-=======
             // Observer.COMMAND UP -> Rotation
 
             if (command == Observer.COMMAND.UP) {
                 this.currentPieceController.rotateClockwise();
             }
->>>>>>> a546aebf8ec0828ad4123a4359496e4762f35b54
 
             if (command == Observer.COMMAND.RIGHT)
-                this.arena.getCurrentPiece().moveRight();
-
-            //if (command == Observer.COMMAND.DOWN)
-                //this.arena.getCurrentPiece().moveDown();
+                if (canGoRight())
+                    this.currentPieceController.moveRight();
 
             if (command == Observer.COMMAND.LEFT)
-                this.arena.getCurrentPiece().moveLeft();
+                if (canGoLeft())
+                    this.currentPieceController.moveLeft();
 
-            this.arena.getCurrentPiece().moveDown();
+            if (command == Observer.COMMAND.DOWN) {
+                if (canGoDown())
+                    this.currentPieceController.moveDown();
+            }
 
         } while (command != Observer.COMMAND.EOF);
 
-<<<<<<< HEAD
-=======
     }
 
     private int tryMoveDown(int counter, int levelDifficulty) {
@@ -78,8 +78,8 @@ public class ArenaController {
             else {
                 pieceTouchedGroud = true;
                 this.arena.addPiece(currentPieceController.getPieceModel()); // quando a peça toca no chão ou noutra
-                                                                             // peça, passa-se a interpretar a peça na
-                                                                             // arena como um conjunto de blocos
+                // peça, passa-se a interpretar a peça na
+                // arena como um conjunto de blocos
             }
             counter = 0;
         }
@@ -156,7 +156,43 @@ public class ArenaController {
                 return true;
         }
 
->>>>>>> a546aebf8ec0828ad4123a4359496e4762f35b54
         return false;
     }
+
+    public boolean checkLine(int line) {
+        for (int column = 0; column < gui.getWidth(); column++) {
+            if (!positionHasBlock(new Position(column, line)))
+                return false;
+        }
+        return true;
+    }
+
+    public void removeLine(int line) {
+        List<Block> blocks = arena.getArenaBlocks();
+        List<Block> toRemove = new ArrayList<>();
+        for (Block block: blocks) {
+            if (block.getPosition().getY() == line) {
+                toRemove.add(block);
+            }
+        }
+        arena.removeArenaBlocks(toRemove);
+    }
+
+    private void pushBlocksDown(int line) { // ajusta os blocos, sabendo que a linha 'line' foi removida
+
+    }
+
+    public void checkIfScore() {
+
+        for (int line = gui.getHeight(); line >= 0; line--) {
+            if (checkLine(line)) {
+                removeLine(line);
+                pushBlocksDown(line);
+            }
+        }
+
+    }
+
+
+
 }

@@ -4,9 +4,11 @@ import java.io.IOException;
 
 public interface Observer<T> {
     void drawAll(T arena); // não sei se é suposto fazer assim
+    int getWidth();
+    int getHeight();
 
-    public enum COMMAND {UP, RIGHT, DOWN, LEFT, EOF}
+    enum COMMAND {UP, RIGHT, DOWN, LEFT, EOF, NULL}
 
-    public COMMAND getCommand() throws IOException;
+    COMMAND getCommand() throws IOException, InterruptedException;
     void changed(T subject);
 }

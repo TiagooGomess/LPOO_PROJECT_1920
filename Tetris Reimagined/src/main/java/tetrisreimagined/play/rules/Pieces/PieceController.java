@@ -42,16 +42,13 @@ public class PieceController {
         int yUp = this.pieceModel.getMinYPosition().getY();
         int xLeft = this.pieceModel.getMinXPosition().getX();
 
-        System.out.println("xLeft: " + xLeft);
-        System.out.println("yUp: " + yUp);
-
         for (Block block: this.pieceModel.getBlocks()) {
 
             // Move piece to origin
             Position origPos = new Position(block.getPosition().getX() - xLeft,block.getPosition().getY() - yUp);
 
             // Rotate 90º
-            origPos = new Position(-origPos.getY() + xLeft, origPos.getX() + yUp);
+            origPos = new Position(-origPos.getY() + xLeft + 3, origPos.getX() + yUp);
 
             // Move piece back to initial place
             block.setPosition(origPos);

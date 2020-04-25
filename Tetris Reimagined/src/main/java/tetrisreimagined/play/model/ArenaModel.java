@@ -1,5 +1,7 @@
+
 package tetrisreimagined.play.model;
 
+import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.observer.Observable;
 
 import java.util.ArrayList;
@@ -8,32 +10,32 @@ import java.util.List;
 public class ArenaModel extends Observable<ArenaModel> {
     // Only represents data
 
-    private List<Piece> pieces;
-    private Piece currentPiece;
+    private List<Block> arenaBlocks; // contém todos os blocos (quadradinhos); assim será mais fácil verificar se pontuou
+
+    private PieceModel currentPieceModel;
 
     public ArenaModel() {
-        this.pieces = new ArrayList<>();
-        addPiece(new ZBlock());
-
-        this.currentPiece = new SBlock();
-
-        for (Piece piece: pieces) {
-            piece.moveDown();
-            piece.moveRight();
-            piece.moveRight();
-        }
+        this.arenaBlocks = new ArrayList<>();
     }
 
-    public List<Piece> getPieces() {
-        return pieces;
+    @Override
+    public void removeArenaBlocks(List<Block> toRemove) {
+        this.arenaBlocks.removeAll(toRemove);
     }
 
-    public Piece getCurrentPiece() {
-        return currentPiece;
+    public PieceModel getCurrentPieceModel() {
+        return this.currentPieceModel;
     }
 
-    public void addPiece(Piece piece) {
-        this.pieces.add(piece);
+    public void setCurrentPieceModel(PieceModel pieceModel) {
+        this.currentPieceModel = pieceModel;
     }
 
+    public void addPiece(PieceModel pieceModel) {
+        this.arenaBlocks.addAll(pieceModel.getBlocks());
+    }
+
+    public List<Block> getArenaBlocks() {
+        return this.arenaBlocks;
+    }
 }
