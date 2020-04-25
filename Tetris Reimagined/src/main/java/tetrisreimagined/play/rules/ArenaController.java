@@ -41,7 +41,13 @@ public class ArenaController {
             if (pieceTouchedGroud) {
                 nextPiece();
                 pieceTouchedGroud = false;
-                checkIfScore();
+
+                for (int i = 0; i < 10; i++) { // change this later
+                    checkIfScore();
+                    checkIfScore();
+                    checkIfScore();
+                    checkIfScore();
+                }
             }
 
             gui.drawAll(arena); // provisório
@@ -180,19 +186,25 @@ public class ArenaController {
 
     private void pushBlocksDown(int line) { // ajusta os blocos, sabendo que a linha 'line' foi removida
 
+        for (int i = 0; i < 10; i++) { // change this later
+            for (Block block: arena.getArenaBlocks()) {
+                if (block.getPosition().getY() < line && !positionHasBlock(block.getPosition().down())) {
+                    block.setPosition(block.getPosition().down());
+                }
+            }
+        }
+
+
     }
 
     public void checkIfScore() {
-
+        
         for (int line = gui.getHeight(); line >= 0; line--) {
             if (checkLine(line)) {
                 removeLine(line);
                 pushBlocksDown(line);
             }
         }
-
     }
-
-
 
 }
