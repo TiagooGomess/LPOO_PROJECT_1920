@@ -18,17 +18,17 @@ public abstract class PieceController {
 
     public void moveLeft() {
         for (Block block: this.pieceModel.getBlocks())
-            block.moveLeft();
+            block.setPosition(block.getPosition().left());
     }
 
     public void moveRight() {
         for (Block block: this.pieceModel.getBlocks())
-            block.moveRight();
+            block.setPosition(block.getPosition().right());
     }
 
     public void moveDown() {
         for (Block block: this.pieceModel.getBlocks())
-            block.moveDown();
+            block.setPosition(block.getPosition().down());
     }
 
     // http://tech.migge.io/2017/02/07/tetris-rotations/
