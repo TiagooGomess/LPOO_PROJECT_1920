@@ -15,11 +15,12 @@ public class ArenaController {
     private ArenaModel arena;
     private PieceController currentPieceController;
     private boolean pieceTouchedGroud = false;
-    int level = 0;
-    int score = 0;
-    int numLinesTotal = 0;
-    int dyCurrentPiece = 0;
-    boolean gameOver = false;
+    private int level = 0;
+    private int score = 0;
+    private int numLinesTotal = 0;
+    private int dyCurrentPiece = 0;
+    private boolean gameOver = false;
+    private boolean gamePaused = false;
 
     public ArenaController(Observer<ArenaModel> gui, ArenaModel arena) {
         this.gui = gui;
@@ -82,6 +83,10 @@ public class ArenaController {
                 this.currentPieceController.rotateCounterClockwise();
             }
 
+            if (command == Observer.COMMAND.ENTER) {
+                this.gamePaused = !this.gamePaused;
+            }
+
 
         } while (command != Observer.COMMAND.EOF);
 
@@ -93,8 +98,12 @@ public class ArenaController {
     private int tryMoveDown(int counter, int levelDifficulty) {
         if (counter++ == levelDifficulty) { // mudar para velocidade da peça
             if (canGoDown()) {
-                makeCurrentPieceFall();
-                this.dyCurrentPiece++;
+                if (!gamePaused) {
+                    makeCurrentPieceFall();
+                    this.dyCurrentPiece++;
+                }
+                else
+                    System.out.println("Game paused. Press ENTER to continue...");
             }
             else {
                 pieceTouchedGroud = true;

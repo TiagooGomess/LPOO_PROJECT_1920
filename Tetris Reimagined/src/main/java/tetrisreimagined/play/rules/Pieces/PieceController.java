@@ -41,8 +41,8 @@ public class PieceController {
             // Move piece to origin
             Position origPos = new Position(block.getPosition().getX() - xLeft,block.getPosition().getY() - yUp);
 
-            // Rotate 90º
-            origPos = new Position(-origPos.getY() + xLeft + 4, origPos.getX() + yUp);
+            // Rotate 90º (este num devia de ser 4, mas depois estragava o jogo, pq temos que mover as peças em x de dois em dois)
+            origPos = new Position(-origPos.getY() + xLeft + 3, origPos.getX() + yUp);
 
             // Move piece back to initial place
             block.setPosition(origPos);

@@ -16,8 +16,6 @@ public class Game {
 
         ArenaController controller = new ArenaController(gui, arena);
         controller.start();
-
-        //gui.drawAll(arena);
     }
 
 }
