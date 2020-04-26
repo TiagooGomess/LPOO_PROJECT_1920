@@ -87,6 +87,12 @@ public class ArenaController {
                 this.gamePaused = !this.gamePaused;
             }
 
+            if (command == Observer.COMMAND.SPACE) { // hard drop
+                while(canGoDown()) {
+                    currentPieceController.moveDown();
+                }
+            }
+
 
         } while (command != Observer.COMMAND.EOF);
 

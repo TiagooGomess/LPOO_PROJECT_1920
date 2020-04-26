@@ -94,6 +94,7 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             if (key.getKeyType() == KeyType.Enter) return COMMAND.ENTER;
             if (key.getKeyType() == KeyType.Character) {
                 if (key.getCharacter() == 'z') return COMMAND.Z;
+                if (key.getCharacter() == ' ') return COMMAND.SPACE;
             }
             if (key.getKeyType() == KeyType.EOF) return COMMAND.EOF;
 
