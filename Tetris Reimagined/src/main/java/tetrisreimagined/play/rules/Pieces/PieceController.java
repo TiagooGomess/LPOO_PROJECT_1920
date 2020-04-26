@@ -65,13 +65,27 @@ public class PieceController {
 
         int[][] transposedOccupied = pieceTransform.transposeMatrix(occupiedBlock, yLenght, xLenght);
 
-        int[][] finalMatrixRotated = pieceTransform.reverseRowsOrder(transposedOccupied, xLenght, yLenght);
+        int[][] finalMatrixRotated = pieceTransform.reverseColumnsOrder(transposedOccupied, xLenght, yLenght);
 
+        for(int row = 0; row < xLenght; row++) {
+            for(int col = 0; col < yLenght; col++)
+                System.out.print(finalMatrixRotated[row][col] + " ");
+            System.out.println();
+        }
+
+
+        for(int row = 0; row < xLenght; row++) {
+            int auxX = initialX;
+            int auxY = initialY;
+            for(int col = 0; col < yLenght; col++) {
+                if(finalMatrixRotated[row][col] != 0) {
+                    Block toAdjust = pieceTransform.getBlockById(finalMatrixRotated[row][col], this.pieceModel.getBlocks());
+                    toAdjust.setPosition(new Position(auxX, auxY));
+                }
+                auxX++;
+            }
+            initialY++;
+        }
     }
-
-    public void rotateCounterClockwise() {
-
-    }
-
 
 }
