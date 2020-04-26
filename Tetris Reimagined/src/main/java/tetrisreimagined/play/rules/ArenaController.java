@@ -31,7 +31,7 @@ public class ArenaController {
     public void start() throws IOException, InterruptedException {
         Observer.COMMAND command;
 
-        int counter = 0, levelDifficulty = 15;
+        int counter = 0, levelDifficulty = 5;
         long begTime = 0, endTime = 0, elapsedTime = 0;
 
         if (2*this.level >= levelDifficulty)
