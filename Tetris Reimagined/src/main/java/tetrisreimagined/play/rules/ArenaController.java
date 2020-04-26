@@ -69,9 +69,9 @@ public class ArenaController {
                     this.currentPieceController.moveLeft();
 
             if (command == Observer.COMMAND.DOWN) {
-                if (canGoDown()) {
+                if (canGoDown()) { // soft drop
                     this.currentPieceController.moveDown();
-                    this.score += 2;
+                    this.score += currentPieceController.getPieceModel().getNumBlocks() *(this.level+1);
                 }
             }
 
@@ -91,6 +91,7 @@ public class ArenaController {
                 while(canGoDown()) {
                     currentPieceController.moveDown();
                 }
+                this.score += 2*currentPieceController.getPieceModel().getNumBlocks() * (this.level+1);
             }
 
 
@@ -231,7 +232,6 @@ public class ArenaController {
     }
 
     public void updateScore(int numLines) {
-        this.score += 10*(this.level+1); // para todas as peças
 
         switch (numLines) {
             case 0:
