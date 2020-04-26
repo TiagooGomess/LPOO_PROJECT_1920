@@ -17,6 +17,9 @@ public class ArenaController {
     private boolean pieceTouchedGroud = false;
     int level = 0;
     int score = 0;
+    int numLinesTotal = 0;
+    int dyCurrentPiece = 0;
+    boolean gameOver = false;
 
     public ArenaController(Observer<ArenaModel> gui, ArenaModel arena) {
         this.gui = gui;
@@ -30,8 +33,11 @@ public class ArenaController {
         int counter = 0, levelDifficulty = 15;
         long begTime = 0, endTime = 0, elapsedTime = 0;
 
+        if (2*this.level >= levelDifficulty)
+            levelDifficulty = 2*this.level + 1;
+
         do {
-            counter = tryMoveDown(counter, levelDifficulty);
+            counter = tryMoveDown(counter, levelDifficulty - 2*this.level);
 
             endTime = System.currentTimeMillis();
             if(notFirstIteration(begTime))
@@ -39,6 +45,9 @@ public class ArenaController {
 
             Thread.sleep(30 - elapsedTime); // mudar para velocidade da peça
             begTime = System.currentTimeMillis();
+
+            if (gameOver)
+                break;
 
             if (pieceTouchedGroud) {
                 nextPiece();
@@ -65,23 +74,35 @@ public class ArenaController {
                     this.currentPieceController.moveLeft();
 
             if (command == Observer.COMMAND.DOWN) {
-                if (canGoDown())
+                if (canGoDown()) {
                     this.currentPieceController.moveDown();
+                    this.score += 2;
+                }
             }
 
+//            System.out.println("SCORE: " + this.score);
+//            System.out.println("LEVEL: " + this.level);
+
         } while (command != Observer.COMMAND.EOF);
+
+        System.out.println("GAME OVER");
+        System.out.println("Your score was " + this.score);
 
     }
 
     private int tryMoveDown(int counter, int levelDifficulty) {
         if (counter++ == levelDifficulty) { // mudar para velocidade da peça
-            if (canGoDown())
+            if (canGoDown()) {
                 makeCurrentPieceFall();
+                this.dyCurrentPiece++;
+            }
             else {
                 pieceTouchedGroud = true;
-                this.arena.addPiece(currentPieceController.getPieceModel()); // quando a peça toca no chão ou noutra
-                // peça, passa-se a interpretar a peça na
-                // arena como um conjunto de blocos
+                this.arena.addPiece(currentPieceController.getPieceModel());
+                if (dyCurrentPiece == 0) {
+                    gameOver = true;
+                }
+                dyCurrentPiece = 0;
             }
             counter = 0;
         }
@@ -218,8 +239,6 @@ public class ArenaController {
             this.score += 2000*(this.level+1);
         }
 
-        System.out.println("SCORE: " + this.score);
-
     }
 
     public void checkIfScore() {
@@ -241,6 +260,14 @@ public class ArenaController {
 
         updateScore(numLines);
 
+        updateLevel();
+
+        this.numLinesTotal += numLines;
+
+    }
+
+    private void updateLevel() {
+        this.level = numLinesTotal / 6; // 6 linhas -> aumenta de nível
     }
 
 }
