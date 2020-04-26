@@ -31,14 +31,25 @@ public class PieceController {
             block.setPosition(block.getPosition().down());
     }
 
-    // http://tech.migge.io/2017/02/07/tetris-rotations/
     public void rotateClockwise() {
-        /*for (Block block: this.pieceModel.getBlocks()) {
-            int newX = 2 - (block.getPosition().getY() - (pieceModel.getSizeOfBoundingBox() - 4));
-            int newY = block.getPosition().getX();
 
-            block.setPosition(new Position(newX, newY));
-        }*/
+        int yUp = this.pieceModel.getMinYPosition().getY();
+        int xLeft = this.pieceModel.getMinXPosition().getX();
+
+        for (Block block: this.pieceModel.getBlocks()) {
+
+            // Move piece to origin
+            Position origPos = new Position(block.getPosition().getX() - xLeft,block.getPosition().getY() - yUp);
+
+            // Rotate 90º (este num devia de ser 4, mas depois estragava o jogo, pq temos que mover as peças em x de dois em dois)
+            origPos = new Position(-origPos.getY() + xLeft + 3, origPos.getX() + yUp);
+
+            // Move piece back to initial place
+            block.setPosition(origPos);
+        }
+    }
+
+    public void rotateCounterClockwise() {
         int yUp = this.pieceModel.getMinYPosition().getY();
         int xLeft = this.pieceModel.getMinXPosition().getX();
 
@@ -48,15 +59,11 @@ public class PieceController {
             Position origPos = new Position(block.getPosition().getX() - xLeft,block.getPosition().getY() - yUp);
 
             // Rotate 90º
-            origPos = new Position(-origPos.getY() + xLeft + 3, origPos.getX() + yUp);
+            origPos = new Position(+origPos.getY() + xLeft, -origPos.getX() + yUp + 4);
 
             // Move piece back to initial place
             block.setPosition(origPos);
         }
-    }
-
-    public void rotateCounterClockwise() {
-
     }
 
 

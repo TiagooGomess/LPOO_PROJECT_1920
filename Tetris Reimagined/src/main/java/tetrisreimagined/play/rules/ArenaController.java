@@ -15,8 +15,12 @@ public class ArenaController {
     private ArenaModel arena;
     private PieceController currentPieceController;
     private boolean pieceTouchedGroud = false;
-    int level = 0;
-    int score = 0;
+    private int level = 0;
+    private int score = 0;
+    private int numLinesTotal = 0;
+    private int dyCurrentPiece = 0;
+    private boolean gameOver = false;
+    private boolean gamePaused = false;
 
     public ArenaController(Observer<ArenaModel> gui, ArenaModel arena) {
         this.gui = gui;
@@ -27,11 +31,14 @@ public class ArenaController {
     public void start() throws IOException, InterruptedException {
         Observer.COMMAND command;
 
-        int counter = 0, levelDifficulty = 15;
+        int counter = 0, levelDifficulty = 5;
         long begTime = 0, endTime = 0, elapsedTime = 0;
 
+        if (2*this.level >= levelDifficulty)
+            levelDifficulty = 2*this.level + 1;
+
         do {
-            counter = tryMoveDown(counter, levelDifficulty);
+            counter = tryMoveDown(counter, levelDifficulty - 2*this.level);
 
             endTime = System.currentTimeMillis();
             if(notFirstIteration(begTime))
@@ -39,6 +46,9 @@ public class ArenaController {
 
             Thread.sleep(30 - elapsedTime); // mudar para velocidade da peça
             begTime = System.currentTimeMillis();
+
+            if (gameOver)
+                break;
 
             if (pieceTouchedGroud) {
                 nextPiece();
@@ -50,12 +60,6 @@ public class ArenaController {
 
             command = gui.getCommand();
 
-            // Observer.COMMAND UP -> Rotation
-
-            if (command == Observer.COMMAND.UP) {
-                this.currentPieceController.rotateClockwise();
-            }
-
             if (command == Observer.COMMAND.RIGHT)
                 if (canGoRight())
                     this.currentPieceController.moveRight();
@@ -65,23 +69,56 @@ public class ArenaController {
                     this.currentPieceController.moveLeft();
 
             if (command == Observer.COMMAND.DOWN) {
-                if (canGoDown())
+                if (canGoDown()) { // soft drop
                     this.currentPieceController.moveDown();
+                    this.score += currentPieceController.getPieceModel().getNumBlocks() *(this.level+1);
+                }
             }
 
+            if (command == Observer.COMMAND.UP) {
+                this.currentPieceController.rotateClockwise();
+            }
+
+            if (command == Observer.COMMAND.Z) {
+                this.currentPieceController.rotateCounterClockwise();
+            }
+
+            if (command == Observer.COMMAND.ENTER) {
+                this.gamePaused = !this.gamePaused;
+            }
+
+            if (command == Observer.COMMAND.SPACE) { // hard drop
+                while(canGoDown()) {
+                    currentPieceController.moveDown();
+                }
+                this.score += 2*currentPieceController.getPieceModel().getNumBlocks() * (this.level+1);
+            }
+
+
         } while (command != Observer.COMMAND.EOF);
+
+        System.out.println("GAME OVER");
+        System.out.println("Your score was " + this.score);
 
     }
 
     private int tryMoveDown(int counter, int levelDifficulty) {
         if (counter++ == levelDifficulty) { // mudar para velocidade da peça
-            if (canGoDown())
-                makeCurrentPieceFall();
+            if (canGoDown()) {
+                if (!gamePaused) {
+                    makeCurrentPieceFall();
+                    this.dyCurrentPiece++;
+                }
+                else
+                    System.out.println("Game paused. Press ENTER to continue...");
+            }
             else {
                 pieceTouchedGroud = true;
-                this.arena.addPiece(currentPieceController.getPieceModel()); // quando a peça toca no chão ou noutra
-                // peça, passa-se a interpretar a peça na
-                // arena como um conjunto de blocos
+                this.arena.addPiece(currentPieceController.getPieceModel());
+                if (dyCurrentPiece == 0) {
+                    gameOver = true;
+                }
+                dyCurrentPiece = 0;
             }
             counter = 0;
         }
@@ -195,7 +232,6 @@ public class ArenaController {
     }
 
     public void updateScore(int numLines) {
-        this.score += 10*(this.level+1); // para todas as peças
 
         switch (numLines) {
             case 0:
@@ -218,8 +254,6 @@ public class ArenaController {
             this.score += 2000*(this.level+1);
         }
 
-        System.out.println("SCORE: " + this.score);
-
     }
 
     public void checkIfScore() {
@@ -241,6 +275,14 @@ public class ArenaController {
 
         updateScore(numLines);
 
+        updateLevel();
+
+        this.numLinesTotal += numLines;
+
+    }
+
+    private void updateLevel() {
+        this.level = numLinesTotal / 6; // 6 linhas -> aumenta de nível
     }
 
 }

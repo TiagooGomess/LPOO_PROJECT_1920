@@ -87,4 +87,8 @@ public abstract class PieceModel {
         return position;
     }
 
+    public int getNumBlocks() {
+        return this.blocks.size();
+    }
+
 }
