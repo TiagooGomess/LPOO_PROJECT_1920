@@ -38,4 +38,8 @@ public class ArenaModel extends Observable<ArenaModel> {
     public List<Block> getArenaBlocks() {
         return this.arenaBlocks;
     }
+
+    public boolean arenaIsEmpty() {
+        return this.arenaBlocks.isEmpty();
+    }
 }

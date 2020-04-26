@@ -11,7 +11,7 @@ public class Game {
     public void run() throws IOException, InterruptedException {
         // ArenaModel arena = new ArenaModel(60, 30); -> Coordinates can represent initial block position...
         ArenaModel arena = new ArenaModel();
-        GameViewLanterna gui = new GameViewLanterna(20, 20);
+        GameViewLanterna gui = new GameViewLanterna(40, 20);
         arena.addObserver(gui);
 
         ArenaController controller = new ArenaController(gui, arena);
