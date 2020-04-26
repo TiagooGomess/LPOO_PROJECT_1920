@@ -7,7 +7,7 @@ public interface Observer<T> {
     int getWidth();
     int getHeight();
 
-    enum COMMAND {UP, RIGHT, DOWN, LEFT, EOF, NULL}
+    enum COMMAND {UP, RIGHT, DOWN, LEFT, EOF, Z, NULL}
 
     COMMAND getCommand() throws IOException, InterruptedException;
     void changed(T subject);

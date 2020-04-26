@@ -59,12 +59,6 @@ public class ArenaController {
 
             command = gui.getCommand();
 
-            // Observer.COMMAND UP -> Rotation
-
-            if (command == Observer.COMMAND.UP) {
-                this.currentPieceController.rotateClockwise();
-            }
-
             if (command == Observer.COMMAND.RIGHT)
                 if (canGoRight())
                     this.currentPieceController.moveRight();
@@ -80,8 +74,14 @@ public class ArenaController {
                 }
             }
 
-//            System.out.println("SCORE: " + this.score);
-//            System.out.println("LEVEL: " + this.level);
+            if (command == Observer.COMMAND.UP) {
+                this.currentPieceController.rotateClockwise();
+            }
+
+            if (command == Observer.COMMAND.Z) {
+                this.currentPieceController.rotateCounterClockwise();
+            }
+
 
         } while (command != Observer.COMMAND.EOF);
 
