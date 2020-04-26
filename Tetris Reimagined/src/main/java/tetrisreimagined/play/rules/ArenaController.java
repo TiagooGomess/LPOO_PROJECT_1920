@@ -15,6 +15,8 @@ public class ArenaController {
     private ArenaModel arena;
     private PieceController currentPieceController;
     private boolean pieceTouchedGroud = false;
+    int level = 0;
+    int score = 0;
 
     public ArenaController(Observer<ArenaModel> gui, ArenaModel arena) {
         this.gui = gui;
@@ -41,13 +43,7 @@ public class ArenaController {
             if (pieceTouchedGroud) {
                 nextPiece();
                 pieceTouchedGroud = false;
-
-                for (int i = 0; i < 10; i++) { // change this later
-                    checkIfScore();
-                    checkIfScore();
-                    checkIfScore();
-                    checkIfScore();
-                }
+                checkIfScore();
             }
 
             gui.drawAll(arena); // provisório
@@ -186,25 +182,58 @@ public class ArenaController {
 
     private void pushBlocksDown(int line) { // ajusta os blocos, sabendo que a linha 'line' foi removida
 
-        for (int i = 0; i < 10; i++) { // change this later
-            for (Block block: arena.getArenaBlocks()) {
-                if (block.getPosition().getY() < line && !positionHasBlock(block.getPosition().down())) {
-                    block.setPosition(block.getPosition().down());
-                }
+        for (Block block: arena.getArenaBlocks()) {
+            if (block.getPosition().getY() < line) {
+                block.setPosition(block.getPosition().down());
             }
         }
 
 
     }
 
+    public void updateScore(int numLines) {
+        this.score += 10*(this.level+1); // para todas as peças
+
+        switch (numLines) {
+            case 0:
+                break;
+            case 1:
+                this.score += 50*(this.level + 1);
+                break;
+            case 2:
+                score += 150*(this.level+1);
+                break;
+            case 3:
+                score += 350*(this.level+1);
+                break;
+            case 4:
+                score += 1000*(this.level+1); // aka a Tetris
+                break;
+        }
+
+        if (this.arena.arenaIsEmpty()) {
+            this.score += 2000*(this.level+1);
+        }
+
+        System.out.println("SCORE: " + this.score);
+
+    }
+
     public void checkIfScore() {
-        
+
+        int numLines = 0;
+
         for (int line = gui.getHeight(); line >= 0; line--) {
             if (checkLine(line)) {
                 removeLine(line);
                 pushBlocksDown(line);
+                numLines++;
             }
         }
+
+        updateScore(numLines);
+
+
     }
 
 }
