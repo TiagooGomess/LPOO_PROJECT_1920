@@ -27,7 +27,7 @@ public class ArenaController {
     public void start() throws IOException, InterruptedException {
         Observer.COMMAND command;
 
-        int counter = 0, levelDifficulty = 10;
+        int counter = 0, levelDifficulty = 15;
         long begTime = 0, endTime = 0, elapsedTime = 0;
 
         do {
@@ -37,7 +37,7 @@ public class ArenaController {
             if(notFirstIteration(begTime))
                 elapsedTime = endTime - begTime;
 
-            Thread.sleep(35 - elapsedTime); // mudar para velocidade da peça
+            Thread.sleep(30 - elapsedTime); // mudar para velocidade da peça
             begTime = System.currentTimeMillis();
 
             if (pieceTouchedGroud) {
@@ -170,6 +170,7 @@ public class ArenaController {
     }
 
     public void removeLine(int line) {
+
         List<Block> blocks = arena.getArenaBlocks();
         List<Block> toRemove = new ArrayList<>();
         for (Block block: blocks) {
@@ -178,6 +179,8 @@ public class ArenaController {
             }
         }
         arena.removeArenaBlocks(toRemove);
+
+
     }
 
     private void pushBlocksDown(int line) { // ajusta os blocos, sabendo que a linha 'line' foi removida
@@ -222,17 +225,21 @@ public class ArenaController {
     public void checkIfScore() {
 
         int numLines = 0;
+        boolean changedNothing;
 
-        for (int line = gui.getHeight(); line >= 0; line--) {
-            if (checkLine(line)) {
-                removeLine(line);
-                pushBlocksDown(line);
-                numLines++;
+        do {
+            changedNothing = true;
+            for (int line = gui.getHeight(); line >= 0; line--) {
+                if (checkLine(line)) {
+                    removeLine(line);
+                    pushBlocksDown(line);
+                    numLines++;
+                    changedNothing = false;
+                }
             }
-        }
+        } while (!changedNothing);
 
         updateScore(numLines);
-
 
     }
 
