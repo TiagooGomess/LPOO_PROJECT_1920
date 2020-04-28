@@ -5,7 +5,7 @@ import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
 import tetrisreimagined.play.rules.Pieces.PieceTransform;
 
-public class PieceController {
+public class PieceController implements Cloneable {
 
     private PieceModel pieceModel;
     private PieceTransform pieceTransform;
@@ -59,12 +59,6 @@ public class PieceController {
         int[][] finalMatrixRotated = pieceTransform.reverseColumnsOrder(transposedOccupied, xLenght, yLenght);
 
         for (int row = 0; row < xLenght; row++) {
-            for (int col = 0; col < yLenght; col++)
-                System.out.print(finalMatrixRotated[row][col] + " ");
-            System.out.println();
-        }
-
-        for (int row = 0; row < xLenght; row++) {
             int auxX = initialX;
             int auxY = initialY;
             for (int col = 0; col < yLenght; col++) {
@@ -100,12 +94,6 @@ public class PieceController {
         int[][] transposedOccupied = pieceTransform.transposeMatrix(occupiedBlock, yLenght, xLenght);
 
         int[][] finalMatrixRotated = pieceTransform.reverseLinesOrder(transposedOccupied, xLenght, yLenght);
-
-        for (int row = 0; row < xLenght; row++) {
-            for (int col = 0; col < yLenght; col++)
-                System.out.print(finalMatrixRotated[row][col] + " ");
-            System.out.println();
-        }
 
         for (int row = 0; row < xLenght; row++) {
             int auxX = initialX;
