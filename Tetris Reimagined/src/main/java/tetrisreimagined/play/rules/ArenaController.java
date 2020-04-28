@@ -14,6 +14,7 @@ public class ArenaController {
     private Observer<ArenaModel> gui; // In this case GameViewLanterna
     private ArenaModel arena;
     private PieceController currentPieceController;
+    private PieceController nextPieceController;
     private boolean pieceTouchedGroud = false;
     private int level = 0;
     private int score = 0;
@@ -21,6 +22,7 @@ public class ArenaController {
     private int dyCurrentPiece = 0;
     private boolean gameOver = false;
     private boolean gamePaused = false;
+    private int numIteration = 0;
 
     public ArenaController(Observer<ArenaModel> gui, ArenaModel arena) {
         this.gui = gui;
@@ -47,7 +49,7 @@ public class ArenaController {
             Thread.sleep(30 - elapsedTime); // mudar para velocidade da peça
             begTime = System.currentTimeMillis();
 
-            if (gameOver)
+            if (gameOver())
                 break;
 
             if (pieceTouchedGroud) {
@@ -76,11 +78,17 @@ public class ArenaController {
             }
 
             if (command == Observer.COMMAND.UP) {
-                this.currentPieceController.rotateClockwise();
+                if (pieceCanRotateClockWise())
+                    this.currentPieceController.rotateClockwise();
+                else
+                    System.out.println("cannot rotate clockwise");
             }
 
             if (command == Observer.COMMAND.Z) {
-                this.currentPieceController.rotateCounterClockwise();
+                if (pieceCanRotateCounterClockWise())
+                    this.currentPieceController.rotateCounterClockwise();
+                else
+                    System.out.println("cannot rotate CounterClockwise");
             }
 
             if (command == Observer.COMMAND.ENTER) {
@@ -184,8 +192,24 @@ public class ArenaController {
             default:
                 newPiece = new ZBlockModel();
         }
-        this.currentPieceController = new PieceController(newPiece);
-        this.arena.setCurrentPieceModel(newPiece);
+
+        if (this.numIteration++ == 0) {
+            this.currentPieceController = new PieceController(newPiece);
+        }
+        else {
+            this.currentPieceController = this.nextPieceController;
+        }
+        this.nextPieceController = new PieceController(newPiece);
+
+        //this.currentPieceController = new PieceController(newPiece);
+        //this.arena.setCurrentPieceModel(newPiece);
+        this.arena.setCurrentPieceModel(currentPieceController.getPieceModel());
+        this.arena.setNextPieceModel(newPiece);
+
+        System.out.println("Next Piece: " + nextPieceController.getPieceModel().getClass().toString());
+
+
+
     }
 
     public boolean positionHasBlock(Position position) {
@@ -283,6 +307,48 @@ public class ArenaController {
 
     private void updateLevel() {
         this.level = numLinesTotal / 6; // 6 linhas -> aumenta de nível
+    }
+
+    private boolean pieceCanRotateClockWise() {
+        boolean canRotate = true;
+        List<Position> blockPositions = new ArrayList<>();
+        currentPieceController.rotateClockwise();
+        for (Block block: currentPieceController.getPieceModel().getBlocks()) {
+            blockPositions.add(block.getPosition());
+        }
+        for (Position position: blockPositions) {
+            boolean isOutOfLimits = position.getX() >= gui.getWidth() || position.getX() < 0 || position.getY() > position.getY() || position.getY() < 0;
+            if (positionHasBlock(position) || isOutOfLimits) {
+                canRotate = false;
+                break;
+            }
+        }
+        currentPieceController.rotateCounterClockwise();
+        return canRotate;
+    }
+
+    private boolean pieceCanRotateCounterClockWise() {
+        boolean canRotate = true;
+        List<Position> blockPositions = new ArrayList<>();
+        currentPieceController.rotateCounterClockwise();
+        for (Block block: currentPieceController.getPieceModel().getBlocks()) {
+            blockPositions.add(block.getPosition());
+        }
+        for (Position position: blockPositions) {
+            boolean isOutOfLimits = position.getX() >= gui.getWidth() || position.getX() < 0 || position.getY() > position.getY() || position.getY() < 0;
+            if (positionHasBlock(position) || isOutOfLimits) {
+                canRotate = false;
+                break;
+            }
+        }
+        currentPieceController.rotateClockwise();
+        return canRotate;
+    }
+
+    private boolean gameOver() {
+        // TODO (já tinha feito de uma maneira, mas não é compatível com ter uma nextPieceController)
+
+        return false;
     }
 
 }

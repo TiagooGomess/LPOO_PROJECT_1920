@@ -13,6 +13,7 @@ public class ArenaModel extends Observable<ArenaModel> {
     private List<Block> arenaBlocks; // contém todos os blocos (quadradinhos); assim será mais fácil verificar se pontuou
 
     private PieceModel currentPieceModel;
+    private PieceModel nextPieceModel;
 
     public ArenaModel() {
         this.arenaBlocks = new ArrayList<>();
@@ -29,6 +30,10 @@ public class ArenaModel extends Observable<ArenaModel> {
 
     public void setCurrentPieceModel(PieceModel pieceModel) {
         this.currentPieceModel = pieceModel;
+    }
+
+    public void setNextPieceModel(PieceModel pieceModel) {
+        this.nextPieceModel = nextPieceModel;
     }
 
     public void addPiece(PieceModel pieceModel) {
