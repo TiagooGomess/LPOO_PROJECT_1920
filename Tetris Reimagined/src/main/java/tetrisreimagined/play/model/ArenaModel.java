@@ -1,3 +1,4 @@
+
 package tetrisreimagined.play.model;
 
 import tetrisreimagined.play.model.Pieces.PieceModel;
@@ -12,9 +13,15 @@ public class ArenaModel extends Observable<ArenaModel> {
     private List<Block> arenaBlocks; // contém todos os blocos (quadradinhos); assim será mais fácil verificar se pontuou
 
     private PieceModel currentPieceModel;
+    private PieceModel nextPieceModel;
 
     public ArenaModel() {
         this.arenaBlocks = new ArrayList<>();
+    }
+
+    @Override
+    public void removeArenaBlocks(List<Block> toRemove) {
+        this.arenaBlocks.removeAll(toRemove);
     }
 
     public PieceModel getCurrentPieceModel() {
@@ -25,11 +32,19 @@ public class ArenaModel extends Observable<ArenaModel> {
         this.currentPieceModel = pieceModel;
     }
 
+    public void setNextPieceModel(PieceModel pieceModel) {
+        this.nextPieceModel = nextPieceModel;
+    }
+
     public void addPiece(PieceModel pieceModel) {
         this.arenaBlocks.addAll(pieceModel.getBlocks());
     }
 
     public List<Block> getArenaBlocks() {
         return this.arenaBlocks;
+    }
+
+    public boolean arenaIsEmpty() {
+        return this.arenaBlocks.isEmpty();
     }
 }

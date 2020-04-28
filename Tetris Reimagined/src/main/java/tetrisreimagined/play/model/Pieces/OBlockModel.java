@@ -18,7 +18,17 @@ public class OBlockModel extends PieceModel {
         this.blocks.add(new Block(new Position(1, 1), this.color, 6));
         this.blocks.add(new Block(new Position(2, 1), this.color, 7));
 
-        sizeOfBoundingBox = 4;
+        this.blocks.add(new Block(new Position(0, 2), this.color));
+        this.blocks.add(new Block(new Position(1, 2), this.color));
+        this.blocks.add(new Block(new Position(2, 2), this.color));
+        this.blocks.add(new Block(new Position(3, 2), this.color));
+
+        this.blocks.add(new Block(new Position(0, 3), this.color));
+        this.blocks.add(new Block(new Position(1, 3), this.color));
+        this.blocks.add(new Block(new Position(2, 3), this.color));
+        this.blocks.add(new Block(new Position(3, 3), this.color));
+
+
 
     }
 

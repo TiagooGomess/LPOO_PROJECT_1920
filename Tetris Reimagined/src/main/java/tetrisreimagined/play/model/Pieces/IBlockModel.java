@@ -20,7 +20,16 @@ public class IBlockModel extends PieceModel {
         blocks.add(new Block(new Position(6, 0), this.color, 7));
         blocks.add(new Block(new Position(7, 0), this.color, 8));
 
-        sizeOfBoundingBox = 8;
+        blocks.add(new Block(new Position(0, 1), this.color));
+        blocks.add(new Block(new Position(1, 1), this.color));
+        blocks.add(new Block(new Position(2, 1), this.color));
+        blocks.add(new Block(new Position(3, 1), this.color));
+
+        blocks.add(new Block(new Position(4, 1), this.color));
+        blocks.add(new Block(new Position(5, 1), this.color));
+        blocks.add(new Block(new Position(6, 1), this.color));
+        blocks.add(new Block(new Position(7, 1), this.color));
+
 
     }
 
