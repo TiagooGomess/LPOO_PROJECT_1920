@@ -79,7 +79,7 @@ public class ArenaController {
 
             if (command == Observer.COMMAND.UP) {
                 if (pieceCanRotateClockWise()) {
-                    this.currentPieceController.rotateClockwise();
+                    this.currentPieceController.rotatePiece(true);
                 }
                 else
                     System.out.println("cannot rotate clockwise");
@@ -87,7 +87,7 @@ public class ArenaController {
 
             if (command == Observer.COMMAND.Z) {
                 if (pieceCanRotateCounterClockWise()) {
-                    this.currentPieceController.rotateCounterClockwise();
+                    this.currentPieceController.rotatePiece(false);
                     System.out.println("COUNTER");
                 }
                 else
@@ -312,7 +312,7 @@ public class ArenaController {
     private boolean pieceCanRotateClockWise() {
         boolean canRotate = true;
         List<Position> blockPositions = new ArrayList<>();
-        currentPieceController.rotateClockwise();
+        currentPieceController.rotatePiece(true);
         for (Block block: currentPieceController.getPieceModel().getBlocks()) {
             blockPositions.add(block.getPosition());
         }
@@ -323,14 +323,14 @@ public class ArenaController {
                 break;
             }
         }
-        currentPieceController.rotateCounterClockwise();
+        currentPieceController.rotatePiece(false);
         return canRotate;
     }
 
     private boolean pieceCanRotateCounterClockWise() {
         boolean canRotate = true;
         List<Position> blockPositions = new ArrayList<>();
-        currentPieceController.rotateCounterClockwise();
+        currentPieceController.rotatePiece(false);
         for (Block block: currentPieceController.getPieceModel().getBlocks()) {
             blockPositions.add(block.getPosition());
         }
@@ -341,7 +341,7 @@ public class ArenaController {
                 break;
             }
         }
-        currentPieceController.rotateClockwise();
+        currentPieceController.rotatePiece(true);
         return canRotate;
     }
 
