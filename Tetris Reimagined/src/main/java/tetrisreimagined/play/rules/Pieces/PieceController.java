@@ -5,7 +5,7 @@ import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
 import tetrisreimagined.play.rules.Pieces.PieceTransform;
 
-public class PieceController implements Cloneable {
+public class PieceController {
 
     private PieceModel pieceModel;
     private PieceTransform pieceTransform;
@@ -34,7 +34,7 @@ public class PieceController implements Cloneable {
             block.setPosition(block.getPosition().down());
     }
 
-    public void rotateClockwise() {
+    public void rotatePiece(boolean clockwise) {
 
         int xLenght = (this.pieceModel.getMaxXPosition().getX() - this.pieceModel.getMinXPosition().getX()) + 1;
         int yLenght = (this.pieceModel.getMaxYPosition().getY() - this.pieceModel.getMinYPosition().getY()) + 1;
@@ -56,7 +56,11 @@ public class PieceController implements Cloneable {
 
         int[][] transposedOccupied = pieceTransform.transposeMatrix(occupiedBlock, yLenght, xLenght);
 
-        int[][] finalMatrixRotated = pieceTransform.reverseColumnsOrder(transposedOccupied, xLenght, yLenght);
+        int[][] finalMatrixRotated;
+        if(clockwise)
+            finalMatrixRotated = pieceTransform.reverseColumnsOrder(transposedOccupied, xLenght, yLenght);
+        else
+            finalMatrixRotated = pieceTransform.reverseLinesOrder(transposedOccupied, xLenght, yLenght);
 
         for (int row = 0; row < xLenght; row++) {
             int auxX = initialX;
@@ -71,42 +75,4 @@ public class PieceController implements Cloneable {
             initialY++;
         }
     }
-          
-    public void rotateCounterClockwise() {
-        int xLenght = (this.pieceModel.getMaxXPosition().getX() - this.pieceModel.getMinXPosition().getX()) + 1;
-        int yLenght = (this.pieceModel.getMaxYPosition().getY() - this.pieceModel.getMinYPosition().getY()) + 1;
-
-        int[][] occupiedBlock = new int[yLenght][xLenght];
-
-        int initialX = this.pieceModel.getMinXPosition().getX();
-        int initialY = this.pieceModel.getMinYPosition().getY();
-
-        int tempY = initialY;
-        for (int row = 0; row < yLenght; row++) {
-            int tempX = initialX;
-            for (int col = 0; col < xLenght; col++) {
-                occupiedBlock[row][col] = pieceTransform.getBlockId(new Position(tempX, tempY), this.pieceModel.getBlocks());
-                tempX++;
-            }
-            tempY++;
-        }
-
-        int[][] transposedOccupied = pieceTransform.transposeMatrix(occupiedBlock, yLenght, xLenght);
-
-        int[][] finalMatrixRotated = pieceTransform.reverseLinesOrder(transposedOccupied, xLenght, yLenght);
-
-        for (int row = 0; row < xLenght; row++) {
-            int auxX = initialX;
-            int auxY = initialY;
-            for (int col = 0; col < yLenght; col++) {
-                if (finalMatrixRotated[row][col] != 0) {
-                    Block toAdjust = pieceTransform.getBlockById(finalMatrixRotated[row][col], this.pieceModel.getBlocks());
-                    toAdjust.setPosition(new Position(auxX, auxY));
-                }
-                auxX++;
-            }
-            initialY++;
-        }
-    }
-
 }
