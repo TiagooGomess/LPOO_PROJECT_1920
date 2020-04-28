@@ -78,15 +78,18 @@ public class ArenaController {
             }
 
             if (command == Observer.COMMAND.UP) {
-                if (pieceCanRotateClockWise())
+                if (pieceCanRotateClockWise()) {
                     this.currentPieceController.rotateClockwise();
+                }
                 else
                     System.out.println("cannot rotate clockwise");
             }
 
             if (command == Observer.COMMAND.Z) {
-                if (pieceCanRotateCounterClockWise())
+                if (pieceCanRotateCounterClockWise()) {
                     this.currentPieceController.rotateCounterClockwise();
+                    System.out.println("COUNTER");
+                }
                 else
                     System.out.println("cannot rotate CounterClockwise");
             }
@@ -207,9 +210,6 @@ public class ArenaController {
         this.arena.setNextPieceModel(newPiece);
 
         System.out.println("Next Piece: " + nextPieceController.getPieceModel().getClass().toString());
-
-
-
     }
 
     public boolean positionHasBlock(Position position) {
