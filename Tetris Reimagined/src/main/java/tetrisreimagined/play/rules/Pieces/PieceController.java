@@ -104,7 +104,6 @@ public class PieceController {
     public boolean pieceCanRotateCounterClockWise(Observer<ArenaModel> gui, ArenaModel gameModel) {
         boolean canRotate = true;
         List<Position> blockPositions = new ArrayList<>();
-
         RotateCounterClockWise rotateCCW = new RotateCounterClockWise(pieceModel, gui, gameModel);
         rotateCCW.rotatePiece(this);
         for (Block block: pieceModel.getBlocks()) {

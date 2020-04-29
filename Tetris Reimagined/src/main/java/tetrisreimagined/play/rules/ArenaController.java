@@ -22,7 +22,6 @@ public class ArenaController {
 
     private int numLinesTotal = 0;
     private int dyCurrentPiece = 0;
-    private boolean gameOver = false;
     private boolean gamePaused = false;
     private int numIteration = 0;
 
@@ -89,9 +88,6 @@ public class ArenaController {
             else {
                 pieceTouchedGroud = true;
                 this.arena.addPiece(currentPieceController.getPieceModel());
-                if (dyCurrentPiece == 0) {
-                    gameOver = true;
-                }
                 dyCurrentPiece = 0;
             }
             counter = 0;
@@ -137,9 +133,6 @@ public class ArenaController {
             this.currentPieceController = this.nextPieceController;
         }
         this.nextPieceController = new PieceController(newPiece);
-
-        //this.currentPieceController = new PieceController(newPiece);
-        //this.arena.setCurrentPieceModel(newPiece);
         this.arena.setCurrentPieceModel(currentPieceController.getPieceModel());
         this.arena.setNextPieceModel(newPiece);
 
@@ -240,9 +233,6 @@ public class ArenaController {
     }
 
     private boolean gameOver() {
-        // TODO (já tinha feito de uma maneira, mas não é compatível com ter uma nextPieceController)
-
-        return false;
+        return dyCurrentPiece == 0 && !gamePaused && currentPieceController.getPieceModel().getMinYPosition().getY() == 0 && !canGoDown();
     }
-
 }
