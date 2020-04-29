@@ -14,6 +14,7 @@ import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.observer.Observer;
+import tetrisreimagined.play.rules.commands.*;
 
 import java.io.IOException;
 
@@ -79,24 +80,23 @@ public class GameViewLanterna implements Observer<ArenaModel> {
     }
 
     @Override
-    public COMMAND getCommand() throws IOException, InterruptedException {
+    public PieceCommand getCommand(ArenaModel gameModel) throws IOException, InterruptedException {
 
         while (true) {
 
             KeyStroke key = screen.pollInput();
 
-            if (key == null) { return COMMAND.NULL; }
-
-            if (key.getKeyType() == KeyType.ArrowUp) return COMMAND.UP;
-            if (key.getKeyType() == KeyType.ArrowRight) return COMMAND.RIGHT;
-            if (key.getKeyType() == KeyType.ArrowDown) return COMMAND.DOWN;
-            if (key.getKeyType() == KeyType.ArrowLeft) return COMMAND.LEFT;
-            if (key.getKeyType() == KeyType.Enter) return COMMAND.ENTER;
+            if (key == null) return new DoNothing();
+            if (key.getKeyType() == KeyType.ArrowUp) return new RotateClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (key.getKeyType() == KeyType.ArrowRight) return new MoveRight(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (key.getKeyType() == KeyType.ArrowDown) return new MoveDown(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (key.getKeyType() == KeyType.ArrowLeft) return new MoveLeft(gameModel.getCurrentPieceModel(), this, gameModel);
+            /*if (key.getKeyType() == KeyType.Enter) return COMMAND.ENTER;*/
             if (key.getKeyType() == KeyType.Character) {
-                if (key.getCharacter() == 'z') return COMMAND.Z;
-                if (key.getCharacter() == ' ') return COMMAND.SPACE;
+                if (key.getCharacter() == 'z') return new RotateCounterClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
+                if (key.getCharacter() == ' ') return new HardDrop(gameModel.getCurrentPieceModel(), this, gameModel);
             }
-            if (key.getKeyType() == KeyType.EOF) return COMMAND.EOF;
+            if (key.getKeyType() == KeyType.EOF) return new ExitTerminal();
 
         }
     }

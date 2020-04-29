@@ -14,6 +14,25 @@ public class ArenaModel extends Observable<ArenaModel> {
 
     private PieceModel currentPieceModel;
     private PieceModel nextPieceModel;
+    private int score = 0;
+    private int level = 0;
+
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public ArenaModel() {
         this.arenaBlocks = new ArrayList<>();
@@ -32,9 +51,7 @@ public class ArenaModel extends Observable<ArenaModel> {
         this.currentPieceModel = pieceModel;
     }
 
-    public void setNextPieceModel(PieceModel pieceModel) {
-        this.nextPieceModel = nextPieceModel;
-    }
+    public void setNextPieceModel(PieceModel pieceModel) { this.nextPieceModel = nextPieceModel; }
 
     public void addPiece(PieceModel pieceModel) {
         this.arenaBlocks.addAll(pieceModel.getBlocks());
@@ -47,4 +64,5 @@ public class ArenaModel extends Observable<ArenaModel> {
     public boolean arenaIsEmpty() {
         return this.arenaBlocks.isEmpty();
     }
+
 }

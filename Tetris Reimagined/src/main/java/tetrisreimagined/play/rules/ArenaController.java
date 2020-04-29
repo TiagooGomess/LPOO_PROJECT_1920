@@ -4,6 +4,8 @@ import tetrisreimagined.play.model.*;
 import tetrisreimagined.play.model.Pieces.*;
 import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Pieces.*;
+import tetrisreimagined.play.rules.commands.ExitTerminal;
+import tetrisreimagined.play.rules.commands.PieceCommand;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,8 +18,8 @@ public class ArenaController {
     private PieceController currentPieceController;
     private PieceController nextPieceController;
     private boolean pieceTouchedGroud = false;
-    private int level = 0;
-    private int score = 0;
+
+
     private int numLinesTotal = 0;
     private int dyCurrentPiece = 0;
     private boolean gamePaused = false;
@@ -30,16 +32,16 @@ public class ArenaController {
     }
 
     public void start() throws IOException, InterruptedException {
-        Observer.COMMAND command;
+        PieceCommand pCommand;
 
         int counter = 0, levelDifficulty = 5;
         long begTime = 0, endTime = 0, elapsedTime = 0;
 
-        if (2*this.level >= levelDifficulty)
-            levelDifficulty = 2*this.level + 1;
+        if (2 * this.arena.getLevel() >= levelDifficulty)
+            levelDifficulty = 2*this.arena.getLevel() + 1;
 
         do {
-            counter = tryMoveDown(counter, levelDifficulty - 2*this.level);
+            counter = tryMoveDown(counter, levelDifficulty - 2*this.arena.getLevel());
 
             endTime = System.currentTimeMillis();
             if(notFirstIteration(begTime))
@@ -59,63 +61,26 @@ public class ArenaController {
 
             gui.drawAll(arena); // provisório
 
-            command = gui.getCommand();
+            pCommand = gui.getCommand(arena);
+            pCommand.execute(currentPieceController);
 
-            if (command == Observer.COMMAND.RIGHT)
-                if (canGoRight())
-                    this.currentPieceController.moveRight();
-
-            if (command == Observer.COMMAND.LEFT)
-                if (canGoLeft())
-                    this.currentPieceController.moveLeft();
-
-            if (command == Observer.COMMAND.DOWN) {
-                if (canGoDown()) { // soft drop
-                    this.currentPieceController.moveDown();
-                    this.score += currentPieceController.getPieceModel().getNumBlocks() *(this.level+1);
-                }
-            }
-
-            if (command == Observer.COMMAND.UP) {
-                if (pieceCanRotateClockWise()) {
-                    this.currentPieceController.rotatePiece(true);
-                }
-                else
-                    System.out.println("cannot rotate clockwise");
-            }
-
-            if (command == Observer.COMMAND.Z) {
-                if (pieceCanRotateCounterClockWise()) {
-                    this.currentPieceController.rotatePiece(false);
-                }
-                else
-                    System.out.println("cannot rotate CounterClockwise");
-            }
-
-            if (command == Observer.COMMAND.ENTER) {
+            /*if (command == Observer.COMMAND.ENTER) { -- TODO IMPLEMENT STATE PATTERN!
                 this.gamePaused = !this.gamePaused;
-            }
+            }*/
 
-            if (command == Observer.COMMAND.SPACE) { // hard drop
-                while(canGoDown()) {
-                    currentPieceController.moveDown();
-                }
-                this.score += 2*currentPieceController.getPieceModel().getNumBlocks() * (this.level+1);
-            }
-
-
-        } while (command != Observer.COMMAND.EOF);
+        } while (!(pCommand instanceof ExitTerminal));
 
         System.out.println("GAME OVER");
-        System.out.println("Your score was " + this.score);
+        System.out.println("Your score was " + arena.getScore());
 
     }
 
     private int tryMoveDown(int counter, int levelDifficulty) {
         if (counter++ == levelDifficulty) { // mudar para velocidade da peça
-            if (canGoDown()) {
+            if (this.currentPieceController.canGoDown(gui, arena)) {
                 if (!gamePaused) {
-                    makeCurrentPieceFall();
+                    this.currentPieceController.makeCurrentPieceFall(gui, arena);
+                    this.dyCurrentPiece++;
                 }
                 else
                     System.out.println("Game paused. Press ENTER to continue...");
@@ -132,38 +97,6 @@ public class ArenaController {
 
     private boolean notFirstIteration(long begTime) {
         return begTime != 0;
-    }
-
-    public void makeCurrentPieceFall() {
-        if (canGoDown()) {
-            this.currentPieceController.moveDown();
-            this.dyCurrentPiece++;
-        }
-
-    }
-
-    public boolean canGoRight() {
-        for (Block block: this.currentPieceController.getPieceModel().getBlocks()) {
-            if (positionHasBlock(block.getPosition().right()))
-                return false;
-        }
-        return this.currentPieceController.getPieceModel().getMaxXPosition().getX() + 1 < gui.getWidth();
-    }
-
-    public boolean canGoLeft() {
-        for (Block block: this.currentPieceController.getPieceModel().getBlocks()) {
-            if (positionHasBlock(block.getPosition().left()))
-                return false;
-        }
-        return this.currentPieceController.getPieceModel().getMinXPosition().getX() > 0;
-    }
-
-    public boolean canGoDown() {
-        for (Block block: this.currentPieceController.getPieceModel().getBlocks()) {
-            if (positionHasBlock(block.getPosition().down()))
-                return false;
-        }
-        return this.currentPieceController.getPieceModel().getMaxYPosition().getY() + 1 < gui.getHeight();
     }
 
     public void nextPiece() {
@@ -234,8 +167,6 @@ public class ArenaController {
             }
         }
         arena.removeArenaBlocks(toRemove);
-
-
     }
 
     private void pushBlocksDown(int line) { // ajusta os blocos, sabendo que a linha 'line' foi removida
@@ -245,8 +176,6 @@ public class ArenaController {
                 block.setPosition(block.getPosition().down());
             }
         }
-
-
     }
 
     public void updateScore(int numLines) {
@@ -255,21 +184,21 @@ public class ArenaController {
             case 0:
                 break;
             case 1:
-                this.score += 50*(this.level + 1);
+                arena.setScore(arena.getScore() + 50*(this.arena.getLevel() + 1));
                 break;
             case 2:
-                score += 150*(this.level+1);
+                arena.setScore(arena.getScore() + 150*(this.arena.getLevel() + 1));
                 break;
             case 3:
-                score += 350*(this.level+1);
+                arena.setScore(arena.getScore() + 350*(this.arena.getLevel() + 1));
                 break;
             case 4:
-                score += 1000*(this.level+1); // aka a Tetris
+                arena.setScore(arena.getScore() + 1000*(this.arena.getLevel() + 1)); // AKA a Tetris
                 break;
         }
 
         if (this.arena.arenaIsEmpty()) {
-            this.score += 2000*(this.level+1);
+            arena.setScore(arena.getScore() + 2000*(this.arena.getLevel() + 1));
         }
 
     }
@@ -300,43 +229,7 @@ public class ArenaController {
     }
 
     private void updateLevel() {
-        this.level = numLinesTotal / 6; // 6 linhas -> aumenta de nível
-    }
-
-    private boolean pieceCanRotateClockWise() {
-        boolean canRotate = true;
-        List<Position> blockPositions = new ArrayList<>();
-        currentPieceController.rotatePiece(true);
-        for (Block block: currentPieceController.getPieceModel().getBlocks()) {
-            blockPositions.add(block.getPosition());
-        }
-        for (Position position: blockPositions) {
-            boolean isOutOfLimits = position.getX() >= gui.getWidth() || position.getX() < 0 || position.getY() > position.getY() || position.getY() < 0;
-            if (positionHasBlock(position) || isOutOfLimits) {
-                canRotate = false;
-                break;
-            }
-        }
-        currentPieceController.rotatePiece(false);
-        return canRotate;
-    }
-
-    private boolean pieceCanRotateCounterClockWise() {
-        boolean canRotate = true;
-        List<Position> blockPositions = new ArrayList<>();
-        currentPieceController.rotatePiece(false);
-        for (Block block: currentPieceController.getPieceModel().getBlocks()) {
-            blockPositions.add(block.getPosition());
-        }
-        for (Position position: blockPositions) {
-            boolean isOutOfLimits = position.getX() >= gui.getWidth() || position.getX() < 0 || position.getY() > position.getY() || position.getY() < 0;
-            if (positionHasBlock(position) || isOutOfLimits) {
-                canRotate = false;
-                break;
-            }
-        }
-        currentPieceController.rotatePiece(true);
-        return canRotate;
+        this.arena.setLevel(numLinesTotal / 6); // 6 linhas -> aumenta de nível
     }
 
     private boolean gameOver() {

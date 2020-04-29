@@ -7,15 +7,7 @@ import java.util.List;
 
 public class PieceTransform {
 
-    public int getBlockId(Position position, List<Block> blocks) {
-        for(Block block: blocks) {
-            if(block.getPosition().equals(position))
-                return block.getId();
-        }
-        return 0;
-    }
-
-    public int[][] transposeMatrix(int[][] occupiedBlock, int yLenght, int xLenght) {
+    public static int[][] transposeMatrix(int[][] occupiedBlock, int yLenght, int xLenght) {
         int[][] result = new int[xLenght][yLenght];
 
         for(int row = 0; row < yLenght; row++) {
@@ -26,7 +18,7 @@ public class PieceTransform {
         return result;
     }
 
-    public int[][] reverseColumnsOrder(int[][] transposedOccupied, int xLenght, int yLenght) {
+    public static int[][] reverseColumnsOrder(int[][] transposedOccupied, int xLenght, int yLenght) {
         int[][] result = new int[xLenght][yLenght];
 
         int tempX = 0;
@@ -39,7 +31,7 @@ public class PieceTransform {
         return result;
     }
 
-    public int[][] reverseLinesOrder(int[][] transposedOccupied, int xLenght, int yLenght) {
+    public static int[][] reverseLinesOrder(int[][] transposedOccupied, int xLenght, int yLenght) {
 
         int[][] result = new int[xLenght][yLenght];
 
@@ -53,12 +45,4 @@ public class PieceTransform {
         return result;
     }
 
-    public Block getBlockById(int id, List<Block> blocks) {
-        for(Block block: blocks) {
-            if(block.getId() == id)
-                return block;
-        }
-
-        return null;
-    }
 }
