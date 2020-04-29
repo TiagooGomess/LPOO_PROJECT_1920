@@ -14,7 +14,7 @@ import tetrisreimagined.play.rules.commands.RotateCounterClockWise;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PieceController implements Cloneable {
+public class PieceController {
 
     private PieceModel pieceModel;
 
