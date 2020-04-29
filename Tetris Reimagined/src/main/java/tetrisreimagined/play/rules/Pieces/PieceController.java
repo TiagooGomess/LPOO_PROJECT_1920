@@ -1,84 +1,124 @@
 package tetrisreimagined.play.rules.Pieces;
 
+import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
+import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Pieces.PieceTransform;
+import tetrisreimagined.play.rules.commands.MoveDown;
+import tetrisreimagined.play.rules.commands.PieceCommand;
+import tetrisreimagined.play.rules.commands.RotateClockWise;
+import tetrisreimagined.play.rules.commands.RotateCounterClockWise;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PieceController {
 
     private PieceModel pieceModel;
-    private PieceTransform pieceTransform;
 
     public PieceController(PieceModel pieceModel) {
         this.pieceModel = pieceModel;
-        pieceTransform = new PieceTransform();
     }
 
     public PieceModel getPieceModel() {
         return pieceModel;
     }
 
-    public void moveLeft() {
-        for (Block block: this.pieceModel.getBlocks())
-            block.setPosition(block.getPosition().left());
+    public void makeCurrentPieceFall(Observer<ArenaModel> gui, ArenaModel gameModel) {
+        if (canGoDown(gui, gameModel))
+            new MoveDown(pieceModel, gui, gameModel).execute(this);
     }
 
-    public void moveRight() {
-        for (Block block: this.pieceModel.getBlocks())
-            block.setPosition(block.getPosition().right());
+    public boolean canGoRight(Observer<ArenaModel> gui, ArenaModel gameModel) {
+        for (Block block: pieceModel.getBlocks()) {
+            if (positionHasBlock(block.getPosition().right(), gameModel))
+                return false;
+        }
+        return pieceModel.getMaxXPosition().getX() + 1 < gui.getWidth();
     }
 
-    public void moveDown() {
-        for (Block block: this.pieceModel.getBlocks())
-            block.setPosition(block.getPosition().down());
+    public boolean canGoLeft(Observer<ArenaModel> gui, ArenaModel gameModel) {
+        for (Block block: pieceModel.getBlocks()) {
+            if (positionHasBlock(block.getPosition().left(), gameModel))
+                return false;
+        }
+        return pieceModel.getMinXPosition().getX() > 0;
     }
 
-    public void rotatePiece(boolean clockwise) {
+    public boolean canGoDown(Observer<ArenaModel> gui, ArenaModel gameModel) {
+        for (Block block: pieceModel.getBlocks()) {
+            if (positionHasBlock(block.getPosition().down(), gameModel))
+                return false;
+        }
+        return pieceModel.getMaxYPosition().getY() + 1 < gui.getHeight();
+    }
 
-        int xLenght = (this.pieceModel.getMaxXPosition().getX() - this.pieceModel.getMinXPosition().getX()) + 1;
-        int yLenght = (this.pieceModel.getMaxYPosition().getY() - this.pieceModel.getMinYPosition().getY()) + 1;
+    public boolean positionHasBlock(Position position, ArenaModel gameModel) {
+        for (Block block: gameModel.getArenaBlocks()) {
+            if (block.getPosition().equals(position))
+                return true;
+        }
+        return false;
+    }
 
-        int[][] occupiedBlock = new int[yLenght][xLenght];
+    public Block getBlockById(int id) {
+        for(Block block: pieceModel.getBlocks()) {
+            if(block.getId() == id)
+                return block;
+        }
+        return null;
+    }
 
-        int initialX = this.pieceModel.getMinXPosition().getX();
-        int initialY = this.pieceModel.getMinYPosition().getY();
+    public int getBlockId(Position position) {
+        for(Block block: pieceModel.getBlocks()) {
+            if(block.getPosition().equals(position))
+                return block.getId();
+        }
+        return 0;
+    }
 
-        int tempY = initialY;
-        for (int row = 0; row < yLenght; row++) {
-            int tempX = initialX;
-            for (int col = 0; col < xLenght; col++) {
-                occupiedBlock[row][col] = pieceTransform.getBlockId(new Position(tempX, tempY), this.pieceModel.getBlocks());
-                tempX++;
+    public boolean pieceCanRotateClockWise(Observer<ArenaModel> gui, ArenaModel gameModel) {
+        boolean canRotate = true;
+        List<Position> blockPositions = new ArrayList<>();
+        System.out.println("1");
+        RotateClockWise rotateCW = new RotateClockWise(pieceModel, gui, gameModel);
+        rotateCW.rotatePiece(this);
+        System.out.println("2");
+        for (Block block: pieceModel.getBlocks()) {
+            blockPositions.add(block.getPosition());
+        }
+        for (Position position: blockPositions) {
+            boolean isOutOfLimits = position.getX() >= gui.getWidth() || position.getX() < 0 || position.getY() > position.getY() || position.getY() < 0;
+            if (positionHasBlock(position, gameModel) || isOutOfLimits) {
+                canRotate = false;
+                break;
             }
-            tempY++;
         }
+        RotateCounterClockWise rotateCCW = new RotateCounterClockWise(pieceModel, gui, gameModel);
+        rotateCCW.rotatePiece(this);
+        return canRotate;
+    }
 
-        int[][] transposedOccupied = pieceTransform.transposeMatrix(occupiedBlock, yLenght, xLenght);
+    public boolean pieceCanRotateCounterClockWise(Observer<ArenaModel> gui, ArenaModel gameModel) {
+        boolean canRotate = true;
+        List<Position> blockPositions = new ArrayList<>();
 
-        int[][] finalMatrixRotated;
-        if(clockwise)
-            finalMatrixRotated = pieceTransform.reverseColumnsOrder(transposedOccupied, xLenght, yLenght);
-        else
-            finalMatrixRotated = pieceTransform.reverseLinesOrder(transposedOccupied, xLenght, yLenght);
-
-        for (int row = 0; row < xLenght; row++) {
-            for (int col = 0; col < yLenght; col++)
-                System.out.print(finalMatrixRotated[row][col] + " ");
-            System.out.println();
+        RotateCounterClockWise rotateCCW = new RotateCounterClockWise(pieceModel, gui, gameModel);
+        rotateCCW.rotatePiece(this);
+        for (Block block: pieceModel.getBlocks()) {
+            blockPositions.add(block.getPosition());
         }
-
-        for (int row = 0; row < xLenght; row++) {
-            int auxX = initialX;
-            int auxY = initialY;
-            for (int col = 0; col < yLenght; col++) {
-                if (finalMatrixRotated[row][col] != 0) {
-                    Block toAdjust = pieceTransform.getBlockById(finalMatrixRotated[row][col], this.pieceModel.getBlocks());
-                    toAdjust.setPosition(new Position(auxX, auxY));
-                }
-                auxX++;
+        for (Position position: blockPositions) {
+            boolean isOutOfLimits = position.getX() >= gui.getWidth() || position.getX() < 0 || position.getY() > position.getY() || position.getY() < 0;
+            if (positionHasBlock(position, gameModel) || isOutOfLimits) {
+                canRotate = false;
+                break;
             }
-            initialY++;
         }
+        RotateClockWise rotateCW = new RotateClockWise(pieceModel, gui, gameModel);
+        rotateCW.rotatePiece(this);
+        return canRotate;
     }
 }
