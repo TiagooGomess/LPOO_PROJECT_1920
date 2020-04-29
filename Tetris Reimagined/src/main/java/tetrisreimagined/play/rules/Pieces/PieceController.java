@@ -14,7 +14,7 @@ import tetrisreimagined.play.rules.commands.RotateCounterClockWise;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PieceController {
+public class PieceController implements Cloneable {
 
     private PieceModel pieceModel;
 
@@ -82,10 +82,8 @@ public class PieceController {
     public boolean pieceCanRotateClockWise(Observer<ArenaModel> gui, ArenaModel gameModel) {
         boolean canRotate = true;
         List<Position> blockPositions = new ArrayList<>();
-        System.out.println("1");
         RotateClockWise rotateCW = new RotateClockWise(pieceModel, gui, gameModel);
         rotateCW.rotatePiece(this);
-        System.out.println("2");
         for (Block block: pieceModel.getBlocks()) {
             blockPositions.add(block.getPosition());
         }

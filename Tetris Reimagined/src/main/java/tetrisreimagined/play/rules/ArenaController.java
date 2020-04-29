@@ -21,7 +21,6 @@ public class ArenaController {
 
 
     private int numLinesTotal = 0;
-    private int dyCurrentPiece = 0;
     private boolean gamePaused = false;
     private int numIteration = 0;
 
@@ -50,9 +49,6 @@ public class ArenaController {
             Thread.sleep(30 - elapsedTime); // mudar para velocidade da peça
             begTime = System.currentTimeMillis();
 
-            if (gameOver())
-                break;
-
             if (pieceTouchedGroud) {
                 nextPiece();
                 pieceTouchedGroud = false;
@@ -80,7 +76,6 @@ public class ArenaController {
             if (this.currentPieceController.canGoDown(gui, arena)) {
                 if (!gamePaused) {
                     this.currentPieceController.makeCurrentPieceFall(gui, arena);
-                    this.dyCurrentPiece++;
                 }
                 else
                     System.out.println("Game paused. Press ENTER to continue...");
@@ -88,7 +83,11 @@ public class ArenaController {
             else {
                 pieceTouchedGroud = true;
                 this.arena.addPiece(currentPieceController.getPieceModel());
-                dyCurrentPiece = 0;
+                int yPos = currentPieceController.getPieceModel().getMaxYPosition().getY();
+                if(yPos == 1 || yPos == 3) {          // TODO Piece initial Y position is upper. After that update this 'if'
+                    System.out.println("YOU LOST!"); // is only tested for y == 0
+                    System.exit(0);
+                }
             }
             counter = 0;
         }
@@ -232,7 +231,4 @@ public class ArenaController {
         this.arena.setLevel(numLinesTotal / 6); // 6 linhas -> aumenta de nível
     }
 
-    private boolean gameOver() {
-        return dyCurrentPiece == 0 && !gamePaused && currentPieceController.getPieceModel().getMinYPosition().getY() == 0 && !canGoDown();
-    }
 }

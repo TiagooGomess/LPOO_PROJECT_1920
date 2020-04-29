@@ -21,7 +21,6 @@ public class RotateClockWise extends PieceCommand {
 
     @Override
     public boolean execute(PieceController currentPieceController) {
-        System.out.println("Entered!");
         if (currentPieceController.pieceCanRotateClockWise(gui, gameModel)) {
             rotatePiece(currentPieceController);
             return true;
@@ -30,7 +29,6 @@ public class RotateClockWise extends PieceCommand {
     }
 
     public void rotatePiece(PieceController currentPieceController) {
-        System.out.println("hellow");
         int xLenght = (this.pieceModel.getMaxXPosition().getX() - this.pieceModel.getMinXPosition().getX()) + 1;
         int yLenght = (this.pieceModel.getMaxYPosition().getY() - this.pieceModel.getMinYPosition().getY()) + 1;
 
@@ -55,11 +53,11 @@ public class RotateClockWise extends PieceCommand {
 
         finalMatrixRotated = PieceTransform.reverseColumnsOrder(transposedOccupied, xLenght, yLenght);
 
-        for (int row = 0; row < xLenght; row++) {
+        /*for (int row = 0; row < xLenght; row++) {
             for (int col = 0; col < yLenght; col++)
                 System.out.print(finalMatrixRotated[row][col] + " ");
             System.out.println();
-        }
+        }*/
 
         for (int row = 0; row < xLenght; row++) {
             int auxX = initialX;

@@ -54,11 +54,11 @@ public class RotateCounterClockWise extends PieceCommand {
 
         finalMatrixRotated = PieceTransform.reverseLinesOrder(transposedOccupied, xLenght, yLenght);
 
-        for (int row = 0; row < xLenght; row++) {
+        /*for (int row = 0; row < xLenght; row++) {
             for (int col = 0; col < yLenght; col++)
                 System.out.print(finalMatrixRotated[row][col] + " ");
             System.out.println();
-        }
+        }*/
 
         for (int row = 0; row < xLenght; row++) {
             int auxX = initialX;
