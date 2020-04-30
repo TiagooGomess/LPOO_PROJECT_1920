@@ -8,6 +8,8 @@ import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
 import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Pieces.PieceController;
+import tetrisreimagined.play.rules.commands.RotateClockWise;
+import tetrisreimagined.play.rules.commands.RotateCounterClockWise;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,24 +39,29 @@ public class PieceControllerTest {
         when(positionMock1.getX()).thenReturn(0);
         when(positionMock1.getY()).thenReturn(2);
         when(blockMock1.getPosition()).thenReturn(positionMock1);
+        // preciso de criar um mock para o equals, mas não sei como se faz // TODO
+        when(blockMock1.getId()).thenReturn(1);
 
         Block blockMock2 = mock(Block.class);
         Position positionMock2 = mock(Position.class);
         when(positionMock2.getX()).thenReturn(1);
         when(positionMock2.getY()).thenReturn(2);
         when(blockMock2.getPosition()).thenReturn(positionMock2);
+        when(blockMock2.getId()).thenReturn(2);
 
         Block blockMock3 = mock(Block.class);
         Position positionMock3 = mock(Position.class);
         when(positionMock3.getX()).thenReturn(1);
         when(positionMock3.getY()).thenReturn(1);
         when(blockMock3.getPosition()).thenReturn(positionMock3);
+        when(blockMock3.getId()).thenReturn(3);
 
         Block blockMock4 = mock(Block.class);
         Position positionMock4 = mock(Position.class);
         when(positionMock4.getX()).thenReturn(2);
         when(positionMock4.getY()).thenReturn(2);
         when(blockMock4.getPosition()).thenReturn(positionMock4);
+        when(blockMock4.getId()).thenReturn(4);
 
         blocks.add(blockMock1);
         blocks.add(blockMock2);
@@ -99,6 +106,45 @@ public class PieceControllerTest {
     @Test
     public void canGoDown() {
         assertTrue(pieceControllers.get(0).canGoDown(observerMock, arenaModelMock));
+    }
+
+//    @Test
+//    public void positionHasBlock() {
+//        Position positionMock1 = mock(Position.class);
+//        when(positionMock1.getX()).thenReturn(1);
+//        when(positionMock1.getY()).thenReturn(2);
+//
+//        assertTrue(pieceControllers.get(0).positionHasBlock(positionMock1, arenaModelMock));
+//    }
+
+    @Test
+    public void getBlockById1() {
+        Position positionMock = mock(Position.class);
+        when(positionMock.getX()).thenReturn(0);
+        when(positionMock.getY()).thenReturn(2);
+
+        // seria preciso um mock do equals das Position para dar ........
+
+        //assertEquals(1, pieceControllers.get(0).getBlockId(positionMock)); // TODO
+
+    }
+
+    @Test
+    public void pieceCanRotateClockWise() {
+        RotateClockWise rotateCW = mock(RotateClockWise.class);
+
+        // com esta arquitetura, não sei como fazer testes para isto ahahah TODO
+
+        //assertTrue(pieceControllers.get(0).pieceCanRotateClockWise(observerMock, arenaModelMock));
+    }
+
+    @Test
+    public void pieceCanRotateCounterClockWise() {
+        RotateCounterClockWise rotateCCW = mock(RotateCounterClockWise.class);
+
+
+        // TODO
+        // same ...
     }
 
 
