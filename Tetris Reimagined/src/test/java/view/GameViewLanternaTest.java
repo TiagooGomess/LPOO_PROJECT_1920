@@ -1,3 +1,5 @@
+package view;
+
 import org.junit.Test;
 
 public class GameViewLanternaTest {
