@@ -7,7 +7,7 @@ import tetrisreimagined.play.model.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class PositionTest {
     private List<Position> positions;
@@ -98,17 +98,19 @@ public class PositionTest {
 
     @Test
     public void positionEquals1() {
-
+        Position p1 = new Position(4, 7);
+        assertEquals(p1, positions.get(1));
     }
 
     @Test
     public void positionEquals2() {
-
+        Position p1 = new Position(24, 37);
+        assertTrue(p1.equals(positions.get(2)));
     }
 
     @Test
     public void positionEquals3() {
-
+        assertFalse(positions.get(0).equals(null));
     }
 
 
