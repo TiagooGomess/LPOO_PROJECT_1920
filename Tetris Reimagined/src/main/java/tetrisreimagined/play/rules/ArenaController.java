@@ -46,7 +46,11 @@ public class ArenaController {
             if(notFirstIteration(begTime))
                 elapsedTime = endTime - begTime;
 
-            Thread.sleep(30 - elapsedTime); // mudar para velocidade da peça
+
+            if(elapsedTime > 30) // Hard drop takes more than 30 ms!
+                Thread.sleep(120 - elapsedTime);
+            else
+                Thread.sleep(30 - elapsedTime); // mudar para velocidade da peça
             begTime = System.currentTimeMillis();
 
             if (pieceTouchedGroud) {
@@ -55,7 +59,7 @@ public class ArenaController {
                 checkIfScore();
             }
 
-            gui.drawAll(arena); // provisório
+            // gui.drawAll(arena); // provisório
 
             pCommand = gui.getCommand(arena);
             pCommand.execute(currentPieceController);

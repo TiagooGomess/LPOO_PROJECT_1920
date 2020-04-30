@@ -23,6 +23,7 @@ public class MoveDown extends PieceCommand {
             for (Block block: this.pieceModel.getBlocks())
                 block.setPosition(block.getPosition().down());
             gameModel.setScore(gameModel.getScore() + currentPieceController.getPieceModel().getNumBlocks() *(this.gameModel.getLevel() + 1));
+            gameModel.notifyObservers(gameModel);
             return true;
         }
         return false;
