@@ -22,6 +22,7 @@ public class HardDrop extends PieceCommand {
             new MoveDown(gameModel.getCurrentPieceModel(), gui, gameModel).execute(currentPieceController);
         }
         gameModel.setScore(gameModel.getScore() + 2*currentPieceController.getPieceModel().getNumBlocks() * (this.gameModel.getLevel() + 1));
+        gameModel.notifyObservers(gameModel);
         return true;
     }
 

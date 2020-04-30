@@ -23,6 +23,7 @@ public class RotateClockWise extends PieceCommand {
     public boolean execute(PieceController currentPieceController) {
         if (currentPieceController.pieceCanRotateClockWise(gui, gameModel)) {
             rotatePiece(currentPieceController);
+            gameModel.notifyObservers(gameModel);
             return true;
         }
         return false;

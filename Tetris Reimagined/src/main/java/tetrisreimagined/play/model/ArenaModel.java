@@ -48,7 +48,9 @@ public class ArenaModel extends Observable<ArenaModel> {
         this.currentPieceModel = pieceModel;
     }
 
-    public void setNextPieceModel(PieceModel pieceModel) { this.nextPieceModel = pieceModel; }
+    public void setNextPieceModel(PieceModel pieceModel) { 
+        this.nextPieceModel = pieceModel;
+    }
 
     public PieceModel getNextPieceModel() {
         return this.nextPieceModel;
