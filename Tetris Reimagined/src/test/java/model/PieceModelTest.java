@@ -2,9 +2,15 @@ package model;
 
 import org.junit.Before;
 import org.junit.Test;
+import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class PieceModelTest {
 
@@ -85,5 +91,18 @@ public class PieceModelTest {
     @Test
     public void getNumBlocks4() {
         assertEquals(8, oBlock.getNumBlocks());
+    }
+
+    @Test
+    public void getBlocks() {
+        List<Block> blocks = new ArrayList<>();
+        Block blockMock = mock(Block.class);
+        blocks.add(blockMock);
+
+        PieceModel pieceModelMock = mock(PieceModel.class);
+
+        when(pieceModelMock.getBlocks()).thenReturn(blocks);
+
+        assertEquals(blocks, pieceModelMock.getBlocks());
     }
 }
