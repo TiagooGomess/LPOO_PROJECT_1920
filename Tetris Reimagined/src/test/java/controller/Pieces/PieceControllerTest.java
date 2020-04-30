@@ -31,8 +31,10 @@ public class PieceControllerTest {
 
         pieceControllers = new ArrayList<>();
         pieceModelsMocks = new ArrayList<>();
-        List<Block> blocks = new ArrayList<>();
+        List<Block> allBlocks = new ArrayList<>();
 
+        // ================================== First Piece Controller ===========================
+        List<Block> blocks1 = new ArrayList<>();
 
         Block blockMock1 = mock(Block.class);
         Position positionMock1 = mock(Position.class);
@@ -63,13 +65,15 @@ public class PieceControllerTest {
         when(blockMock4.getPosition()).thenReturn(positionMock4);
         when(blockMock4.getId()).thenReturn(4);
 
-        blocks.add(blockMock1);
-        blocks.add(blockMock2);
-        blocks.add(blockMock3);
-        blocks.add(blockMock4);
+        blocks1.add(blockMock1);
+        blocks1.add(blockMock2);
+        blocks1.add(blockMock3);
+        blocks1.add(blockMock4);
+
+        allBlocks.addAll(blocks1);
 
         PieceModel pieceModelMock1 = mock(PieceModel.class);
-        when(pieceModelMock1.getBlocks()).thenReturn(blocks);
+        when(pieceModelMock1.getBlocks()).thenReturn(blocks1);
         when(pieceModelMock1.getMinXPosition()).thenReturn(positionMock1);
         when(pieceModelMock1.getMaxXPosition()).thenReturn(positionMock4);
         when(pieceModelMock1.getMaxYPosition()).thenReturn(positionMock1);
@@ -78,9 +82,53 @@ public class PieceControllerTest {
         pieceControllers.add(pieceController1);
         pieceModelsMocks.add(pieceModelMock1);
 
+        // ================================== Second Piece Controller ===========================
+        List<Block> blocks2 = new ArrayList<>();
+
+        Block blockMock5 = mock(Block.class);
+        Position positionMock5 = mock(Position.class);
+        when(positionMock5.getX()).thenReturn(29);
+        when(positionMock5.getY()).thenReturn(57);
+        when(blockMock5.getPosition()).thenReturn(positionMock5);
+        // preciso de criar um mock para o equals, mas não sei como se faz // TODO
+        when(blockMock5.getId()).thenReturn(5);
+
+        Block blockMock6 = mock(Block.class);
+        Position positionMock6 = mock(Position.class);
+        when(positionMock6.getX()).thenReturn(29);
+        when(positionMock6.getY()).thenReturn(58);
+        when(blockMock6.getPosition()).thenReturn(positionMock6);
+        when(blockMock6.getId()).thenReturn(6);
+
+        Block blockMock7 = mock(Block.class);
+        Position positionMock7 = mock(Position.class);
+        when(positionMock7.getX()).thenReturn(29);
+        when(positionMock7.getY()).thenReturn(59);
+        when(blockMock7.getPosition()).thenReturn(positionMock7);
+        when(blockMock7.getId()).thenReturn(7);
+
+        blocks2.add(blockMock5);
+        blocks2.add(blockMock6);
+        blocks2.add(blockMock7);
+
+        allBlocks.addAll(blocks2);
+
+        PieceModel pieceModelMock2 = mock(PieceModel.class);
+        when(pieceModelMock2.getBlocks()).thenReturn(blocks2);
+        when(pieceModelMock2.getMinXPosition()).thenReturn(positionMock5);
+        when(pieceModelMock2.getMaxXPosition()).thenReturn(positionMock5);
+        when(pieceModelMock2.getMaxYPosition()).thenReturn(positionMock7);
+        PieceController pieceController2 = new PieceController(pieceModelMock2);
+
+        pieceControllers.add(pieceController2);
+        pieceModelsMocks.add(pieceModelMock2);
+
+
+
+
 
         arenaModelMock = mock(ArenaModel.class);
-        when(arenaModelMock.getArenaBlocks()).thenReturn(blocks);
+        when(arenaModelMock.getArenaBlocks()).thenReturn(allBlocks);
 
         observerMock = mock(Observer.class);
         when(observerMock.getWidth()).thenReturn(30);
@@ -89,23 +137,43 @@ public class PieceControllerTest {
     }
 
     @Test
-    public void getPieceModel() {
+    public void getPieceModel1() {
         assertEquals(pieceModelsMocks.get(0), pieceControllers.get(0).getPieceModel());
     }
 
     @Test
-    public void canGoRight() {
+    public void getPieceModel2() {
+        assertEquals(pieceModelsMocks.get(1), pieceControllers.get(1).getPieceModel());
+    }
+
+    @Test
+    public void canGoRight1() {
         assertTrue(pieceControllers.get(0).canGoRight(observerMock, arenaModelMock));
     }
 
     @Test
-    public void canGoLeft() {
+    public void canGoRight2() {
+        assertFalse(pieceControllers.get(1).canGoRight(observerMock, arenaModelMock));
+    }
+
+    @Test
+    public void canGoLeft1() {
         assertFalse(pieceControllers.get(0).canGoLeft(observerMock, arenaModelMock));
     }
 
     @Test
-    public void canGoDown() {
+    public void canGoLeft2() {
+        assertTrue(pieceControllers.get(1).canGoLeft(observerMock, arenaModelMock));
+    }
+
+    @Test
+    public void canGoDown1() {
         assertTrue(pieceControllers.get(0).canGoDown(observerMock, arenaModelMock));
+    }
+
+    @Test
+    public void canGoDown2() {
+        assertFalse(pieceControllers.get(1).canGoDown(observerMock, arenaModelMock));
     }
 
 //    @Test
@@ -126,11 +194,21 @@ public class PieceControllerTest {
         // seria preciso um mock do equals das Position para dar ........
 
         //assertEquals(1, pieceControllers.get(0).getBlockId(positionMock)); // TODO
-
     }
 
     @Test
-    public void pieceCanRotateClockWise() {
+    public void getBlockById2() {
+        Position positionMock = mock(Position.class);
+        when(positionMock.getX()).thenReturn(29);
+        when(positionMock.getY()).thenReturn(58);
+
+        // seria preciso um mock do equals das Position para dar ........
+
+        //assertEquals(6, pieceControllers.get(1).getBlockId(positionMock)); // TODO
+    }
+
+    @Test
+    public void pieceCanRotateClockWise1() {
         RotateClockWise rotateCW = mock(RotateClockWise.class);
 
         // com esta arquitetura, não sei como fazer testes para isto ahahah TODO
@@ -139,15 +217,12 @@ public class PieceControllerTest {
     }
 
     @Test
-    public void pieceCanRotateCounterClockWise() {
+    public void pieceCanRotateCounterClockWise1() {
         RotateCounterClockWise rotateCCW = mock(RotateCounterClockWise.class);
 
 
         // TODO
         // same ...
     }
-
-
-
 
 }
