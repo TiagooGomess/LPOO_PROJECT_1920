@@ -74,7 +74,7 @@ public class ArenaModelTest {
     }
 
     @Test
-    public void getAreanaBlocks() {
+    public void getArenaBlocks() {
         List<Block> blocks = new ArrayList<>();
         Block blockMock = mock(Block.class);
         blocks.add(blockMock);
