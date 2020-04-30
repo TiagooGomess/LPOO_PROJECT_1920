@@ -15,7 +15,6 @@ public abstract class PieceModel {
 
     protected List<Block> blocks;
     protected Color color;
-    protected int sizeOfBoundingBox;
 
     public PieceModel() {
         this.blocks = new ArrayList<>();
@@ -23,10 +22,6 @@ public abstract class PieceModel {
 
     public List<Block> getBlocks() {
         return this.blocks;
-    }
-
-    public int getSizeOfBoundingBox() {
-        return sizeOfBoundingBox;
     }
 
     public Position getMinXPosition() {

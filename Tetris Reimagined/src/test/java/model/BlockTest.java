@@ -14,13 +14,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class BlockTest {
-    private List<Block> blocksMocks;
+    private List<Block> blocks;
 
     @Before
     public void setup() {
-        blocksMocks = new ArrayList<>();
+        blocks = new ArrayList<>();
 
-        // First Block Mock
+        // First Block
         Position positionMock1 = mock(Position.class);
         when(positionMock1.getX()).thenReturn(4);
         when(positionMock1.getY()).thenReturn(5);
@@ -29,9 +29,9 @@ public class BlockTest {
         when(colorMock1.getCode()).thenReturn("#0000FF");
 
         Block blockMock1 = new Block(positionMock1, colorMock1, 1);
-        blocksMocks.add(blockMock1);
+        blocks.add(blockMock1);
 
-        // Second Block Mock
+        // Second Block
         Position positionMock2 = mock(Position.class);
         when(positionMock2.getX()).thenReturn(7);
         when(positionMock2.getY()).thenReturn(3);
@@ -40,9 +40,9 @@ public class BlockTest {
         when(colorMock2.getCode()).thenReturn("#FF00FF");
 
         Block blockMock2 = new Block(positionMock2, colorMock2, 2);
-        blocksMocks.add(blockMock2);
+        blocks.add(blockMock2);
 
-        // Third Block Mock
+        // Third Block
         Position positionMock3 = mock(Position.class);
         when(positionMock3.getX()).thenReturn(43);
         when(positionMock3.getY()).thenReturn(57);
@@ -51,17 +51,17 @@ public class BlockTest {
         when(colorMock3.getCode()).thenReturn("#FF0000");
 
         Block blockMock3 = new Block(positionMock3, colorMock3, 3);
-        blocksMocks.add(blockMock3);
+        blocks.add(blockMock3);
     }
 
     @Test
     public void getId1() {
-        assertEquals(1, blocksMocks.get(0).getId());
+        assertEquals(1, blocks.get(0).getId());
     }
 
     @Test
     public void getId2() {
-        assertEquals(2, blocksMocks.get(1).getId());
+        assertEquals(2, blocks.get(1).getId());
     }
 
     @Test
@@ -70,10 +70,10 @@ public class BlockTest {
         when(positionMock.getX()).thenReturn(2);
         when(positionMock.getY()).thenReturn(6);
 
-        blocksMocks.get(0).setPosition(positionMock);
+        blocks.get(0).setPosition(positionMock);
 
-        assertEquals(2, blocksMocks.get(0).getPosition().getX());
-        assertEquals(6, blocksMocks.get(0).getPosition().getY());
+        assertEquals(2, blocks.get(0).getPosition().getX());
+        assertEquals(6, blocks.get(0).getPosition().getY());
     }
 
     @Test
@@ -82,10 +82,10 @@ public class BlockTest {
         when(positionMock.getX()).thenReturn(42);
         when(positionMock.getY()).thenReturn(55);
 
-        blocksMocks.get(2).setPosition(positionMock);
+        blocks.get(2).setPosition(positionMock);
 
-        assertEquals(42, blocksMocks.get(2).getPosition().getX());
-        assertEquals(55, blocksMocks.get(2).getPosition().getY());
+        assertEquals(42, blocks.get(2).getPosition().getX());
+        assertEquals(55, blocks.get(2).getPosition().getY());
     }
 
     @Test
@@ -93,9 +93,9 @@ public class BlockTest {
         Color colorMock = mock(Color.class);
         when(colorMock.getCode()).thenReturn("#FF0FFF");
 
-        blocksMocks.get(1).setColor(colorMock);
+        blocks.get(1).setColor(colorMock);
 
-        assertEquals("#FF0FFF", blocksMocks.get(1).getColor().getCode());
+        assertEquals("#FF0FFF", blocks.get(1).getColor().getCode());
     }
 
     @Test
@@ -103,8 +103,8 @@ public class BlockTest {
         Color colorMock = mock(Color.class);
         when(colorMock.getCode()).thenReturn("#FFFFFF");
 
-        blocksMocks.get(2).setColor(colorMock);
+        blocks.get(2).setColor(colorMock);
 
-        assertEquals("#FFFFFF", blocksMocks.get(2).getColor().getCode());
+        assertEquals("#FFFFFF", blocks.get(2).getColor().getCode());
     }
 }
