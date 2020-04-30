@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArenaModel extends Observable<ArenaModel> {
-    // Only represents data
 
     private List<Block> arenaBlocks; // contém todos os blocos (quadradinhos); assim será mais fácil verificar se pontuou
 
@@ -17,6 +16,9 @@ public class ArenaModel extends Observable<ArenaModel> {
     private int score = 0;
     private int level = 0;
 
+    public ArenaModel() {
+        this.arenaBlocks = new ArrayList<>();
+    }
 
     public int getLevel() {
         return level;
@@ -34,11 +36,6 @@ public class ArenaModel extends Observable<ArenaModel> {
         this.score = score;
     }
 
-    public ArenaModel() {
-        this.arenaBlocks = new ArrayList<>();
-    }
-
-    @Override
     public void removeArenaBlocks(List<Block> toRemove) {
         this.arenaBlocks.removeAll(toRemove);
     }
@@ -51,9 +48,12 @@ public class ArenaModel extends Observable<ArenaModel> {
         this.currentPieceModel = pieceModel;
     }
 
-    public void setNextPieceModel(PieceModel pieceModel) {
-        this.nextPieceModel = nextPieceModel;
+    public void setNextPieceModel(PieceModel pieceModel) { 
+        this.nextPieceModel = pieceModel;
+    }
 
+    public PieceModel getNextPieceModel() {
+        return this.nextPieceModel;
     }
 
     public void addPiece(PieceModel pieceModel) {

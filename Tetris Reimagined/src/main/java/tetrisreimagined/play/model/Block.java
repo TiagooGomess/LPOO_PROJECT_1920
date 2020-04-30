@@ -4,16 +4,16 @@ public class Block {
 
     private Position position;
     private Color color;
-    private int id;
-
-    public int getId() {
-        return id;
-    }
+    private final int id;
 
     public Block(Position position, Color color, int id) {
         this.position = position;
         this.color = color;
         this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Position getPosition() {

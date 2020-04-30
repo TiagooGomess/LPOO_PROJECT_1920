@@ -16,7 +16,7 @@ import java.util.List;
 
 public class PieceController {
 
-    private PieceModel pieceModel;
+    private final PieceModel pieceModel;
 
     public PieceController(PieceModel pieceModel) {
         this.pieceModel = pieceModel;

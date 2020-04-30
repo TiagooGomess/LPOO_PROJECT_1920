@@ -24,6 +24,4 @@ public abstract class Observable<T> {
         for (Observer<T> observer : observers)
             observer.changed(subject);
     }
-
-    public abstract void removeArenaBlocks(List<Block> toRemove); // temos q tirar isto daqui
 }
