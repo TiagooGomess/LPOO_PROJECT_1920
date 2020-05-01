@@ -147,4 +147,13 @@ public class ArenaControllerTest {
     public void checkLine3() {
         assertFalse(arenaController.checkLine(22));
     }
+
+    @Test
+    public void removeLine1() {
+
+        // we need a mock of a void method (arenaModelMock.removeArenaBlocks(blocksToRemove))
+
+        //arenaController.removeLine(20);
+
+    }
 }
