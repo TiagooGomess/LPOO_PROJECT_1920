@@ -2,8 +2,11 @@ package controller.Pieces;
 
 import org.junit.Before;
 import org.junit.Test;
+import tetrisreimagined.play.gui.lantern.GameViewLanterna;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
+import tetrisreimagined.play.model.Color;
+import tetrisreimagined.play.model.Pieces.IBlockModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
 import tetrisreimagined.play.observer.Observer;
@@ -22,16 +25,19 @@ public class PieceControllerTest {
 
     List<PieceController> pieceControllers;
     List<PieceModel> pieceModelsMocks;
+    PieceModel pieceModelMock1;
+    PieceModel pieceModelMock2;
 
     ArenaModel arenaModelMock;
     Observer observerMock;
+    List<Block> allBlocks;
 
     @Before
     public void setup() {
 
         pieceControllers = new ArrayList<>();
         pieceModelsMocks = new ArrayList<>();
-        List<Block> allBlocks = new ArrayList<>();
+        allBlocks = new ArrayList<>();
 
         // ================================== First Piece Controller ===========================
         List<Block> blocks1 = new ArrayList<>();
@@ -41,8 +47,8 @@ public class PieceControllerTest {
         when(positionMock1.getX()).thenReturn(0);
         when(positionMock1.getY()).thenReturn(2);
         when(blockMock1.getPosition()).thenReturn(positionMock1);
-        // preciso de criar um mock para o equals, mas não sei como se faz // TODO
         when(blockMock1.getId()).thenReturn(1);
+        // preciso de criar um mock para o equals, mas não sei como se faz // TODO
 
         Block blockMock2 = mock(Block.class);
         Position positionMock2 = mock(Position.class);
@@ -72,7 +78,7 @@ public class PieceControllerTest {
 
         allBlocks.addAll(blocks1);
 
-        PieceModel pieceModelMock1 = mock(PieceModel.class);
+        pieceModelMock1 = mock(PieceModel.class);
         when(pieceModelMock1.getBlocks()).thenReturn(blocks1);
         when(pieceModelMock1.getMinXPosition()).thenReturn(positionMock1);
         when(pieceModelMock1.getMaxXPosition()).thenReturn(positionMock4);
@@ -123,10 +129,6 @@ public class PieceControllerTest {
         pieceControllers.add(pieceController2);
         pieceModelsMocks.add(pieceModelMock2);
 
-
-
-
-
         arenaModelMock = mock(ArenaModel.class);
         when(arenaModelMock.getArenaBlocks()).thenReturn(allBlocks);
 
@@ -176,56 +178,79 @@ public class PieceControllerTest {
         assertFalse(pieceControllers.get(1).canGoDown(observerMock, arenaModelMock));
     }
 
-//    @Test
-//    public void positionHasBlock() {
-//        Position positionMock1 = mock(Position.class);
-//        when(positionMock1.getX()).thenReturn(1);
-//        when(positionMock1.getY()).thenReturn(2);
-//
-//        assertTrue(pieceControllers.get(0).positionHasBlock(positionMock1, arenaModelMock));
-//    }
-
     @Test
-    public void getBlockById1() {
-        Position positionMock = mock(Position.class);
-        when(positionMock.getX()).thenReturn(0);
-        when(positionMock.getY()).thenReturn(2);
+    public void getBlockId() {
+        List<Block> blocks = new ArrayList<>();
 
-        // seria preciso um mock do equals das Position para dar ........
+        Block blockMock1 = mock(Block.class);
+        when(blockMock1.getPosition()).thenReturn(new Position(0, 2));
+        when(blockMock1.getId()).thenReturn(1);
 
-        //assertEquals(1, pieceControllers.get(0).getBlockId(positionMock)); // TODO
+        Block blockMock2 = mock(Block.class);
+        when(blockMock2.getPosition()).thenReturn(new Position(1, 2));
+        when(blockMock2.getId()).thenReturn(2);
+
+        blocks.add(blockMock1);
+        blocks.add(blockMock2);
+
+        PieceModel pMock = mock(PieceModel.class);
+        when(pMock.getBlocks()).thenReturn(blocks);
+
+        PieceController pieceController = new PieceController(pMock);
+
+        // Position is not a mock because we can't mock equals() function used by getBlockId
+        assertEquals(2, pieceController.getBlockId(new Position(1, 2)));
     }
 
     @Test
-    public void getBlockById2() {
-        Position positionMock = mock(Position.class);
-        when(positionMock.getX()).thenReturn(29);
-        when(positionMock.getY()).thenReturn(58);
+    public void getBlockById() {
+        PieceController pieceController = new PieceController(pieceModelMock1);
+        assertEquals(pieceModelMock1.getBlocks().get(2), pieceController.getBlockById(3));
 
-        // seria preciso um mock do equals das Position para dar ........
-
-        //assertEquals(6, pieceControllers.get(1).getBlockId(positionMock)); // TODO
     }
 
     @Test
-    public void pieceCanRotateClockWise1() {
+    public void pieceCanRotateClockWise() {
+
+        // Mock Gui
         RotateClockWise rotateCW = mock(RotateClockWise.class);
+        Observer<ArenaModel> guiMock = mock(GameViewLanterna.class);
+        when(guiMock.getHeight()).thenReturn(30);
+        when(guiMock.getWidth()).thenReturn(30);
 
-        // com esta arquitetura, não sei como fazer testes para isto ahahah TODO
+        // Mock ArenaModel
+        List<Block> blocks = new ArrayList<>();
+        Color cl = new Color("green", "#asdlk2");
+        blocks.add(new Block(new Position(29, 29), cl,1));
+        blocks.add(new Block(new Position(29, 28), cl, 2));
+        blocks.add(new Block(new Position(29, 27), cl, 3));
+        blocks.add(new Block(new Position(29, 26), cl, 4));
 
-        //assertTrue(pieceControllers.get(0).pieceCanRotateClockWise(observerMock, arenaModelMock));
+        blocks.add(new Block(new Position(29, 25), cl, 5));
+        blocks.add(new Block(new Position(29, 24), cl, 6));
+        blocks.add(new Block(new Position(29, 23), cl, 7));
+        blocks.add(new Block(new Position(29, 22), cl, 8));
 
+        blocks.add(new Block(new Position(29, 21), cl, 9));
+        blocks.add(new Block(new Position(29, 20), cl, 10));
+        blocks.add(new Block(new Position(29, 19), cl, 11));
+        blocks.add(new Block(new Position(29, 18), cl, 12));
 
+        blocks.add(new Block(new Position(29, 17), cl, 13));
+        blocks.add(new Block(new Position(29, 16), cl, 14));
+        blocks.add(new Block(new Position(29, 15), cl, 15));
+        blocks.add(new Block(new Position(29, 14), cl, 16));
 
+        PieceModel pMock = mock(PieceModel.class);
+        when(pMock.getBlocks()).thenReturn(blocks);
+        when(pMock.getMaxXPosition()).thenReturn(new Position(29, 29));
+        when(pMock.getMinXPosition()).thenReturn(new Position(29, 29));
+        when(pMock.getMaxYPosition()).thenReturn(new Position(29, 29));
+        when(pMock.getMinYPosition()).thenReturn(new Position(29, 14));
+
+        ArenaModel gameModel = new ArenaModel();
+
+        PieceController pieceController = new PieceController(pMock);
+        assertFalse(pieceController.pieceCanRotate(guiMock, gameModel));
     }
-
-    @Test
-    public void pieceCanRotateCounterClockWise1() {
-        RotateCounterClockWise rotateCCW = mock(RotateCounterClockWise.class);
-
-
-        // TODO
-        // same ...
-    }
-
 }

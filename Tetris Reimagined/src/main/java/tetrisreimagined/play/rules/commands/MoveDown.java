@@ -5,6 +5,7 @@ import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Pieces.PieceController;
+import tetrisreimagined.play.rules.Pieces.PieceTransform;
 
 public class MoveDown extends PieceCommand {
     private Observer<ArenaModel> gui;
