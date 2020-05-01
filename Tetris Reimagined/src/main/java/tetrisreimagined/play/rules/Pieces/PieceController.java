@@ -71,16 +71,18 @@ public class PieceController {
         return 0;
     }
 
-    public boolean pieceCanRotateClockWise(Observer<ArenaModel> gui, ArenaModel gameModel) {
+    public boolean pieceCanRotate(Observer<ArenaModel> gui, ArenaModel gameModel) {
         boolean canRotate = true;
         List<Position> blockPositions = new ArrayList<>();
         RotateClockWise rotateCW = new RotateClockWise(pieceModel, gui, gameModel);
+        System.out.println("ASJDKASD");
         rotateCW.rotatePiece(this);
+        System.out.println(pieceModel.getBlocks());
         for (Block block: pieceModel.getBlocks()) {
             blockPositions.add(block.getPosition());
         }
         for (Position position: blockPositions) {
-            boolean isOutOfLimits = position.getX() >= gui.getWidth() || position.getX() < 0 || position.getY() > position.getY() || position.getY() < 0;
+            boolean isOutOfLimits = position.getX() >= gui.getWidth() || position.getX() < 0 || position.getY() > gui.getHeight() || position.getY() < 0;
             if (gameModel.positionHasBlock(position) || isOutOfLimits) {
                 canRotate = false;
                 break;
@@ -91,23 +93,4 @@ public class PieceController {
         return canRotate;
     }
 
-    public boolean pieceCanRotateCounterClockWise(Observer<ArenaModel> gui, ArenaModel gameModel) {
-        boolean canRotate = true;
-        List<Position> blockPositions = new ArrayList<>();
-        RotateCounterClockWise rotateCCW = new RotateCounterClockWise(pieceModel, gui, gameModel);
-        rotateCCW.rotatePiece(this);
-        for (Block block: pieceModel.getBlocks()) {
-            blockPositions.add(block.getPosition());
-        }
-        for (Position position: blockPositions) {
-            boolean isOutOfLimits = position.getX() >= gui.getWidth() || position.getX() < 0 || position.getY() > position.getY() || position.getY() < 0;
-            if (gameModel.positionHasBlock(position) || isOutOfLimits) {
-                canRotate = false;
-                break;
-            }
-        }
-        RotateClockWise rotateCW = new RotateClockWise(pieceModel, gui, gameModel);
-        rotateCW.rotatePiece(this);
-        return canRotate;
-    }
 }
