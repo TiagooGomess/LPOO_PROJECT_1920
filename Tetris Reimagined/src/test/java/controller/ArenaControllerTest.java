@@ -1,31 +1,45 @@
 package controller;
 
 import org.junit.Before;
+import org.junit.Test;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Color;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
+import tetrisreimagined.play.observer.Observer;
+import tetrisreimagined.play.rules.ArenaController;
 import tetrisreimagined.play.rules.Pieces.PieceController;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ArenaControllerTest {
+    ArenaController arenaController;
     ArenaModel arenaModelMock;
     PieceController pieceControllerMock;
 
     @Before
     public void setup() {
+
+        Observer observerMock = mock(Observer.class);
+
+        when(observerMock.getHeight()).thenReturn(23);
+        when(observerMock.getWidth()).thenReturn(10);
+
         arenaModelMock = mock(ArenaModel.class);
         pieceControllerMock = mock(PieceController.class);
 
         PieceModel pieceModelMock = mock(PieceModel.class);
 
         when(pieceControllerMock.getPieceModel()).thenReturn(pieceModelMock);
+
+        arenaController = new ArenaController(observerMock, arenaModelMock);
 
         // linha 20 -> completa; os blocos da linha 19 têm que descer
         Block block0 = new Block(new Position(0, 20), new Color("",""), 0);
@@ -83,5 +97,63 @@ public class ArenaControllerTest {
         blocks.add(block22);
 
         when(arenaModelMock.getArenaBlocks()).thenReturn(blocks);
+
+        when(arenaModelMock.positionHasBlock(new Position(0, 20))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(1, 20))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(2, 20))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(3, 20))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(4, 20))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(5, 20))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(6, 20))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(7, 20))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(8, 20))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(9, 20))).thenReturn(true);
+
+        when(arenaModelMock.positionHasBlock(new Position(0, 21))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(1, 21))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(2, 21))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(3, 21))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(4, 21))).thenReturn(false);
+        when(arenaModelMock.positionHasBlock(new Position(5, 21))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(6, 21))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(7, 21))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(8, 21))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(9, 21))).thenReturn(true);
+
+        when(arenaModelMock.positionHasBlock(new Position(0, 22))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(1, 22))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(2, 22))).thenReturn(true);
+        when(arenaModelMock.positionHasBlock(new Position(3, 22))).thenReturn(false);
+        when(arenaModelMock.positionHasBlock(new Position(4, 22))).thenReturn(false);
+        when(arenaModelMock.positionHasBlock(new Position(5, 22))).thenReturn(false);
+        when(arenaModelMock.positionHasBlock(new Position(6, 22))).thenReturn(false);
+        when(arenaModelMock.positionHasBlock(new Position(7, 22))).thenReturn(false);
+        when(arenaModelMock.positionHasBlock(new Position(8, 22))).thenReturn(false);
+        when(arenaModelMock.positionHasBlock(new Position(9, 22))).thenReturn(false);
+
+    }
+
+    @Test
+    public void checkLine1() {
+        assertTrue(arenaController.checkLine(20));
+    }
+
+    @Test
+    public void checkLine2() {
+        assertFalse(arenaController.checkLine(21));
+    }
+
+    @Test
+    public void checkLine3() {
+        assertFalse(arenaController.checkLine(22));
+    }
+
+    @Test
+    public void removeLine1() {
+
+        // we need a mock of a void method (arenaModelMock.removeArenaBlocks(blocksToRemove))
+
+        //arenaController.removeLine(20);
+
     }
 }
