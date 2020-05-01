@@ -75,9 +75,7 @@ public class PieceController {
         boolean canRotate = true;
         List<Position> blockPositions = new ArrayList<>();
         RotateClockWise rotateCW = new RotateClockWise(pieceModel, gui, gameModel);
-        System.out.println("ASJDKASD");
         rotateCW.rotatePiece(this);
-        System.out.println(pieceModel.getBlocks());
         for (Block block: pieceModel.getBlocks()) {
             blockPositions.add(block.getPosition());
         }

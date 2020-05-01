@@ -30,7 +30,6 @@ public class RotateClockWise extends PieceCommand {
     }
 
     public void rotatePiece(PieceController currentPieceController) {
-        System.out.println("ASDASDASD");
         int xLenght = (this.pieceModel.getMaxXPosition().getX() - this.pieceModel.getMinXPosition().getX()) + 1;
         int yLenght = (this.pieceModel.getMaxYPosition().getY() - this.pieceModel.getMinYPosition().getY()) + 1;
 
