@@ -47,8 +47,11 @@ public class ArenaController {
                 elapsedTime = endTime - begTime;
 
 
-            if(elapsedTime > 30) // Hard drop takes more than 30 ms!
-                Thread.sleep(120 - elapsedTime);
+            if(elapsedTime > 30) { // Hard drop takes more than 30 ms!
+                System.out.println(elapsedTime);
+                Thread.sleep(100 - elapsedTime);
+
+            }
             else
                 Thread.sleep(30 - elapsedTime); // mudar para velocidade da peça
             begTime = System.currentTimeMillis();
@@ -142,19 +145,9 @@ public class ArenaController {
         System.out.println("Next Piece: " + nextPieceController.getPieceModel().getClass().toString());
     }
 
-    public boolean positionHasBlock(Position position) {
-
-        for (Block block: arena.getArenaBlocks()) {
-            if (block.getPosition().equals(position))
-                return true;
-        }
-
-        return false;
-    }
-
     public boolean checkLine(int line) {
         for (int column = 0; column < gui.getWidth(); column++) {
-            if (!positionHasBlock(new Position(column, line)))
+            if (!arena.positionHasBlock(new Position(column, line)))
                 return false;
         }
         return true;

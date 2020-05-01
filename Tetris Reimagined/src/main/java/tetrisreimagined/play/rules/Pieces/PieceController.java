@@ -33,7 +33,7 @@ public class PieceController {
 
     public boolean canGoRight(Observer<ArenaModel> gui, ArenaModel gameModel) {
         for (Block block: pieceModel.getBlocks()) {
-            if (positionHasBlock(block.getPosition().right(), gameModel))
+            if (gameModel.positionHasBlock(block.getPosition().right()))
                 return false;
         }
         return pieceModel.getMaxXPosition().getX() + 1 < gui.getWidth();
@@ -41,7 +41,7 @@ public class PieceController {
 
     public boolean canGoLeft(Observer<ArenaModel> gui, ArenaModel gameModel) {
         for (Block block: pieceModel.getBlocks()) {
-            if (positionHasBlock(block.getPosition().left(), gameModel))
+            if (gameModel.positionHasBlock(block.getPosition().left()))
                 return false;
         }
         return pieceModel.getMinXPosition().getX() > 0;
@@ -49,18 +49,10 @@ public class PieceController {
 
     public boolean canGoDown(Observer<ArenaModel> gui, ArenaModel gameModel) {
         for (Block block: pieceModel.getBlocks()) {
-            if (positionHasBlock(block.getPosition().down(), gameModel))
+            if (gameModel.positionHasBlock(block.getPosition().down()))
                 return false;
         }
         return pieceModel.getMaxYPosition().getY() + 1 < gui.getHeight();
-    }
-
-    public boolean positionHasBlock(Position position, ArenaModel gameModel) {
-        for (Block block: gameModel.getArenaBlocks()) {
-            if (block.getPosition().equals(position))
-                return true;
-        }
-        return false;
     }
 
     public Block getBlockById(int id) {
@@ -89,7 +81,7 @@ public class PieceController {
         }
         for (Position position: blockPositions) {
             boolean isOutOfLimits = position.getX() >= gui.getWidth() || position.getX() < 0 || position.getY() > position.getY() || position.getY() < 0;
-            if (positionHasBlock(position, gameModel) || isOutOfLimits) {
+            if (gameModel.positionHasBlock(position) || isOutOfLimits) {
                 canRotate = false;
                 break;
             }
@@ -109,7 +101,7 @@ public class PieceController {
         }
         for (Position position: blockPositions) {
             boolean isOutOfLimits = position.getX() >= gui.getWidth() || position.getX() < 0 || position.getY() > position.getY() || position.getY() < 0;
-            if (positionHasBlock(position, gameModel) || isOutOfLimits) {
+            if (gameModel.positionHasBlock(position) || isOutOfLimits) {
                 canRotate = false;
                 break;
             }

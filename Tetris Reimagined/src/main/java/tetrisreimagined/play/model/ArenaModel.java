@@ -68,4 +68,12 @@ public class ArenaModel extends Observable<ArenaModel> {
         return this.arenaBlocks.isEmpty();
     }
 
+    public boolean positionHasBlock(Position position) {
+        for (Block block: arenaBlocks) {
+            if (block.getPosition().equals(position))
+                return true;
+        }
+        return false;
+    }
+
 }
