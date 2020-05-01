@@ -206,6 +206,7 @@ public class PieceControllerTest {
     public void getBlockById() {
         PieceController pieceController = new PieceController(pieceModelMock1);
         assertEquals(pieceModelMock1.getBlocks().get(2), pieceController.getBlockById(3));
+
     }
 
     @Test
