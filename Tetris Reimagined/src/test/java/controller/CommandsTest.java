@@ -2,23 +2,21 @@ package controller;
 
 import org.junit.Before;
 import org.junit.Test;
+import tetrisreimagined.play.gui.lantern.GameViewLanterna;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Color;
+import tetrisreimagined.play.model.Pieces.OBlockModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
 import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Pieces.PieceController;
-import tetrisreimagined.play.rules.commands.HardDrop;
-import tetrisreimagined.play.rules.commands.MoveDown;
-import tetrisreimagined.play.rules.commands.MoveLeft;
-import tetrisreimagined.play.rules.commands.MoveRight;
+import tetrisreimagined.play.rules.commands.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -100,4 +98,53 @@ public class CommandsTest {
 
     }
 
+    @Test
+    public void rotateClockWise() {
+        // Mock Gui
+        Observer<ArenaModel> guiMock = mock(GameViewLanterna.class);
+        when(guiMock.getHeight()).thenReturn(30);
+        when(guiMock.getWidth()).thenReturn(30);
+
+        PieceModel pModel = new OBlockModel();
+        ArenaModel gameModel = new ArenaModel();
+
+        PieceController pieceController = new PieceController(pModel);
+        RotateClockWise rCw = new RotateClockWise(pModel, guiMock, gameModel);
+        rCw.execute(pieceController);
+
+        assertEquals(pModel.getBlocks().get(0).getPosition(), new Position(1, 2));
+        assertEquals(pModel.getBlocks().get(1).getPosition(), new Position(1, 3));
+        assertEquals(pModel.getBlocks().get(2).getPosition(), new Position(1, 4));
+        assertEquals(pModel.getBlocks().get(3).getPosition(), new Position(1, 5));
+
+        assertEquals(pModel.getBlocks().get(4).getPosition(), new Position(0, 2));
+        assertEquals(pModel.getBlocks().get(5).getPosition(), new Position(0, 3));
+        assertEquals(pModel.getBlocks().get(6).getPosition(), new Position(0, 4));
+        assertEquals(pModel.getBlocks().get(7).getPosition(), new Position(0, 5));
+    }
+
+    @Test
+    public void rotateCounterClockWise() {
+        // Mock Gui
+        Observer<ArenaModel> guiMock = mock(GameViewLanterna.class);
+        when(guiMock.getHeight()).thenReturn(30);
+        when(guiMock.getWidth()).thenReturn(30);
+
+        PieceModel pModel = new OBlockModel();
+        ArenaModel gameModel = new ArenaModel();
+
+        PieceController pieceController = new PieceController(pModel);
+        RotateCounterClockWise rCCw = new RotateCounterClockWise(pModel, guiMock, gameModel);
+        rCCw.execute(pieceController);
+
+        assertEquals(pModel.getBlocks().get(3).getPosition(), new Position(0, 2));
+        assertEquals(pModel.getBlocks().get(2).getPosition(), new Position(0, 3));
+        assertEquals(pModel.getBlocks().get(1).getPosition(), new Position(0, 4));
+        assertEquals(pModel.getBlocks().get(0).getPosition(), new Position(0, 5));
+
+        assertEquals(pModel.getBlocks().get(7).getPosition(), new Position(1, 2));
+        assertEquals(pModel.getBlocks().get(6).getPosition(), new Position(1, 3));
+        assertEquals(pModel.getBlocks().get(5).getPosition(), new Position(1, 4));
+        assertEquals(pModel.getBlocks().get(4).getPosition(), new Position(1, 5));
+    }
 }

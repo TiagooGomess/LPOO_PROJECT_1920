@@ -213,7 +213,6 @@ public class PieceControllerTest {
     public void pieceCanRotateClockWise() {
 
         // Mock Gui
-        RotateClockWise rotateCW = mock(RotateClockWise.class);
         Observer<ArenaModel> guiMock = mock(GameViewLanterna.class);
         when(guiMock.getHeight()).thenReturn(30);
         when(guiMock.getWidth()).thenReturn(30);

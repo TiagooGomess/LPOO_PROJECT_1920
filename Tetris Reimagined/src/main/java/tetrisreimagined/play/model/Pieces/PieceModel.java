@@ -7,7 +7,7 @@ import tetrisreimagined.play.model.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PieceModel {
+public class PieceModel {
 
     // Names of pieces:
     // https://tetris.fandom.com/wiki/Tetromino
