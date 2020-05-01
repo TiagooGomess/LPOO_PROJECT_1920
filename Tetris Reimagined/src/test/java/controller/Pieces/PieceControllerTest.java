@@ -214,6 +214,9 @@ public class PieceControllerTest {
         // com esta arquitetura, não sei como fazer testes para isto ahahah TODO
 
         //assertTrue(pieceControllers.get(0).pieceCanRotateClockWise(observerMock, arenaModelMock));
+
+
+
     }
 
     @Test
