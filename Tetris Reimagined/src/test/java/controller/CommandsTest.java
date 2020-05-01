@@ -9,9 +9,10 @@ import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
 import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Pieces.PieceController;
+import tetrisreimagined.play.rules.commands.MoveDown;
+import tetrisreimagined.play.rules.commands.MoveLeft;
 import tetrisreimagined.play.rules.commands.MoveRight;
 
-import java.io.PipedOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +55,28 @@ public class CommandsTest {
 
         assertEquals(new Position(6, 5), pieceControllerMock.getPieceModel().getBlocks().get(0).getPosition());
         assertEquals(new Position(6, 6), pieceControllerMock.getPieceModel().getBlocks().get(1).getPosition());
+    }
+
+    @Test
+    public void moveLeft() {
+        MoveLeft moveLeft = new MoveLeft(pieceModelMock, observerMock, arenaModelMock);
+        when(pieceControllerMock.canGoLeft(observerMock, arenaModelMock)).thenReturn(true);
+
+        assertTrue(moveLeft.execute(pieceControllerMock));
+
+        assertEquals(new Position(2, 5), pieceControllerMock.getPieceModel().getBlocks().get(0).getPosition());
+        assertEquals(new Position(2, 6), pieceControllerMock.getPieceModel().getBlocks().get(1).getPosition());
+    }
+
+    @Test
+    public void moveDown() {
+        MoveDown moveDown = new MoveDown(pieceModelMock, observerMock, arenaModelMock);
+        when(pieceControllerMock.canGoDown(observerMock, arenaModelMock)).thenReturn(true);
+
+        assertTrue(moveDown.execute(pieceControllerMock));
+
+        assertEquals(new Position(4, 6), pieceControllerMock.getPieceModel().getBlocks().get(0).getPosition());
+        assertEquals(new Position(4, 7), pieceControllerMock.getPieceModel().getBlocks().get(1).getPosition());
     }
 
 }
