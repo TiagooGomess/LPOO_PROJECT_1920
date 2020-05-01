@@ -95,7 +95,6 @@ public class CommandsTest {
 
         // deveria de dar (4, 30), mas dá (4, 6)
 
-
     }
 
     @Test
