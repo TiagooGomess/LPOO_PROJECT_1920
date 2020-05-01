@@ -83,8 +83,5 @@ public class ArenaControllerTest {
         blocks.add(block22);
 
         when(arenaModelMock.getArenaBlocks()).thenReturn(blocks);
-
-
-
     }
 }
