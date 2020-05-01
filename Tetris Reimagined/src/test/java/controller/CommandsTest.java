@@ -9,6 +9,7 @@ import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
 import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Pieces.PieceController;
+import tetrisreimagined.play.rules.commands.HardDrop;
 import tetrisreimagined.play.rules.commands.MoveDown;
 import tetrisreimagined.play.rules.commands.MoveLeft;
 import tetrisreimagined.play.rules.commands.MoveRight;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -44,6 +46,12 @@ public class CommandsTest {
         blocks.add(block1);
         blocks.add(block2);
         when(pieceModelMock.getBlocks()).thenReturn(blocks);
+
+        when(pieceModelMock.getMaxYPosition()).thenReturn(block2.getPosition());
+
+        when(arenaModelMock.positionHasBlock((Position)any())).thenReturn(false);
+
+        when(observerMock.getHeight()).thenReturn(30);
     }
 
     @Test
@@ -77,6 +85,19 @@ public class CommandsTest {
 
         assertEquals(new Position(4, 6), pieceControllerMock.getPieceModel().getBlocks().get(0).getPosition());
         assertEquals(new Position(4, 7), pieceControllerMock.getPieceModel().getBlocks().get(1).getPosition());
+    }
+
+    @Test
+    public void hardDrop() {
+        HardDrop hardDrop = new HardDrop(pieceModelMock, observerMock, arenaModelMock);
+
+        hardDrop.execute(pieceControllerMock);
+
+        System.out.println("->> " + pieceControllerMock.getPieceModel().getBlocks().get(1).getPosition().getX() + " - " + pieceControllerMock.getPieceModel().getBlocks().get(1).getPosition().getY());
+
+        // deveria de dar (4, 30), mas dá (4, 6)
+
+
     }
 
 }
