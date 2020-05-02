@@ -1,9 +1,9 @@
-#LPOO_22 - Tetris Reimagined
+# LPOO_22 - Tetris Reimagined
 Réplica do jogo Tetris, que é um jogo que consiste em empilhar blocos que descem no ecrã, de forma a completarem linhas horizontais.
 
 Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes (up201806658@fe.up.pt) para a unidade corricular de LPOO 2019/2020.
 
-##Implemented Features
+## Implemented Features
   * Movimento das peças para a esquerda e direita através do teclado.
   * Movimento das peças para baixo à medida que o tempo passa.
   * Limites das peças dentro da janela.
@@ -29,7 +29,7 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
    
   
   
-##Planned Features
+## Planned Features
   * Top pontuações.
   * Modo Multiplayer
   * Peça em espera: peça que o jogador decidiu guardar para usar mais tarde.
@@ -37,7 +37,7 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
   * Rotação de toda a arena quando rodamos uma peça.
   * 
 
-#Design
+# Design
   
   * Model-View-Controller (MVC) and Observer Pattern
   
@@ -77,7 +77,7 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 >**Observer:**
 >Consequences: A utilização deste padrão permitiu uma maior simplificação do ArenaController ([ArenaController.java - Result](./src/main/java/tetrisreimagined/play/rules/ArenaController.java)) bem como uma maior abstração dos comandos utilizados.
   
-#Code Smells e Sugestões de Refactoring
+# Code Smells e Sugestões de Refactoring
   * Implementar State
   * Implementar Abstract Factory
   * **Long Method e Duplicate Code:** os métodos rotatePiece de RotateClockWise e RotateCounterClockWise são bastante longos, pelo que os poderíamos ter dividido em vários métodos mais pequenos. Além disso, existe uma certa similaridade entre os métodos, havendo algum código repetido. Poderíamos condensar os comandos RotateClockWise e RotateCounterClockWise, ficando com um comando Rotate, que receberia no construtor qual o tipo de rotação. 
@@ -86,10 +86,10 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
   * 
   *  
   
-#Testing
+# Testing
   * Almost everything tested
   * 
   
-#Self-evaluation
+# Self-evaluation
   *  2dukes:
   * ![Contribution guidelines for this project](./309558.jpg)
