@@ -1,9 +1,9 @@
-#LPOO_22 - Tetris Reimagined
+# LPOO_22 - Tetris Reimagined
 Réplica do jogo Tetris, que é um jogo que consiste em empilhar blocos que descem no ecrã, de forma a completarem linhas horizontais.
 
 Este projeto foi desenvolvido por Rui Pinto (up2018xxxxx@fe.up.pt) e Tiago Gomes (up201806658@fe.up.pt) para a unidade corricular de LPOO 2019/2020.
 
-##Implemented Features
+## Implemented Features
   * Movimento das peças para a esquerda e direita através do teclado
   * Movimento das peças para baixo à medida que o tempo passa
   * Limites das peças dentro da janela
@@ -14,25 +14,25 @@ Este projeto foi desenvolvido por Rui Pinto (up2018xxxxx@fe.up.pt) e Tiago Gomes
   * Sistema de pontuação
   
   
-##Planned Features
+## Planned Features
   * Modo Multiplayer
-  *
-  *
-  *
-  *
+  * a
+  * a
+  * a
+  * a
 
-#Design
-  *  
-  *
+# Design
+  * a
+  * a
   
-#Code Smells e Sugestões de Refactoring
-  *  
-  *
+# Code Smells e Sugestões de Refactoring
+  * a 
+  * a
   
-#Testing
-  *  
-  *
+# Testing
+  * a
+  * a
   
-#Self-evaluation
-  *  
-  *
+# Self-evaluation
+  * a
+  * a
