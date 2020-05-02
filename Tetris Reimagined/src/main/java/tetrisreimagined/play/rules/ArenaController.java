@@ -49,7 +49,7 @@ public class ArenaController {
 
             if(elapsedTime > 30) { // Hard drop takes more than 30 ms!
                 System.out.println(elapsedTime);
-                Thread.sleep(100 - elapsedTime);
+                Thread.sleep(110 - elapsedTime);
 
             }
             else
