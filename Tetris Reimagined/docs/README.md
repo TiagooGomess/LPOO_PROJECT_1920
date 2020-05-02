@@ -87,15 +87,15 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
   
 # Code Smells e Sugestões de Refactoring
   * **Long Method e Duplicate Code:** 
->   Os métodos rotatePiece de [RotateClockWise](./src/main/java/tetrisreimagined/play/rules/commands/RotateClockWise.java) e [RotateCounterClockWise](./src/main/java/tetrisreimagined/play/rules/commands/RotateCounterClockWise.java)  são bastante longos, pelo que os poderíamos ter dividido em vários métodos mais pequenos. Além disso, existe uma certa similaridade entre os métodos, havendo algum código repetido. Poderíamos condensar os comandos RotateClockWise e RotateCounterClockWise, ficando com um comando Rotate, que receberia no construtor qual o tipo de rotação.
+>   Os métodos rotatePiece de [RotateClockWise](../src/main/java/tetrisreimagined/play/rules/commands/RotateClockWise.java) e [RotateCounterClockWise](./src/main/java/tetrisreimagined/play/rules/commands/RotateCounterClockWise.java)  são bastante longos, pelo que os poderíamos ter dividido em vários métodos mais pequenos. Além disso, existe uma certa similaridade entre os métodos, havendo algum código repetido. Poderíamos condensar os comandos RotateClockWise e RotateCounterClockWise, ficando com um comando Rotate, que receberia no construtor qual o tipo de rotação.
   * **If Statements:** 
->  Os if's de getCommand, na classe [GameViewLanterna](./src/main/java/tetrisreimagined/play/gui/lantern/GameViewLanterna.java), poderiam ser substituídos por um switch statement.
+>  Os if's de getCommand, na classe [GameViewLanterna](../src/main/java/tetrisreimagined/play/gui/lantern/GameViewLanterna.java), poderiam ser substituídos por um switch statement.
   
   * **Return null:** 
->  No método getBlockById, na classe [PieceController](./src/main/java/tetrisreimagined/play/rules/Pieces/PieceController.java), poderíamos criar uma classe NullBlock.
+>  No método getBlockById, na classe [PieceController](../src/main/java/tetrisreimagined/play/rules/Pieces/PieceController.java), poderíamos criar uma classe NullBlock.
 
-* **Switch Statements**
-> No método updateScore() da classe [ArenaController](./src/main/java/tetrisreimagined/play/rules/ArenaController.java) a existência de um switch conduz a um novo smell. A existência de este tipo estrutura condicional é sempre algo de que sempre devemos desconfiar. Provavelmente posteriormente procederemos a um refactor da mesma.
+* **Switch Statements** 
+> No método updateScore() da classe [ArenaController](../src/main/java/tetrisreimagined/play/rules/ArenaController.java) a existência de um switch conduz a um novo smell. A existência de este tipo estrutura condicional é sempre algo de que sempre devemos desconfiar. Provavelmente posteriormente procederemos a um refactor da mesma.
     
   
 # Testing
