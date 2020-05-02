@@ -7,7 +7,7 @@ import tetrisreimagined.play.rules.commands.PieceCommand;
 import java.io.IOException;
 
 public interface Observer<T> {
-    void drawAll(T arena); // não sei se é suposto fazer assim
+    void drawAll(T arena);
 
     int getWidth();
     int getHeight();

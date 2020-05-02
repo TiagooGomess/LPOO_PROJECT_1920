@@ -111,15 +111,15 @@ public class CommandsTest {
         RotateClockWise rCw = new RotateClockWise(pModel, guiMock, gameModel);
         rCw.execute(pieceController);
 
-        assertEquals(pModel.getBlocks().get(0).getPosition(), new Position(1, 2));
-        assertEquals(pModel.getBlocks().get(1).getPosition(), new Position(1, 3));
-        assertEquals(pModel.getBlocks().get(2).getPosition(), new Position(1, 4));
-        assertEquals(pModel.getBlocks().get(3).getPosition(), new Position(1, 5));
+        assertEquals(pModel.getBlocks().get(0).getPosition(), new Position(1, 0));
+        assertEquals(pModel.getBlocks().get(1).getPosition(), new Position(1, 1));
+        assertEquals(pModel.getBlocks().get(2).getPosition(), new Position(1, 2));
+        assertEquals(pModel.getBlocks().get(3).getPosition(), new Position(1, 3));
 
-        assertEquals(pModel.getBlocks().get(4).getPosition(), new Position(0, 2));
-        assertEquals(pModel.getBlocks().get(5).getPosition(), new Position(0, 3));
-        assertEquals(pModel.getBlocks().get(6).getPosition(), new Position(0, 4));
-        assertEquals(pModel.getBlocks().get(7).getPosition(), new Position(0, 5));
+        assertEquals(pModel.getBlocks().get(4).getPosition(), new Position(0, 0));
+        assertEquals(pModel.getBlocks().get(5).getPosition(), new Position(0, 1));
+        assertEquals(pModel.getBlocks().get(6).getPosition(), new Position(0, 2));
+        assertEquals(pModel.getBlocks().get(7).getPosition(), new Position(0, 3));
     }
 
     @Test
@@ -136,14 +136,14 @@ public class CommandsTest {
         RotateCounterClockWise rCCw = new RotateCounterClockWise(pModel, guiMock, gameModel);
         rCCw.execute(pieceController);
 
-        assertEquals(pModel.getBlocks().get(3).getPosition(), new Position(0, 2));
-        assertEquals(pModel.getBlocks().get(2).getPosition(), new Position(0, 3));
-        assertEquals(pModel.getBlocks().get(1).getPosition(), new Position(0, 4));
-        assertEquals(pModel.getBlocks().get(0).getPosition(), new Position(0, 5));
+        assertEquals(pModel.getBlocks().get(3).getPosition(), new Position(2, 0));
+        assertEquals(pModel.getBlocks().get(2).getPosition(), new Position(2, 1));
+        assertEquals(pModel.getBlocks().get(1).getPosition(), new Position(2, 2));
+        assertEquals(pModel.getBlocks().get(0).getPosition(), new Position(2, 3));
 
-        assertEquals(pModel.getBlocks().get(7).getPosition(), new Position(1, 2));
-        assertEquals(pModel.getBlocks().get(6).getPosition(), new Position(1, 3));
-        assertEquals(pModel.getBlocks().get(5).getPosition(), new Position(1, 4));
-        assertEquals(pModel.getBlocks().get(4).getPosition(), new Position(1, 5));
+        assertEquals(pModel.getBlocks().get(7).getPosition(), new Position(3, 0));
+        assertEquals(pModel.getBlocks().get(6).getPosition(), new Position(3, 1));
+        assertEquals(pModel.getBlocks().get(5).getPosition(), new Position(3, 2));
+        assertEquals(pModel.getBlocks().get(4).getPosition(), new Position(3, 3));
     }
 }

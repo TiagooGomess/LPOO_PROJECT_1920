@@ -90,7 +90,7 @@ public class PieceModelTest {
 
     @Test
     public void getNumBlocks4() {
-        assertEquals(8, oBlock.getNumBlocks());
+        assertEquals(16, oBlock.getNumBlocks());
     }
 
     @Test
