@@ -17,7 +17,7 @@ public class ArenaController {
     private ArenaModel arena;
     private PieceController currentPieceController;
     private PieceController nextPieceController;
-    private boolean pieceTouchedGroud = false;
+    private boolean pieceTouchedGround = false;
 
 
     private int numLinesTotal = 0;
@@ -27,7 +27,6 @@ public class ArenaController {
     public ArenaController(Observer<ArenaModel> gui, ArenaModel arena) {
         this.gui = gui;
         this.arena = arena;
-        nextPiece();
     }
 
     public void start() throws IOException, InterruptedException {
@@ -39,6 +38,7 @@ public class ArenaController {
         if (2 * this.arena.getLevel() >= levelDifficulty)
             levelDifficulty = 2*this.arena.getLevel() + 1;
 
+        nextPiece();
         do {
             counter = tryMoveDown(counter, levelDifficulty - 2*this.arena.getLevel());
 
@@ -56,10 +56,11 @@ public class ArenaController {
                 Thread.sleep(30 - elapsedTime); // mudar para velocidade da peça
             begTime = System.currentTimeMillis();
 
-            if (pieceTouchedGroud) {
+            if (pieceTouchedGround) {
                 nextPiece();
-                pieceTouchedGroud = false;
+                pieceTouchedGround = false;
                 checkIfScore();
+                System.out.println(arena.getArenaBlocks());
             }
 
             // gui.drawAll(arena); // provisório
@@ -88,7 +89,7 @@ public class ArenaController {
                     System.out.println("Game paused. Press ENTER to continue...");
             }
             else {
-                pieceTouchedGroud = true;
+                pieceTouchedGround = true;
                 this.arena.addPiece(currentPieceController.getPieceModel());
                 int yPos = currentPieceController.getPieceModel().getMaxYPosition().getY();
                 if(yPos == 1 || yPos == 3) {          // TODO Piece initial Y position is upper. After that update this 'if'
@@ -133,7 +134,7 @@ public class ArenaController {
         }
 
         if (this.numIteration++ == 0) {
-            this.currentPieceController = new PieceController(newPiece);
+            this.currentPieceController = new PieceController(new IBlockModel());
         }
         else {
             this.currentPieceController = this.nextPieceController;
@@ -202,19 +203,14 @@ public class ArenaController {
     public void checkIfScore() {
 
         int numLines = 0;
-        boolean changedNothing;
 
-        do {
-            changedNothing = true;
-            for (int line = gui.getHeight(); line >= 0; line--) {
-                if (checkLine(line)) {
-                    removeLine(line);
-                    pushBlocksDown(line);
-                    numLines++;
-                    changedNothing = false;
-                }
-            }
-        } while (!changedNothing);
+        int line = this.gui.getHeight() - 1;
+
+        while(checkLine(line)) {
+            removeLine(line);
+            pushBlocksDown(line);
+            numLines++;
+        }
 
         updateScore(numLines);
 

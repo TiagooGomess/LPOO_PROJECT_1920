@@ -7,7 +7,7 @@ import tetrisreimagined.play.model.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PieceModel {
+public class PieceModel implements Cloneable {
 
     // Names of pieces:
     // https://tetris.fandom.com/wiki/Tetromino
@@ -18,6 +18,11 @@ public class PieceModel {
 
     public PieceModel() {
         this.blocks = new ArrayList<>();
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public List<Block> getBlocks() {
