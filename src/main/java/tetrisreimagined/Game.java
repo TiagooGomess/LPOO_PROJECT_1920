@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Game {
 
-    public void run() throws IOException, InterruptedException {
+    public void run() throws IOException, InterruptedException, CloneNotSupportedException {
         // ArenaModel arena = new ArenaModel(60, 30); -> Coordinates can represent initial block position...
         ArenaModel arena = new ArenaModel();
 

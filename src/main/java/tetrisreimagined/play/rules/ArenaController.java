@@ -29,7 +29,7 @@ public class ArenaController {
         this.arena = arena;
     }
 
-    public void start() throws IOException, InterruptedException {
+    public void start() throws IOException, InterruptedException, CloneNotSupportedException {
         PieceCommand pCommand;
 
         int counter = 0, levelDifficulty = 5;
@@ -106,7 +106,7 @@ public class ArenaController {
         return begTime != 0;
     }
 
-    public void nextPiece() {
+    public void nextPiece() throws CloneNotSupportedException {
         Random rand = new Random();
         int nexBlockNum = rand.nextInt(7); // random int in range 0 to 6
         PieceModel newPiece;
@@ -134,14 +134,14 @@ public class ArenaController {
         }
 
         if (this.numIteration++ == 0) {
-            this.currentPieceController = new PieceController(new IBlockModel());
+            this.currentPieceController = new PieceController(newPiece);
         }
         else {
             this.currentPieceController = this.nextPieceController;
         }
         this.nextPieceController = new PieceController(newPiece);
         this.arena.setCurrentPieceModel(currentPieceController.getPieceModel());
-        this.arena.setNextPieceModel(newPiece);
+        this.arena.setNextPieceModel((PieceModel) newPiece.clone());
 
         System.out.println("Next Piece: " + nextPieceController.getPieceModel().getClass().toString());
     }
@@ -204,13 +204,19 @@ public class ArenaController {
 
         int numLines = 0;
 
-        int line = this.gui.getHeight() - 1;
+        boolean changedNothing;
 
-        while(checkLine(line)) {
-            removeLine(line);
-            pushBlocksDown(line);
-            numLines++;
-        }
+        do {
+            changedNothing = true;
+            for (int line = gui.getHeight(); line >= 0; line--) {
+                if (checkLine(line)) {
+                    removeLine(line);
+                    pushBlocksDown(line);
+                    numLines++;
+                    changedNothing = false;
+                }
+            }
+        } while (!changedNothing);
 
         updateScore(numLines);
 
