@@ -132,14 +132,9 @@ public class ArenaController {
             default:
                 newPiece = new ZBlockModel();
         }
-
-        if (this.numIteration++ == 0) {
-            this.currentPieceController = new PieceController(new IBlockModel());
-        }
-        else {
-            this.currentPieceController = this.nextPieceController;
-        }
         this.nextPieceController = new PieceController(newPiece);
+        this.currentPieceController = this.nextPieceController;
+
         this.arena.setCurrentPieceModel(currentPieceController.getPieceModel());
         this.arena.setNextPieceModel(newPiece);
 
