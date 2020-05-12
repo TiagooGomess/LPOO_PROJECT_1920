@@ -1,4 +1,4 @@
-package tetrisreimagined.play.rules.commands;
+package tetrisreimagined.play.rules.Commands;
 
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
@@ -8,12 +8,12 @@ import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Pieces.PieceController;
 import tetrisreimagined.play.rules.Pieces.PieceTransform;
 
-public class RotateCounterClockWise extends PieceCommand {
+public class RotateClockWise extends PieceCommand {
     private Observer<ArenaModel> gui;
     private ArenaModel gameModel;
     private PieceModel pieceModel;
 
-    public RotateCounterClockWise(PieceModel pModel, Observer<ArenaModel> gui, ArenaModel gameModel) {
+    public RotateClockWise(PieceModel pModel, Observer<ArenaModel> gui, ArenaModel gameModel) {
         this.gui = gui;
         this.gameModel = gameModel;
         this.pieceModel = pModel;
@@ -30,7 +30,6 @@ public class RotateCounterClockWise extends PieceCommand {
     }
 
     public void rotatePiece(PieceController currentPieceController) {
-
         int xLenght = (this.pieceModel.getMaxXPosition().getX() - this.pieceModel.getMinXPosition().getX()) + 1;
         int yLenght = (this.pieceModel.getMaxYPosition().getY() - this.pieceModel.getMinYPosition().getY()) + 1;
 
@@ -53,7 +52,7 @@ public class RotateCounterClockWise extends PieceCommand {
 
         int[][] finalMatrixRotated;
 
-        finalMatrixRotated = PieceTransform.reverseLinesOrder(transposedOccupied, xLenght, yLenght);
+        finalMatrixRotated = PieceTransform.reverseColumnsOrder(transposedOccupied, xLenght, yLenght);
 
         /*for (int row = 0; row < xLenght; row++) {
             for (int col = 0; col < yLenght; col++)

@@ -11,7 +11,7 @@ import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
 import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Pieces.PieceController;
-import tetrisreimagined.play.rules.commands.*;
+import tetrisreimagined.play.rules.Commands.*;
 
 import java.util.ArrayList;
 import java.util.List;

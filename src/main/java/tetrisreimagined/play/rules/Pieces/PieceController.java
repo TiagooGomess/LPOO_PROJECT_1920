@@ -5,11 +5,9 @@ import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
 import tetrisreimagined.play.observer.Observer;
-import tetrisreimagined.play.rules.Pieces.PieceTransform;
-import tetrisreimagined.play.rules.commands.MoveDown;
-import tetrisreimagined.play.rules.commands.PieceCommand;
-import tetrisreimagined.play.rules.commands.RotateClockWise;
-import tetrisreimagined.play.rules.commands.RotateCounterClockWise;
+import tetrisreimagined.play.rules.Commands.MoveDown;
+import tetrisreimagined.play.rules.Commands.RotateClockWise;
+import tetrisreimagined.play.rules.Commands.RotateCounterClockWise;
 
 import java.util.ArrayList;
 import java.util.List;

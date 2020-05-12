@@ -1,8 +1,7 @@
 package tetrisreimagined.play.observer;
 
-import com.googlecode.lanterna.screen.Screen;
 import tetrisreimagined.play.model.ArenaModel;
-import tetrisreimagined.play.rules.commands.PieceCommand;
+import tetrisreimagined.play.rules.Commands.PieceCommand;
 
 import java.io.IOException;
 

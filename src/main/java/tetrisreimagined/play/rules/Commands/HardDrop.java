@@ -1,4 +1,4 @@
-package tetrisreimagined.play.rules.commands;
+package tetrisreimagined.play.rules.Commands;
 
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;

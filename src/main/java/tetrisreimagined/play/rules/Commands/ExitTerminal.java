@@ -1,8 +1,9 @@
-package tetrisreimagined.play.rules.commands;
+package tetrisreimagined.play.rules.Commands;
 
 import tetrisreimagined.play.rules.Pieces.PieceController;
 
-public class DoNothing extends PieceCommand {
+public class ExitTerminal extends PieceCommand {
+
     @Override
     public boolean execute(PieceController currentPieceController) {
         return true;

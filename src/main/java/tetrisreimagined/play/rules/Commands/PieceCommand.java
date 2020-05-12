@@ -1,4 +1,4 @@
-package tetrisreimagined.play.rules.commands;
+package tetrisreimagined.play.rules.Commands;
 
 import tetrisreimagined.play.rules.Pieces.PieceController;
 

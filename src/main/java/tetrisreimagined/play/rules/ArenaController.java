@@ -4,8 +4,8 @@ import tetrisreimagined.play.model.*;
 import tetrisreimagined.play.model.Pieces.*;
 import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Pieces.*;
-import tetrisreimagined.play.rules.commands.ExitTerminal;
-import tetrisreimagined.play.rules.commands.PieceCommand;
+import tetrisreimagined.play.rules.Commands.ExitTerminal;
+import tetrisreimagined.play.rules.Commands.PieceCommand;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class ArenaController {
 
             if(elapsedTime > 30) { // Hard drop takes more than 30 ms!
                 System.out.println(elapsedTime);
-                Thread.sleep(110 - elapsedTime);
+                Thread.sleep(105 - elapsedTime);
 
             }
             else
