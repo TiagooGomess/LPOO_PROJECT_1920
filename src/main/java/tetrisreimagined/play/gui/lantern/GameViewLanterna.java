@@ -1,8 +1,6 @@
 package tetrisreimagined.play.gui.lantern;
 
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -41,7 +39,7 @@ public class GameViewLanterna implements Observer<ArenaModel> {
     }
 
     public int getWidth() {
-        return this.width;
+        return this.width - 15;
     }
 
     public int getHeight() {
@@ -75,6 +73,10 @@ public class GameViewLanterna implements Observer<ArenaModel> {
     }
 
     public void drawBlock(Block block) {
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#ffffff"));
+        graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
+        graphics.fillRectangle(new TerminalPosition(width - 13, 1), new TerminalSize(11, 1), ' ');
+        graphics.putString(new TerminalPosition(width - 13, 1), "NEXT PIECE:", SGR.BLINK);
         graphics.setBackgroundColor(TextColor.Factory.fromString(block.getColor().getCode()));
         graphics.putString(new TerminalPosition(block.getPosition().getX(), block.getPosition().getY()), " ");
     }
