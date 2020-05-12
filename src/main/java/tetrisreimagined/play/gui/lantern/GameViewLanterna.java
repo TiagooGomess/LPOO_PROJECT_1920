@@ -33,9 +33,22 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             this.screen.setCursorPosition(null);   // we don't need a cursor
             this.screen.startScreen();             // screens must be started
             this.screen.doResizeIfNecessary();     // resize screen if necessary
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void initialDraw() {
+        int xCoord = getWidth();
+        for(int yCoord = 0; yCoord < height; yCoord++)
+            graphics.putString(new TerminalPosition(xCoord, yCoord), " ");
+
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#ffffff"));
+        graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
+        graphics.fillRectangle(new TerminalPosition(width - 13, 1), new TerminalSize(11, 1), ' ');
+        graphics.putString(new TerminalPosition(width - 13, 1), "NEXT PIECE:", SGR.BLINK);
+        graphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
     }
 
     public int getWidth() {
@@ -55,6 +68,8 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         try {
             this.screen.clear();
 
+            initialDraw();
+            drawNextPiece(arena.getNextPieceToDisplay(), width - 10, 3);
             drawPiece(arena.getCurrentPieceModel());
 
             for (Block block: arena.getArenaBlocks())
@@ -66,6 +81,14 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         }
     }
 
+    private void drawNextPiece(PieceModel nextPieceModel, int xOffset, int yOffset) {
+        graphics.setBackgroundColor(TextColor.Factory.fromString(nextPieceModel.getBlocks().get(0).getColor().getCode()));
+
+        for(Block block: nextPieceModel.getBlocks()) {
+            graphics.putString(new TerminalPosition(block.getPosition().getX() + xOffset, block.getPosition().getY() + yOffset), " ");
+        }
+    }
+
     public void drawPiece(PieceModel pieceModel) {
         for (Block block: pieceModel.getBlocks()) {
             drawBlock(block);
@@ -73,10 +96,6 @@ public class GameViewLanterna implements Observer<ArenaModel> {
     }
 
     public void drawBlock(Block block) {
-        graphics.setBackgroundColor(TextColor.Factory.fromString("#ffffff"));
-        graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
-        graphics.fillRectangle(new TerminalPosition(width - 13, 1), new TerminalSize(11, 1), ' ');
-        graphics.putString(new TerminalPosition(width - 13, 1), "NEXT PIECE:", SGR.BLINK);
         graphics.setBackgroundColor(TextColor.Factory.fromString(block.getColor().getCode()));
         graphics.putString(new TerminalPosition(block.getPosition().getX(), block.getPosition().getY()), " ");
     }

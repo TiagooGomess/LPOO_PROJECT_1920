@@ -26,6 +26,7 @@ public class ArenaController {
     public ArenaController(Observer<ArenaModel> gui, ArenaModel arena) {
         this.gui = gui;
         this.arena = arena;
+        nextPiece();
     }
 
     public void start() throws IOException, InterruptedException, CloneNotSupportedException {
@@ -99,35 +100,50 @@ public class ArenaController {
         return begTime != 0;
     }
 
-    public void nextPiece() throws CloneNotSupportedException {
+    public void nextPiece() {
         Random rand = new Random();
         int nexBlockNum = rand.nextInt(7); // random int in range 0 to 6
         PieceModel newPiece;
+        PieceModel nextPieceToDisplay;
         switch (nexBlockNum) {
             case 0:
                 newPiece = new IBlockModel();
+                nextPieceToDisplay = new IBlockModel();
                 break;
             case 1:
                 newPiece = new JBlockModel();
+                nextPieceToDisplay = new JBlockModel();
                 break;
             case 2:
                 newPiece = new LBlockModel();
+                nextPieceToDisplay = new LBlockModel();
                 break;
             case 3:
                 newPiece = new OBlockModel();
+                nextPieceToDisplay = new OBlockModel();
                 break;
             case 4:
                 newPiece = new SBlockModel();
+                nextPieceToDisplay = new SBlockModel();
                 break;
             case 5:
                 newPiece = new TBlockModel();
+                nextPieceToDisplay = new TBlockModel();
                 break;
             default:
                 newPiece = new ZBlockModel();
+                nextPieceToDisplay = new ZBlockModel();
         }
-        this.nextPieceController = new PieceController(newPiece);
-        this.currentPieceController = this.nextPieceController;
+        if(numIteration++ == 0) {
+            this.nextPieceController = new PieceController(newPiece);
+            return;
+        }
+        else {
+            this.currentPieceController = this.nextPieceController;
+            this.nextPieceController = new PieceController(newPiece);
+        }
 
+        this.arena.setNextPieceToDisplay(nextPieceToDisplay);
         this.arena.setCurrentPieceModel(currentPieceController.getPieceModel());
         this.arena.setNextPieceModel(newPiece);
 
