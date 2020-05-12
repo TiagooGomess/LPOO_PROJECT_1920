@@ -6,6 +6,7 @@ import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
 import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Commands.MoveDown;
+import tetrisreimagined.play.rules.Commands.MoveRight;
 import tetrisreimagined.play.rules.Commands.RotateClockWise;
 import tetrisreimagined.play.rules.Commands.RotateCounterClockWise;
 
@@ -87,6 +88,17 @@ public class PieceController {
         RotateCounterClockWise rotateCCW = new RotateCounterClockWise(pieceModel, gui, gameModel);
         rotateCCW.rotatePiece(this);
         return canRotate;
+    }
+
+    public void setStartPosition(Observer<ArenaModel> gui) {
+
+        int dx = (gui.getWidth() - this.pieceModel.getMinXPosition().getX())/4 - 2;
+
+        for (int i = 0; i < dx; i++) {
+            for (Block block: this.pieceModel.getBlocks())
+                block.setPosition(block.getPosition().right());
+        }
+
     }
 
 }

@@ -49,7 +49,7 @@ public class ArenaController {
 
             if(elapsedTime > 30) { // Hard drop takes more than 30 ms!
                 System.out.println(elapsedTime);
-                Thread.sleep(105 - elapsedTime);
+                Thread.sleep(150 - elapsedTime);
 
             }
             else
@@ -127,6 +127,8 @@ public class ArenaController {
         }
         this.nextPieceController = new PieceController(newPiece);
         this.currentPieceController = this.nextPieceController;
+
+        this.currentPieceController.setStartPosition(this.gui);
 
         this.arena.setCurrentPieceModel(currentPieceController.getPieceModel());
         this.arena.setNextPieceModel(newPiece);

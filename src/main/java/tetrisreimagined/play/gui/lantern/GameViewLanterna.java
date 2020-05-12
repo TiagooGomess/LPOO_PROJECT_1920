@@ -10,13 +10,19 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Commands.*;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
+
+import static java.awt.Font.TRUETYPE_FONT;
+import static java.awt.Font.createFont;
 
 public class GameViewLanterna implements Observer<ArenaModel> {
 
@@ -35,7 +41,13 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             this.screen.setCursorPosition(null);   // we don't need a cursor
             this.screen.startScreen();             // screens must be started
             this.screen.doResizeIfNecessary();     // resize screen if necessary
-        } catch (IOException e) {
+
+            File file = new File("fonts/square.ttf");
+            Font font = createFont(TRUETYPE_FONT, file);
+
+            SwingTerminalFontConfiguration.newInstance(font);
+
+        } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
     }
