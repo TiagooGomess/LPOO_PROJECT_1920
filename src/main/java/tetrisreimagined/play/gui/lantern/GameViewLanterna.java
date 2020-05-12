@@ -91,7 +91,7 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             if (key.getKeyType() == KeyType.ArrowRight) return new MoveRight(gameModel.getCurrentPieceModel(), this, gameModel);
             if (key.getKeyType() == KeyType.ArrowDown) return new MoveDown(gameModel.getCurrentPieceModel(), this, gameModel);
             if (key.getKeyType() == KeyType.ArrowLeft) return new MoveLeft(gameModel.getCurrentPieceModel(), this, gameModel);
-            /*if (key.getKeyType() == KeyType.Enter) return COMMAND.ENTER;*/
+            if (key.getKeyType() == KeyType.Enter) return new PauseGame();
             if (key.getKeyType() == KeyType.Character) {
                 if (key.getCharacter() == 'z') return new RotateCounterClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
                 if (key.getCharacter() == ' ') return new HardDrop(gameModel.getCurrentPieceModel(), this, gameModel);

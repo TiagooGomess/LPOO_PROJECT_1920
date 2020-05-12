@@ -19,9 +19,8 @@ public class ArenaController {
     private PieceController nextPieceController;
     private boolean pieceTouchedGround = false;
 
-
     private int numLinesTotal = 0;
-    private boolean gamePaused = false;
+    private static boolean gamePaused = false;
     private int numIteration = 0;
 
     public ArenaController(Observer<ArenaModel> gui, ArenaModel arena) {
@@ -39,6 +38,7 @@ public class ArenaController {
             levelDifficulty = 2*this.arena.getLevel() + 1;
 
         nextPiece();
+
         do {
             counter = tryMoveDown(counter, levelDifficulty - 2*this.arena.getLevel());
 
@@ -60,17 +60,10 @@ public class ArenaController {
                 nextPiece();
                 pieceTouchedGround = false;
                 checkIfScore();
-                System.out.println(arena.getArenaBlocks());
             }
-
-            // gui.drawAll(arena); // provisório
 
             pCommand = gui.getCommand(arena);
             pCommand.execute(currentPieceController);
-
-            /*if (command == Observer.COMMAND.ENTER) { -- TODO IMPLEMENT STATE PATTERN!
-                this.gamePaused = !this.gamePaused;
-            }*/
 
         } while (!(pCommand instanceof ExitTerminal));
 
@@ -223,6 +216,10 @@ public class ArenaController {
 
     private void updateLevel() {
         this.arena.setLevel(numLinesTotal / 6); // 6 linhas -> aumenta de nível
+    }
+
+    public static void swapGameState() {
+        gamePaused = !gamePaused;
     }
 
 }
