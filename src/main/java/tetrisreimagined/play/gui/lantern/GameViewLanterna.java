@@ -10,6 +10,8 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
+import tetrisreimagined.play.model.Pieces.IBlockModel;
+import tetrisreimagined.play.model.Pieces.OBlockModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Commands.*;
@@ -46,8 +48,8 @@ public class GameViewLanterna implements Observer<ArenaModel> {
 
         graphics.setBackgroundColor(TextColor.Factory.fromString("#ffffff"));
         graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
-        graphics.fillRectangle(new TerminalPosition(width - 13, 1), new TerminalSize(11, 1), ' ');
-        graphics.putString(new TerminalPosition(width - 13, 1), "NEXT PIECE:", SGR.BLINK);
+        graphics.fillRectangle(new TerminalPosition(width - 12, 1), new TerminalSize(10, 1), ' ');
+        graphics.putString(new TerminalPosition(width - 12, 1), "NEXT PIECE", SGR.BLINK);
         graphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
     }
 
@@ -68,9 +70,9 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         try {
             this.screen.clear();
 
-            initialDraw();
             drawNextPiece(arena.getNextPieceToDisplay(), width - 10, 3);
             drawPiece(arena.getCurrentPieceModel());
+            initialDraw();
 
             for (Block block: arena.getArenaBlocks())
                 drawBlock(block);
@@ -84,6 +86,10 @@ public class GameViewLanterna implements Observer<ArenaModel> {
     private void drawNextPiece(PieceModel nextPieceModel, int xOffset, int yOffset) {
         graphics.setBackgroundColor(TextColor.Factory.fromString(nextPieceModel.getBlocks().get(0).getColor().getCode()));
 
+        if(nextPieceModel instanceof IBlockModel)
+            xOffset -= 1;
+        else if (nextPieceModel instanceof OBlockModel)
+            xOffset += 1;
         for(Block block: nextPieceModel.getBlocks()) {
             graphics.putString(new TerminalPosition(block.getPosition().getX() + xOffset, block.getPosition().getY() + yOffset), " ");
         }
