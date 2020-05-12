@@ -10,7 +10,8 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
+import com.googlecode.lanterna.terminal.swing.*;
+import com.googlecode.lanterna.terminal.virtual.DefaultVirtualTerminal;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.PieceModel;
@@ -18,6 +19,7 @@ import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Commands.*;
 
 import java.awt.*;
+import java.awt.geom.Dimension2D;
 import java.io.File;
 import java.io.IOException;
 
@@ -35,6 +37,15 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             this.width = width;
             this.height = height;
 
+            /*
+            File file = new File("fonts/square.ttf");
+            Font font = createFont(TRUETYPE_FONT, file);
+
+            SwingTerminalFontConfiguration fontConfiguration = SwingTerminalFontConfiguration.newInstance(font);
+
+            Terminal terminal = new SwingTerminal(TerminalEmulatorDeviceConfiguration.getDefault(), fontConfiguration, TerminalEmulatorColorConfiguration.getDefault());
+            */
+
             Terminal terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
             this.screen = new TerminalScreen(terminal);
             this.graphics = this.screen.newTextGraphics();
@@ -42,12 +53,9 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             this.screen.startScreen();             // screens must be started
             this.screen.doResizeIfNecessary();     // resize screen if necessary
 
-            File file = new File("fonts/square.ttf");
-            Font font = createFont(TRUETYPE_FONT, file);
 
-            SwingTerminalFontConfiguration.newInstance(font);
 
-        } catch (IOException | FontFormatException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
