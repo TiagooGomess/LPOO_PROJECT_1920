@@ -10,11 +10,13 @@ public class MoveDown extends PieceCommand {
     private Observer<ArenaModel> gui;
     private ArenaModel gameModel;
     private PieceModel pieceModel;
+    private boolean isHardDrop;
 
-    public MoveDown(PieceModel pModel, Observer<ArenaModel> gui, ArenaModel gameModel) {
+    public MoveDown(PieceModel pModel, Observer<ArenaModel> gui, ArenaModel gameModel, boolean isHardDrop) {
         this.gui = gui;
         this.gameModel = gameModel;
         this.pieceModel = pModel;
+        this.isHardDrop = isHardDrop;
     }
 
     @Override
@@ -23,7 +25,8 @@ public class MoveDown extends PieceCommand {
             for (Block block: this.pieceModel.getBlocks())
                 block.setPosition(block.getPosition().down());
             gameModel.setScore(gameModel.getScore() + currentPieceController.getPieceModel().getNumBlocks() *(this.gameModel.getLevel() + 1));
-            gameModel.notifyObservers(gameModel);
+            if(!isHardDrop)
+                gameModel.notifyObservers(gameModel);
             return true;
         }
         return false;

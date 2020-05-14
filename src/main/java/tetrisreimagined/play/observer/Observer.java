@@ -13,4 +13,5 @@ public interface Observer<T> {
 
     PieceCommand getCommand(ArenaModel gameModel) throws IOException, InterruptedException;
     void changed(T subject);
+    void closeTerminal() throws IOException;
 }

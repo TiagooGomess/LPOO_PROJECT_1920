@@ -19,7 +19,7 @@ public class HardDrop extends PieceCommand {
     @Override
     public boolean execute(PieceController currentPieceController) {
         while(currentPieceController.canGoDown(gui, gameModel)) {
-            new MoveDown(gameModel.getCurrentPieceModel(), gui, gameModel).execute(currentPieceController);
+            new MoveDown(gameModel.getCurrentPieceModel(), gui, gameModel, true).execute(currentPieceController);
         }
         gameModel.setScore(gameModel.getScore() + 2*currentPieceController.getPieceModel().getNumBlocks() * (this.gameModel.getLevel() + 1));
         gameModel.notifyObservers(gameModel);

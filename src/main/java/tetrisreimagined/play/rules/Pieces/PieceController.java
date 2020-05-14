@@ -27,7 +27,7 @@ public class PieceController {
 
     public void makeCurrentPieceFall(Observer<ArenaModel> gui, ArenaModel gameModel) {
         if (canGoDown(gui, gameModel))
-            new MoveDown(pieceModel, gui, gameModel).execute(this);
+            new MoveDown(pieceModel, gui, gameModel, false).execute(this);
     }
 
     public boolean canGoRight(Observer<ArenaModel> gui, ArenaModel gameModel) {

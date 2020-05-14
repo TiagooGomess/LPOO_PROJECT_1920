@@ -95,7 +95,7 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         try {
             this.screen.clear();
 
-            //drawNextPiece(arena.getNextPieceToDisplay(), width - 10, 3);
+            drawNextPiece(arena.getNextPieceToDisplay(), width - 10, 3);
             drawPiece(arena.getCurrentPieceModel());
             initialDraw();
 
@@ -141,16 +141,19 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             if (key == null) return new DoNothing();
             if (key.getKeyType() == KeyType.ArrowUp) return new RotateClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
             if (key.getKeyType() == KeyType.ArrowRight) return new MoveRight(gameModel.getCurrentPieceModel(), this, gameModel);
-            if (key.getKeyType() == KeyType.ArrowDown) return new MoveDown(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (key.getKeyType() == KeyType.ArrowDown) return new MoveDown(gameModel.getCurrentPieceModel(), this, gameModel, false);
             if (key.getKeyType() == KeyType.ArrowLeft) return new MoveLeft(gameModel.getCurrentPieceModel(), this, gameModel);
             if (key.getKeyType() == KeyType.Enter) return new PauseGame();
             if (key.getKeyType() == KeyType.Character) {
                 if (key.getCharacter() == 'z') return new RotateCounterClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
                 if (key.getCharacter() == ' ') return new HardDrop(gameModel.getCurrentPieceModel(), this, gameModel);
             }
-            if (key.getKeyType() == KeyType.EOF) return new ExitTerminal();
-
+            if (key.getKeyType() == KeyType.Escape) return new ExitTerminal(this);
         }
+    }
+
+    public void closeTerminal() throws IOException {
+       screen.close();
     }
 
 }
