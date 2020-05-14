@@ -37,16 +37,24 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             this.width = width;
             this.height = height;
 
-            /*
-            File file = new File("fonts/square.ttf");
-            Font font = createFont(TRUETYPE_FONT, file);
+            DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
 
-            SwingTerminalFontConfiguration fontConfiguration = SwingTerminalFontConfiguration.newInstance(font);
+            File fontFile = new File("fonts/square.ttf");
+            Font font = createFont(Font.TRUETYPE_FONT, fontFile);
 
-            Terminal terminal = new SwingTerminal(TerminalEmulatorDeviceConfiguration.getDefault(), fontConfiguration, TerminalEmulatorColorConfiguration.getDefault());
-            */
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(font);
 
-            Terminal terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
+            Font loadedFont = font.deriveFont(Font.PLAIN, 20);
+
+            AWTTerminalFontConfiguration fontConfiguration = AWTTerminalFontConfiguration.newInstance(loadedFont);
+
+            defaultTerminalFactory.setForceAWTOverSwing(true);
+            defaultTerminalFactory.setTerminalEmulatorFontConfiguration(fontConfiguration);
+
+            Terminal terminal = defaultTerminalFactory.setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
+
+
             this.screen = new TerminalScreen(terminal);
             this.graphics = this.screen.newTextGraphics();
             this.screen.setCursorPosition(null);   // we don't need a cursor
@@ -55,7 +63,7 @@ public class GameViewLanterna implements Observer<ArenaModel> {
 
 
 
-        } catch (IOException e) {
+        } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
     }
