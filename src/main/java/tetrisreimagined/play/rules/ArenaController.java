@@ -143,7 +143,8 @@ public class ArenaController {
             this.nextPieceController = new PieceController(newPiece);
         }
 
-        this.arena.setNextPieceToDisplay(nextPieceToDisplay);
+        this.currentPieceController.setStartPosition(this.gui);
+
         this.arena.setCurrentPieceModel(currentPieceController.getPieceModel());
         this.arena.setNextPieceModel(newPiece);
 
