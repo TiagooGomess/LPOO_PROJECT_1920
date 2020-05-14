@@ -1,8 +1,6 @@
 package tetrisreimagined.play.gui.lantern;
 
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -14,6 +12,8 @@ import com.googlecode.lanterna.terminal.swing.*;
 import com.googlecode.lanterna.terminal.virtual.DefaultVirtualTerminal;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
+import tetrisreimagined.play.model.Pieces.IBlockModel;
+import tetrisreimagined.play.model.Pieces.OBlockModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Commands.*;
@@ -61,15 +61,25 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             this.screen.startScreen();             // screens must be started
             this.screen.doResizeIfNecessary();     // resize screen if necessary
 
-
-
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
     }
 
+    private void initialDraw() {
+        int xCoord = getWidth();
+        for(int yCoord = 0; yCoord < height; yCoord++)
+            graphics.putString(new TerminalPosition(xCoord, yCoord), " ");
+
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#ffffff"));
+        graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
+        graphics.fillRectangle(new TerminalPosition(width - 12, 1), new TerminalSize(10, 1), ' ');
+        graphics.putString(new TerminalPosition(width - 12, 1), "NEXT PIECE", SGR.BLINK);
+        graphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
+    }
+
     public int getWidth() {
-        return this.width;
+        return this.width - 15;
     }
 
     public int getHeight() {
@@ -85,7 +95,9 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         try {
             this.screen.clear();
 
+            drawNextPiece(arena.getNextPieceToDisplay(), width - 10, 3);
             drawPiece(arena.getCurrentPieceModel());
+            initialDraw();
 
             for (Block block: arena.getArenaBlocks())
                 drawBlock(block);
@@ -93,6 +105,18 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             this.screen.refresh();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void drawNextPiece(PieceModel nextPieceModel, int xOffset, int yOffset) {
+        graphics.setBackgroundColor(TextColor.Factory.fromString(nextPieceModel.getBlocks().get(0).getColor().getCode()));
+
+        if(nextPieceModel instanceof IBlockModel)
+            xOffset -= 1;
+        else if (nextPieceModel instanceof OBlockModel)
+            xOffset += 1;
+        for(Block block: nextPieceModel.getBlocks()) {
+            graphics.putString(new TerminalPosition(block.getPosition().getX() + xOffset, block.getPosition().getY() + yOffset), " ");
         }
     }
 

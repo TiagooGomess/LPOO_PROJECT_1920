@@ -24,6 +24,7 @@ public class Game {
         ArenaModel arena = new ArenaModel();
 
         GameViewLanterna gui = new GameViewLanterna(20, 40);
+
         arena.addObserver(gui);
 
         ArenaController controller = new ArenaController(gui, arena);

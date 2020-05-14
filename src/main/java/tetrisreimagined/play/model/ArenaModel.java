@@ -13,11 +13,21 @@ public class ArenaModel extends Observable<ArenaModel> {
 
     private PieceModel currentPieceModel;
     private PieceModel nextPieceModel;
+
+    private PieceModel nextPieceToDisplay;
     private int score = 0;
     private int level = 0;
 
     public ArenaModel() {
         this.arenaBlocks = new ArrayList<>();
+    }
+
+    public PieceModel getNextPieceToDisplay() {
+        return nextPieceToDisplay;
+    }
+
+    public void setNextPieceToDisplay(PieceModel nextPieceToDisplay) {
+        this.nextPieceToDisplay = nextPieceToDisplay;
     }
 
     public int getLevel() {
