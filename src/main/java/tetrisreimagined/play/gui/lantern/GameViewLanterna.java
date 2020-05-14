@@ -10,13 +10,21 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.*;
+import com.googlecode.lanterna.terminal.virtual.DefaultVirtualTerminal;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Commands.*;
 
+import java.awt.*;
+import java.awt.geom.Dimension2D;
+import java.io.File;
 import java.io.IOException;
+
+import static java.awt.Font.TRUETYPE_FONT;
+import static java.awt.Font.createFont;
 
 public class GameViewLanterna implements Observer<ArenaModel> {
 
@@ -29,13 +37,33 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             this.width = width;
             this.height = height;
 
-            Terminal terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
+            DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
+
+            File fontFile = new File("fonts/square.ttf");
+            Font font = createFont(Font.TRUETYPE_FONT, fontFile);
+
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(font);
+
+            Font loadedFont = font.deriveFont(Font.PLAIN, 20);
+
+            AWTTerminalFontConfiguration fontConfiguration = AWTTerminalFontConfiguration.newInstance(loadedFont);
+
+            defaultTerminalFactory.setForceAWTOverSwing(true);
+            defaultTerminalFactory.setTerminalEmulatorFontConfiguration(fontConfiguration);
+
+            Terminal terminal = defaultTerminalFactory.setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
+
+
             this.screen = new TerminalScreen(terminal);
             this.graphics = this.screen.newTextGraphics();
             this.screen.setCursorPosition(null);   // we don't need a cursor
             this.screen.startScreen();             // screens must be started
             this.screen.doResizeIfNecessary();     // resize screen if necessary
-        } catch (IOException e) {
+
+
+
+        } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
     }
