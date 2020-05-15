@@ -76,7 +76,7 @@ public class CommandsTest {
 
     @Test
     public void moveDown() {
-        MoveDown moveDown = new MoveDown(pieceModelMock, observerMock, arenaModelMock);
+        MoveDown moveDown = new MoveDown(pieceModelMock, observerMock, arenaModelMock, false);
         when(pieceControllerMock.canGoDown(observerMock, arenaModelMock)).thenReturn(true);
 
         assertTrue(moveDown.execute(pieceControllerMock));
