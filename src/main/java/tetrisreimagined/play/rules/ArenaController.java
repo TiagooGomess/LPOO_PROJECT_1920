@@ -148,8 +148,6 @@ public class ArenaController {
         this.arena.setNextPieceToDisplay(nextPieceToDisplay);
         this.arena.setCurrentPieceModel(currentPieceController.getPieceModel());
         this.arena.setNextPieceModel(newPiece);
-
-        System.out.println("Next Piece: " + nextPieceController.getPieceModel().getClass().toString());
     }
 
     public boolean checkLine(int line) {
