@@ -35,12 +35,12 @@ public class ArenaController {
         int counter = 0, levelDifficulty = 5;
         long begTime = 0, endTime = 0, elapsedTime = 0;
 
-        if (2 * this.arena.getLevel() >= levelDifficulty)
-            levelDifficulty = 2*this.arena.getLevel() + 1;
-
         nextPiece();
 
         do {
+            if (2 * this.arena.getLevel() >= levelDifficulty)
+                levelDifficulty = 2*this.arena.getLevel() + 1;
+
             counter = tryMoveDown(counter, levelDifficulty - 2*this.arena.getLevel());
 
             endTime = System.currentTimeMillis();
@@ -88,6 +88,8 @@ public class ArenaController {
                 int yPos = currentPieceController.getPieceModel().getMaxYPosition().getY();
                 if(yPos == 1 || yPos == 3) {          // TODO Piece initial Y position is upper. After that update this 'if'
                     System.out.println("YOU LOST!"); // is only tested for y == 0
+                    System.out.println("GAME OVER");
+                    System.out.println("Your score was " + arena.getScore());
                     System.exit(0);
                 }
             }
