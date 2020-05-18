@@ -147,6 +147,7 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             if (key.getKeyType() == KeyType.Character) {
                 if (key.getCharacter() == 'z') return new RotateCounterClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
                 if (key.getCharacter() == ' ') return new HardDrop(gameModel.getCurrentPieceModel(), this, gameModel);
+                if (key.getCharacter() == 'c') return new Hold(gameModel.getCurrentPieceModel(), this, gameModel);
             }
             if (key.getKeyType() == KeyType.Escape) return new ExitTerminal(this);
         }

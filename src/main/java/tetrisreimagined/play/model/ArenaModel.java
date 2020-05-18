@@ -1,6 +1,7 @@
 
 package tetrisreimagined.play.model;
 
+import tetrisreimagined.play.model.Pieces.NullPieceModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.observer.Observable;
 
@@ -13,6 +14,7 @@ public class ArenaModel extends Observable<ArenaModel> {
 
     private PieceModel currentPieceModel;
     private PieceModel nextPieceModel;
+    private PieceModel holdPieceModel;
 
     private PieceModel nextPieceToDisplay;
     private int score = 0;
@@ -20,6 +22,8 @@ public class ArenaModel extends Observable<ArenaModel> {
 
     public ArenaModel() {
         this.arenaBlocks = new ArrayList<>();
+        this.holdPieceModel = new NullPieceModel();
+        this.nextPieceModel = new NullPieceModel();
     }
 
     public PieceModel getNextPieceToDisplay() {
@@ -86,4 +90,11 @@ public class ArenaModel extends Observable<ArenaModel> {
         return false;
     }
 
+    public PieceModel getHoldPieceModel() {
+        return holdPieceModel;
+    }
+
+    public void setHoldPieceModel(PieceModel holdPieceModel) {
+        this.holdPieceModel = holdPieceModel;
+    }
 }

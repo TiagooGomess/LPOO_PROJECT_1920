@@ -17,7 +17,9 @@ public class ArenaController {
     private ArenaModel arena;
     private PieceController currentPieceController;
     private PieceController nextPieceController;
+    private PieceController holdPieceController;
     private boolean pieceTouchedGround = false;
+    private static boolean hasPieceInHold = false;
 
     private int numLinesTotal = 0;
     private static boolean gamePaused = false;
@@ -57,6 +59,10 @@ public class ArenaController {
             }
             begTime = System.currentTimeMillis();
 
+            if (currentPieceController.getPieceModel().isInHold()) {
+                holdPieceHandler();
+            }
+
             if (pieceTouchedGround) {
                 nextPiece();
                 pieceTouchedGround = false;
@@ -77,7 +83,8 @@ public class ArenaController {
         if (counter++ == levelDifficulty) { // mudar para velocidade da peça
             if (this.currentPieceController.canGoDown(gui, arena)) {
                 if (!gamePaused) {
-                    this.currentPieceController.makeCurrentPieceFall(gui, arena);
+                    if (!currentPieceController.getPieceModel().isInHold())
+                        this.currentPieceController.makeCurrentPieceFall(gui, arena);
                 }
                 else
                     System.out.println("Game paused. Press ENTER to continue...");
@@ -239,5 +246,63 @@ public class ArenaController {
     public static void swapGameState() {
         gamePaused = !gamePaused;
     }
+
+    public static void setHasPieceInHold(boolean hasPieceInHold) {
+        ArenaController.hasPieceInHold = hasPieceInHold;
+    }
+
+    public void holdPieceHandler() {
+        //System.out.println("Hold Piece: " + this.arena.getHoldPieceModel().toString());
+
+
+
+        //this.currentPieceController = this.holdPieceController;
+
+        //this.arena.setCurrentPieceModel(currentPieceController.getPieceModel());
+
+        //this.currentPieceController.setStartPosition(this.gui);
+
+        /*System.out.println("Hold Piece: " + this.arena.getHoldPieceModel().toString());
+
+        this.holdPieceController = new PieceController(this.arena.getHoldPieceModel());
+
+
+            PieceModel holdPieceModel = this.currentPieceController.getPieceModel();
+            this.currentPieceController = this.holdPieceController;
+            this.arena.setCurrentPieceModel(currentPieceController.getPieceModel());
+            this.currentPieceController.setStartPosition(this.gui);*/
+        if (!hasPieceInHold) {
+            nextPiece();
+            System.out.println("NEXT PIECE");
+        }
+        else {
+//            System.out.println("Here");
+
+            System.out.println("---------------------------");
+            System.out.println("Hold Piece: " + this.arena.getHoldPieceModel().toString());
+            System.out.println("Current Piece: " + this.arena.getHoldPieceModel().toString());
+
+
+
+
+            PieceController currentPieceControllerCopy = new PieceController(currentPieceController.getPieceModel());
+            currentPieceController = new PieceController(holdPieceController.getPieceModel());
+            holdPieceController = new PieceController(currentPieceControllerCopy.getPieceModel());
+            currentPieceController.setStartPosition(this.gui);
+            this.arena.setCurrentPieceModel(this.currentPieceController.getPieceModel());
+            this.arena.setHoldPieceModel(holdPieceController.getPieceModel());
+//            System.out.println("---------------------------");
+            System.out.println("Hold Piece: " + this.arena.getHoldPieceModel().toString());
+            System.out.println("Current Piece: " + this.arena.getHoldPieceModel().toString());
+            System.out.println("---------------------------");
+        }
+
+        this.holdPieceController = this.currentPieceController;
+        this.arena.setHoldPieceModel(this.holdPieceController.getPieceModel());
+
+//            this.arena.setHoldPieceModel(holdPieceModel);
+    }
+
+
 
 }
