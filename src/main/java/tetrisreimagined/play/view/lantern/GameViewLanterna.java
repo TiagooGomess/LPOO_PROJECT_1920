@@ -1,4 +1,4 @@
-package tetrisreimagined.play.gui.lantern;
+package tetrisreimagined.play.view.lantern;
 
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -9,22 +9,19 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.*;
-import com.googlecode.lanterna.terminal.virtual.DefaultVirtualTerminal;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.IBlockModel;
 import tetrisreimagined.play.model.Pieces.NullPieceModel;
 import tetrisreimagined.play.model.Pieces.OBlockModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
-import tetrisreimagined.play.observer.Observer;
-import tetrisreimagined.play.rules.Commands.*;
+import tetrisreimagined.observer.Observer;
+import tetrisreimagined.play.controller.Commands.*;
 
 import java.awt.*;
-import java.awt.geom.Dimension2D;
 import java.io.File;
 import java.io.IOException;
 
-import static java.awt.Font.TRUETYPE_FONT;
 import static java.awt.Font.createFont;
 
 public class GameViewLanterna implements Observer<ArenaModel> {

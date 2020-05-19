@@ -2,7 +2,7 @@ package tetrisreimagined.controller.Pieces;
 
 
 import org.junit.Test;
-import tetrisreimagined.play.rules.Pieces.PieceTransform;
+import tetrisreimagined.play.controller.Pieces.PieceTransform;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;

@@ -1,4 +1,4 @@
-package tetrisreimagined.play.rules.States;
+package tetrisreimagined.States;
 
 import tetrisreimagined.Game;
 

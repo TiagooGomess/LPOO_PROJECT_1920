@@ -3,7 +3,7 @@ package tetrisreimagined.play.model;
 
 import tetrisreimagined.play.model.Pieces.NullPieceModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
-import tetrisreimagined.play.observer.Observable;
+import tetrisreimagined.observer.Observable;
 
 import java.util.ArrayList;
 import java.util.List;

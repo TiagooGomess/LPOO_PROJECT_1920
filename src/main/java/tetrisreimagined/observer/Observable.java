@@ -1,6 +1,4 @@
-package tetrisreimagined.play.observer;
-
-import tetrisreimagined.play.model.Block;
+package tetrisreimagined.observer;
 
 import java.util.ArrayList;
 import java.util.List;

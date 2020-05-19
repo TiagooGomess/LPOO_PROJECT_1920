@@ -1,7 +1,7 @@
-package tetrisreimagined.play.observer;
+package tetrisreimagined.observer;
 
 import tetrisreimagined.play.model.ArenaModel;
-import tetrisreimagined.play.rules.Commands.PieceCommand;
+import tetrisreimagined.play.controller.Commands.PieceCommand;
 
 import java.io.IOException;
 

@@ -1,13 +1,11 @@
 package tetrisreimagined;
 
-import tetrisreimagined.play.gui.lantern.GameViewLanterna;
+import tetrisreimagined.play.view.lantern.GameViewLanterna;
 import tetrisreimagined.play.model.ArenaModel;
-import tetrisreimagined.play.rules.ArenaController;
-import tetrisreimagined.play.rules.States.GamePlayState;
-import tetrisreimagined.play.rules.States.GameState;
-import tetrisreimagined.play.rules.States.MenuState;
+import tetrisreimagined.play.controller.ArenaController;
+import tetrisreimagined.States.GamePlayState;
+import tetrisreimagined.States.GameState;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class Game {

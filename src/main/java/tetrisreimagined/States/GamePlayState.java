@@ -1,9 +1,9 @@
-package tetrisreimagined.play.rules.States;
+package tetrisreimagined.States;
 
 import tetrisreimagined.Game;
 
-public class MultiplayerState extends GameState {
-    public MultiplayerState(Game game) {
+public class GamePlayState extends GameState {
+    public GamePlayState(Game game) {
         super(game);
     }
 

@@ -1,7 +1,7 @@
-package tetrisreimagined.play.rules.Commands;
+package tetrisreimagined.play.controller.Commands;
 
-import tetrisreimagined.play.rules.ArenaController;
-import tetrisreimagined.play.rules.Pieces.PieceController;
+import tetrisreimagined.play.controller.ArenaController;
+import tetrisreimagined.play.controller.Pieces.PieceController;
 
 public class PauseGame extends PieceCommand {
 

@@ -1,9 +1,9 @@
-package tetrisreimagined.play.rules.Commands;
+package tetrisreimagined.play.controller.Commands;
 
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
-import tetrisreimagined.play.observer.Observer;
-import tetrisreimagined.play.rules.Pieces.PieceController;
+import tetrisreimagined.observer.Observer;
+import tetrisreimagined.play.controller.Pieces.PieceController;
 
 public class HardDrop extends PieceCommand {
     private Observer<ArenaModel> gui;

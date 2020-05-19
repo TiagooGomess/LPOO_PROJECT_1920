@@ -1,6 +1,6 @@
-package tetrisreimagined.play.rules.Commands;
+package tetrisreimagined.play.controller.Commands;
 
-import tetrisreimagined.play.rules.Pieces.PieceController;
+import tetrisreimagined.play.controller.Pieces.PieceController;
 
 public class DoNothing extends PieceCommand {
     @Override

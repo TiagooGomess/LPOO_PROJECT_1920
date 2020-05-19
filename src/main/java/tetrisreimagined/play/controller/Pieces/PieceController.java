@@ -1,14 +1,13 @@
-package tetrisreimagined.play.rules.Pieces;
+package tetrisreimagined.play.controller.Pieces;
 
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.*;
 import tetrisreimagined.play.model.Position;
-import tetrisreimagined.play.observer.Observer;
-import tetrisreimagined.play.rules.Commands.MoveDown;
-import tetrisreimagined.play.rules.Commands.MoveRight;
-import tetrisreimagined.play.rules.Commands.RotateClockWise;
-import tetrisreimagined.play.rules.Commands.RotateCounterClockWise;
+import tetrisreimagined.observer.Observer;
+import tetrisreimagined.play.controller.Commands.MoveDown;
+import tetrisreimagined.play.controller.Commands.RotateClockWise;
+import tetrisreimagined.play.controller.Commands.RotateCounterClockWise;
 
 import java.util.ArrayList;
 import java.util.List;

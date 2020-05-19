@@ -1,11 +1,11 @@
-package tetrisreimagined.play.rules;
+package tetrisreimagined.play.controller;
 
 import tetrisreimagined.play.model.*;
 import tetrisreimagined.play.model.Pieces.*;
-import tetrisreimagined.play.observer.Observer;
-import tetrisreimagined.play.rules.Pieces.*;
-import tetrisreimagined.play.rules.Commands.ExitTerminal;
-import tetrisreimagined.play.rules.Commands.PieceCommand;
+import tetrisreimagined.observer.Observer;
+import tetrisreimagined.play.controller.Pieces.*;
+import tetrisreimagined.play.controller.Commands.ExitTerminal;
+import tetrisreimagined.play.controller.Commands.PieceCommand;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -115,35 +115,27 @@ public class ArenaController {
         Random rand = new Random();
         int nexBlockNum = rand.nextInt(7); // random int in range 0 to 6
         PieceModel newPiece;
-        PieceModel nextPieceToDisplay;
         switch (nexBlockNum) {
             case 0:
                 newPiece = new IBlockModel();
-                nextPieceToDisplay = new IBlockModel();
                 break;
             case 1:
                 newPiece = new JBlockModel();
-                nextPieceToDisplay = new JBlockModel();
                 break;
             case 2:
                 newPiece = new LBlockModel();
-                nextPieceToDisplay = new LBlockModel();
                 break;
             case 3:
                 newPiece = new OBlockModel();
-                nextPieceToDisplay = new OBlockModel();
                 break;
             case 4:
                 newPiece = new SBlockModel();
-                nextPieceToDisplay = new SBlockModel();
                 break;
             case 5:
                 newPiece = new TBlockModel();
-                nextPieceToDisplay = new TBlockModel();
                 break;
             default:
                 newPiece = new ZBlockModel();
-                nextPieceToDisplay = new ZBlockModel();
         }
         if(numIteration++ == 0) {
             this.nextPieceController = new PieceController(newPiece);
@@ -157,7 +149,7 @@ public class ArenaController {
         this.currentPieceController.setStartPosition(this.gui);
         this.nextPieceController.setStartPosition(this.gui);
 
-        this.arena.setNextPieceToDisplay(nextPieceToDisplay);
+        this.arena.setNextPieceToDisplay(nextPieceController.getPieceModelRaw());
         this.arena.setCurrentPieceModel(currentPieceController.getPieceModel());
         this.arena.setNextPieceModel(newPiece);
     }

@@ -1,9 +1,4 @@
-package tetrisreimagined.play.rules.Pieces;
-
-import tetrisreimagined.play.model.Block;
-import tetrisreimagined.play.model.Position;
-
-import java.util.List;
+package tetrisreimagined.play.controller.Pieces;
 
 public class PieceTransform {
 
