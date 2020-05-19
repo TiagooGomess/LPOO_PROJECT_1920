@@ -13,6 +13,7 @@ import com.googlecode.lanterna.terminal.virtual.DefaultVirtualTerminal;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.IBlockModel;
+import tetrisreimagined.play.model.Pieces.NullPieceModel;
 import tetrisreimagined.play.model.Pieces.OBlockModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.observer.Observer;
@@ -75,6 +76,7 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
         graphics.fillRectangle(new TerminalPosition(width - 12, 1), new TerminalSize(10, 1), ' ');
         graphics.putString(new TerminalPosition(width - 12, 1), "NEXT PIECE", SGR.BLINK);
+        graphics.putString(new TerminalPosition(width - 12, 10), "HOLD PIECE", SGR.BLINK);
         graphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
     }
 
@@ -96,6 +98,7 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             this.screen.clear();
 
             drawNextPiece(arena.getNextPieceToDisplay(), width - 10, 3);
+            drawHoldPiece(arena.getHoldPieceToDisplay(), width - 10, 15);
             drawPiece(arena.getCurrentPieceModel());
             initialDraw();
 
@@ -119,6 +122,22 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             graphics.putString(new TerminalPosition(block.getPosition().getX() + xOffset, block.getPosition().getY() + yOffset), " ");
         }
     }
+
+    private void drawHoldPiece(PieceModel holdPieceModel, int xOffset, int yOffset) {
+        if (holdPieceModel instanceof NullPieceModel)
+            return;
+        graphics.setBackgroundColor(TextColor.Factory.fromString(holdPieceModel.getBlocks().get(0).getColor().getCode()));
+
+        if(holdPieceModel instanceof IBlockModel)
+            xOffset -= 1;
+        else if (holdPieceModel instanceof OBlockModel)
+            xOffset += 1;
+        for(Block block: holdPieceModel.getBlocks()) {
+            graphics.putString(new TerminalPosition(block.getPosition().getX() + xOffset, block.getPosition().getY() + yOffset), " ");
+        }
+    }
+
+
 
     public void drawPiece(PieceModel pieceModel) {
         for (Block block: pieceModel.getBlocks()) {

@@ -29,17 +29,17 @@ public class PieceController {
         if (pieceModel instanceof IBlockModel)
             return new IBlockModel();
         if (pieceModel instanceof JBlockModel)
-            return new IBlockModel();
+            return new JBlockModel();
         if (pieceModel instanceof LBlockModel)
-            return new IBlockModel();
+            return new LBlockModel();
         if (pieceModel instanceof OBlockModel)
-            return new IBlockModel();
+            return new OBlockModel();
         if (pieceModel instanceof SBlockModel)
-            return new IBlockModel();
+            return new SBlockModel();
         if (pieceModel instanceof TBlockModel)
-            return new IBlockModel();
+            return new TBlockModel();
         if (pieceModel instanceof ZBlockModel)
-            return new IBlockModel();
+            return new ZBlockModel();
         return new NullPieceModel();
     }
 

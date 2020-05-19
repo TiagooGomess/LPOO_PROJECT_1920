@@ -268,6 +268,7 @@ public class ArenaController {
             this.holdPieceController = new PieceController(this.currentPieceController.getPieceModelRaw());
             this.arena.setHoldPieceModel(this.holdPieceController.getPieceModel());
             nextPiece();
+            this.arena.setHoldPieceToDisplay(this.holdPieceController.getPieceModel());
             return;
         }
         PieceController currentPieceControllerCopy = new PieceController(currentPieceController.getPieceModel());
@@ -278,6 +279,7 @@ public class ArenaController {
         this.arena.setHoldPieceModel(holdPieceController.getPieceModel());
         this.arena.getCurrentPieceModel().setInHold(false);
         this.arena.getHoldPieceModel().setInHold(true);
+        this.arena.setHoldPieceToDisplay(this.holdPieceController.getPieceModel());
     }
 
 
