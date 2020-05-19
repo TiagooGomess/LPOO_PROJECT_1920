@@ -6,6 +6,7 @@ public class Application {
 
     public static void main(String[] args) throws IOException, InterruptedException, CloneNotSupportedException {
         Game game = new Game();
-        game.gamePlay();
+        game.run();
+        //game.gamePlay();
     }
 }
