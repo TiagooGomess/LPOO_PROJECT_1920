@@ -271,19 +271,17 @@ public class ArenaController {
             this.currentPieceController = this.holdPieceController;
             this.arena.setCurrentPieceModel(currentPieceController.getPieceModel());
             this.currentPieceController.setStartPosition(this.gui);*/
-        if (!hasPieceInHold) {
+        if (!hasPieceInHold) { // done
+            this.holdPieceController = this.currentPieceController;
+            this.arena.setHoldPieceModel(this.holdPieceController.getPieceModel());
             nextPiece();
-            System.out.println("NEXT PIECE");
         }
         else {
 //            System.out.println("Here");
 
-            System.out.println("---------------------------");
-            System.out.println("Hold Piece: " + this.arena.getHoldPieceModel().toString());
-            System.out.println("Current Piece: " + this.arena.getHoldPieceModel().toString());
-
-
-
+//            System.out.println("---------------------------");
+//            System.out.println("Hold Piece: " + this.arena.getHoldPieceModel().toString());
+//            System.out.println("Current Piece: " + this.arena.getHoldPieceModel().toString());
 
             PieceController currentPieceControllerCopy = new PieceController(currentPieceController.getPieceModel());
             currentPieceController = new PieceController(holdPieceController.getPieceModel());
@@ -291,14 +289,15 @@ public class ArenaController {
             currentPieceController.setStartPosition(this.gui);
             this.arena.setCurrentPieceModel(this.currentPieceController.getPieceModel());
             this.arena.setHoldPieceModel(holdPieceController.getPieceModel());
-//            System.out.println("---------------------------");
+            this.arena.getCurrentPieceModel().setInHold(false);
+            this.arena.getHoldPieceModel().setInHold(true);
+            System.out.println("---------------------------");
             System.out.println("Hold Piece: " + this.arena.getHoldPieceModel().toString());
             System.out.println("Current Piece: " + this.arena.getHoldPieceModel().toString());
             System.out.println("---------------------------");
         }
 
-        this.holdPieceController = this.currentPieceController;
-        this.arena.setHoldPieceModel(this.holdPieceController.getPieceModel());
+
 
 //            this.arena.setHoldPieceModel(holdPieceModel);
     }
