@@ -274,6 +274,4 @@ public class ArenaController {
         this.arena.setHoldPieceToDisplay(this.holdPieceController.getPieceModel());
     }
 
-
-
 }
