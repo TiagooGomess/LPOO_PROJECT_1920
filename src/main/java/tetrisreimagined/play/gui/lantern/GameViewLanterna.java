@@ -98,11 +98,11 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         try {
             this.screen.clear();
 
-            initialDraw();
             drawScore(width - 8, 29, arena.getScore());
-            drawNextPiece(arena.getNextPieceToDisplay(), width - 10, 3);
             drawHoldPiece(arena.getHoldPieceToDisplay(), width - 10, 15);
+            drawNextPiece(arena.getNextPieceToDisplay(), width - 10, 3);
             drawPiece(arena.getCurrentPieceModel());
+            initialDraw();
 
             for (Block block: arena.getArenaBlocks())
                 drawBlock(block);
