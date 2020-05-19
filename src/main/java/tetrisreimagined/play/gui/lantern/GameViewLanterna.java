@@ -77,6 +77,7 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         graphics.fillRectangle(new TerminalPosition(width - 12, 1), new TerminalSize(10, 1), ' ');
         graphics.putString(new TerminalPosition(width - 12, 1), "NEXT PIECE", SGR.BLINK);
         graphics.putString(new TerminalPosition(width - 12, 10), "HOLD PIECE", SGR.BLINK);
+        graphics.putString(new TerminalPosition(width - 9, 25), "SCORE", SGR.BLINK);
         graphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
     }
 
@@ -97,10 +98,11 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         try {
             this.screen.clear();
 
+            initialDraw();
+            drawScore(width - 8, 29, arena.getScore());
             drawNextPiece(arena.getNextPieceToDisplay(), width - 10, 3);
             drawHoldPiece(arena.getHoldPieceToDisplay(), width - 10, 15);
             drawPiece(arena.getCurrentPieceModel());
-            initialDraw();
 
             for (Block block: arena.getArenaBlocks())
                 drawBlock(block);
@@ -148,6 +150,11 @@ public class GameViewLanterna implements Observer<ArenaModel> {
     public void drawBlock(Block block) {
         graphics.setBackgroundColor(TextColor.Factory.fromString(block.getColor().getCode()));
         graphics.putString(new TerminalPosition(block.getPosition().getX(), block.getPosition().getY()), " ");
+    }
+
+    public void drawScore(int xOffset, int yOffset, int score) {
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
+        graphics.putString(new TerminalPosition(xOffset, yOffset), String.valueOf(score));
     }
 
     @Override
