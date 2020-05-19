@@ -23,16 +23,13 @@ public class Hold extends PieceCommand{
 
     @Override
     public boolean execute(PieceController currentPieceController) throws IOException {
-        if (this.gameModel.getHoldPieceModel() instanceof NullPieceModel) {
-            ArenaController.setHasPieceInHold(false);
+        if (ArenaController.isGamePaused())
+            return false;
+        if (!ArenaController.getUsedHoldInRound()) {
+            ArenaController.setHasPieceInHold(!(this.gameModel.getHoldPieceModel() instanceof NullPieceModel));
+            this.pieceModel.setInHold(true);
+            return true;
         }
-        else {
-            ArenaController.setHasPieceInHold(true);
-//            System.out.println("yes");
-        }
-
-        this.pieceModel.setInHold(true);
-
-        return true;
+        return false;
     }
 }

@@ -5,6 +5,7 @@ import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
 import tetrisreimagined.play.observer.Observer;
+import tetrisreimagined.play.rules.ArenaController;
 import tetrisreimagined.play.rules.Pieces.PieceController;
 import tetrisreimagined.play.rules.Pieces.PieceTransform;
 
@@ -21,6 +22,8 @@ public class RotateClockWise extends PieceCommand {
 
     @Override
     public boolean execute(PieceController currentPieceController) {
+        if (ArenaController.isGamePaused())
+            return false;
         if (currentPieceController.pieceCanRotate(gui, gameModel)) {
             rotatePiece(currentPieceController);
             gameModel.notifyObservers(gameModel);

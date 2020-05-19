@@ -2,7 +2,7 @@ package tetrisreimagined.play.rules.Pieces;
 
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
-import tetrisreimagined.play.model.Pieces.PieceModel;
+import tetrisreimagined.play.model.Pieces.*;
 import tetrisreimagined.play.model.Position;
 import tetrisreimagined.play.observer.Observer;
 import tetrisreimagined.play.rules.Commands.MoveDown;
@@ -23,6 +23,24 @@ public class PieceController {
 
     public PieceModel getPieceModel() {
         return pieceModel;
+    }
+
+    public PieceModel getPieceModelRaw() {
+        if (pieceModel instanceof IBlockModel)
+            return new IBlockModel();
+        if (pieceModel instanceof JBlockModel)
+            return new IBlockModel();
+        if (pieceModel instanceof LBlockModel)
+            return new IBlockModel();
+        if (pieceModel instanceof OBlockModel)
+            return new IBlockModel();
+        if (pieceModel instanceof SBlockModel)
+            return new IBlockModel();
+        if (pieceModel instanceof TBlockModel)
+            return new IBlockModel();
+        if (pieceModel instanceof ZBlockModel)
+            return new IBlockModel();
+        return new NullPieceModel();
     }
 
     public void makeCurrentPieceFall(Observer<ArenaModel> gui, ArenaModel gameModel) {
@@ -93,11 +111,19 @@ public class PieceController {
     public void setStartPosition(Observer<ArenaModel> gui) {
 
         int dx = (gui.getWidth() - this.pieceModel.getMinXPosition().getX())/4 - 2;
+        int dy = (this.pieceModel.getMaxYPosition().getY())-4;
 
         for (int i = 0; i < dx; i++) {
             for (Block block: this.pieceModel.getBlocks())
                 block.setPosition(block.getPosition().right());
         }
+
+        for (int i = 0; i < dy; i++) {
+            for (Block block: this.pieceModel.getBlocks())
+                block.setPosition(block.getPosition().up());
+        }
+
+
 
     }
 

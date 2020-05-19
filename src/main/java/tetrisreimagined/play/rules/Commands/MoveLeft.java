@@ -4,6 +4,7 @@ import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.observer.Observer;
+import tetrisreimagined.play.rules.ArenaController;
 import tetrisreimagined.play.rules.Pieces.PieceController;
 
 public class MoveLeft extends PieceCommand {
@@ -19,6 +20,8 @@ public class MoveLeft extends PieceCommand {
 
     @Override
     public boolean execute(PieceController currentPieceController) {
+        if (ArenaController.isGamePaused())
+            return false;
         if(currentPieceController.canGoLeft(gui, gameModel)) {
             for (Block block: this.pieceModel.getBlocks())
                 block.setPosition(block.getPosition().left());
