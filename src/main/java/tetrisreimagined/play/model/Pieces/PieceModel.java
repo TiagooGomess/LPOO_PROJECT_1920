@@ -15,9 +15,11 @@ public class PieceModel implements Cloneable {
 
     protected List<Block> blocks;
     protected Color color;
+    private boolean inHold;
 
     public PieceModel() {
         this.blocks = new ArrayList<>();
+        this.inHold = false;
     }
 
     @Override
@@ -91,4 +93,11 @@ public class PieceModel implements Cloneable {
         return this.blocks.size();
     }
 
+    public boolean isInHold() {
+        return inHold;
+    }
+
+    public void setInHold(boolean inHold) {
+        this.inHold = inHold;
+    }
 }

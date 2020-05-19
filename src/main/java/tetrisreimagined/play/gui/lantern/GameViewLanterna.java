@@ -13,6 +13,7 @@ import com.googlecode.lanterna.terminal.virtual.DefaultVirtualTerminal;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.IBlockModel;
+import tetrisreimagined.play.model.Pieces.NullPieceModel;
 import tetrisreimagined.play.model.Pieces.OBlockModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.observer.Observer;
@@ -75,6 +76,8 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
         graphics.fillRectangle(new TerminalPosition(width - 12, 1), new TerminalSize(10, 1), ' ');
         graphics.putString(new TerminalPosition(width - 12, 1), "NEXT PIECE", SGR.BLINK);
+        graphics.putString(new TerminalPosition(width - 12, 10), "HOLD PIECE", SGR.BLINK);
+        graphics.putString(new TerminalPosition(width - 9, 25), "SCORE", SGR.BLINK);
         graphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
     }
 
@@ -95,9 +98,11 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         try {
             this.screen.clear();
 
-            drawNextPiece(arena.getNextPieceToDisplay(), width - 10, 3);
-            drawPiece(arena.getCurrentPieceModel());
             initialDraw();
+            drawScore(width - 8, 29, arena.getScore());
+            drawNextPiece(arena.getNextPieceToDisplay(), width - 10, 3);
+            drawHoldPiece(arena.getHoldPieceToDisplay(), width - 10, 15);
+            drawPiece(arena.getCurrentPieceModel());
 
             for (Block block: arena.getArenaBlocks())
                 drawBlock(block);
@@ -120,6 +125,22 @@ public class GameViewLanterna implements Observer<ArenaModel> {
         }
     }
 
+    private void drawHoldPiece(PieceModel holdPieceModel, int xOffset, int yOffset) {
+        if (holdPieceModel instanceof NullPieceModel)
+            return;
+        graphics.setBackgroundColor(TextColor.Factory.fromString(holdPieceModel.getBlocks().get(0).getColor().getCode()));
+
+        if(holdPieceModel instanceof IBlockModel)
+            xOffset -= 1;
+        else if (holdPieceModel instanceof OBlockModel)
+            xOffset += 1;
+        for(Block block: holdPieceModel.getBlocks()) {
+            graphics.putString(new TerminalPosition(block.getPosition().getX() + xOffset, block.getPosition().getY() + yOffset), " ");
+        }
+    }
+
+
+
     public void drawPiece(PieceModel pieceModel) {
         for (Block block: pieceModel.getBlocks()) {
             drawBlock(block);
@@ -129,6 +150,11 @@ public class GameViewLanterna implements Observer<ArenaModel> {
     public void drawBlock(Block block) {
         graphics.setBackgroundColor(TextColor.Factory.fromString(block.getColor().getCode()));
         graphics.putString(new TerminalPosition(block.getPosition().getX(), block.getPosition().getY()), " ");
+    }
+
+    public void drawScore(int xOffset, int yOffset, int score) {
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
+        graphics.putString(new TerminalPosition(xOffset, yOffset), String.valueOf(score));
     }
 
     @Override
@@ -147,6 +173,7 @@ public class GameViewLanterna implements Observer<ArenaModel> {
             if (key.getKeyType() == KeyType.Character) {
                 if (key.getCharacter() == 'z') return new RotateCounterClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
                 if (key.getCharacter() == ' ') return new HardDrop(gameModel.getCurrentPieceModel(), this, gameModel);
+                if (key.getCharacter() == 'c') return new Hold(gameModel.getCurrentPieceModel(), this, gameModel);
             }
             if (key.getKeyType() == KeyType.Escape) return new ExitTerminal(this);
         }
