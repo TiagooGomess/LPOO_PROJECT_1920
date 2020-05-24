@@ -65,4 +65,12 @@ public class Game {
         return lanternaHandler;
     }
 
+    public void run() throws InterruptedException, CloneNotSupportedException, IOException {
+        MenuCommand toReceive = null;
+        while(!(toReceive instanceof ExitTerminal)) {
+            toReceive = gameMenu(getLanternaHandler());
+        }
+        System.exit(0);
+    }
+
 }
