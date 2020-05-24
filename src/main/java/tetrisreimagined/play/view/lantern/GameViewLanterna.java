@@ -71,11 +71,11 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
             drawNextPiece(arena.getNextPieceToDisplay(), width - 10, 3);
             drawPiece(arena.getCurrentPieceModel());
             initialDraw();
-
             for (Block block: arena.getArenaBlocks())
                 drawBlock(block);
 
             this.screen.refresh();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
