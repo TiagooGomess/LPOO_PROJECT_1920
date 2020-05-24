@@ -1,7 +1,6 @@
 package tetrisreimagined;
 
-import tetrisreimagined.Menu.controller.MenuCommand.MenuCommand;
-import tetrisreimagined.Menu.controller.MenuCommand.StartGameSinglePlayer;
+import tetrisreimagined.Menu.controller.MenuCommand.*;
 import tetrisreimagined.Menu.controller.MenuController;
 import tetrisreimagined.Menu.model.MenuModel;
 import tetrisreimagined.Menu.view.lantern.MenuViewLanterna;
@@ -18,28 +17,39 @@ public class Game {
 
     public enum BUTTON {MENU, LEADERBOARD, GAME_PLAY, MULTIPLAYER}
     private GameState gameState;
+    private LanternaHandler lanternaHandler;
 
-    public Game() {
+    public Game() throws IOException, InterruptedException, CloneNotSupportedException {
         //this.gameState = new GamePlayState(this); // It will be Menu in a further development!
+        this.lanternaHandler = new LanternaHandler(35, 35);
         this.gameState = new MenuState(this);
     }
 
-    public void gamePlay() throws IOException, InterruptedException, CloneNotSupportedException {
+    public void gamePlay(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
         ArenaModel arena = new ArenaModel();
-        GameViewLanterna gui = new GameViewLanterna(35, 35);
+        GameViewLanterna gui = new GameViewLanterna(lanternaHandler);
         arena.addObserver(gui);
         ArenaController controller = new ArenaController(gui, arena);
         controller.start();
     }
 
-    public MenuCommand gameMenu() throws IOException, InterruptedException {
+    public MenuCommand gameMenu(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
         MenuModel menuModel = new MenuModel();
-        MenuViewLanterna menuGui = new MenuViewLanterna(35, 35);
+        MenuViewLanterna menuGui = new MenuViewLanterna(lanternaHandler);
         MenuController controller = new MenuController(menuGui, menuModel);
-        return controller.start();
+        MenuCommand newCommand = controller.start();
+
+        if(newCommand instanceof StartGameSinglePlayer)
+            buttonPressed(BUTTON.GAME_PLAY);
+        else if (newCommand instanceof StartGameMultiplayer)
+            buttonPressed(BUTTON.MULTIPLAYER);
+        else if (newCommand instanceof ExitTerminal)
+            return newCommand;
+
+        return new DoNothing();
     }
 
-    public void buttonPressed(BUTTON button) {
+    public void buttonPressed(BUTTON button) throws InterruptedException, CloneNotSupportedException, IOException {
         gameState.buttonPressed(button);
     }
 
@@ -47,10 +57,8 @@ public class Game {
         this.gameState = gameState;
     }
 
-    public void run() throws IOException, InterruptedException, CloneNotSupportedException {
-        MenuCommand menuCommand = gameMenu();
-        if (menuCommand instanceof StartGameSinglePlayer)
-            gamePlay();
+    public LanternaHandler getLanternaHandler() {
+        return lanternaHandler;
     }
 
 }

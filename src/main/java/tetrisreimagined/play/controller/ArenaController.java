@@ -25,6 +25,7 @@ public class ArenaController {
     private int numLinesTotal = 0;
     private static boolean gamePaused = false;
     private int numIteration = 0;
+    private boolean hasFinished = false;
 
     public ArenaController(Observer<ArenaModel> gui, ArenaModel arena) {
         this.gui = gui;
@@ -73,7 +74,7 @@ public class ArenaController {
             pCommand = gui.getCommand(arena);
             pCommand.execute(currentPieceController);
 
-        } while (!(pCommand instanceof ExitTerminal));
+        } while (!(pCommand instanceof ExitTerminal) && !hasFinished);
 
         System.out.println("GAME OVER");
         System.out.println("Your score was " + arena.getScore());
@@ -99,7 +100,7 @@ public class ArenaController {
                     System.out.println("YOU LOST!"); // is only tested for y == 0
                     System.out.println("GAME OVER");
                     System.out.println("Your score was " + arena.getScore());
-                    System.exit(0);
+                    hasFinished = true;
                 }
             }
             counter = 0;

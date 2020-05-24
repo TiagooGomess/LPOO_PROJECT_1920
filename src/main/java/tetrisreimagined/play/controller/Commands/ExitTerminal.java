@@ -16,7 +16,7 @@ public class ExitTerminal extends PieceCommand {
 
     @Override
     public boolean execute(PieceController currentPieceController) throws IOException {
-        gui.closeTerminal();
+        //gui.closeTerminal();
         return true;
     }
 

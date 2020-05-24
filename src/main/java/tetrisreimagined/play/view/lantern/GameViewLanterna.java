@@ -35,6 +35,14 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
         super(width, height);
     }
 
+    public GameViewLanterna(LanternaHandler lanternaHandler) {
+        super();
+        this.graphics = lanternaHandler.getGraphics();
+        this.screen = lanternaHandler.getScreen();
+        this.width = lanternaHandler.getWidth();
+        this.height = lanternaHandler.getHeight();
+    }
+
     private void initialDraw() {
         int xCoord = getWidth();
         for(int yCoord = 0; yCoord < height; yCoord++)

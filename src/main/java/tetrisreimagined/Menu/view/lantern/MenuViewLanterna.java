@@ -13,12 +13,20 @@ import tetrisreimagined.Menu.controller.MenuCommand.DoNothing;
 import tetrisreimagined.Menu.controller.MenuCommand.StartGameMultiplayer;
 import tetrisreimagined.Menu.controller.MenuCommand.StartGameSinglePlayer;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class MenuViewLanterna extends LanternaHandler  {
 
     public MenuViewLanterna(int width, int height) throws IOException {
         super(width, height);
+    }
+
+    public MenuViewLanterna(LanternaHandler lanternaHandler) {
+        this.graphics = lanternaHandler.getGraphics();
+        this.screen = lanternaHandler.getScreen();
+        this.width = lanternaHandler.getWidth();
+        this.height = lanternaHandler.getHeight();
     }
 
     public void drawAll() {

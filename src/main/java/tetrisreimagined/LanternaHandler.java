@@ -14,11 +14,32 @@ import java.io.IOException;
 
 import static java.awt.Font.createFont;
 
-public abstract class LanternaHandler {
+public class LanternaHandler {
 
     protected Screen screen;
-    protected int width, height;
+    protected int width;
+    protected int height;
     protected TextGraphics graphics;
+
+    public Screen getScreen() {
+        return screen;
+    }
+
+    public TextGraphics getGraphics() {
+        return graphics;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public LanternaHandler() {
+
+    }
 
     public LanternaHandler(int width, int height) throws IOException {
         try {
@@ -41,7 +62,7 @@ public abstract class LanternaHandler {
             defaultTerminalFactory.setTerminalEmulatorFontConfiguration(fontConfiguration);
 
             Terminal terminal = defaultTerminalFactory.setInitialTerminalSize(new TerminalSize(width, height)).createTerminal();
-
+            
 
             this.screen = new TerminalScreen(terminal);
             this.graphics = this.screen.newTextGraphics();
