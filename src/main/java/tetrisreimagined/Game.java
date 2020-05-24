@@ -1,10 +1,16 @@
 package tetrisreimagined;
 
-import tetrisreimagined.play.view.lantern.GameViewLanterna;
-import tetrisreimagined.play.model.ArenaModel;
-import tetrisreimagined.play.controller.ArenaController;
+import tetrisreimagined.Menu.controller.MenuCommand.MenuCommand;
+import tetrisreimagined.Menu.controller.MenuCommand.StartGameSinglePlayer;
+import tetrisreimagined.Menu.controller.MenuController;
+import tetrisreimagined.Menu.model.MenuModel;
+import tetrisreimagined.Menu.view.lantern.MenuViewLanterna;
 import tetrisreimagined.States.GamePlayState;
 import tetrisreimagined.States.GameState;
+import tetrisreimagined.States.MenuState;
+import tetrisreimagined.play.controller.ArenaController;
+import tetrisreimagined.play.model.ArenaModel;
+import tetrisreimagined.play.view.lantern.GameViewLanterna;
 
 import java.io.IOException;
 
@@ -14,25 +20,23 @@ public class Game {
     private GameState gameState;
 
     public Game() {
-        this.gameState = new GamePlayState(this); // It will be Menu in a further development!
+        //this.gameState = new GamePlayState(this); // It will be Menu in a further development!
+        this.gameState = new MenuState(this);
     }
 
     public void gamePlay() throws IOException, InterruptedException, CloneNotSupportedException {
-        // ArenaModel arena = new ArenaModel(60, 30); -> Coordinates can represent initial block position...
         ArenaModel arena = new ArenaModel();
-//        ArenaModel arena2 = new ArenaModel();
-
         GameViewLanterna gui = new GameViewLanterna(35, 35);
-//        GameViewLanterna gui2 = new GameViewLanterna(35, 35);
-
         arena.addObserver(gui);
-//        arena2.addObserver(gui2);
-
         ArenaController controller = new ArenaController(gui, arena);
         controller.start();
+    }
 
-//        ArenaController controller2 = new ArenaController(gui2, arena2);
-//        controller2.start();
+    public MenuCommand gameMenu() throws IOException, InterruptedException {
+        MenuModel menuModel = new MenuModel();
+        MenuViewLanterna menuGui = new MenuViewLanterna(35, 35);
+        MenuController controller = new MenuController(menuGui, menuModel);
+        return controller.start();
     }
 
     public void buttonPressed(BUTTON button) {
@@ -41,6 +45,12 @@ public class Game {
 
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
+    }
+
+    public void run() throws IOException, InterruptedException, CloneNotSupportedException {
+        MenuCommand menuCommand = gameMenu();
+        if (menuCommand instanceof StartGameSinglePlayer)
+            gamePlay();
     }
 
 }
