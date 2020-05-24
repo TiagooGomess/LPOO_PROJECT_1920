@@ -26,10 +26,14 @@ public class Game {
 
     public void gamePlay() throws IOException, InterruptedException, CloneNotSupportedException {
         ArenaModel arena = new ArenaModel();
+//        ArenaModel arena2 = new ArenaModel();
         GameViewLanterna gui = new GameViewLanterna(35, 35);
         arena.addObserver(gui);
+//        arena2.addObserver(gui);
         ArenaController controller = new ArenaController(gui, arena);
+//        ArenaController controller2 = new ArenaController(gui, arena2);
         controller.start();
+//        controller2.start();
     }
 
     public MenuCommand gameMenu() throws IOException, InterruptedException {

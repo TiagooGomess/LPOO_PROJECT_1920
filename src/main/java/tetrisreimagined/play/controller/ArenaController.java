@@ -32,32 +32,23 @@ public class ArenaController {
         nextPiece();
     }
 
-    public void start() throws IOException, InterruptedException, CloneNotSupportedException {
+    public void start() throws IOException, InterruptedException {
         PieceCommand pCommand;
 
-        int counter = 0, levelDifficulty = 5;
-        long begTime = 0, endTime = 0, elapsedTime = 0;
+        int counter = 0, levelDifficulty = 6;
+        long begTime = 0, endTime, elapsedTime = 0;
 
         nextPiece();
 
         do {
-            if (2 * this.arena.getLevel() >= levelDifficulty)
-                levelDifficulty = 2*this.arena.getLevel() + 1;
-
-            counter = tryMoveDown(counter, levelDifficulty - 2*this.arena.getLevel());
+            counter = tryMoveDown(counter, Math.abs(levelDifficulty - this.arena.getLevel()));
 
             endTime = System.currentTimeMillis();
             if(notFirstIteration(begTime))
                 elapsedTime = endTime - begTime;
 
+            Thread.sleep(Math.abs(30 - elapsedTime));
 
-            if(elapsedTime > 30) { // Hard drop takes more than 30 ms!
-                Thread.sleep(Math.abs(110 - elapsedTime));
-
-            }
-            else {
-                Thread.sleep(Math.abs(30 - elapsedTime)); // mudar para velocidade da peça
-            }
             begTime = System.currentTimeMillis();
 
             if (currentPieceController.getPieceModel().isInHold()) {
@@ -95,8 +86,8 @@ public class ArenaController {
                 usedHoldInRound = false;
                 this.arena.addPiece(currentPieceController.getPieceModel());
                 int yPos = currentPieceController.getPieceModel().getMaxYPosition().getY();
-                if(yPos == 1 || yPos == 3) {          // TODO Piece initial Y position is upper. After that update this 'if'
-                    System.out.println("YOU LOST!"); // is only tested for y == 0
+                if(yPos <= 1) {
+                    System.out.println("YOU LOST!");
                     System.out.println("GAME OVER");
                     System.out.println("Your score was " + arena.getScore());
                     System.exit(0);
@@ -205,13 +196,11 @@ public class ArenaController {
         if (this.arena.arenaIsEmpty()) {
             arena.setScore(arena.getScore() + 2000*(this.arena.getLevel() + 1));
         }
-
     }
 
     public void checkIfScore() {
 
         int numLines = 0;
-
         boolean changedNothing;
 
         do {
@@ -227,11 +216,8 @@ public class ArenaController {
         } while (!changedNothing);
 
         updateScore(numLines);
-
         updateLevel();
-
         this.numLinesTotal += numLines;
-
     }
 
     private void updateLevel() {
