@@ -20,7 +20,7 @@ public class Game {
     private GameState gameState;
 
     public Game() {
-        this.gameState = new GamePlayState(this); // It will be Menu in a further development!
+        //this.gameState = new GamePlayState(this); // It will be Menu in a further development!
         this.gameState = new MenuState(this);
     }
 

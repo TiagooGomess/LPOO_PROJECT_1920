@@ -14,7 +14,7 @@ import java.io.IOException;
 
 import static java.awt.Font.createFont;
 
-public class LanternaHandler {
+public abstract class LanternaHandler {
 
     protected Screen screen;
     protected int width, height;
@@ -53,4 +53,6 @@ public class LanternaHandler {
             e.printStackTrace();
         }
     }
+
+    //public abstract void drawAll();
 }
