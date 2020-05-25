@@ -18,10 +18,12 @@ import tetrisreimagined.play.model.Pieces.OBlockModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.observer.Observer;
 import tetrisreimagined.play.controller.Commands.*;
+import tetrisreimagined.play.model.Position;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import static java.awt.Font.createFont;
 
@@ -58,7 +60,25 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
         graphics.putString(new TerminalPosition(width - 45, 25), "SCORE", SGR.BLINK);
         graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
 
-        graphics.putString(new TerminalPosition(width - (width/3), height/2), "SINGLE PLAYER", SGR.BOLD);
+//        graphics.putString(new TerminalPosition(width - (width/3), height/2), "SINGLE PLAYER", SGR.BOLD);
+        graphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
+
+    }
+
+    private void initialDraw2() {
+        int xCoord = getWidth();
+        for(int yCoord = 0; yCoord < height; yCoord++)
+            graphics.putString(new TerminalPosition(xCoord, yCoord), " ");
+
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#ffffff"));
+        graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
+        graphics.fillRectangle(new TerminalPosition(width - 15, 1), new TerminalSize(10, 1), ' ');
+        graphics.putString(new TerminalPosition(width - 15, 1), "NEXT PIECE", SGR.BLINK);
+        graphics.putString(new TerminalPosition(width - 15, 10), "HOLD PIECE", SGR.BLINK);
+        graphics.putString(new TerminalPosition(width - 15, 25), "SCORE", SGR.BLINK);
+        graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
+
+//        graphics.putString(new TerminalPosition(width - (width/3), height/2), "SINGLE PLAYER", SGR.BOLD);
         graphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
 
     }
@@ -74,6 +94,7 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
     @Override
     public void changed(ArenaModel arena) {
         drawAll(arena);
+        drawAll2(arena);
     }
 
     public void drawAll(ArenaModel arena) {
@@ -87,6 +108,41 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
             initialDraw();
             for (Block block: arena.getArenaBlocks())
                 drawBlock(block);
+
+            this.screen.refresh();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void drawAll2(ArenaModel arena) {
+        try {
+//            this.screen.clear();
+
+            drawScore(width-15, 29, arena.getScore());
+            drawHoldPiece(arena.getHoldPieceToDisplay(), width-15, 15);
+            drawNextPiece(arena.getNextPieceToDisplay(), width-15, 3);
+
+            PieceModel pieceModel = arena.getCurrentPieceModel();
+            List<Block> blocks = pieceModel.getBlocks();
+            List<Block> auxBlocks = blocks;
+            for (Block block: auxBlocks) {
+                Position originalPos = block.getPosition();
+                block.setPosition(new Position(block.getPosition().getX()+width/2, block.getPosition().getY()));
+                drawBlock(block);
+                block.setPosition(originalPos);
+            }
+
+//            drawPiece(arena.getCurrentPieceModel());
+            initialDraw2();
+            for (Block block: arena.getArenaBlocks()) {
+                Position originalPos = block.getPosition();
+                block.setPosition(new Position(block.getPosition().getX()+width/2, block.getPosition().getY()));
+                drawBlock(block);
+                block.setPosition(originalPos);
+            }
+
 
             this.screen.refresh();
 
