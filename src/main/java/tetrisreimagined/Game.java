@@ -34,7 +34,7 @@ public class Game {
     }
 
     public void gamePlayMultiplayer(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
-        ArenaModel arena1 = new ArenaModel();
+        /*ArenaModel arena1 = new ArenaModel();
         ArenaModel arena2 = new ArenaModel();
         GameViewLanterna gui = new GameViewLanterna(lanternaHandler);
         arena1.addObserver(gui);
@@ -42,8 +42,7 @@ public class Game {
         ArenaController controller1 = new ArenaController(gui, arena1);
         ArenaController controller2 = new ArenaController(gui, arena2);
         controller1.start();
-        controller2.start();
-
+        controller2.start();*/
     }
 
     public MenuCommand gameMenu(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
