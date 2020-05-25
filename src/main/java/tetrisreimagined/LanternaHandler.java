@@ -84,9 +84,4 @@ public class LanternaHandler {
         }
     }
 
-    public void resizeWindow() {
-        this.screen.doResizeIfNecessary();     // resize screen
-    }
-
-    //public abstract void drawAll();
 }

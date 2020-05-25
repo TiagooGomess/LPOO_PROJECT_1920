@@ -121,8 +121,6 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
         }
     }
 
-
-
     public void drawPiece(PieceModel pieceModel) {
         for (Block block: pieceModel.getBlocks()) {
             drawBlock(block);
@@ -137,6 +135,16 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
     public void drawScore(int xOffset, int yOffset, int score) {
         graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
         graphics.putString(new TerminalPosition(xOffset, yOffset), String.valueOf(score));
+    }
+
+    public void drawBigScore(int xOffset, int yOffset, int score) throws IOException {
+        screen.clear();
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#ff0000"));
+        graphics.putString(new TerminalPosition(width / 2 - 7, 5), "TETRIS REIMAGINED", SGR.BOLD);
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
+        graphics.putString(new TerminalPosition(xOffset + 3, yOffset), "FINAL SCORE: ", SGR.BLINK);
+        graphics.putString(new TerminalPosition(xOffset + 15, yOffset), String.valueOf(score), SGR.BLINK);
+        screen.refresh();
     }
 
     @Override

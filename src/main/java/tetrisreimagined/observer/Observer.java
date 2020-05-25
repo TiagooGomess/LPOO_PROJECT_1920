@@ -7,6 +7,7 @@ import java.io.IOException;
 
 public interface Observer<T> {
     void drawAll(T arena);
+    void drawBigScore(int xOffset, int yOffset, int score) throws IOException;
 
     int getWidth();
     int getHeight();

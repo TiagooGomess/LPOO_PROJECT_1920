@@ -7,12 +7,14 @@ import tetrisreimagined.play.controller.Pieces.*;
 import tetrisreimagined.play.controller.Commands.ExitTerminal;
 import tetrisreimagined.play.controller.Commands.PieceCommand;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
+
+import static java.lang.Integer.max;
+import static java.lang.Integer.parseInt;
 
 public class ArenaController {
     private final Observer<ArenaModel> gui; // In this case GameViewLanterna
@@ -71,7 +73,9 @@ public class ArenaController {
 
         System.out.println("GAME OVER");
         System.out.println("Your score was " + arena.getScore());
-        writeScoreToFile();
+        this.gui.drawBigScore(gui.getWidth() + 7, gui.getHeight() / 3, arena.getScore());
+        writeScoreToFile(arena.getScore());
+        Thread.sleep(3500);
     }
 
     private int tryMoveDown(int counter, int levelDifficulty) {
@@ -259,7 +263,7 @@ public class ArenaController {
         this.arena.setHoldPieceToDisplay(this.holdPieceController.getPieceModel());
     }
 
-    private void writeScoreToFile() {
+    private void writeScoreToFile(int score) {
         try {
             File myFile = new File("leaderboard.txt");
             myFile.createNewFile();
@@ -269,10 +273,20 @@ public class ArenaController {
 
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                Integer points = Integer.parseInt(data);
-                System.out.println(points);
+                maxPoints.add(parseInt(data));
             }
+            maxPoints.add(score);
+            Collections.sort(maxPoints, Collections.reverseOrder());
             myReader.close();
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter("leaderboard.txt", false));
+
+            for(int index = 0; index < Integer.min(maxPoints.size(), 5); index++) {
+                String toAdd = maxPoints.get(index) + "\n";
+                writer.append(toAdd);
+            }
+
+            writer.close();
 
         } catch (IOException e) {
             System.out.println("An error occurred.");
