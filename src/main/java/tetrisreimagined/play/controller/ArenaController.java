@@ -7,10 +7,12 @@ import tetrisreimagined.play.controller.Pieces.*;
 import tetrisreimagined.play.controller.Commands.ExitTerminal;
 import tetrisreimagined.play.controller.Commands.PieceCommand;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class ArenaController {
     private final Observer<ArenaModel> gui; // In this case GameViewLanterna
@@ -69,7 +71,7 @@ public class ArenaController {
 
         System.out.println("GAME OVER");
         System.out.println("Your score was " + arena.getScore());
-
+        writeScoreToFile();
     }
 
     private int tryMoveDown(int counter, int levelDifficulty) {
@@ -87,12 +89,8 @@ public class ArenaController {
                 usedHoldInRound = false;
                 this.arena.addPiece(currentPieceController.getPieceModel());
                 int yPos = currentPieceController.getPieceModel().getMaxYPosition().getY();
-                if(yPos <= 1) {
-                    System.out.println("YOU LOST!");
-                    System.out.println("GAME OVER");
-                    System.out.println("Your score was " + arena.getScore());
+                if(yPos <= 1)
                     hasFinished = true;
-                }
             }
             counter = 0;
         }
@@ -259,6 +257,27 @@ public class ArenaController {
         this.arena.getCurrentPieceModel().setInHold(false);
         this.arena.getHoldPieceModel().setInHold(true);
         this.arena.setHoldPieceToDisplay(this.holdPieceController.getPieceModel());
+    }
+
+    private void writeScoreToFile() {
+        try {
+            File myFile = new File("leaderboard.txt");
+            myFile.createNewFile();
+
+            Scanner myReader = new Scanner(myFile);
+            List<Integer> maxPoints = new ArrayList<>();
+
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                Integer points = Integer.parseInt(data);
+                System.out.println(points);
+            }
+            myReader.close();
+
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
 }

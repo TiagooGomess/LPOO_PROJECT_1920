@@ -7,11 +7,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import tetrisreimagined.LanternaHandler;
-import tetrisreimagined.Menu.controller.MenuCommand.ExitTerminal;
-import tetrisreimagined.Menu.controller.MenuCommand.MenuCommand;
-import tetrisreimagined.Menu.controller.MenuCommand.DoNothing;
-import tetrisreimagined.Menu.controller.MenuCommand.StartGameMultiplayer;
-import tetrisreimagined.Menu.controller.MenuCommand.StartGameSinglePlayer;
+import tetrisreimagined.Menu.controller.MenuCommand.*;
 
 import java.awt.*;
 import java.io.IOException;
@@ -56,7 +52,7 @@ public class MenuViewLanterna extends LanternaHandler  {
             if (key == null) return new DoNothing();
             if (key.getKeyType() == KeyType.Character) {
                 if (key.getCharacter() == '1') return new StartGameSinglePlayer();
-                if (key.getCharacter() == '2') return new StartGameMultiplayer();
+                if (key.getCharacter() == '2') return new OpenLeaderboard();
             }
             if (key.getKeyType() == KeyType.Escape) return new ExitTerminal(this);
         }

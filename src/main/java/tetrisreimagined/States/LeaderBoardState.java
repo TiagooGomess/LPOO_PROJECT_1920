@@ -11,9 +11,6 @@ public class LeaderBoardState extends GameState {
 
     @Override
     public void buttonPressed(Game.BUTTON button) throws InterruptedException, CloneNotSupportedException, IOException {
-        if(button == Game.BUTTON.MENU) {
             game.setGameState(new MenuState(game));
-            // game.viewMenu();
-        }
     }
 }

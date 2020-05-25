@@ -1,9 +1,6 @@
 package tetrisreimagined.Menu.controller;
 
-import tetrisreimagined.Menu.controller.MenuCommand.ExitTerminal;
-import tetrisreimagined.Menu.controller.MenuCommand.MenuCommand;
-import tetrisreimagined.Menu.controller.MenuCommand.StartGameMultiplayer;
-import tetrisreimagined.Menu.controller.MenuCommand.StartGameSinglePlayer;
+import tetrisreimagined.Menu.controller.MenuCommand.*;
 import tetrisreimagined.Menu.model.MenuModel;
 import tetrisreimagined.Menu.view.lantern.MenuViewLanterna;
 
@@ -33,7 +30,8 @@ public class MenuController {
         do {
             menuCommand = gui.getMenuCommand();
 
-        } while (!(menuCommand instanceof ExitTerminal) && (!(menuCommand instanceof StartGameSinglePlayer)) && (!(menuCommand instanceof StartGameMultiplayer)));
+        } while (!(menuCommand instanceof ExitTerminal) && (!(menuCommand instanceof StartGameSinglePlayer))
+                && (!(menuCommand instanceof StartGameMultiplayer)) && (!(menuCommand instanceof OpenLeaderboard)));
 
         return menuCommand;
     }

@@ -33,6 +33,13 @@ public class Game {
         controller.start();
     }
 
+
+    public void viewLeaderboard() {
+
+
+    }
+
+
     public void gamePlayMultiplayer(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
         /*ArenaModel arena1 = new ArenaModel();
         ArenaModel arena2 = new ArenaModel();
@@ -55,6 +62,8 @@ public class Game {
             buttonPressed(BUTTON.GAME_PLAY);
         else if (newCommand instanceof StartGameMultiplayer)
             buttonPressed(BUTTON.MULTIPLAYER);
+        else if(newCommand instanceof OpenLeaderboard)
+            buttonPressed(BUTTON.LEADERBOARD);
         else if (newCommand instanceof ExitTerminal)
             return newCommand;
 
