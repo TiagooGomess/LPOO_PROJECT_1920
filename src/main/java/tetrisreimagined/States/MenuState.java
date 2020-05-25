@@ -20,7 +20,6 @@ public class MenuState extends GameState {
             case LEADERBOARD:
                 game.setGameState(new LeaderBoardState(game));
                 game.viewLeaderboard();
-                Thread.sleep(5000);
                 game.setGameState(new MenuState(game));
                 break;
             case MULTIPLAYER:
