@@ -10,7 +10,6 @@ import tetrisreimagined.Leaderboard.controller.LeaderboardCommand.*;
 import tetrisreimagined.Leaderboard.model.LeaderboardModel;
 
 import java.io.IOException;
-import java.util.List;
 
 public class LeaderboardViewLanterna extends LanternaHandler {
 

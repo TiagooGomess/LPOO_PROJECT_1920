@@ -71,10 +71,7 @@ public class ArenaController {
 
         } while (!(pCommand instanceof ExitTerminal) && !hasFinished);
 
-        System.out.println("GAME OVER");
-        System.out.println("Your score was " + arena.getScore());
-        this.gui.drawBigScore(gui.getWidth() + 7, gui.getHeight() / 3, arena.getScore());
-        writeScoreToFile(arena.getScore());
+        gameOver();
     }
 
     private int tryMoveDown(int counter, int levelDifficulty) {
@@ -291,6 +288,11 @@ public class ArenaController {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+    }
+
+    public void gameOver() throws IOException {
+        this.gui.drawBigScore(gui.getWidth() + 7, gui.getHeight() / 3, arena.getScore());
+        writeScoreToFile(arena.getScore());
     }
 
 }

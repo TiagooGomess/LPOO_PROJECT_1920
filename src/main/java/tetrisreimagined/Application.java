@@ -1,8 +1,5 @@
 package tetrisreimagined;
 
-import tetrisreimagined.Menu.controller.MenuCommand.ExitTerminal;
-import tetrisreimagined.Menu.controller.MenuCommand.MenuCommand;
-
 import java.io.IOException;
 
 public class Application {
