@@ -1,5 +1,10 @@
 package tetrisreimagined;
 
+import tetrisreimagined.Leaderboard.controller.LeaderboardCommand.BackToMenu;
+import tetrisreimagined.Leaderboard.controller.LeaderboardCommand.LeaderboardCommand;
+import tetrisreimagined.Leaderboard.controller.LeaderboardController;
+import tetrisreimagined.Leaderboard.model.LeaderboardModel;
+import tetrisreimagined.Leaderboard.view.lantern.LeaderboardViewLanterna;
 import tetrisreimagined.Menu.controller.MenuCommand.*;
 import tetrisreimagined.Menu.controller.MenuController;
 import tetrisreimagined.Menu.model.MenuModel;
@@ -34,8 +39,20 @@ public class Game {
     }
 
 
-    public void viewLeaderboard() {
+    public LeaderboardCommand viewLeaderboard() throws IOException, InterruptedException, CloneNotSupportedException {
+        LeaderboardModel leaderboardModel = new LeaderboardModel();
+        leaderboardModel.readLeaderboardFile("");
+        LeaderboardViewLanterna gui = new LeaderboardViewLanterna(lanternaHandler);
+        LeaderboardController controller = new LeaderboardController(gui, leaderboardModel);
+        LeaderboardCommand command = controller.start();
 
+        if (command instanceof BackToMenu) {
+            buttonPressed(BUTTON.MENU);
+        }
+        else if (command instanceof tetrisreimagined.Leaderboard.controller.LeaderboardCommand.ExitTerminal)
+            return command;
+
+        return new tetrisreimagined.Leaderboard.controller.LeaderboardCommand.DoNothing();
 
     }
 
