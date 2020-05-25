@@ -265,7 +265,7 @@ public class ArenaController {
 
     private void writeScoreToFile(int score) {
         try {
-            File myFile = new File("leaderboard.txt");
+            File myFile = new File("files/leaderboard.txt");
             myFile.createNewFile();
 
             Scanner myReader = new Scanner(myFile);
@@ -279,7 +279,7 @@ public class ArenaController {
             Collections.sort(maxPoints, Collections.reverseOrder());
             myReader.close();
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter("leaderboard.txt", false));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("files/leaderboard.txt", false));
 
             for(int index = 0; index < Integer.min(maxPoints.size(), 5); index++) {
                 String toAdd = maxPoints.get(index) + "\n";
