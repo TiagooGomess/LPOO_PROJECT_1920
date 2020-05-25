@@ -75,7 +75,6 @@ public class ArenaController {
         System.out.println("Your score was " + arena.getScore());
         this.gui.drawBigScore(gui.getWidth() + 7, gui.getHeight() / 3, arena.getScore());
         writeScoreToFile(arena.getScore());
-        Thread.sleep(3500);
     }
 
     private int tryMoveDown(int counter, int levelDifficulty) {

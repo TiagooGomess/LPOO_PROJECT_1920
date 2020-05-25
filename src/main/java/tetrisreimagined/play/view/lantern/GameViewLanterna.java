@@ -140,11 +140,25 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
     public void drawBigScore(int xOffset, int yOffset, int score) throws IOException {
         screen.clear();
         graphics.setBackgroundColor(TextColor.Factory.fromString("#ff0000"));
-        graphics.putString(new TerminalPosition(width / 2 - 7, 5), "TETRIS REIMAGINED", SGR.BOLD);
+        graphics.putString(new TerminalPosition(width / 2 - 8, 5), "TETRIS REIMAGINED", SGR.BOLD);
         graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
-        graphics.putString(new TerminalPosition(xOffset + 3, yOffset), "FINAL SCORE: ", SGR.BLINK);
-        graphics.putString(new TerminalPosition(xOffset + 15, yOffset), String.valueOf(score), SGR.BLINK);
+        String resultScore = Integer.toString(score);
+        graphics.putString(new TerminalPosition(xOffset + 3 - resultScore.length() + 1, yOffset), "FINAL SCORE: ", SGR.BLINK);
+        graphics.putString(new TerminalPosition(xOffset + 15 - resultScore.length() + 1, yOffset), String.valueOf(score), SGR.BLINK);
+        graphics.putString(new TerminalPosition(width / 2 - 10, 25), "Press Enter To Continue", SGR.BOLD);
+
         screen.refresh();
+
+        KeyStroke key = null;
+
+        do {
+            key = screen.pollInput();
+            if(key != null) {
+                if(key.getKeyType() == KeyType.Enter)
+                    break;
+            }
+
+        } while(true);
     }
 
     @Override
