@@ -16,14 +16,17 @@ public class MenuState extends GameState {
                 game.setGameState(new GamePlayState(game));
                 game.gamePlay(game.getLanternaHandler());
                 game.setGameState(new MenuState(game));
+                break;
             case LEADERBOARD:
                 game.setGameState(new LeaderBoardState(game));
                 // game.viewLeaderboard();
                 game.setGameState(new MenuState(game));
+                break;
             case MULTIPLAYER:
                 game.setGameState(new MultiplayerState(game));
-                // game.multiplayerGame();
+                game.gamePlayMultiplayer(game.getLanternaHandler());
                 game.setGameState(new MenuState(game));
+                break;
         }
 
     }

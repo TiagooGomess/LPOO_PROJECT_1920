@@ -31,6 +31,8 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
 //    private int width, height;
 //    private TextGraphics graphics;
 
+    boolean isMultiplayer;
+
     public GameViewLanterna(int width, int height) throws IOException {
         super(width, height);
     }
@@ -50,15 +52,19 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
 
         graphics.setBackgroundColor(TextColor.Factory.fromString("#ffffff"));
         graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
-        graphics.fillRectangle(new TerminalPosition(width - 12, 1), new TerminalSize(10, 1), ' ');
-        graphics.putString(new TerminalPosition(width - 12, 1), "NEXT PIECE", SGR.BLINK);
-        graphics.putString(new TerminalPosition(width - 12, 10), "HOLD PIECE", SGR.BLINK);
-        graphics.putString(new TerminalPosition(width - 9, 25), "SCORE", SGR.BLINK);
+        graphics.fillRectangle(new TerminalPosition(width - 47, 1), new TerminalSize(10, 1), ' ');
+        graphics.putString(new TerminalPosition(width - 47, 1), "NEXT PIECE", SGR.BLINK);
+        graphics.putString(new TerminalPosition(width - 47, 10), "HOLD PIECE", SGR.BLINK);
+        graphics.putString(new TerminalPosition(width - 45, 25), "SCORE", SGR.BLINK);
+        graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
+
+        graphics.putString(new TerminalPosition(width - (width/3), height/2), "SINGLE PLAYER", SGR.BOLD);
         graphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
+
     }
 
     public int getWidth() {
-        return this.width - 15;
+        return (this.width /2 ) - 15;
     }
 
     public int getHeight() {
@@ -74,9 +80,9 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
         try {
             this.screen.clear();
 
-            drawScore(width - 8, 29, arena.getScore());
-            drawHoldPiece(arena.getHoldPieceToDisplay(), width - 10, 15);
-            drawNextPiece(arena.getNextPieceToDisplay(), width - 10, 3);
+            drawScore(width - 44, 29, arena.getScore());
+            drawHoldPiece(arena.getHoldPieceToDisplay(), width - 45, 15);
+            drawNextPiece(arena.getNextPieceToDisplay(), width - 45, 3);
             drawPiece(arena.getCurrentPieceModel());
             initialDraw();
             for (Block block: arena.getArenaBlocks())

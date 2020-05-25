@@ -37,6 +37,15 @@ public class LanternaHandler {
         return height;
     }
 
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+
     public LanternaHandler() {
 
     }
@@ -73,6 +82,10 @@ public class LanternaHandler {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
+    }
+
+    public void resizeWindow() {
+        this.screen.doResizeIfNecessary();     // resize screen
     }
 
     //public abstract void drawAll();

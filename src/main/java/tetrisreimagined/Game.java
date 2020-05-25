@@ -21,20 +21,29 @@ public class Game {
 
     public Game() throws IOException, InterruptedException, CloneNotSupportedException {
         //this.gameState = new GamePlayState(this); // It will be Menu in a further development!
-        this.lanternaHandler = new LanternaHandler(35, 35);
+        this.lanternaHandler = new LanternaHandler(70, 35);
         this.gameState = new MenuState(this);
     }
 
     public void gamePlay(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
         ArenaModel arena = new ArenaModel();
         GameViewLanterna gui = new GameViewLanterna(lanternaHandler);
-//        ArenaModel arena2 = new ArenaModel();
         arena.addObserver(gui);
-//        arena2.addObserver(gui);
         ArenaController controller = new ArenaController(gui, arena);
-//        ArenaController controller2 = new ArenaController(gui, arena2);
         controller.start();
-//        controller2.start();
+    }
+
+    public void gamePlayMultiplayer(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
+        ArenaModel arena1 = new ArenaModel();
+        ArenaModel arena2 = new ArenaModel();
+        GameViewLanterna gui = new GameViewLanterna(lanternaHandler);
+        arena1.addObserver(gui);
+        arena2.addObserver(gui);
+        ArenaController controller1 = new ArenaController(gui, arena1);
+        ArenaController controller2 = new ArenaController(gui, arena2);
+        controller1.start();
+        controller2.start();
+
     }
 
     public MenuCommand gameMenu(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
@@ -68,7 +77,7 @@ public class Game {
     public void run() throws InterruptedException, CloneNotSupportedException, IOException {
         MenuCommand toReceive = null;
         while(!(toReceive instanceof ExitTerminal)) {
-            toReceive = gameMenu(getLanternaHandler());
+            toReceive = gameMenu(lanternaHandler);
         }
         System.exit(0);
     }

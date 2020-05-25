@@ -18,5 +18,5 @@ dependencies {
 }
 
 application {
-    mainClassName = 'tetrisreimagined/Application'
+    mainClassName = 'java/tetrisreimagined/Application'
 }
