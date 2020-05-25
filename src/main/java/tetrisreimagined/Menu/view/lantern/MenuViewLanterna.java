@@ -39,7 +39,7 @@ public class MenuViewLanterna extends LanternaHandler  {
             graphics.putString(new TerminalPosition(width / 2 - 7, 5), "TETRIS REIMAGINED", SGR.BOLD);
             graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
             graphics.putString(new TerminalPosition(width / 2 - 11, 12), "PRESS 1 TO SINGLE PLAYER", SGR.BOLD);
-            graphics.putString(new TerminalPosition(width / 2 - 10, 22), "PRESS 2 TO MULTIPLAYER", SGR.BOLD);
+            graphics.putString(new TerminalPosition(width / 2 - 10, 22), "PRESS 2 TO LEADERBOARD", SGR.BOLD);
 
             this.screen.refresh();
         } catch (IOException e) {
