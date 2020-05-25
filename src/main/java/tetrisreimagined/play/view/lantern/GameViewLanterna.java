@@ -31,40 +31,47 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
 //    private int width, height;
 //    private TextGraphics graphics;
 
-    boolean isMultiplayer;
+    private boolean isMultiplayer;
 
     public GameViewLanterna(int width, int height) throws IOException {
         super(width, height);
+        this.isMultiplayer = false;
     }
 
-    public GameViewLanterna(LanternaHandler lanternaHandler) {
+    public GameViewLanterna(LanternaHandler lanternaHandler, boolean isMultiplayer) {
         super();
         this.graphics = lanternaHandler.getGraphics();
         this.screen = lanternaHandler.getScreen();
         this.width = lanternaHandler.getWidth();
         this.height = lanternaHandler.getHeight();
+        this.isMultiplayer = isMultiplayer;
     }
 
     private void initialDraw() {
-        int xCoord = getWidth();
-        for(int yCoord = 0; yCoord < height; yCoord++)
+        int xCoord = (isMultiplayer) ? (width - 15) : getWidth();
+        int xOff1 = (isMultiplayer) ? 12 : 47;
+        int xOff2 = (isMultiplayer) ? 9 : 45;
+
+        for (int yCoord = 0; yCoord < height; yCoord++)
             graphics.putString(new TerminalPosition(xCoord, yCoord), " ");
 
         graphics.setBackgroundColor(TextColor.Factory.fromString("#ffffff"));
         graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
-        graphics.fillRectangle(new TerminalPosition(width - 47, 1), new TerminalSize(10, 1), ' ');
-        graphics.putString(new TerminalPosition(width - 47, 1), "NEXT PIECE", SGR.BLINK);
-        graphics.putString(new TerminalPosition(width - 47, 10), "HOLD PIECE", SGR.BLINK);
-        graphics.putString(new TerminalPosition(width - 45, 25), "SCORE", SGR.BLINK);
-        graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
+        graphics.fillRectangle(new TerminalPosition(width - xOff1, 1), new TerminalSize(10, 1), ' ');
+        graphics.putString(new TerminalPosition(width - xOff1, 1), "NEXT PIECE", SGR.BLINK);
+        graphics.putString(new TerminalPosition(width - xOff1, 10), "HOLD PIECE", SGR.BLINK);
+        graphics.putString(new TerminalPosition(width - xOff2, 25), "SCORE", SGR.BLINK);
 
-        graphics.putString(new TerminalPosition(width - (width/3), height/2), "SINGLE PLAYER", SGR.BOLD);
+        if (!isMultiplayer) {
+            graphics.setForegroundColor(TextColor.Factory.fromString("#000000"));
+            graphics.putString(new TerminalPosition(width - (width / 3), height / 2), "SINGLE PLAYER", SGR.BOLD);
+        }
         graphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
 
     }
 
     public int getWidth() {
-        return (this.width /2 ) - 15;
+        return (this.width / 2) - 15;
     }
 
     public int getHeight() {
@@ -77,16 +84,20 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
     }
 
     public void drawAll(ArenaModel arena) {
+        int xOffset = (isMultiplayer) ? 10 : 45;
+        int scoreOff = (isMultiplayer) ? 8 : 44;
+        int pieceOffset = (isMultiplayer) ? 35 : 0;
+
         try {
             this.screen.clear();
 
-            drawScore(width - 44, 29, arena.getScore());
-            drawHoldPiece(arena.getHoldPieceToDisplay(), width - 45, 15);
-            drawNextPiece(arena.getNextPieceToDisplay(), width - 45, 3);
-            drawPiece(arena.getCurrentPieceModel());
+            drawScore(width - (scoreOff), 29, arena.getScore());
+            drawHoldPiece(arena.getHoldPieceToDisplay(), width - xOffset, 15);
+            drawNextPiece(arena.getNextPieceToDisplay(), width - xOffset, 3);
+            drawPiece(arena.getCurrentPieceModel(), pieceOffset);
             initialDraw();
             for (Block block: arena.getArenaBlocks())
-                drawBlock(block);
+                drawBlock(block, pieceOffset);
 
             this.screen.refresh();
 
@@ -121,17 +132,15 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
         }
     }
 
-
-
-    public void drawPiece(PieceModel pieceModel) {
+    public void drawPiece(PieceModel pieceModel, int pieceOffset) {
         for (Block block: pieceModel.getBlocks()) {
-            drawBlock(block);
+            drawBlock(block, pieceOffset);
         }
     }
 
-    public void drawBlock(Block block) {
+    public void drawBlock(Block block, int pieceOffset) {
         graphics.setBackgroundColor(TextColor.Factory.fromString(block.getColor().getCode()));
-        graphics.putString(new TerminalPosition(block.getPosition().getX(), block.getPosition().getY()), " ");
+        graphics.putString(new TerminalPosition(block.getPosition().getX() + pieceOffset, block.getPosition().getY()), " ");
     }
 
     public void drawScore(int xOffset, int yOffset, int score) {
@@ -165,4 +174,11 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
        screen.close();
     }
 
+    public void swapIsMultiplayer() {
+        isMultiplayer = !isMultiplayer;
+    }
+
+    public boolean isMultiplayer() {
+        return isMultiplayer;
+    }
 }

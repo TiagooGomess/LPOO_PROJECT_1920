@@ -1,5 +1,6 @@
 package tetrisreimagined;
 
+import com.googlecode.lanterna.input.KeyStroke;
 import tetrisreimagined.Menu.controller.MenuCommand.*;
 import tetrisreimagined.Menu.controller.MenuController;
 import tetrisreimagined.Menu.model.MenuModel;
@@ -27,7 +28,7 @@ public class Game {
 
     public void gamePlay(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
         ArenaModel arena = new ArenaModel();
-        GameViewLanterna gui = new GameViewLanterna(lanternaHandler);
+        GameViewLanterna gui = new GameViewLanterna(lanternaHandler, false);
         arena.addObserver(gui);
         ArenaController controller = new ArenaController(gui, arena);
         controller.start();
@@ -36,14 +37,13 @@ public class Game {
     public void gamePlayMultiplayer(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
         ArenaModel arena1 = new ArenaModel();
         ArenaModel arena2 = new ArenaModel();
-        GameViewLanterna gui = new GameViewLanterna(lanternaHandler);
-        arena1.addObserver(gui);
-        arena2.addObserver(gui);
-        ArenaController controller1 = new ArenaController(gui, arena1);
-        ArenaController controller2 = new ArenaController(gui, arena2);
-        controller1.start();
-        controller2.start();
 
+        GameViewLanterna gui1 = new GameViewLanterna(lanternaHandler, true);
+        arena1.addObserver(gui1);
+        // arena2.addObserver(gui2);
+        ArenaController controller1 = new ArenaController(gui1, arena1);
+        //ArenaController controller2 = new ArenaController(gui2, arena2);
+        controller1.start();
     }
 
     public MenuCommand gameMenu(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {

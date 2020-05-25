@@ -22,7 +22,14 @@ public class HardDrop extends PieceCommand {
             new MoveDown(gameModel.getCurrentPieceModel(), gui, gameModel, true).execute(currentPieceController);
         }
         gameModel.setScore(gameModel.getScore() + 2*currentPieceController.getPieceModel().getNumBlocks() * (this.gameModel.getLevel() + 1));
+
+        if(gui.isMultiplayer()) {
+            gameModel.notifyObservers(gameModel);
+            gui.swapIsMultiplayer();
+        }
         gameModel.notifyObservers(gameModel);
+        gui.swapIsMultiplayer();
+
         return true;
     }
 

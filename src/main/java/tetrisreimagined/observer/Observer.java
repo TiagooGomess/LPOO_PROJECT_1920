@@ -13,5 +13,7 @@ public interface Observer<T> {
 
     PieceCommand getCommand(ArenaModel gameModel) throws IOException, InterruptedException;
     void changed(T subject);
+    boolean isMultiplayer();
+    void swapIsMultiplayer();
     void closeTerminal() throws IOException;
 }

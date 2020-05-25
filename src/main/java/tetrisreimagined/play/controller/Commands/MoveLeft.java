@@ -25,7 +25,12 @@ public class MoveLeft extends PieceCommand {
         if(currentPieceController.canGoLeft(gui, gameModel)) {
             for (Block block: this.pieceModel.getBlocks())
                 block.setPosition(block.getPosition().left());
+            if(gui.isMultiplayer()) {
+                gameModel.notifyObservers(gameModel);
+                gui.swapIsMultiplayer();
+            }
             gameModel.notifyObservers(gameModel);
+            gui.swapIsMultiplayer();
             return true;
         }
         return false;

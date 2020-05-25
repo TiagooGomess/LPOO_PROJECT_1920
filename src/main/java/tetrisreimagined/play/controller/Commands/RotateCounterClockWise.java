@@ -26,7 +26,12 @@ public class RotateCounterClockWise extends PieceCommand {
             return false;
         if (currentPieceController.pieceCanRotate(gui, gameModel)) {
             rotatePiece(currentPieceController);
+            if(gui.isMultiplayer()) {
+                gameModel.notifyObservers(gameModel);
+                gui.swapIsMultiplayer();
+            }
             gameModel.notifyObservers(gameModel);
+            gui.swapIsMultiplayer();
             return true;
         }
         return false;

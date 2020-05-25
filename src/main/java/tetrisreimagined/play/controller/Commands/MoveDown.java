@@ -27,8 +27,14 @@ public class MoveDown extends PieceCommand {
         if(currentPieceController.canGoDown(gui, gameModel)) {
             for (Block block: this.pieceModel.getBlocks())
                 block.setPosition(block.getPosition().down());
-            if(!isHardDrop)
+            if(!isHardDrop) {
+                if(gui.isMultiplayer()) {
+                    gameModel.notifyObservers(gameModel);
+                    gui.swapIsMultiplayer();
+                }
                 gameModel.notifyObservers(gameModel);
+                gui.swapIsMultiplayer();
+            }
             return true;
         }
         return false;

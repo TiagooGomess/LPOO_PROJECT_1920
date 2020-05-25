@@ -25,7 +25,12 @@ public class MoveRight extends PieceCommand {
         if(currentPieceController.canGoRight(gui, gameModel)) {
             for (Block block: this.pieceModel.getBlocks())
                 block.setPosition(block.getPosition().right());
+            if(gui.isMultiplayer()) {
+                gameModel.notifyObservers(gameModel);
+                gui.swapIsMultiplayer();
+            }
             gameModel.notifyObservers(gameModel);
+            gui.swapIsMultiplayer();
             return true;
         }
         return false;
