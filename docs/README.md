@@ -11,7 +11,7 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
   
   ![Contribution guidelines for this project](Images/Leaderboard.png)
   
-  ![Contribution guidelines for this project](Images/SinglePLayer.png)
+  ![Contribution guidelines for this project](Images/SinglePlayer.png)
   
   ![Contribution guidelines for this project](Images/FinalScore.png)  
 
