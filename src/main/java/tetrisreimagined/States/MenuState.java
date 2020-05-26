@@ -1,6 +1,7 @@
 package tetrisreimagined.States;
 
 import tetrisreimagined.Game;
+import tetrisreimagined.Menu.controller.MenuCommand.OpenInstructions;
 
 import java.io.IOException;
 
@@ -25,6 +26,11 @@ public class MenuState extends GameState {
             case MULTIPLAYER:
                 game.setGameState(new MultiplayerState(game));
                 game.gamePlayMultiplayer(game.getLanternaHandler());
+                game.setGameState(new MenuState(game));
+                break;
+            case INSTRUCTIONS:
+                game.setGameState(new InstructionState(game));
+                game.viewInstructions();
                 game.setGameState(new MenuState(game));
                 break;
         }

@@ -1,10 +1,16 @@
 package tetrisreimagined;
 
-import tetrisreimagined.Leaderboard.controller.LeaderboardCommand.BackToMenu;
-import tetrisreimagined.Leaderboard.controller.LeaderboardCommand.LeaderboardCommand;
-import tetrisreimagined.Leaderboard.controller.LeaderboardController;
-import tetrisreimagined.Leaderboard.model.LeaderboardModel;
-import tetrisreimagined.Leaderboard.view.lantern.LeaderboardViewLanterna;
+import tetrisreimagined.MenuCommands.BackToMenu;
+import tetrisreimagined.MenuCommands.DoNothing;
+import tetrisreimagined.MenuCommands.ExitTerminal;
+import tetrisreimagined.MenuCommands.InstructionsCommand;
+import tetrisreimagined.Instructions.InstructionsController;
+import tetrisreimagined.Instructions.InstructionsModel;
+import tetrisreimagined.Instructions.InstructionsViewLanterna;
+
+import tetrisreimagined.Leaderboard.LeaderboardController;
+import tetrisreimagined.Leaderboard.LeaderboardModel;
+import tetrisreimagined.Leaderboard.LeaderboardViewLanterna;
 import tetrisreimagined.Menu.controller.MenuCommand.*;
 import tetrisreimagined.Menu.controller.MenuController;
 import tetrisreimagined.Menu.model.MenuModel;
@@ -19,7 +25,7 @@ import java.io.IOException;
 
 public class Game {
 
-    public enum BUTTON {MENU, LEADERBOARD, GAME_PLAY, MULTIPLAYER}
+    public enum BUTTON {MENU, LEADERBOARD, GAME_PLAY, MULTIPLAYER, INSTRUCTIONS}
     private GameState gameState;
     private LanternaHandler lanternaHandler;
 
@@ -37,33 +43,41 @@ public class Game {
     }
 
 
-    public LeaderboardCommand viewLeaderboard() throws IOException, InterruptedException, CloneNotSupportedException {
+    public InstructionsCommand viewLeaderboard() throws IOException, InterruptedException, CloneNotSupportedException {
         LeaderboardModel leaderboardModel = new LeaderboardModel();
         leaderboardModel.readLeaderboardFile("");
         LeaderboardViewLanterna gui = new LeaderboardViewLanterna(lanternaHandler);
         LeaderboardController controller = new LeaderboardController(gui, leaderboardModel);
-        LeaderboardCommand command = controller.start();
+        InstructionsCommand command = controller.start();
 
-        if (command instanceof BackToMenu) {
+        if (command instanceof BackToMenu)
             buttonPressed(BUTTON.MENU);
-        }
-        else if (command instanceof tetrisreimagined.Leaderboard.controller.LeaderboardCommand.ExitTerminal)
-            return command;
 
-        return new tetrisreimagined.Leaderboard.controller.LeaderboardCommand.DoNothing();
-
+        return new tetrisreimagined.MenuCommands.DoNothing();
     }
 
+
+    public InstructionsCommand viewInstructions() throws IOException, InterruptedException, CloneNotSupportedException {
+        InstructionsModel instructionsModel = new InstructionsModel();
+        InstructionsViewLanterna gui = new InstructionsViewLanterna(lanternaHandler);
+        InstructionsController controller = new InstructionsController(gui, instructionsModel);
+        InstructionsCommand command = controller.start();
+
+        if (command instanceof BackToMenu)
+            buttonPressed(BUTTON.MENU);
+
+        return new tetrisreimagined.MenuCommands.DoNothing();
+    }
 
     public void gamePlayMultiplayer(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
 
     }
 
-    public MenuCommand gameMenu(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
+    public InstructionsCommand gameMenu(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
         MenuModel menuModel = new MenuModel();
         MenuViewLanterna menuGui = new MenuViewLanterna(lanternaHandler);
         MenuController controller = new MenuController(menuGui, menuModel);
-        MenuCommand newCommand = controller.start();
+        InstructionsCommand newCommand = controller.start();
 
         if(newCommand instanceof StartGameSinglePlayer)
             buttonPressed(BUTTON.GAME_PLAY);
@@ -71,6 +85,10 @@ public class Game {
             buttonPressed(BUTTON.MULTIPLAYER);
         else if(newCommand instanceof OpenLeaderboard)
             buttonPressed(BUTTON.LEADERBOARD);
+        else if(newCommand instanceof OpenInstructions) {
+            buttonPressed(BUTTON.INSTRUCTIONS);
+
+        }
         else if (newCommand instanceof ExitTerminal)
             return newCommand;
 
@@ -90,7 +108,7 @@ public class Game {
     }
 
     public void run() throws InterruptedException, CloneNotSupportedException, IOException {
-        MenuCommand toReceive = null;
+        InstructionsCommand toReceive = null;
         while(!(toReceive instanceof ExitTerminal)) {
             toReceive = gameMenu(lanternaHandler);
         }

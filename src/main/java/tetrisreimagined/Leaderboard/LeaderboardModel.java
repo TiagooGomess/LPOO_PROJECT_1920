@@ -1,4 +1,4 @@
-package tetrisreimagined.Leaderboard.model;
+package tetrisreimagined.Leaderboard;
 
 import java.io.File;
 import java.io.FileNotFoundException;

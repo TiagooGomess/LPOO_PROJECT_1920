@@ -3,6 +3,8 @@ package tetrisreimagined.Menu.controller;
 import tetrisreimagined.Menu.controller.MenuCommand.*;
 import tetrisreimagined.Menu.model.MenuModel;
 import tetrisreimagined.Menu.view.lantern.MenuViewLanterna;
+import tetrisreimagined.MenuCommands.ExitTerminal;
+import tetrisreimagined.MenuCommands.InstructionsCommand;
 
 import java.io.IOException;
 
@@ -24,14 +26,15 @@ public class MenuController {
         System.out.println("Starting multi player game...");
     }
 
-    public MenuCommand start() throws IOException, InterruptedException {
-        MenuCommand menuCommand;
+    public InstructionsCommand start() throws IOException, InterruptedException {
+        InstructionsCommand menuCommand;
         gui.drawAll();
         do {
             menuCommand = gui.getMenuCommand();
 
         } while (!(menuCommand instanceof ExitTerminal) && (!(menuCommand instanceof StartGameSinglePlayer))
-                && (!(menuCommand instanceof StartGameMultiplayer)) && (!(menuCommand instanceof OpenLeaderboard)));
+                && (!(menuCommand instanceof StartGameMultiplayer)) && (!(menuCommand instanceof OpenLeaderboard))
+                && (!(menuCommand instanceof OpenInstructions)));
 
         return menuCommand;
     }

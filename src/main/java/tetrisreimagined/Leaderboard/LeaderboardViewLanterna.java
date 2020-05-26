@@ -1,4 +1,4 @@
-package tetrisreimagined.Leaderboard.view.lantern;
+package tetrisreimagined.Leaderboard;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
@@ -6,8 +6,10 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import tetrisreimagined.LanternaHandler;
-import tetrisreimagined.Leaderboard.controller.LeaderboardCommand.*;
-import tetrisreimagined.Leaderboard.model.LeaderboardModel;
+import tetrisreimagined.MenuCommands.BackToMenu;
+import tetrisreimagined.MenuCommands.DoNothing;
+import tetrisreimagined.MenuCommands.ExitTerminal;
+import tetrisreimagined.MenuCommands.InstructionsCommand;
 
 import java.io.IOException;
 
@@ -39,7 +41,9 @@ public class LeaderboardViewLanterna extends LanternaHandler {
                 offset += 3;
             }
             graphics.setBackgroundColor(TextColor.Factory.fromString("#ff0000"));
-            graphics.putString(new TerminalPosition(width / 2 - 16, height-3), "Press 1 to Go Back to Main Menu", SGR.BOLD);
+            graphics.putString(new TerminalPosition(width / 2 - 16, height-3), "Press ESC to Go Back to Main Menu", SGR.BOLD);
+
+            graphics.setForegroundColor(TextColor.Factory.fromString("#ffffff"));
 
             this.screen.refresh();
         } catch (IOException e) {
@@ -47,17 +51,14 @@ public class LeaderboardViewLanterna extends LanternaHandler {
         }
     }
 
-    public LeaderboardCommand getLeaderboardCommand() throws IOException, InterruptedException {
+    public InstructionsCommand getLeaderboardCommand() throws IOException, InterruptedException {
 
         while (true) {
 
-            KeyStroke key = screen.pollInput();
+            KeyStroke key = screen.readInput();
 
             if (key == null) return new DoNothing();
-            if (key.getKeyType() == KeyType.Character) {
-                if (key.getCharacter() == '1') return new BackToMenu();
-            }
-            if (key.getKeyType() == KeyType.Escape) return new ExitTerminal(this);
+            if (key.getKeyType() == KeyType.Escape) return new BackToMenu();
         }
     }
 
