@@ -14,8 +14,7 @@ import tetrisreimagined.play.controller.Pieces.PieceController;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,6 +22,10 @@ public class ArenaControllerTest {
     ArenaController arenaController;
     ArenaModel arenaModelMock;
     PieceController pieceControllerMock;
+
+    ArenaController arenaController2;
+    ArenaModel arenaModel2;
+    Observer observerMock2;
 
     @Before
     public void setup() {
@@ -131,6 +134,15 @@ public class ArenaControllerTest {
         when(arenaModelMock.positionHasBlock(new Position(8, 22))).thenReturn(false);
         when(arenaModelMock.positionHasBlock(new Position(9, 22))).thenReturn(false);
 
+        // ---------------------------------------------------------------------------------------
+
+        arenaModel2 = new ArenaModel();
+        observerMock2 = mock(Observer.class);
+        arenaController2 = new ArenaController(observerMock2, arenaModel2);
+
+        when(observerMock2.getHeight()).thenReturn(20);
+        when(observerMock2.getWidth()).thenReturn(20);
+
     }
 
     @Test
@@ -149,11 +161,21 @@ public class ArenaControllerTest {
     }
 
     @Test
-    public void removeLine1() {
+    public void checkTryMoveDown() {
+        // verifica se o y mínimo de uma peça é 0 e se o Y max de uma peça é igual a height - 1.
+        arenaController2.nextPiece();
+        assertEquals(0, arenaModel2.getCurrentPieceModel().getMinYPosition().getY());
+        int counter = 0;
+        for (int i = 0; i < 100; i++) {
+            counter = arenaController2.tryMoveDown(counter, 1);
+        }
+        assertEquals(observerMock2.getHeight()-1, arenaModel2.getCurrentPieceModel().getMaxYPosition().getY());
+    }
 
-        // we need a mock of a void method (arenaModelMock.removeArenaBlocks(blocksToRemove))
-
-        //arenaController.removeLine(20);
-
+    @Test
+    public void moveRight() {
+        // verifica se uma peça é movida para a direita com o comando MoveRight
+//        arenaController2.nextPiece();
+//        arenaController2.getCurrentPieceController()
     }
 }

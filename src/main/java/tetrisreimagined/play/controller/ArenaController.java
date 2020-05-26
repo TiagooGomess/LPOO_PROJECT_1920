@@ -74,8 +74,8 @@ public class ArenaController {
         gameOver();
     }
 
-    private int tryMoveDown(int counter, int levelDifficulty) {
-        if (counter++ == levelDifficulty) { // mudar para velocidade da peça
+    public int tryMoveDown(int counter, int levelDifficulty) {
+        if (counter++ == levelDifficulty) {
             if (this.currentPieceController.canGoDown(gui, arena)) {
                 if (!gamePaused) {
                     if (!currentPieceController.getPieceModel().isInHold())
@@ -294,5 +294,10 @@ public class ArenaController {
         this.gui.drawBigScore(gui.getWidth() + 7, gui.getHeight() / 3, arena.getScore());
         writeScoreToFile(arena.getScore());
     }
+
+    public PieceController getCurrentPieceController() {
+        return currentPieceController;
+    }
+
 
 }

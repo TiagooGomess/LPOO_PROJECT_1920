@@ -2,6 +2,8 @@ package tetrisreimagined.controller;
 
 import org.junit.Before;
 import org.junit.Test;
+import tetrisreimagined.play.controller.ArenaController;
+import tetrisreimagined.play.model.Pieces.NullPieceModel;
 import tetrisreimagined.play.view.lantern.GameViewLanterna;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
@@ -13,6 +15,7 @@ import tetrisreimagined.observer.Observer;
 import tetrisreimagined.play.controller.Pieces.PieceController;
 import tetrisreimagined.play.controller.Commands.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +94,7 @@ public class CommandsTest {
 
         hardDrop.execute(pieceControllerMock);
 
-        System.out.println("->> " + pieceControllerMock.getPieceModel().getBlocks().get(1).getPosition().getX() + " - " + pieceControllerMock.getPieceModel().getBlocks().get(1).getPosition().getY());
+//        System.out.println("->> " + pieceControllerMock.getPieceModel().getBlocks().get(1).getPosition().getX() + " - " + pieceControllerMock.getPieceModel().getBlocks().get(1).getPosition().getY());
 
         // deveria de dar (4, 30), mas dá (4, 6)
 
@@ -145,5 +148,58 @@ public class CommandsTest {
         assertEquals(pModel.getBlocks().get(6).getPosition(), new Position(3, 1));
         assertEquals(pModel.getBlocks().get(5).getPosition(), new Position(3, 2));
         assertEquals(pModel.getBlocks().get(4).getPosition(), new Position(3, 3));
+    }
+
+    @Test
+    public void pauseGame() {
+        assertFalse(ArenaController.isGamePaused());
+        PauseGame pauseGame = new PauseGame();
+        pauseGame.execute(pieceControllerMock);
+        assertTrue(ArenaController.isGamePaused());
+        pauseGame.execute(pieceControllerMock);
+        assertFalse(ArenaController.isGamePaused());
+    }
+
+    @Test
+    public void hold() {
+        ArenaModel arenaModel = new ArenaModel();
+        ArenaController arenaController = new ArenaController(observerMock, arenaModel);
+        arenaController.nextPiece();
+
+        PieceModel currentPieceModel = arenaModel.getCurrentPieceModel();
+
+        assertTrue(arenaModel.getHoldPieceModel() instanceof NullPieceModel);
+
+        Hold hold = new Hold(currentPieceModel, observerMock, arenaModel);
+        PieceController pieceController = arenaController.getCurrentPieceController();
+        hold.execute(arenaController.getCurrentPieceController());
+        arenaController.holdPieceHandler();
+
+        assertFalse(arenaModel.getHoldPieceModel() instanceof NullPieceModel);
+        assertTrue(pieceController.getPieceModel().isInHold());
+
+        PieceModel holdPieceModel = arenaModel.getHoldPieceModel();
+
+        // a anterior currentPiece ficou em espera
+        assertEquals(currentPieceModel.getClass(), holdPieceModel.getClass());
+
+        PieceModel currentPieceModel2 = arenaController.getCurrentPieceController().getPieceModelRaw();
+        hold.execute(arenaController.getCurrentPieceController());
+        arenaController.holdPieceHandler();
+
+        // troca-se a holdPiece pela currentPiece
+        assertEquals(currentPieceModel2.getClass(), arenaModel.getHoldPieceModel().getClass());
+    }
+
+    @Test
+    public void doNothing() {
+        DoNothing doNothing = new DoNothing();
+        assertTrue(doNothing.execute(pieceControllerMock));
+    }
+
+    @Test
+    public void exitTerminal() throws IOException {
+        ExitTerminal exitTerminal = new ExitTerminal(observerMock);
+        assertTrue(exitTerminal.execute(pieceControllerMock));
     }
 }

@@ -22,7 +22,7 @@ public class Hold extends PieceCommand{
     }
 
     @Override
-    public boolean execute(PieceController currentPieceController) throws IOException {
+    public boolean execute(PieceController currentPieceController) {
         if (ArenaController.isGamePaused())
             return false;
         if (!ArenaController.getUsedHoldInRound()) {
