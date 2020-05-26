@@ -1,4 +1,4 @@
-package tetrisreimagined;
+package tetrisreimagined.model;
 
 import org.junit.Before;
 import org.junit.Test;
