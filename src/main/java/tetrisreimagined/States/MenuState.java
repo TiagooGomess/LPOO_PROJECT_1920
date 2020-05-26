@@ -1,7 +1,6 @@
 package tetrisreimagined.States;
 
 import tetrisreimagined.Game;
-import tetrisreimagined.Menu.controller.MenuCommand.OpenInstructions;
 
 import java.io.IOException;
 

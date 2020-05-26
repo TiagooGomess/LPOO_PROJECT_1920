@@ -1,6 +1,6 @@
 package tetrisreimagined.Menu.controller;
 
-import tetrisreimagined.Menu.controller.MenuCommand.*;
+import tetrisreimagined.Menu.controller.WindowCommands.*;
 import tetrisreimagined.Menu.model.MenuModel;
 import tetrisreimagined.Menu.view.lantern.MenuViewLanterna;
 import tetrisreimagined.MenuCommands.ExitTerminal;

@@ -11,7 +11,7 @@ import tetrisreimagined.Instructions.InstructionsViewLanterna;
 import tetrisreimagined.Leaderboard.LeaderboardController;
 import tetrisreimagined.Leaderboard.LeaderboardModel;
 import tetrisreimagined.Leaderboard.LeaderboardViewLanterna;
-import tetrisreimagined.Menu.controller.MenuCommand.*;
+import tetrisreimagined.Menu.controller.WindowCommands.*;
 import tetrisreimagined.Menu.controller.MenuController;
 import tetrisreimagined.Menu.model.MenuModel;
 import tetrisreimagined.Menu.view.lantern.MenuViewLanterna;

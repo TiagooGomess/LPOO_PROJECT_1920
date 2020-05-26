@@ -1,7 +1,5 @@
-package tetrisreimagined.Menu.controller.MenuCommand;
+package tetrisreimagined.Menu.controller.WindowCommands;
 
-import tetrisreimagined.Instructions.InstructionsController;
-import tetrisreimagined.Menu.controller.MenuController;
 import tetrisreimagined.MenuCommands.InstructionsCommand;
 
 import java.io.IOException;

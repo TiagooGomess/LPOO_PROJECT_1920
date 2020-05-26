@@ -2,17 +2,15 @@ package tetrisreimagined.Menu.view.lantern;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import tetrisreimagined.LanternaHandler;
-import tetrisreimagined.Menu.controller.MenuCommand.*;
+import tetrisreimagined.Menu.controller.WindowCommands.*;
 import tetrisreimagined.MenuCommands.DoNothing;
 import tetrisreimagined.MenuCommands.ExitTerminal;
 import tetrisreimagined.MenuCommands.InstructionsCommand;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class MenuViewLanterna extends LanternaHandler  {

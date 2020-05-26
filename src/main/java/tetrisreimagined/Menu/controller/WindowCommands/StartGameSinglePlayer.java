@@ -1,16 +1,12 @@
-package tetrisreimagined.Menu.controller.MenuCommand;
+package tetrisreimagined.Menu.controller.WindowCommands;
 
-import tetrisreimagined.Menu.controller.MenuController;
 import tetrisreimagined.MenuCommands.InstructionsCommand;
 
 import java.io.IOException;
 
-public class OpenInstructions extends InstructionsCommand {
+public class StartGameSinglePlayer extends InstructionsCommand {
     @Override
     public boolean execute() throws IOException {
         return true;
     }
 }
-
-
-
