@@ -4,6 +4,17 @@ Réplica do jogo Tetris, que é um jogo que consiste em empilhar blocos que desc
 Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes (up201806658@fe.up.pt) para a unidade corricular de LPOO 2019/2020.
 
 ## Implemented Features
+
+  ![Contribution guidelines for this project](Images/Menu.png)
+  
+  ![Contribution guidelines for this project](Images/Instructions.png)
+  
+  ![Contribution guidelines for this project](Images/Leaderboard.png)
+  
+  ![Contribution guidelines for this project](Images/SinglePLayer.png)
+  
+  ![Contribution guidelines for this project](Images/FinalScore.png)  
+
   * Movimento das peças para a esquerda e direita através do teclado.
   * Movimento das peças para baixo à medida que o tempo passa.
   * Limites das peças dentro da janela.
@@ -11,30 +22,24 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
   * Soft drop: a peça desce mais rápido quando pressionamos a tecla 'seta para baixo'.
   * Hard drop: a peça desce na arena o máximo possível quando pressionamos a tecla SPACE.
   * Rotação das peças no sentido horário e anti-horário.
-  * Remoção de linhas completas: quando uma linha está completamente preenchida por blocos, então é removida da arena (com bugs)
-   
-   
-  ![Contribution guidelines for this project](Images/Implemented2.png)
-    
-    
+  * Remoção de linhas completas: quando uma linha está completamente preenchida por blocos, então é removida da arena (com bugs).   
   * Ajuste da posição dos blocos depois de uma linha ter sido removida: os blocos das linhas que estão acima da linha removida descem uma unidade.
   * Nível de dificuldade: aumenta a cada 6 linhas "feitas"; faz aumentar a velocidade da peça.
   * Sistema de pontuação: aumenta quando o jogador "faz uma linha", quando usa o soft ou hard drop; a pontuação adicionada é sempre multiplicada pelo nível.
-  * Visualização da próxima peça, na consola.
   * Fim do jogo: o jogo termina quando não for possível a uma peça descer mais na arena a partir da posição inicial.
+  * Peça em espera: peça que o jogador decidiu guardar para usar mais tarde.
+  * Visualização da próxima peça, da peça em espera e da pontuação em modo gráfico.
+  * Visualização da pontuação final e opção de voltar para o menu principal quando o jogador perde.
+  * Adição de um *Menu* com as opções: jogar, ver leaderboard e ver instruções.
+  * Leaderboard: visualização das top 5 pontuações.
     
-  ![Contribution guidelines for this project](Images/Implemented1.png)
      
-  ![ALT TEXT](https://media.giphy.com/media/XcGdJLs8ql3vhKoqoZ/giphy.gif) 
+  ![ALT TEXT](https://media.giphy.com/media/hXDWAAPYo3sMDSypuv/giphy.gif) 
    
   
   
 ## Planned Features
-  * Top pontuações.
   * Modo Multiplayer
-  * Peça em espera: peça que o jogador decidiu guardar para usar mais tarde.
-  * Visualização da próxima peça, da pontuação e do nível em modo gráfico.
-  * Rotação de toda a arena quando rodamos uma peça.
 
 # Design
   
@@ -73,29 +78,34 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 >**Implementation:**
 ![ALT TEXT](Images/CommandPattern.PNG)
 
->**Observer:**
->Consequences: A utilização deste padrão permitiu uma maior simplificação do ArenaController ([ArenaController.java - Result](../src/main/java/tetrisreimagined/play/rules/ArenaController.java)) bem como uma maior abstração dos comandos utilizados.
+>**Consequences:** A utilização deste padrão permitiu uma maior simplificação do ArenaController ([ArenaController.java - Result](../src/main/java/tetrisreimagined/play/rules/ArenaController.java)) bem como uma maior abstração dos comandos utilizados.
 
-  * Pretendemos também implementar o Design Pattern State, com os seguintes estados:
->* GamePlay
->* GamePause
->* Menu
->* Multiplayer
->* ToRecordVisualization
->* entre outros.
+  * State Pattern
+ 
+>**Problem in Context:**
+>Realizar a transição entre os vários estados possíveis do ecrã (Menu Principal, *Instructions*, *Leaderboard* e *SinglePlayer*)..
 
+>**The Pattern:**
+>O *State Pattern* permite que um determinado objeto realize ações dependendo do seu estado atual e da ação do utilizador (consoante um evento seja desencadeado)
+>Deste modo, os vários "ecrãs" são representados por estados, sendo que cada estado altera a parte gráfica consoante a forma como ocorreu.
+
+>**Implementation:**
+>![ALT TEXT](Images/StatePattern.PNG)
+
+>**Consequences:** A utilização deste padrão permitiu uma maior simplificação da classe *Game* ([Game.java - Result](../src/main/java/tetrisreimagined/Game.java)), bem como uma maior abstração dos vários estados e da passagem entre eles.
+>Foi utilizado para as transições entre o Menu, *SinglePlayer*, *Leaderboard* e *Instructions Menu*.
   
 # Code Smells e Sugestões de Refactoring
   * **Long Method e Duplicate Code:** 
->   Os métodos rotatePiece de [RotateClockWise](../src/main/java/tetrisreimagined/play/rules/commands/RotateClockWise.java) e [RotateCounterClockWise](../src/main/java/tetrisreimagined/play/rules/commands/RotateCounterClockWise.java)  são bastante longos, pelo que os poderíamos ter dividido em vários métodos mais pequenos. Além disso, existe uma certa similaridade entre os métodos, havendo algum código repetido. Poderíamos condensar os comandos RotateClockWise e RotateCounterClockWise, ficando com um comando Rotate, que receberia no construtor qual o tipo de rotação.
+>   Os métodos rotatePiece de [RotateClockWise](../src/main/java/tetrisreimagined/play/controller/Commands/RotateClockWise.java) e [RotateCounterClockWise](../src/main/java/tetrisreimagined/play/controller/Commands/RotateCounterClockWise.java)  são bastante longos, pelo que os poderíamos ter dividido em vários métodos mais pequenos. Além disso, existe uma certa similaridade entre os métodos, havendo algum código repetido. Poderíamos condensar os comandos RotateClockWise e RotateCounterClockWise, ficando com um comando Rotate, que receberia no construtor qual o tipo de rotação.
   * **If Statements:** 
->  Os if's de getCommand, na classe [GameViewLanterna](../src/main/java/tetrisreimagined/play/gui/lantern/GameViewLanterna.java), poderiam ser substituídos por um switch statement.
+>  Os if's de getCommand, na classe [GameViewLanterna](../src/main/java/tetrisreimagined/play/view/lantern/GameViewLanterna.java), poderiam ser substituídos por um switch statement.
   
   * **Return null:** 
->  No método getBlockById, na classe [PieceController](../src/main/java/tetrisreimagined/play/rules/Pieces/PieceController.java), poderíamos criar uma classe NullBlock.
+>  No método getBlockById, na classe [PieceController](../src/main/java/tetrisreimagined/play/controller/Pieces/PieceController.java), poderíamos criar uma classe NullBlock.
 
 * **Switch Statements** 
-> No método updateScore() da classe [ArenaController](../src/main/java/tetrisreimagined/play/rules/ArenaController.java) a existência de um switch conduz a um novo smell. A existência de este tipo estrutura condicional é sempre algo de que sempre devemos desconfiar. Provavelmente posteriormente procederemos a um refactor da mesma.
+> No método updateScore() da classe [ArenaController](../src/main/java/tetrisreimagined/play/controller/ArenaController.java) a existência de um switch conduz a um novo smell. A existência de este tipo estrutura condicional é sempre algo de que sempre devemos desconfiar. Provavelmente posteriormente procederemos a um refactor da mesma.
     
   
 # Testing
