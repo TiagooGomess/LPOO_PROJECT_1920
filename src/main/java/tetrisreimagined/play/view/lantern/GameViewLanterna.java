@@ -150,17 +150,6 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
         graphics.putString(new TerminalPosition(width / 2 - 10, 25), "Press Enter To Continue", SGR.BOLD);
 
         screen.refresh();
-
-        KeyStroke key = null;
-
-        do {
-            key = screen.readInput();
-            if(key != null) {
-                if(key.getKeyType() == KeyType.Enter)
-                    break;
-            }
-
-        } while(true);
     }
 
     @Override
@@ -175,7 +164,7 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
             if (key.getKeyType() == KeyType.ArrowRight) return new MoveRight(gameModel.getCurrentPieceModel(), this, gameModel);
             if (key.getKeyType() == KeyType.ArrowDown) return new MoveDown(gameModel.getCurrentPieceModel(), this, gameModel, false);
             if (key.getKeyType() == KeyType.ArrowLeft) return new MoveLeft(gameModel.getCurrentPieceModel(), this, gameModel);
-            if (key.getKeyType() == KeyType.Enter) return new PauseGame();
+            if (key.getKeyType() == KeyType.Enter) return new PauseGame(this);
             if (key.getKeyType() == KeyType.Character) {
                 if (key.getCharacter() == 'z') return new RotateCounterClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
                 if (key.getCharacter() == ' ') return new HardDrop(gameModel.getCurrentPieceModel(), this, gameModel);

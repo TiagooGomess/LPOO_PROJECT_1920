@@ -26,7 +26,6 @@ public class ArenaController {
     private static boolean hasPieceInHold = false;
     private static boolean usedHoldInRound = false;
 
-    private static boolean gamePaused = false;
     private int numIteration = 0;
     private boolean hasFinished = false;
 
@@ -49,15 +48,15 @@ public class ArenaController {
 
             endTime = System.currentTimeMillis();
             if(notFirstIteration(begTime))
-                elapsedTime = endTime - begTime;
+                elapsedTime = Math.min(45, endTime - begTime);
 
             Thread.sleep(Math.abs(30 - elapsedTime));
 
             begTime = System.currentTimeMillis();
 
-            if (currentPieceController.getPieceModel().isInHold()) {
+            if (currentPieceController.getPieceModel().isInHold())
                 holdPieceHandler();
-            }
+
 
             if (pieceTouchedGround) {
                 nextPiece();
@@ -74,10 +73,8 @@ public class ArenaController {
     public int tryMoveDown(int counter, int levelDifficulty) {
         if (counter++ == levelDifficulty) {
             if (this.currentPieceController.canGoDown(gui, arena)) {
-                if (!gamePaused) {
-                    if (!currentPieceController.getPieceModel().isInHold())
-                        this.currentPieceController.makeCurrentPieceFall(gui, arena);
-                }
+                if (!currentPieceController.getPieceModel().isInHold())
+                    this.currentPieceController.makeCurrentPieceFall(gui, arena);
                 else
                     System.out.println("Game paused. Press ENTER to continue...");
             }
@@ -150,23 +147,19 @@ public class ArenaController {
     }
 
     public void removeLine(int line) {
-
         List<Block> blocks = arena.getArenaBlocks();
         List<Block> toRemove = new ArrayList<>();
         for (Block block: blocks) {
-            if (block.getPosition().getY() == line) {
+            if (block.getPosition().getY() == line)
                 toRemove.add(block);
-            }
         }
         arena.removeArenaBlocks(toRemove);
     }
 
     private void pushBlocksDown(int line) { // ajusta os blocos, sabendo que a linha 'line' foi removida
-
         for (Block block: arena.getArenaBlocks()) {
-            if (block.getPosition().getY() < line) {
+            if (block.getPosition().getY() < line)
                 block.setPosition(block.getPosition().down());
-            }
         }
     }
 
@@ -210,14 +203,6 @@ public class ArenaController {
         this.arena.getCurrentPieceModel().setInHold(false);
         this.arena.getHoldPieceModel().setInHold(true);
         this.arena.setHoldPieceToDisplay(this.holdPieceController.getPieceModel());
-    }
-
-    public static void swapGameState() {
-        gamePaused = !gamePaused;
-    }
-
-    public static boolean isGamePaused() {
-        return gamePaused;
     }
 
     public static void setHasPieceInHold(boolean hasPieceInHold) {

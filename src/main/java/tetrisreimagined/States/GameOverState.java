@@ -1,5 +1,7 @@
 package tetrisreimagined.States;
 
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 import tetrisreimagined.Game;
 import tetrisreimagined.LanternaHandler;
 import tetrisreimagined.MenuCommands.DoNothing;
@@ -37,8 +39,23 @@ public class GameOverState extends GameState {
         this.gui.drawBigScore((game.getLanternaHandler().getWidth() / 2) - 8, game.getLanternaHandler().getHeight() / 3, game.getArena().getScore());
         writeScoreToFile(game.getArena().getScore());
 
+        readUntilEnter();
+
         buttonPressed(Game.BUTTON.MENU);
         return new DoNothing();
+    }
+
+    private void readUntilEnter() throws IOException {
+        KeyStroke key = null;
+
+        do {
+            key = this.gui.getScreen().readInput();
+            if(key != null) {
+                if(key.getKeyType() == KeyType.Enter)
+                    break;
+            }
+
+        } while(true);
     }
 
     private void writeScoreToFile(int score) {

@@ -20,8 +20,6 @@ public class MoveRight extends PieceCommand {
 
     @Override
     public boolean execute(PieceController currentPieceController) {
-        if (ArenaController.isGamePaused())
-            return false;
         if(currentPieceController.canGoRight(gui, gameModel)) {
             for (Block block: this.pieceModel.getBlocks())
                 block.setPosition(block.getPosition().right());

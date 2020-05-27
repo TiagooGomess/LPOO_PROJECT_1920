@@ -23,8 +23,6 @@ public class Hold extends PieceCommand{
 
     @Override
     public boolean execute(PieceController currentPieceController) {
-        if (ArenaController.isGamePaused())
-            return false;
         if (!ArenaController.getUsedHoldInRound()) {
             ArenaController.setHasPieceInHold(!(this.gameModel.getHoldPieceModel() instanceof NullPieceModel));
             this.pieceModel.setInHold(true);

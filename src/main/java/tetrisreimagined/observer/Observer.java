@@ -1,5 +1,6 @@
 package tetrisreimagined.observer;
 
+import com.googlecode.lanterna.screen.Screen;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.controller.Commands.PieceCommand;
 
@@ -12,6 +13,7 @@ public interface Observer<T> {
     int getWidth();
     int getHeight();
 
+    Screen getScreen();
     PieceCommand getCommand(ArenaModel gameModel) throws IOException, InterruptedException;
     void changed(T subject);
     void closeTerminal() throws IOException;
