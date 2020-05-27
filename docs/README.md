@@ -90,7 +90,7 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 >Deste modo, os vários "ecrãs" são representados por estados, sendo que cada estado altera a parte gráfica consoante a forma como ocorreu.
 
 >**Implementation:**
->![ALT TEXT](Images/StatePattern.PNG)
+>![ALT TEXT](Images/StatePattern.png)
 
 >**Consequences:** A utilização deste padrão permitiu uma maior simplificação da classe *Game* ([Game.java - Result](../src/main/java/tetrisreimagined/Game.java)), bem como uma maior abstração dos vários estados e da passagem entre eles.
 >Foi utilizado para as transições entre o Menu, *SinglePlayer*, *Leaderboard*, *Instructions Menu* e *Game Over*
