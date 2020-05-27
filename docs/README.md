@@ -78,7 +78,7 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 >**Implementation:**
 ![ALT TEXT](Images/CommandPattern.png)
 
->**Consequences:** A utilização deste padrão permitiu uma maior simplificação do ArenaController ([ArenaController.java - Result](../src/main/java/tetrisreimagined/play/rules/ArenaController.java)) bem como uma maior abstração dos comandos utilizados.
+>**Consequences:** A utilização deste padrão permitiu uma maior simplificação do ArenaController ([ArenaController.java - Result](../src/main/java/tetrisreimagined/play/controller/ArenaController.java)) bem como uma maior abstração dos comandos utilizados.
 
   * State Pattern
  
