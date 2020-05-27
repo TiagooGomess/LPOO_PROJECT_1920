@@ -95,6 +95,9 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 >**Consequences:** A utilização deste padrão permitiu uma maior simplificação da classe *Game* ([Game.java - Result](../src/main/java/tetrisreimagined/Game.java)), bem como uma maior abstração dos vários estados e da passagem entre eles.
 >Foi utilizado para as transições entre o Menu, *SinglePlayer*, *Leaderboard*, *Instructions Menu* e *Game Over*
   
+> De modo a ilustrar as diferentes transições entre os possíveis estados, elaboramos uma *State Machine* que exemplifica as mesmas:
+>![ALT TEXT](Images/StateMachine.png)
+>
 # Code Smells e Sugestões de Refactoring
   * **Long Method e Duplicate Code:** 
 >   Os métodos rotatePiece de [RotateClockWise](../src/main/java/tetrisreimagined/play/controller/Commands/RotateClockWise.java) e [RotateCounterClockWise](../src/main/java/tetrisreimagined/play/controller/Commands/RotateCounterClockWise.java)  são bastante longos, pelo que os poderíamos ter dividido em vários métodos mais pequenos. Além disso, existe uma certa similaridade entre os métodos, havendo algum código repetido. Poderíamos condensar os comandos RotateClockWise e RotateCounterClockWise, ficando com um comando Rotate, que receberia no construtor qual o tipo de rotação.
