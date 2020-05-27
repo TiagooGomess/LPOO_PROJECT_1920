@@ -42,6 +42,7 @@ public class MenuState extends GameState {
                 break;
         }
         game.getGameState().updateView();
+        game.setArena(new ArenaModel());
     }
 
     public InstructionsCommand updateView() throws IOException, InterruptedException, CloneNotSupportedException {

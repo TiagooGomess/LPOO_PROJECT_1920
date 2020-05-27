@@ -20,6 +20,7 @@ public class ArenaModel extends Observable<ArenaModel> {
     private PieceModel holdPieceToDisplay;
     private int score = 0;
     private int level = 0;
+    private int numLinesTotal = 0;
 
     public ArenaModel() {
         this.arenaBlocks = new ArrayList<>();
@@ -109,8 +110,39 @@ public class ArenaModel extends Observable<ArenaModel> {
         this.holdPieceModel = holdPieceModel;
     }
 
+    public int getNumLinesTotal() {
+        return numLinesTotal;
+    }
+
+    public void setNumLinesTotal(int numLinesTotal) {
+        this.numLinesTotal = numLinesTotal;
+    }
+
     public void updateLevel(int numLinesTotal) {
         this.level = numLinesTotal / 6; // 6 linhas -> aumenta de nível
     }
 
+    public void updateScore(int numLines) {
+
+        switch (numLines) {
+            case 0:
+                break;
+            case 1:
+                this.score = this.score + 50 * (this.level + 1);
+                break;
+            case 2:
+                this.score = this.score + 150 * (this.level + 1);
+                break;
+            case 3:
+                this.score = this.score + 350 * (this.level + 1);
+                break;
+            case 4:
+                this.score = this.score + 1000 * (this.level + 1); // AKA a Tetris
+                break;
+        }
+
+        if (arenaIsEmpty()) {
+            this.score = this.score + 2000 * (this.level + 1);
+        }
+    }
 }

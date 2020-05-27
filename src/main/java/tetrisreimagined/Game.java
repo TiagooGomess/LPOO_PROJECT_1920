@@ -60,4 +60,8 @@ public class Game {
     public ArenaModel getArena() {
         return arena;
     }
+
+    public void setArena(ArenaModel arena) {
+        this.arena = arena;
+    }
 }

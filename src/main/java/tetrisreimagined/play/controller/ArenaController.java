@@ -26,7 +26,6 @@ public class ArenaController {
     private static boolean hasPieceInHold = false;
     private static boolean usedHoldInRound = false;
 
-    private int numLinesTotal = 0;
     private static boolean gamePaused = false;
     private int numIteration = 0;
     private boolean hasFinished = false;
@@ -171,30 +170,6 @@ public class ArenaController {
         }
     }
 
-    public void updateScore(int numLines) {
-
-        switch (numLines) {
-            case 0:
-                break;
-            case 1:
-                arena.setScore(arena.getScore() + 50*(this.arena.getLevel() + 1));
-                break;
-            case 2:
-                arena.setScore(arena.getScore() + 150*(this.arena.getLevel() + 1));
-                break;
-            case 3:
-                arena.setScore(arena.getScore() + 350*(this.arena.getLevel() + 1));
-                break;
-            case 4:
-                arena.setScore(arena.getScore() + 1000*(this.arena.getLevel() + 1)); // AKA a Tetris
-                break;
-        }
-
-        if (this.arena.arenaIsEmpty()) {
-            arena.setScore(arena.getScore() + 2000*(this.arena.getLevel() + 1));
-        }
-    }
-
     public void checkIfScore() {
 
         int numLines = 0;
@@ -212,9 +187,29 @@ public class ArenaController {
             }
         } while (!changedNothing);
 
-        updateScore(numLines);
-        arena.updateLevel(numLinesTotal);
-        this.numLinesTotal += numLines;
+        arena.updateScore(numLines);
+        arena.updateLevel(arena.getNumLinesTotal());
+        arena.setNumLinesTotal(arena.getNumLinesTotal() + numLines);
+    }
+
+    public void holdPieceHandler() {
+        if (!hasPieceInHold) {
+            this.holdPieceController = new PieceController(this.currentPieceController.getPieceModelRaw());
+            this.arena.setHoldPieceModel(this.holdPieceController.getPieceModel());
+            nextPiece();
+            this.arena.setHoldPieceToDisplay(this.holdPieceController.getPieceModel());
+            return;
+        }
+
+        PieceController currentPieceControllerCopy = new PieceController(currentPieceController.getPieceModel());
+        currentPieceController = new PieceController(holdPieceController.getPieceModelRaw());
+        holdPieceController = new PieceController(currentPieceControllerCopy.getPieceModelRaw());
+        currentPieceController.setStartPosition(this.gui);
+        this.arena.setCurrentPieceModel(this.currentPieceController.getPieceModel());
+        this.arena.setHoldPieceModel(holdPieceController.getPieceModel());
+        this.arena.getCurrentPieceModel().setInHold(false);
+        this.arena.getHoldPieceModel().setInHold(true);
+        this.arena.setHoldPieceToDisplay(this.holdPieceController.getPieceModel());
     }
 
     public static void swapGameState() {
@@ -232,25 +227,6 @@ public class ArenaController {
 
     public static boolean getUsedHoldInRound() {
         return usedHoldInRound;
-    }
-
-    public void holdPieceHandler() {
-        if (!hasPieceInHold) {
-            this.holdPieceController = new PieceController(this.currentPieceController.getPieceModelRaw());
-            this.arena.setHoldPieceModel(this.holdPieceController.getPieceModel());
-            nextPiece();
-            this.arena.setHoldPieceToDisplay(this.holdPieceController.getPieceModel());
-            return;
-        }
-        PieceController currentPieceControllerCopy = new PieceController(currentPieceController.getPieceModel());
-        currentPieceController = new PieceController(holdPieceController.getPieceModelRaw());
-        holdPieceController = new PieceController(currentPieceControllerCopy.getPieceModelRaw());
-        currentPieceController.setStartPosition(this.gui);
-        this.arena.setCurrentPieceModel(this.currentPieceController.getPieceModel());
-        this.arena.setHoldPieceModel(holdPieceController.getPieceModel());
-        this.arena.getCurrentPieceModel().setInHold(false);
-        this.arena.getHoldPieceModel().setInHold(true);
-        this.arena.setHoldPieceToDisplay(this.holdPieceController.getPieceModel());
     }
 
     public PieceController getCurrentPieceController() {
