@@ -57,7 +57,7 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 >de que foram feitas alterações e redesenha a cena.
 
 >**Implementation:**
-![ALT TEXT](Images/MVC.PNG)
+![ALT TEXT](Images/MVC.png)
 >**Consequences:**
 >Com esta implementação, alcançamos uma melhor estruturação do projeto. O processo de notificar e registo de ocorrências,
 >agiliza ainda mais a questão de desenhar a cena, uma vez que a mesma só é novamente desenhada se ocorrerem alterações. 
@@ -76,7 +76,7 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 >viabilizando assim o SRP (Single Responsability Principle)
 
 >**Implementation:**
-![ALT TEXT](Images/CommandPattern.PNG)
+![ALT TEXT](Images/CommandPattern.png)
 
 >**Consequences:** A utilização deste padrão permitiu uma maior simplificação do ArenaController ([ArenaController.java - Result](../src/main/java/tetrisreimagined/play/rules/ArenaController.java)) bem como uma maior abstração dos comandos utilizados.
 
@@ -90,7 +90,7 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 >Deste modo, os vários "ecrãs" são representados por estados, sendo que cada estado altera a parte gráfica consoante a forma como ocorreu.
 
 >**Implementation:**
->![ALT TEXT](Images/StatePattern.png)
+>![ALT TEXT](Images/StatePattern.PNG)
 
 >**Consequences:** A utilização deste padrão permitiu uma maior simplificação da classe *Game* ([Game.java - Result](../src/main/java/tetrisreimagined/Game.java)), bem como uma maior abstração dos vários estados e da passagem entre eles.
 >Foi utilizado para as transições entre o Menu, *SinglePlayer*, *Leaderboard*, *Instructions Menu* e *Game Over*
