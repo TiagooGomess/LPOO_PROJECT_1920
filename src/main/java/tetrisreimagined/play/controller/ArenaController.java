@@ -70,8 +70,6 @@ public class ArenaController {
             pCommand.execute(currentPieceController);
 
         } while (!(pCommand instanceof ExitTerminal) && !hasFinished);
-
-        gameOver();
     }
 
     public int tryMoveDown(int counter, int levelDifficulty) {
@@ -215,12 +213,8 @@ public class ArenaController {
         } while (!changedNothing);
 
         updateScore(numLines);
-        updateLevel();
+        arena.updateLevel(numLinesTotal);
         this.numLinesTotal += numLines;
-    }
-
-    private void updateLevel() {
-        this.arena.setLevel(numLinesTotal / 6); // 6 linhas -> aumenta de nível
     }
 
     public static void swapGameState() {
@@ -259,45 +253,7 @@ public class ArenaController {
         this.arena.setHoldPieceToDisplay(this.holdPieceController.getPieceModel());
     }
 
-    private void writeScoreToFile(int score) {
-        try {
-            File myFile = new File("files/leaderboard.txt");
-            myFile.createNewFile();
-
-            Scanner myReader = new Scanner(myFile);
-            List<Integer> maxPoints = new ArrayList<>();
-
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                maxPoints.add(parseInt(data));
-            }
-            maxPoints.add(score);
-            Collections.sort(maxPoints, Collections.reverseOrder());
-            myReader.close();
-
-            BufferedWriter writer = new BufferedWriter(new FileWriter("files/leaderboard.txt", false));
-
-            for(int index = 0; index < Integer.min(maxPoints.size(), 5); index++) {
-                String toAdd = maxPoints.get(index) + "\n";
-                writer.append(toAdd);
-            }
-
-            writer.close();
-
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
-
-    public void gameOver() throws IOException {
-        this.gui.drawBigScore(gui.getWidth() + 7, gui.getHeight() / 3, arena.getScore());
-        writeScoreToFile(arena.getScore());
-    }
-
     public PieceController getCurrentPieceController() {
         return currentPieceController;
     }
-
-
 }

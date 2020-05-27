@@ -12,6 +12,7 @@ import tetrisreimagined.Menu.view.lantern.MenuViewLanterna;
 import tetrisreimagined.MenuCommands.DoNothing;
 import tetrisreimagined.MenuCommands.ExitTerminal;
 import tetrisreimagined.MenuCommands.InstructionsCommand;
+import tetrisreimagined.play.model.ArenaModel;
 
 import java.io.IOException;
 
@@ -41,7 +42,6 @@ public class MenuState extends GameState {
                 break;
         }
         game.getGameState().updateView();
-        game.setGameState(this);
     }
 
     public InstructionsCommand updateView() throws IOException, InterruptedException, CloneNotSupportedException {

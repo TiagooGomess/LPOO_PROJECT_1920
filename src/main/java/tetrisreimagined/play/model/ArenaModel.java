@@ -108,4 +108,9 @@ public class ArenaModel extends Observable<ArenaModel> {
     public void setHoldPieceModel(PieceModel holdPieceModel) {
         this.holdPieceModel = holdPieceModel;
     }
+
+    public void updateLevel(int numLinesTotal) {
+        this.level = numLinesTotal / 6; // 6 linhas -> aumenta de nível
+    }
+
 }

@@ -17,14 +17,15 @@ public class GamePlayState extends GameState {
 
     public GamePlayState(Game game, LanternaHandler lanternaHandler) throws InterruptedException, CloneNotSupportedException, IOException {
         super(game);
-        this.arena = new ArenaModel();
+        this.arena = game.getArena();
         this.gui = new GameViewLanterna(lanternaHandler);
-        this.controller = new ArenaController(gui, this.arena);
+        this.controller = new ArenaController(this.gui, this.arena);
     }
 
     @Override
     public void buttonPressed(Game.BUTTON button) throws InterruptedException, CloneNotSupportedException, IOException {
-        game.setGameState(new MenuState(game, game.getLanternaHandler()));
+        game.setGameState(new GameOverState(game, game.getLanternaHandler()));
+        game.getGameState().updateView();
     }
 
     @Override
@@ -32,6 +33,7 @@ public class GamePlayState extends GameState {
         arena.addObserver(gui);
         controller.start();
 
+        buttonPressed(Game.BUTTON.GAME_OVER);
         return new DoNothing();
     }
 }

@@ -25,13 +25,15 @@ import java.io.IOException;
 
 public class Game {
 
-    public enum BUTTON {MENU, LEADERBOARD, GAME_PLAY, MULTIPLAYER, INSTRUCTIONS}
+    public enum BUTTON {MENU, LEADERBOARD, GAME_PLAY, MULTIPLAYER, INSTRUCTIONS, GAME_OVER}
     private GameState gameState;
     private LanternaHandler lanternaHandler;
+    private ArenaModel arena;
 
     public Game() throws IOException, InterruptedException, CloneNotSupportedException {
         this.lanternaHandler = new LanternaHandler(70, 35);
         this.gameState = new MenuState(this, lanternaHandler);
+        this.arena = new ArenaModel();
     }
 
     public void run() throws InterruptedException, CloneNotSupportedException, IOException {
@@ -55,4 +57,7 @@ public class Game {
         this.gameState = gameState;
     }
 
+    public ArenaModel getArena() {
+        return arena;
+    }
 }

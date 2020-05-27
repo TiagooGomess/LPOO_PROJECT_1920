@@ -9,6 +9,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.*;
+import org.w3c.dom.Text;
 import tetrisreimagined.LanternaHandler;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
@@ -144,7 +145,8 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
         graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
         String resultScore = Integer.toString(score);
         graphics.putString(new TerminalPosition(xOffset + 3 - resultScore.length() + 1, yOffset), "FINAL SCORE: ", SGR.BLINK);
-        graphics.putString(new TerminalPosition(xOffset + 15 - resultScore.length() + 1, yOffset), String.valueOf(score), SGR.BLINK);
+
+        graphics.putString(new TerminalPosition(xOffset + 15 - resultScore.length() + 1, yOffset), resultScore, SGR.BLINK);
         graphics.putString(new TerminalPosition(width / 2 - 10, 25), "Press Enter To Continue", SGR.BOLD);
 
         screen.refresh();
@@ -152,7 +154,7 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
         KeyStroke key = null;
 
         do {
-            key = screen.pollInput();
+            key = screen.readInput();
             if(key != null) {
                 if(key.getKeyType() == KeyType.Enter)
                     break;
