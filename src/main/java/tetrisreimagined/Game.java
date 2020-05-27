@@ -31,88 +31,28 @@ public class Game {
 
     public Game() throws IOException, InterruptedException, CloneNotSupportedException {
         this.lanternaHandler = new LanternaHandler(70, 35);
-        this.gameState = new MenuState(this);
+        this.gameState = new MenuState(this, lanternaHandler);
     }
 
-    public void gamePlay(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
-        ArenaModel arena = new ArenaModel();
-        GameViewLanterna gui = new GameViewLanterna(lanternaHandler);
-        arena.addObserver(gui);
-        ArenaController controller = new ArenaController(gui, arena);
-        controller.start();
-    }
+    public void run() throws InterruptedException, CloneNotSupportedException, IOException {
+        InstructionsCommand toReceive;
+        do
+            toReceive = gameState.updateView();
+        while(!(toReceive instanceof ExitTerminal));
 
-
-    public InstructionsCommand viewLeaderboard() throws IOException, InterruptedException, CloneNotSupportedException {
-        LeaderboardModel leaderboardModel = new LeaderboardModel();
-        leaderboardModel.readLeaderboardFile("");
-        LeaderboardViewLanterna gui = new LeaderboardViewLanterna(lanternaHandler);
-        LeaderboardController controller = new LeaderboardController(gui, leaderboardModel);
-        InstructionsCommand command = controller.start();
-
-        if (command instanceof BackToMenu)
-            buttonPressed(BUTTON.MENU);
-
-        return new tetrisreimagined.MenuCommands.DoNothing();
-    }
-
-
-    public InstructionsCommand viewInstructions() throws IOException, InterruptedException, CloneNotSupportedException {
-        InstructionsModel instructionsModel = new InstructionsModel();
-        InstructionsViewLanterna gui = new InstructionsViewLanterna(lanternaHandler);
-        InstructionsController controller = new InstructionsController(gui, instructionsModel);
-        InstructionsCommand command = controller.start();
-
-        if (command instanceof BackToMenu)
-            buttonPressed(BUTTON.MENU);
-
-        return new tetrisreimagined.MenuCommands.DoNothing();
-    }
-
-    public void gamePlayMultiplayer(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
-
-    }
-
-    public InstructionsCommand gameMenu(LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
-        MenuModel menuModel = new MenuModel();
-        MenuViewLanterna menuGui = new MenuViewLanterna(lanternaHandler);
-        MenuController controller = new MenuController(menuGui, menuModel);
-        InstructionsCommand newCommand = controller.start();
-
-        if(newCommand instanceof StartGameSinglePlayer)
-            buttonPressed(BUTTON.GAME_PLAY);
-        else if (newCommand instanceof StartGameMultiplayer)
-            buttonPressed(BUTTON.MULTIPLAYER);
-        else if(newCommand instanceof OpenLeaderboard)
-            buttonPressed(BUTTON.LEADERBOARD);
-        else if(newCommand instanceof OpenInstructions) {
-            buttonPressed(BUTTON.INSTRUCTIONS);
-
-        }
-        else if (newCommand instanceof ExitTerminal)
-            return newCommand;
-
-        return new DoNothing();
-    }
-
-    public void buttonPressed(BUTTON button) throws InterruptedException, CloneNotSupportedException, IOException {
-        gameState.buttonPressed(button);
-    }
-
-    public void setGameState(GameState gameState) {
-        this.gameState = gameState;
+        System.exit(0);
     }
 
     public LanternaHandler getLanternaHandler() {
         return lanternaHandler;
     }
 
-    public void run() throws InterruptedException, CloneNotSupportedException, IOException {
-        InstructionsCommand toReceive = null;
-        while(!(toReceive instanceof ExitTerminal)) {
-            toReceive = gameMenu(lanternaHandler);
-        }
-        System.exit(0);
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 
 }
