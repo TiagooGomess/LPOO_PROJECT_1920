@@ -5,7 +5,6 @@ import tetrisreimagined.LanternaHandler;
 import tetrisreimagined.Menu.controller.MenuController;
 import tetrisreimagined.Menu.controller.WindowCommands.OpenInstructions;
 import tetrisreimagined.Menu.controller.WindowCommands.OpenLeaderboard;
-import tetrisreimagined.Menu.controller.WindowCommands.StartGameMultiplayer;
 import tetrisreimagined.Menu.controller.WindowCommands.StartGameSinglePlayer;
 import tetrisreimagined.Menu.model.MenuModel;
 import tetrisreimagined.Menu.view.lantern.MenuViewLanterna;
@@ -21,7 +20,7 @@ public class MenuState extends GameState {
     MenuViewLanterna menuGui;
     MenuController controller;
 
-    public MenuState(Game game, LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
+    public MenuState(Game game, LanternaHandler lanternaHandler) {
         super(game);
         this.menuModel = new MenuModel();
         this.menuGui = new MenuViewLanterna(lanternaHandler);
@@ -50,8 +49,6 @@ public class MenuState extends GameState {
 
         if(newCommand instanceof StartGameSinglePlayer)
             buttonPressed(Game.BUTTON.GAME_PLAY);
-        else if (newCommand instanceof StartGameMultiplayer)
-            buttonPressed(Game.BUTTON.MULTIPLAYER);
         else if(newCommand instanceof OpenLeaderboard)
             buttonPressed(Game.BUTTON.LEADERBOARD);
         else if(newCommand instanceof OpenInstructions)
