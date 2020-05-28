@@ -10,13 +10,19 @@ import java.io.IOException;
 
 public class Game {
 
-    public enum BUTTON {MENU, LEADERBOARD, GAME_PLAY, MULTIPLAYER, INSTRUCTIONS, GAME_OVER}
+    public enum BUTTON {MENU, LEADERBOARD, GAME_PLAY, INSTRUCTIONS, GAME_OVER}
     private GameState gameState;
     private final LanternaHandler lanternaHandler;
     private ArenaModel arena;
 
-    public Game() throws IOException, InterruptedException, CloneNotSupportedException {
+    public Game() {
         this.lanternaHandler = new LanternaHandler(70, 35);
+        this.gameState = new MenuState(this, lanternaHandler);
+        this.arena = new ArenaModel();
+    }
+
+    public Game(LanternaHandler lanternaHandler) {
+        this.lanternaHandler = lanternaHandler;
         this.gameState = new MenuState(this, lanternaHandler);
         this.arena = new ArenaModel();
     }

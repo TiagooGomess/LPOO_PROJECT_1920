@@ -27,7 +27,7 @@ public class LeaderBoardState extends GameState {
     }
 
     public InstructionsCommand updateView() throws IOException, InterruptedException, CloneNotSupportedException {
-        leaderboardModel.readLeaderboardFile("");
+        leaderboardModel.readLeaderboardFile();
         InstructionsCommand command = controller.start();
 
         buttonPressed(Game.BUTTON.MENU);

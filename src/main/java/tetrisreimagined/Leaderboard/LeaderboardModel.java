@@ -15,7 +15,7 @@ public class LeaderboardModel {
        scores = new ArrayList<>();
     }
 
-    public void readLeaderboardFile(String filename) throws IOException {
+    public void readLeaderboardFile() throws IOException {
         File myFile = new File("files/leaderboard.txt");
         myFile.createNewFile();
 
