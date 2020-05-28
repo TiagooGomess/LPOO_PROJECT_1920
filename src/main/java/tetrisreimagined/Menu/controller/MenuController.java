@@ -21,7 +21,7 @@ public class MenuController {
         this.menuModel = menuModel;
     }
 
-    public InstructionsCommand start() throws IOException, InterruptedException {
+    public InstructionsCommand start() throws IOException {
         InstructionsCommand menuCommand;
         gui.drawAll();
         do {
