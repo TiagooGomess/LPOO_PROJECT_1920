@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.LanternaHandler;
-import tetrisreimagined.play.controller.ArenaController;
 import tetrisreimagined.play.controller.Commands.*;
 import tetrisreimagined.play.controller.Pieces.PieceController;
 import tetrisreimagined.play.model.ArenaModel;
