@@ -10,8 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.LanternaHandler;
+import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.OBlockModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
+import tetrisreimagined.play.model.Pieces.TBlockModel;
 import tetrisreimagined.play.view.lantern.GameViewLanterna;
 
 import java.io.IOException;
@@ -85,4 +87,29 @@ public class GameViewLanternaTest {
         Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(14, 0), "25", SGR.BLINK);
         Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(view.getRealWidth()/2 - 10, 25), "Press Enter To Continue", SGR.BOLD);
     }
+
+    @Test
+    public void testDrawNextPiece() {
+
+        PieceModel pieceModel = new TBlockModel();
+
+        view.drawNextPiece(pieceModel, 0, 0);
+
+        for(Block block: pieceModel.getBlocks())
+            Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(block.getPosition().getX(), block.getPosition().getY()), " ");
+
+    }
+
+    @Test
+    public void testDrawHoldPiece() {
+
+        PieceModel pieceModel = new TBlockModel();
+
+        view.drawHoldPiece(pieceModel, 0, 0);
+
+        for(Block block: pieceModel.getBlocks())
+            Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(block.getPosition().getX(), block.getPosition().getY()), " ");
+
+    }
+    
 }

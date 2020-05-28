@@ -83,7 +83,7 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
         }
     }
 
-    private void drawNextPiece(PieceModel nextPieceModel, int xOffset, int yOffset) {
+    public void drawNextPiece(PieceModel nextPieceModel, int xOffset, int yOffset) {
         graphics.setBackgroundColor(TextColor.Factory.fromString(nextPieceModel.getBlocks().get(0).getColor().getCode()));
 
         if(nextPieceModel instanceof IBlockModel)
@@ -95,7 +95,7 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
         }
     }
 
-    private void drawHoldPiece(PieceModel holdPieceModel, int xOffset, int yOffset) {
+    public void drawHoldPiece(PieceModel holdPieceModel, int xOffset, int yOffset) {
         if (holdPieceModel instanceof NullPieceModel)
             return;
         graphics.setBackgroundColor(TextColor.Factory.fromString(holdPieceModel.getBlocks().get(0).getColor().getCode()));
