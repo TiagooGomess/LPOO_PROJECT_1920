@@ -28,7 +28,7 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
         this.height = lanternaHandler.getHeight();
     }
 
-    private void initialDraw() {
+    public void initialDraw() {
         int xCoord = getWidth();
         for(int yCoord = 0; yCoord < height; yCoord++)
             graphics.putString(new TerminalPosition(xCoord, yCoord), " ");
@@ -46,6 +46,11 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
 
     }
 
+    public int getRealWidth() {
+        return width;
+    }
+
+    // comprimento da área de jogo útil
     public int getWidth() {
         return (this.width /2 ) - 15;
     }

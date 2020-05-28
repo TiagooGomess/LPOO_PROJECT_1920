@@ -1,6 +1,8 @@
 package tetrisreimagined.play.view;
 
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -8,17 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.LanternaHandler;
-import tetrisreimagined.play.model.Block;
-import tetrisreimagined.play.model.Color;
 import tetrisreimagined.play.model.Pieces.OBlockModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
-import tetrisreimagined.play.model.Position;
 import tetrisreimagined.play.view.lantern.GameViewLanterna;
-
-import java.util.ArrayList;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class GameViewLanternaTest {
 
@@ -53,4 +47,29 @@ public class GameViewLanternaTest {
             }
         }
     }
+
+    @Test
+    public void testDrawScore() {
+
+        view.drawScore(0, 0, 10);
+
+        Mockito.verify(graphics, Mockito.times(1)).setBackgroundColor(TextColor.Factory.fromString("#000000"));
+        Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(0, 0), "10");
+    }
+
+    @Test
+    public void testInitialDraw() {
+
+        view.initialDraw();
+
+        Mockito.verify(graphics, Mockito.times(1)).setBackgroundColor(TextColor.Factory.fromString("#ffffff"));
+        Mockito.verify(graphics, Mockito.times(2)).setForegroundColor(TextColor.Factory.fromString("#000000"));
+        Mockito.verify(graphics, Mockito.times(1)).fillRectangle(new TerminalPosition(view.getRealWidth() - 47, 1), new TerminalSize(10, 1), ' ');
+        Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(view.getRealWidth() - 47, 1), "NEXT PIECE", SGR.BLINK);
+        Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(view.getRealWidth() - 47, 10), "HOLD PIECE", SGR.BLINK);
+        Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(view.getRealWidth() - 45, 25), "SCORE", SGR.BLINK);
+        Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(view.getRealWidth() - (view.getRealWidth()/3), view.getHeight()/2), "SINGLE PLAYER", SGR.BOLD);
+    }
+
+    
 }
