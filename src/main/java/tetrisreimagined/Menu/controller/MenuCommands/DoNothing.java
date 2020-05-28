@@ -1,4 +1,4 @@
-package tetrisreimagined.MenuCommands;
+package tetrisreimagined.Menu.controller.MenuCommands;
 
 public class DoNothing extends InstructionsCommand {
 

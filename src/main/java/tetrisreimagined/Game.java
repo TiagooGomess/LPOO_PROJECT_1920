@@ -1,7 +1,7 @@
 package tetrisreimagined;
 
-import tetrisreimagined.MenuCommands.ExitTerminal;
-import tetrisreimagined.MenuCommands.InstructionsCommand;
+import tetrisreimagined.Menu.controller.MenuCommands.ExitTerminal;
+import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
 import tetrisreimagined.States.GameState;
 import tetrisreimagined.States.MenuState;
 import tetrisreimagined.play.model.ArenaModel;

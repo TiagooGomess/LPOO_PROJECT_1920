@@ -9,9 +9,9 @@ import tetrisreimagined.LanternaHandler;
 import tetrisreimagined.Menu.controller.WindowCommands.OpenInstructions;
 import tetrisreimagined.Menu.controller.WindowCommands.OpenLeaderboard;
 import tetrisreimagined.Menu.controller.WindowCommands.StartGameSinglePlayer;
-import tetrisreimagined.MenuCommands.DoNothing;
-import tetrisreimagined.MenuCommands.ExitTerminal;
-import tetrisreimagined.MenuCommands.InstructionsCommand;
+import tetrisreimagined.Menu.controller.MenuCommands.DoNothing;
+import tetrisreimagined.Menu.controller.MenuCommands.ExitTerminal;
+import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
 
 import java.io.IOException;
 

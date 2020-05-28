@@ -4,8 +4,8 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import tetrisreimagined.Game;
 import tetrisreimagined.LanternaHandler;
-import tetrisreimagined.MenuCommands.DoNothing;
-import tetrisreimagined.MenuCommands.InstructionsCommand;
+import tetrisreimagined.Menu.controller.MenuCommands.DoNothing;
+import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
 import tetrisreimagined.play.view.lantern.GameViewLanterna;
 
 import java.io.BufferedWriter;

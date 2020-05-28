@@ -6,9 +6,9 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import tetrisreimagined.LanternaHandler;
-import tetrisreimagined.MenuCommands.BackToMenu;
-import tetrisreimagined.MenuCommands.DoNothing;
-import tetrisreimagined.MenuCommands.InstructionsCommand;
+import tetrisreimagined.Menu.controller.MenuCommands.BackToMenu;
+import tetrisreimagined.Menu.controller.MenuCommands.DoNothing;
+import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
 
 import java.io.IOException;
 

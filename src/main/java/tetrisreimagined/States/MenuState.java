@@ -9,9 +9,9 @@ import tetrisreimagined.Menu.controller.WindowCommands.StartGameMultiplayer;
 import tetrisreimagined.Menu.controller.WindowCommands.StartGameSinglePlayer;
 import tetrisreimagined.Menu.model.MenuModel;
 import tetrisreimagined.Menu.view.lantern.MenuViewLanterna;
-import tetrisreimagined.MenuCommands.DoNothing;
-import tetrisreimagined.MenuCommands.ExitTerminal;
-import tetrisreimagined.MenuCommands.InstructionsCommand;
+import tetrisreimagined.Menu.controller.MenuCommands.DoNothing;
+import tetrisreimagined.Menu.controller.MenuCommands.ExitTerminal;
+import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
 import tetrisreimagined.play.model.ArenaModel;
 
 import java.io.IOException;

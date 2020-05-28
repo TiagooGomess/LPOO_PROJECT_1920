@@ -1,6 +1,6 @@
 package tetrisreimagined.Menu.controller.WindowCommands;
 
-import tetrisreimagined.MenuCommands.InstructionsCommand;
+import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
 
 public class StartGameSinglePlayer extends InstructionsCommand {
     @Override

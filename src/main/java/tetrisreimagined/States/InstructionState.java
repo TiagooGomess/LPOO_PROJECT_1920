@@ -5,8 +5,8 @@ import tetrisreimagined.Instructions.InstructionsController;
 import tetrisreimagined.Instructions.InstructionsModel;
 import tetrisreimagined.Instructions.InstructionsViewLanterna;
 import tetrisreimagined.LanternaHandler;
-import tetrisreimagined.MenuCommands.DoNothing;
-import tetrisreimagined.MenuCommands.InstructionsCommand;
+import tetrisreimagined.Menu.controller.MenuCommands.DoNothing;
+import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
 
 import java.io.IOException;
 

@@ -2,8 +2,8 @@ package tetrisreimagined.States;
 
 import tetrisreimagined.Game;
 import tetrisreimagined.LanternaHandler;
-import tetrisreimagined.MenuCommands.DoNothing;
-import tetrisreimagined.MenuCommands.InstructionsCommand;
+import tetrisreimagined.Menu.controller.MenuCommands.DoNothing;
+import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
 import tetrisreimagined.play.controller.ArenaController;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.view.lantern.GameViewLanterna;

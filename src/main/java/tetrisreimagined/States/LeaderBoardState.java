@@ -5,7 +5,7 @@ import tetrisreimagined.LanternaHandler;
 import tetrisreimagined.Leaderboard.LeaderboardController;
 import tetrisreimagined.Leaderboard.LeaderboardModel;
 import tetrisreimagined.Leaderboard.LeaderboardViewLanterna;
-import tetrisreimagined.MenuCommands.InstructionsCommand;
+import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
 
 import java.io.IOException;
 
@@ -31,6 +31,6 @@ public class LeaderBoardState extends GameState {
         InstructionsCommand command = controller.start();
 
         buttonPressed(Game.BUTTON.MENU);
-        return new tetrisreimagined.MenuCommands.DoNothing();
+        return new tetrisreimagined.Menu.controller.MenuCommands.DoNothing();
     }
 }
