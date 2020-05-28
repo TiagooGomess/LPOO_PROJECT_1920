@@ -7,8 +7,8 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.LanternaHandler;
 import tetrisreimagined.Menu.controller.MenuCommands.ExitTerminal;
@@ -20,7 +20,8 @@ import tetrisreimagined.Menu.view.lantern.MenuViewLanterna;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class MenuViewLanternaTest {
 
@@ -28,7 +29,6 @@ public class MenuViewLanternaTest {
     TerminalScreen screen;
     TextGraphics graphics;
 
-    @Before
     public void setup() {
 
         screen = Mockito.mock(TerminalScreen.class);
@@ -40,6 +40,7 @@ public class MenuViewLanternaTest {
 
     @Test
     public void drawAll() throws IOException {
+        setup();
 
         view.drawAll();
 
@@ -56,6 +57,7 @@ public class MenuViewLanternaTest {
 
     @Test
     public void closeTerminal() throws IOException {
+        setup();
 
         view.closeTerminal();
 
@@ -64,6 +66,7 @@ public class MenuViewLanternaTest {
 
     @Test
     public void getCommandStartGameSinglePlayer() throws IOException {
+        setup();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
         Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Character);
@@ -77,6 +80,7 @@ public class MenuViewLanternaTest {
 
     @Test
     public void getCommandOpenLeaderboard() throws IOException {
+        setup();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
         Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Character);
@@ -90,6 +94,7 @@ public class MenuViewLanternaTest {
 
     @Test
     public void getCommandOpenInstructions() throws IOException {
+        setup();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
         Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Character);
@@ -103,6 +108,7 @@ public class MenuViewLanternaTest {
 
     @Test
     public void getCommandExitTerminal() throws IOException {
+        setup();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
         Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Escape);

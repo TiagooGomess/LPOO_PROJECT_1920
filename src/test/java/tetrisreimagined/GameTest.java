@@ -2,12 +2,12 @@ package tetrisreimagined;
 
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import tetrisreimagined.States.GameState;
 import tetrisreimagined.play.model.ArenaModel;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class GameTest {
@@ -20,7 +20,6 @@ public class GameTest {
     TerminalScreen screen;
     TextGraphics graphics;
 
-    @Before
     public void setup() {
 
         screen = mock(TerminalScreen.class);
@@ -35,17 +34,20 @@ public class GameTest {
 
     @Test
     public void getLanternaHandler() {
+        setup();
         assertEquals(handler, game.getLanternaHandler());
     }
 
     @Test
     public void setGetGameState() {
+        setup();
         game.setGameState(gameState);
         assertEquals(gameState, game.getGameState());
     }
 
     @Test
     public void setGetArena() {
+        setup();
         game.setArena(arena);
         assertEquals(arena, game.getArena());
     }
