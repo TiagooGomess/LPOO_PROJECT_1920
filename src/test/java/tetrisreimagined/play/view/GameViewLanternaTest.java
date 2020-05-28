@@ -1,27 +1,21 @@
 package tetrisreimagined.play.view;
 
 import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import org.junit.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.LanternaHandler;
-import tetrisreimagined.play.controller.ArenaController;
-import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Pieces.OBlockModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.view.lantern.GameViewLanterna;
 
-import java.io.IOException;
-
 public class GameViewLanternaTest {
     @Test
-    public void testCommand() {
+    public void testDrawPiece() {
 
-        ArenaModel arenaModel = new ArenaModel();
         PieceModel pieceModel = new OBlockModel();
-        arenaModel.addPiece(pieceModel);
 
         TerminalScreen screen = Mockito.mock(TerminalScreen.class);
         TextGraphics graphics = Mockito.mock(TextGraphics.class);
@@ -31,7 +25,16 @@ public class GameViewLanternaTest {
 
         view.drawPiece(pieceModel);
 
-        Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(0, 0), " ");
+        // A peça OBlock é composta por 16 blocos amarelos (code color = "#FFFF00")
+        Mockito.verify(graphics, Mockito.times(16)).setBackgroundColor(TextColor.Factory.fromString("#FFFF00"));
+
+        // verificar a posição inicial de cada bloco unitário da peça
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(i, j), " ");
+            }
+        }
+
 
     }
 }
