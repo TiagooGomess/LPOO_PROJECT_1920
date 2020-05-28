@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tetrisreimagined.model.ColorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2020-05-26T17:51:08" hostname="DESKTOP-QBQ6GL3" time="0.001">
-  <properties/>
-  <testcase name="getCode1" classname="tetrisreimagined.model.ColorTest" time="0.0"/>
-  <testcase name="getCode2" classname="tetrisreimagined.model.ColorTest" time="0.0"/>
-  <testcase name="getCode3" classname="tetrisreimagined.model.ColorTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
