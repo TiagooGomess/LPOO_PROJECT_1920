@@ -35,7 +35,7 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
     
      
   ![ALT TEXT](https://media.giphy.com/media/hXDWAAPYo3sMDSypuv/giphy.gif) 
-> O vídeo da versão final do nosso projeto é visível no seguinte link: ![Final Video](../docs/FinalVideo/finalVid.mp4)
+> O vídeo da versão final do nosso projeto é visível no seguinte link: ![Final Video](https://vimeo.com/user116590615/review/423692187/b441fec89d)
   
   
 ## Planned Features
