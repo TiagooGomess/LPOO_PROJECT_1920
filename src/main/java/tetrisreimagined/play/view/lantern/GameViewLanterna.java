@@ -1,42 +1,24 @@
 package tetrisreimagined.play.view.lantern;
 
-import com.googlecode.lanterna.*;
-import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.SGR;
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.swing.*;
-import org.w3c.dom.Text;
 import tetrisreimagined.LanternaHandler;
+import tetrisreimagined.observer.Observer;
+import tetrisreimagined.play.controller.Commands.*;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.IBlockModel;
 import tetrisreimagined.play.model.Pieces.NullPieceModel;
 import tetrisreimagined.play.model.Pieces.OBlockModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
-import tetrisreimagined.observer.Observer;
-import tetrisreimagined.play.controller.Commands.*;
 
-import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 
-import static java.awt.Font.createFont;
-
 public class GameViewLanterna extends LanternaHandler implements Observer<ArenaModel> {
-
-//    private Screen screen;
-//    private int width, height;
-//    private TextGraphics graphics;
-
-    boolean isMultiplayer;
-
-    public GameViewLanterna(int width, int height) throws IOException {
-        super(width, height);
-    }
 
     public GameViewLanterna(LanternaHandler lanternaHandler) {
         super();

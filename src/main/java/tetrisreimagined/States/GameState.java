@@ -1,13 +1,12 @@
 package tetrisreimagined.States;
 
 import tetrisreimagined.Game;
-import tetrisreimagined.LanternaHandler;
 import tetrisreimagined.MenuCommands.InstructionsCommand;
 
 import java.io.IOException;
 
 public abstract class GameState {
-    public GameState(Game game) throws IOException, InterruptedException, CloneNotSupportedException {
+    public GameState(Game game) {
         this.game = game;
     }
 

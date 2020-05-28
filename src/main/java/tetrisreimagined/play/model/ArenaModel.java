@@ -1,16 +1,16 @@
 
 package tetrisreimagined.play.model;
 
+import tetrisreimagined.observer.Observable;
 import tetrisreimagined.play.model.Pieces.NullPieceModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
-import tetrisreimagined.observer.Observable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArenaModel extends Observable<ArenaModel> {
 
-    private List<Block> arenaBlocks; // contém todos os blocos (quadradinhos); assim será mais fácil verificar se pontuou
+    private final List<Block> arenaBlocks; // contém todos os blocos (quadradinhos); assim será mais fácil verificar se pontuou
 
     private PieceModel currentPieceModel;
     private PieceModel nextPieceModel;

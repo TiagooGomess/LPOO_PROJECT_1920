@@ -29,10 +29,5 @@ public class IBlockModel extends PieceModel {
         blocks.add(new Block(new Position(5, 1), this.color, 14));
         blocks.add(new Block(new Position(6, 1), this.color, 15));
         blocks.add(new Block(new Position(7, 1), this.color, 16));
-
-
     }
-
-
-
 }

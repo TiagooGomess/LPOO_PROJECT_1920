@@ -1,13 +1,13 @@
 package tetrisreimagined.play.controller.Pieces;
 
-import tetrisreimagined.play.model.ArenaModel;
-import tetrisreimagined.play.model.Block;
-import tetrisreimagined.play.model.Pieces.*;
-import tetrisreimagined.play.model.Position;
 import tetrisreimagined.observer.Observer;
 import tetrisreimagined.play.controller.Commands.MoveDown;
 import tetrisreimagined.play.controller.Commands.RotateClockWise;
 import tetrisreimagined.play.controller.Commands.RotateCounterClockWise;
+import tetrisreimagined.play.model.ArenaModel;
+import tetrisreimagined.play.model.Block;
+import tetrisreimagined.play.model.Pieces.*;
+import tetrisreimagined.play.model.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,9 +121,5 @@ public class PieceController {
             for (Block block: this.pieceModel.getBlocks())
                 block.setPosition(block.getPosition().up());
         }
-
-
-
     }
-
 }

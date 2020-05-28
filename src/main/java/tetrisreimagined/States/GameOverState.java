@@ -6,10 +6,8 @@ import tetrisreimagined.Game;
 import tetrisreimagined.LanternaHandler;
 import tetrisreimagined.MenuCommands.DoNothing;
 import tetrisreimagined.MenuCommands.InstructionsCommand;
-import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.view.lantern.GameViewLanterna;
 
-import java.awt.desktop.PreferencesEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -24,7 +22,7 @@ import static java.lang.Integer.parseInt;
 public class GameOverState extends GameState {
     GameViewLanterna gui;
 
-    public GameOverState(Game game, LanternaHandler lanternaHandler) throws IOException, InterruptedException, CloneNotSupportedException {
+    public GameOverState(Game game, LanternaHandler lanternaHandler) {
         super(game);
         this.gui = new GameViewLanterna(lanternaHandler);
     }

@@ -4,8 +4,7 @@ package tetrisreimagined.controller.Pieces;
 import org.junit.Test;
 import tetrisreimagined.play.controller.Pieces.PieceTransform;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.assertArrayEquals;
 
 
 public class PieceTransformTest {

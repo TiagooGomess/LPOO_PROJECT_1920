@@ -1,20 +1,18 @@
 package tetrisreimagined.play.controller;
 
-import tetrisreimagined.play.model.*;
-import tetrisreimagined.play.model.Pieces.*;
 import tetrisreimagined.observer.Observer;
-import tetrisreimagined.play.controller.Pieces.*;
 import tetrisreimagined.play.controller.Commands.ExitTerminal;
 import tetrisreimagined.play.controller.Commands.PieceCommand;
+import tetrisreimagined.play.controller.Pieces.PieceController;
+import tetrisreimagined.play.model.ArenaModel;
+import tetrisreimagined.play.model.Block;
+import tetrisreimagined.play.model.Pieces.*;
+import tetrisreimagined.play.model.Position;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
-
-import static java.lang.Integer.max;
-import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class ArenaController {
     private final Observer<ArenaModel> gui; // In this case GameViewLanterna

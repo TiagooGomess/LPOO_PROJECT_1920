@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tetrisreimagined.model.PieceModelTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2020-05-26T17:51:08" hostname="DESKTOP-QBQ6GL3" time="0.006">
+  <properties/>
+  <testcase name="getMaxYPosition1" classname="tetrisreimagined.model.PieceModelTest" time="0.0"/>
+  <testcase name="getMaxYPosition2" classname="tetrisreimagined.model.PieceModelTest" time="0.0"/>
+  <testcase name="getMaxXPosition1" classname="tetrisreimagined.model.PieceModelTest" time="0.0"/>
+  <testcase name="getMaxXPosition2" classname="tetrisreimagined.model.PieceModelTest" time="0.0"/>
+  <testcase name="getBlocks" classname="tetrisreimagined.model.PieceModelTest" time="0.001"/>
+  <testcase name="getMinYPosition1" classname="tetrisreimagined.model.PieceModelTest" time="0.0"/>
+  <testcase name="getMinYPosition2" classname="tetrisreimagined.model.PieceModelTest" time="0.001"/>
+  <testcase name="getMinXPosition1" classname="tetrisreimagined.model.PieceModelTest" time="0.0"/>
+  <testcase name="getMinXPosition2" classname="tetrisreimagined.model.PieceModelTest" time="0.0"/>
+  <testcase name="getNumBlocks1" classname="tetrisreimagined.model.PieceModelTest" time="0.0"/>
+  <testcase name="getNumBlocks2" classname="tetrisreimagined.model.PieceModelTest" time="0.0"/>
+  <testcase name="getNumBlocks3" classname="tetrisreimagined.model.PieceModelTest" time="0.0"/>
+  <testcase name="getNumBlocks4" classname="tetrisreimagined.model.PieceModelTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,13 +1,12 @@
 package tetrisreimagined.play.controller.Commands;
 
+import tetrisreimagined.observer.Observer;
+import tetrisreimagined.play.controller.Pieces.PieceController;
+import tetrisreimagined.play.controller.Pieces.PieceTransform;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
-import tetrisreimagined.observer.Observer;
-import tetrisreimagined.play.controller.ArenaController;
-import tetrisreimagined.play.controller.Pieces.PieceController;
-import tetrisreimagined.play.controller.Pieces.PieceTransform;
 
 public class RotateCounterClockWise extends PieceCommand {
     private Observer<ArenaModel> gui;
@@ -56,11 +55,6 @@ public class RotateCounterClockWise extends PieceCommand {
 
         finalMatrixRotated = PieceTransform.reverseLinesOrder(transposedOccupied, xLenght, yLenght);
 
-        /*for (int row = 0; row < xLenght; row++) {
-            for (int col = 0; col < yLenght; col++)
-                System.out.print(finalMatrixRotated[row][col] + " ");
-            System.out.println();
-        }*/
 
         for (int row = 0; row < xLenght; row++) {
             int auxX = initialX;

@@ -5,7 +5,6 @@ import tetrisreimagined.Instructions.InstructionsController;
 import tetrisreimagined.Instructions.InstructionsModel;
 import tetrisreimagined.Instructions.InstructionsViewLanterna;
 import tetrisreimagined.LanternaHandler;
-import tetrisreimagined.MenuCommands.BackToMenu;
 import tetrisreimagined.MenuCommands.DoNothing;
 import tetrisreimagined.MenuCommands.InstructionsCommand;
 
@@ -16,7 +15,7 @@ public class InstructionState extends GameState{
     InstructionsViewLanterna gui;
     InstructionsController controller;
 
-    public InstructionState(Game game, LanternaHandler lanternaHandler) throws InterruptedException, CloneNotSupportedException, IOException {
+    public InstructionState(Game game, LanternaHandler lanternaHandler) {
         super(game);
         this.instructionsModel = new InstructionsModel();
         this.gui = new InstructionsViewLanterna(lanternaHandler);

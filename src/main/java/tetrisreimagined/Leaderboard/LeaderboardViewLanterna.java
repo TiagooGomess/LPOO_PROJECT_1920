@@ -8,7 +8,6 @@ import com.googlecode.lanterna.input.KeyType;
 import tetrisreimagined.LanternaHandler;
 import tetrisreimagined.MenuCommands.BackToMenu;
 import tetrisreimagined.MenuCommands.DoNothing;
-import tetrisreimagined.MenuCommands.ExitTerminal;
 import tetrisreimagined.MenuCommands.InstructionsCommand;
 
 import java.io.IOException;

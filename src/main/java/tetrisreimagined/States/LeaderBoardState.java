@@ -5,7 +5,6 @@ import tetrisreimagined.LanternaHandler;
 import tetrisreimagined.Leaderboard.LeaderboardController;
 import tetrisreimagined.Leaderboard.LeaderboardModel;
 import tetrisreimagined.Leaderboard.LeaderboardViewLanterna;
-import tetrisreimagined.MenuCommands.BackToMenu;
 import tetrisreimagined.MenuCommands.InstructionsCommand;
 
 import java.io.IOException;

@@ -37,20 +37,9 @@ public class LanternaHandler {
         return height;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
+    public LanternaHandler() { }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-
-    public LanternaHandler() {
-
-    }
-
-    public LanternaHandler(int width, int height) throws IOException {
+    public LanternaHandler(int width, int height) {
         try {
             this.width = width;
             this.height = height;

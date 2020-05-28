@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="908df3f7-558d-487e-9d6d-f4bfe3da395e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.floo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flooignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/leaderboard.txt" beforeDir="false" afterPath="$PROJECT_DIR$/files/leaderboard.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Instructions/InstructionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Instructions/InstructionsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Instructions/InstructionsViewLanterna.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Instructions/InstructionsViewLanterna.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/LanternaHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/LanternaHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Leaderboard/LeaderboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Leaderboard/LeaderboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Leaderboard/LeaderboardModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Leaderboard/LeaderboardModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Leaderboard/LeaderboardViewLanterna.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Leaderboard/LeaderboardViewLanterna.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Menu/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Menu/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Menu/controller/WindowCommands/OpenInstructions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Menu/controller/WindowCommands/OpenInstructions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Menu/controller/WindowCommands/OpenLeaderboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Menu/controller/WindowCommands/OpenLeaderboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Menu/controller/WindowCommands/StartGameMultiplayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Menu/controller/WindowCommands/StartGameMultiplayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Menu/controller/WindowCommands/StartGameSinglePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Menu/controller/WindowCommands/StartGameSinglePlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Menu/view/lantern/MenuViewLanterna.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/Menu/view/lantern/MenuViewLanterna.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/MenuCommands/BackToMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/MenuCommands/BackToMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/MenuCommands/DoNothing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/MenuCommands/DoNothing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/MenuCommands/ExitTerminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/MenuCommands/ExitTerminal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/States/GameOverState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/States/GameOverState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/States/GamePlayState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/States/GamePlayState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/States/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/States/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/States/InstructionState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/States/InstructionState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/States/LeaderBoardState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/States/LeaderBoardState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/observer/Observer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/observer/Observer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/ArenaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/ArenaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/ExitTerminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/ExitTerminal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/HardDrop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/HardDrop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/Hold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/Hold.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/MoveDown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/MoveDown.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/MoveLeft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/MoveLeft.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/MoveRight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/MoveRight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/PauseGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/PauseGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/RotateClockWise.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/RotateClockWise.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/RotateCounterClockWise.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Commands/RotateCounterClockWise.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Pieces/PieceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/controller/Pieces/PieceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/ArenaModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/ArenaModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Pieces/IBlockModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Pieces/IBlockModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Pieces/JBlockModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Pieces/JBlockModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Pieces/LBlockModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Pieces/LBlockModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Pieces/OBlockModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Pieces/OBlockModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Pieces/SBlockModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Pieces/SBlockModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Pieces/TBlockModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Pieces/TBlockModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Pieces/ZBlockModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Pieces/ZBlockModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/model/Position.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/view/lantern/GameViewLanterna.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tetrisreimagined/play/view/lantern/GameViewLanterna.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tetrisreimagined/controller/ArenaControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tetrisreimagined/controller/ArenaControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tetrisreimagined/controller/CommandsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tetrisreimagined/controller/CommandsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tetrisreimagined/controller/Pieces/PieceControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tetrisreimagined/controller/Pieces/PieceControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tetrisreimagined/controller/Pieces/PieceTransformTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tetrisreimagined/controller/Pieces/PieceTransformTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1cPWAPzHNB9G4xzjIgwsU26lE1F" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/tetrisreimagined/Leaderboard/controller/LeaderboardCommand" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Tiago\Desktop\lpoo-2020-g22\Files" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Tiago\Desktop\lpoo-2020-g22\src\main\java\tetrisreimagined\Leaderboard\controller\LeaderboardCommand" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Application">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="tetrisreimagined.Application" />
+      <module name="Tetris_Reimagined.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tetrisreimagined.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CommandsTest.doNothing" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;tetrisreimagined.controller.CommandsTest.doNothing&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="CommandsTest.exitTerminal" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;tetrisreimagined.controller.CommandsTest.exitTerminal&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="CommandsTest.hold" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;tetrisreimagined.controller.CommandsTest.hold&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'Tetris_Reimagined.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests *" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Application" />
+        <item itemvalue="Gradle.Tests in 'Tetris_Reimagined.test'" />
+        <item itemvalue="Gradle.CommandsTest.hold" />
+        <item itemvalue="Gradle.CommandsTest.exitTerminal" />
+        <item itemvalue="Gradle.CommandsTest.doNothing" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="908df3f7-558d-487e-9d6d-f4bfe3da395e" name="Default Changelist" comment="" />
+      <created>1590430564790</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1590430564790</updated>
+      <workItem from="1590430573566" duration="6454000" />
+      <workItem from="1590473506393" duration="207000" />
+      <workItem from="1590500854781" duration="45000" />
+      <workItem from="1590503262008" duration="1354000" />
+      <workItem from="1590507983439" duration="7729000" />
+      <workItem from="1590597943591" duration="3000" />
+      <workItem from="1590644970396" duration="1302000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1590431710281">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1590431710281" />
+    <state width="1493" height="212" key="GridCell.Tab.0.bottom" timestamp="1590646255462">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="212" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590646255462" />
+    <state width="1493" height="212" key="GridCell.Tab.0.center" timestamp="1590646255462">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="212" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1590646255462" />
+    <state width="1493" height="212" key="GridCell.Tab.0.left" timestamp="1590646255462">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="212" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1590646255462" />
+    <state width="1493" height="212" key="GridCell.Tab.0.right" timestamp="1590646255462">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="212" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1590646255462" />
+    <state x="249" y="0" key="SettingsEditor" timestamp="1590503290742">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1590503290742" />
+    <state x="478" y="145" width="579" height="534" key="find.popup" timestamp="1590513531791">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="478" y="145" width="579" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1590513531791" />
+    <state x="209" y="33" key="new project wizard" timestamp="1590500899325">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="209" y="33" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1590500899325" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1590433637083">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1590433637083" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Tetris_Reimagined$Tests_in__Tetris_Reimagined_test_.ic" NAME="Tests in 'Tetris_Reimagined.test' Coverage Results" MODIFIED="1590515466011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

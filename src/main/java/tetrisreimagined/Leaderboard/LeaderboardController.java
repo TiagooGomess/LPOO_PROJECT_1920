@@ -1,7 +1,6 @@
 package tetrisreimagined.Leaderboard;
 
 import tetrisreimagined.MenuCommands.BackToMenu;
-import tetrisreimagined.MenuCommands.ExitTerminal;
 import tetrisreimagined.MenuCommands.InstructionsCommand;
 
 import java.io.IOException;

@@ -1,6 +1,9 @@
 package tetrisreimagined.Menu.controller;
 
-import tetrisreimagined.Menu.controller.WindowCommands.*;
+import tetrisreimagined.Menu.controller.WindowCommands.OpenInstructions;
+import tetrisreimagined.Menu.controller.WindowCommands.OpenLeaderboard;
+import tetrisreimagined.Menu.controller.WindowCommands.StartGameMultiplayer;
+import tetrisreimagined.Menu.controller.WindowCommands.StartGameSinglePlayer;
 import tetrisreimagined.Menu.model.MenuModel;
 import tetrisreimagined.Menu.view.lantern.MenuViewLanterna;
 import tetrisreimagined.MenuCommands.ExitTerminal;
@@ -16,14 +19,6 @@ public class MenuController {
     public MenuController(MenuViewLanterna gui, MenuModel menuModel) {
         this.gui = gui;
         this.menuModel = menuModel;
-    }
-
-    public void startGameSinglePlayer() {
-        System.out.println("Starting single player game...");
-    }
-
-    public void startGameMultiPlayer() {
-        System.out.println("Starting multi player game...");
     }
 
     public InstructionsCommand start() throws IOException, InterruptedException {

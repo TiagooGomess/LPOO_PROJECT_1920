@@ -2,14 +2,14 @@ package tetrisreimagined.controller;
 
 import org.junit.Before;
 import org.junit.Test;
+import tetrisreimagined.observer.Observer;
+import tetrisreimagined.play.controller.ArenaController;
+import tetrisreimagined.play.controller.Pieces.PieceController;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Color;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
-import tetrisreimagined.observer.Observer;
-import tetrisreimagined.play.controller.ArenaController;
-import tetrisreimagined.play.controller.Pieces.PieceController;
 
 import java.util.ArrayList;
 import java.util.List;

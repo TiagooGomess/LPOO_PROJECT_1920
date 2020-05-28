@@ -1,10 +1,8 @@
 package tetrisreimagined.play.controller.Commands;
 
-import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.observer.Observer;
 import tetrisreimagined.play.controller.Pieces.PieceController;
-
-import java.io.IOException;
+import tetrisreimagined.play.model.ArenaModel;
 
 public class ExitTerminal extends PieceCommand {
 
@@ -15,8 +13,7 @@ public class ExitTerminal extends PieceCommand {
     }
 
     @Override
-    public boolean execute(PieceController currentPieceController) throws IOException {
-        //gui.closeTerminal();
+    public boolean execute(PieceController currentPieceController) {
         return true;
     }
 

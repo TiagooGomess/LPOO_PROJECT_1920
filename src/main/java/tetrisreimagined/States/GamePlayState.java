@@ -15,7 +15,7 @@ public class GamePlayState extends GameState {
     GameViewLanterna gui;
     ArenaController controller;
 
-    public GamePlayState(Game game, LanternaHandler lanternaHandler) throws InterruptedException, CloneNotSupportedException, IOException {
+    public GamePlayState(Game game, LanternaHandler lanternaHandler) {
         super(game);
         this.arena = game.getArena();
         this.gui = new GameViewLanterna(lanternaHandler);

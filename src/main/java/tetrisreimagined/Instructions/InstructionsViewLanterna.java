@@ -5,11 +5,10 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
+import tetrisreimagined.LanternaHandler;
 import tetrisreimagined.MenuCommands.BackToMenu;
 import tetrisreimagined.MenuCommands.DoNothing;
-import tetrisreimagined.MenuCommands.ExitTerminal;
 import tetrisreimagined.MenuCommands.InstructionsCommand;
-import tetrisreimagined.LanternaHandler;
 
 import java.io.IOException;
 

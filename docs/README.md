@@ -22,7 +22,7 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
   * Soft drop: a peça desce mais rápido quando pressionamos a tecla 'seta para baixo'.
   * Hard drop: a peça desce na arena o máximo possível quando pressionamos a tecla SPACE.
   * Rotação das peças no sentido horário e anti-horário.
-  * Remoção de linhas completas: quando uma linha está completamente preenchida por blocos, então é removida da arena (com bugs).   
+  * Remoção de linhas completas: quando uma linha está completamente preenchida por blocos, então é removida da arena.   
   * Ajuste da posição dos blocos depois de uma linha ter sido removida: os blocos das linhas que estão acima da linha removida descem uma unidade.
   * Nível de dificuldade: aumenta a cada 6 linhas "feitas"; faz aumentar a velocidade da peça.
   * Sistema de pontuação: aumenta quando o jogador "faz uma linha", quando usa o soft ou hard drop; a pontuação adicionada é sempre multiplicada pelo nível.
