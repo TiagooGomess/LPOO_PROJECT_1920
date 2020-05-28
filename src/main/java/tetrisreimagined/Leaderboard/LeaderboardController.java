@@ -15,7 +15,7 @@ public class LeaderboardController {
         this.leaderboardModel = leaderboardModel;
     }
 
-    public InstructionsCommand start() throws IOException, InterruptedException {
+    public InstructionsCommand start() throws IOException {
         InstructionsCommand leaderboardCommand;
         gui.drawAll(leaderboardModel);
         do {

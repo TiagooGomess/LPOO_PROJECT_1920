@@ -14,10 +14,6 @@ public abstract class Observable<T> {
         observers.add(observer);
     }
 
-    public void removeObserver(Observer<T> observer) {
-        observers.remove(observer);
-    }
-
     public void notifyObservers(T subject) {
         for (Observer<T> observer : observers)
             observer.changed(subject);

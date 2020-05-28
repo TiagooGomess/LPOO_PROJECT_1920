@@ -14,7 +14,7 @@ public class InstructionsController {
         this.instructionsModel = instructionsModel;
     }
 
-    public InstructionsCommand start() throws IOException, InterruptedException {
+    public InstructionsCommand start() throws IOException {
         InstructionsCommand command;
         gui.drawAll(instructionsModel);
         do {
