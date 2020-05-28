@@ -163,4 +163,21 @@ public class GameViewLanternaTest {
         Mockito.verify(screen, Mockito.times(1)).refresh();
 
     }
+
+    @Test
+    public void testCloseTerminal() throws IOException {
+
+        view.closeTerminal();
+
+        Mockito.verify(screen, Mockito.times(1)).close();
+    }
+
+    @Test
+    public void testGetCommand() {
+//
+//        keyPressEvent = new KeyPressEvent();
+//
+//        KeyStroke keyStrokeMock1 = mock(KeyStroke.class);
+//        when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.EOF);
+    }
 }

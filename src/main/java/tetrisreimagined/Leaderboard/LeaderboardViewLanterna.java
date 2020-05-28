@@ -50,14 +50,14 @@ public class LeaderboardViewLanterna extends LanternaHandler {
         }
     }
 
-    public InstructionsCommand getLeaderboardCommand() throws IOException, InterruptedException {
+    public InstructionsCommand getLeaderboardCommand() throws IOException {
 
         while (true) {
 
             KeyStroke key = screen.readInput();
 
-            if (key == null) return new DoNothing();
-            if (key.getKeyType() == KeyType.Escape) return new BackToMenu();
+            if (processKey(key) == null) return new DoNothing();
+            if (processKey(key) == KEYS.ESCAPE) return new BackToMenu();
         }
     }
 

@@ -140,24 +140,22 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
     }
 
     @Override
-    public PieceCommand getCommand(ArenaModel gameModel) throws IOException, InterruptedException {
+    public PieceCommand getCommand(ArenaModel gameModel) throws IOException {
 
         while (true) {
 
             KeyStroke key = screen.pollInput();
 
-            if (key == null) return new DoNothing();
-            if (key.getKeyType() == KeyType.ArrowUp) return new RotateClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
-            if (key.getKeyType() == KeyType.ArrowRight) return new MoveRight(gameModel.getCurrentPieceModel(), this, gameModel);
-            if (key.getKeyType() == KeyType.ArrowDown) return new MoveDown(gameModel.getCurrentPieceModel(), this, gameModel, false);
-            if (key.getKeyType() == KeyType.ArrowLeft) return new MoveLeft(gameModel.getCurrentPieceModel(), this, gameModel);
-            if (key.getKeyType() == KeyType.Enter) return new PauseGame(this);
-            if (key.getKeyType() == KeyType.Character) {
-                if (key.getCharacter() == 'z') return new RotateCounterClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
-                if (key.getCharacter() == ' ') return new HardDrop(gameModel.getCurrentPieceModel(), this, gameModel);
-                if (key.getCharacter() == 'c') return new Hold(gameModel.getCurrentPieceModel(), this, gameModel);
-            }
-            if (key.getKeyType() == KeyType.Escape) return new ExitTerminal(this);
+            if (processKey(key) == null) return new DoNothing();
+            if (processKey(key) == KEYS.ARROW_UP) return new RotateClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (processKey(key) == KEYS.ARROW_RIGHT) return new MoveRight(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (processKey(key) == KEYS.ARROW_DOWN) return new MoveDown(gameModel.getCurrentPieceModel(), this, gameModel, false);
+            if (processKey(key) == KEYS.ARROW_LEFT) return new MoveLeft(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (processKey(key) == KEYS.ENTER) return new PauseGame(this);
+            if (processKey(key) == KEYS.Z) return new RotateCounterClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (processKey(key) == KEYS.SPACE) return new HardDrop(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (processKey(key) == KEYS.C) return new Hold(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (processKey(key) == KEYS.ESCAPE) return new ExitTerminal(this);
         }
     }
 
