@@ -10,13 +10,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.LanternaHandler;
+import tetrisreimagined.play.controller.Pieces.PieceController;
+import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
-import tetrisreimagined.play.model.Pieces.OBlockModel;
-import tetrisreimagined.play.model.Pieces.PieceModel;
-import tetrisreimagined.play.model.Pieces.TBlockModel;
+import tetrisreimagined.play.model.Pieces.*;
 import tetrisreimagined.play.view.lantern.GameViewLanterna;
 
 import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class GameViewLanternaTest {
 
@@ -111,5 +114,53 @@ public class GameViewLanternaTest {
             Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(block.getPosition().getX(), block.getPosition().getY()), " ");
 
     }
-    
+
+    @Test
+    public void testDrawAll() throws IOException {
+
+        ArenaModel arenaModel = new ArenaModel();
+        PieceModel pieceModel1 = new OBlockModel();
+        PieceModel pieceModel4 = new ZBlockModel();
+        PieceModel pieceModel5 = new JBlockModel();
+        PieceModel pieceModel6 = new IBlockModel();
+
+        arenaModel.setCurrentPieceModel(pieceModel6);
+        arenaModel.setHoldPieceToDisplay(pieceModel4);
+        arenaModel.setNextPieceToDisplay(pieceModel5);
+        arenaModel.setScore(125);
+
+        view.drawAll(arenaModel);
+
+        // Score
+        Mockito.verify(graphics, Mockito.times(1)).setBackgroundColor(TextColor.Factory.fromString("#000000"));
+        Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(view.getRealWidth()-44, 29), "125");
+
+        // Hold Piece
+        for(Block block: pieceModel4.getBlocks())
+            Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(block.getPosition().getX() + view.getRealWidth() - 45, block.getPosition().getY() + 15), " ");
+
+        // Next Piece
+        for(Block block: pieceModel5.getBlocks())
+            Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(block.getPosition().getX() + view.getRealWidth() - 45, block.getPosition().getY() + 3), " ");
+
+        // CurrentPiece
+        Mockito.verify(graphics, Mockito.times(16)).setBackgroundColor(TextColor.Factory.fromString("#00FFFF"));
+        for(Block block: pieceModel6.getBlocks())
+            Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(block.getPosition().getX(), block.getPosition().getY()), " ");
+
+        // Arena Blocks (blocos que já tocaram no 'chão')
+        PieceController pieceController = new PieceController(pieceModel1);
+        pieceController.setStartPosition(view);
+        for (int i = 0; i < view.getHeight() + 100; i++) {
+            pieceController.makeCurrentPieceFall(view, arenaModel);
+        }
+        arenaModel.addPiece(pieceController.getPieceModel());
+        for (int i = 0; i < pieceModel1.getBlocks().size(); i++) {
+            assertTrue(arenaModel.getArenaBlocks().contains(pieceModel1.getBlocks().get(i)));
+        }
+
+        Mockito.verify(screen, Mockito.times(1)).clear();
+        Mockito.verify(screen, Mockito.times(1)).refresh();
+
+    }
 }
