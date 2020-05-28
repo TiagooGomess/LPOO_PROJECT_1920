@@ -4,7 +4,6 @@ import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import tetrisreimagined.LanternaHandler;
 import tetrisreimagined.Menu.controller.WindowCommands.OpenInstructions;
 import tetrisreimagined.Menu.controller.WindowCommands.OpenLeaderboard;
@@ -16,10 +15,6 @@ import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
 import java.io.IOException;
 
 public class MenuViewLanterna extends LanternaHandler  {
-
-    public MenuViewLanterna(int width, int height) {
-        super(width, height);
-    }
 
     public MenuViewLanterna(LanternaHandler lanternaHandler) {
         this.graphics = lanternaHandler.getGraphics();
@@ -48,19 +43,19 @@ public class MenuViewLanterna extends LanternaHandler  {
         }
     }
 
-    public InstructionsCommand getMenuCommand() throws IOException, InterruptedException {
+    public InstructionsCommand getMenuCommand() throws IOException {
 
         while (true) {
 
             KeyStroke key = screen.readInput();
 
-            if (key == null) return new DoNothing();
-            if (key.getKeyType() == KeyType.Character) {
-                if (key.getCharacter() == '1') return new StartGameSinglePlayer();
-                if (key.getCharacter() == '2') return new OpenLeaderboard();
-                if (key.getCharacter() == '3') return new OpenInstructions();
-            }
-            if (key.getKeyType() == KeyType.Escape) return new ExitTerminal();
+            if (processKey(key) == null) return new DoNothing();
+
+            if (processKey(key) == KEYS.NUM_1) return new StartGameSinglePlayer();
+            if (processKey(key) == KEYS.NUM_2) return new OpenLeaderboard();
+            if (processKey(key) == KEYS.NUM_3) return new OpenInstructions();
+
+            if (processKey(key) == KEYS.ESCAPE) return new ExitTerminal();
         }
     }
 

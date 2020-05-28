@@ -28,7 +28,7 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
         this.height = lanternaHandler.getHeight();
     }
 
-    private void initialDraw() {
+    public void initialDraw() {
         int xCoord = getWidth();
         for(int yCoord = 0; yCoord < height; yCoord++)
             graphics.putString(new TerminalPosition(xCoord, yCoord), " ");
@@ -46,6 +46,11 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
 
     }
 
+    public int getRealWidth() {
+        return width;
+    }
+
+    // comprimento da área de jogo útil
     public int getWidth() {
         return (this.width /2 ) - 15;
     }
@@ -78,7 +83,7 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
         }
     }
 
-    private void drawNextPiece(PieceModel nextPieceModel, int xOffset, int yOffset) {
+    public void drawNextPiece(PieceModel nextPieceModel, int xOffset, int yOffset) {
         graphics.setBackgroundColor(TextColor.Factory.fromString(nextPieceModel.getBlocks().get(0).getColor().getCode()));
 
         if(nextPieceModel instanceof IBlockModel)
@@ -90,7 +95,7 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
         }
     }
 
-    private void drawHoldPiece(PieceModel holdPieceModel, int xOffset, int yOffset) {
+    public void drawHoldPiece(PieceModel holdPieceModel, int xOffset, int yOffset) {
         if (holdPieceModel instanceof NullPieceModel)
             return;
         graphics.setBackgroundColor(TextColor.Factory.fromString(holdPieceModel.getBlocks().get(0).getColor().getCode()));
@@ -135,24 +140,22 @@ public class GameViewLanterna extends LanternaHandler implements Observer<ArenaM
     }
 
     @Override
-    public PieceCommand getCommand(ArenaModel gameModel) throws IOException, InterruptedException {
+    public PieceCommand getCommand(ArenaModel gameModel) throws IOException {
 
         while (true) {
 
             KeyStroke key = screen.pollInput();
 
-            if (key == null) return new DoNothing();
-            if (key.getKeyType() == KeyType.ArrowUp) return new RotateClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
-            if (key.getKeyType() == KeyType.ArrowRight) return new MoveRight(gameModel.getCurrentPieceModel(), this, gameModel);
-            if (key.getKeyType() == KeyType.ArrowDown) return new MoveDown(gameModel.getCurrentPieceModel(), this, gameModel, false);
-            if (key.getKeyType() == KeyType.ArrowLeft) return new MoveLeft(gameModel.getCurrentPieceModel(), this, gameModel);
-            if (key.getKeyType() == KeyType.Enter) return new PauseGame(this);
-            if (key.getKeyType() == KeyType.Character) {
-                if (key.getCharacter() == 'z') return new RotateCounterClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
-                if (key.getCharacter() == ' ') return new HardDrop(gameModel.getCurrentPieceModel(), this, gameModel);
-                if (key.getCharacter() == 'c') return new Hold(gameModel.getCurrentPieceModel(), this, gameModel);
-            }
-            if (key.getKeyType() == KeyType.Escape) return new ExitTerminal(this);
+            if (processKey(key) == null) return new DoNothing();
+            if (processKey(key) == KEYS.ARROW_UP) return new RotateClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (processKey(key) == KEYS.ARROW_RIGHT) return new MoveRight(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (processKey(key) == KEYS.ARROW_DOWN) return new MoveDown(gameModel.getCurrentPieceModel(), this, gameModel, false);
+            if (processKey(key) == KEYS.ARROW_LEFT) return new MoveLeft(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (processKey(key) == KEYS.ENTER) return new PauseGame(this);
+            if (processKey(key) == KEYS.Z) return new RotateCounterClockWise(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (processKey(key) == KEYS.SPACE) return new HardDrop(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (processKey(key) == KEYS.C) return new Hold(gameModel.getCurrentPieceModel(), this, gameModel);
+            if (processKey(key) == KEYS.ESCAPE) return new ExitTerminal(this);
         }
     }
 

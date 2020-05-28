@@ -52,14 +52,14 @@ public class InstructionsViewLanterna extends LanternaHandler {
         }
     }
 
-    public InstructionsCommand getInstructionCommand() throws IOException, InterruptedException {
+    public InstructionsCommand getInstructionCommand() throws IOException {
 
         while (true) {
 
             KeyStroke key = screen.readInput();
 
-            if (key == null) return new DoNothing();
-            if (key.getKeyType() == KeyType.Escape) return new BackToMenu();
+            if (processKey(key) == null) return new DoNothing();
+            if (processKey(key) == KEYS.ESCAPE) return new BackToMenu();
         }
     }
 

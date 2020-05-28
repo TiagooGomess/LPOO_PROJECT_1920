@@ -2,6 +2,8 @@ package tetrisreimagined;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -14,7 +16,10 @@ import java.io.IOException;
 
 import static java.awt.Font.createFont;
 
+
 public class LanternaHandler {
+
+    public enum KEYS {ARROW_UP, ARROW_DOWN, ARROW_RIGHT, ARROW_LEFT, ENTER, Z, SPACE, C, ESCAPE, NUM_1, NUM_2, NUM_3}
 
     protected Screen screen;
     protected int width;
@@ -87,6 +92,26 @@ public class LanternaHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public KEYS processKey(KeyStroke key) {
+        if (key == null) return null;
+        if (key.getKeyType() == KeyType.ArrowUp) return KEYS.ARROW_UP;
+        if (key.getKeyType() == KeyType.ArrowRight) return KEYS.ARROW_RIGHT;
+        if (key.getKeyType() == KeyType.ArrowDown) return KEYS.ARROW_DOWN;
+        if (key.getKeyType() == KeyType.ArrowLeft) return KEYS.ARROW_LEFT;
+        if (key.getKeyType() == KeyType.Enter) return KEYS.ENTER;
+        if (key.getKeyType() == KeyType.Character) {
+            if (key.getCharacter() == 'z') return KEYS.Z;
+            if (key.getCharacter() == ' ') return KEYS.SPACE;
+            if (key.getCharacter() == 'c') return KEYS.C;
+            if (key.getCharacter() == '1') return KEYS.NUM_1;
+            if (key.getCharacter() == '2') return KEYS.NUM_2;
+            if (key.getCharacter() == '3') return KEYS.NUM_3;
+        }
+        if (key.getKeyType() == KeyType.Escape) return KEYS.ESCAPE;
+
+        return null;
     }
 
 }
