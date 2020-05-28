@@ -4,14 +4,23 @@ import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.LanternaHandler;
+import tetrisreimagined.Menu.controller.MenuCommands.ExitTerminal;
+import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
+import tetrisreimagined.Menu.controller.WindowCommands.OpenInstructions;
+import tetrisreimagined.Menu.controller.WindowCommands.OpenLeaderboard;
+import tetrisreimagined.Menu.controller.WindowCommands.StartGameSinglePlayer;
 import tetrisreimagined.Menu.view.lantern.MenuViewLanterna;
 
 import java.io.IOException;
+
+import static org.junit.Assert.assertTrue;
 
 public class MenuViewLanternaTest {
 
@@ -45,5 +54,62 @@ public class MenuViewLanternaTest {
         Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(view.getWidth()/2 - 10, 28), "PRESS 3 TO INSTRUCTIONS", SGR.BOLD);
     }
 
-    
+    @Test
+    public void closeTerminal() throws IOException {
+
+        view.closeTerminal();
+
+        Mockito.verify(screen, Mockito.times(1)).close();
+    }
+
+    @Test
+    public void getCommandStartGameSinglePlayer() throws IOException {
+
+        KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
+        Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Character);
+        Mockito.when(keyStrokeMock1.getCharacter()).thenReturn('1');
+        Mockito.when(screen.readInput()).thenReturn(keyStrokeMock1);
+
+        InstructionsCommand command = view.getMenuCommand();
+
+        assertTrue(command instanceof StartGameSinglePlayer);
+    }
+
+    @Test
+    public void getCommandOpenLeaderboard() throws IOException {
+
+        KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
+        Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Character);
+        Mockito.when(keyStrokeMock1.getCharacter()).thenReturn('2');
+        Mockito.when(screen.readInput()).thenReturn(keyStrokeMock1);
+
+        InstructionsCommand command = view.getMenuCommand();
+
+        assertTrue(command instanceof OpenLeaderboard);
+    }
+
+    @Test
+    public void getCommandOpenInstructions() throws IOException {
+
+        KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
+        Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Character);
+        Mockito.when(keyStrokeMock1.getCharacter()).thenReturn('3');
+        Mockito.when(screen.readInput()).thenReturn(keyStrokeMock1);
+
+        InstructionsCommand command = view.getMenuCommand();
+
+        assertTrue(command instanceof OpenInstructions);
+    }
+
+    @Test
+    public void getCommandExitTerminal() throws IOException {
+
+        KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
+        Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Escape);
+        Mockito.when(screen.readInput()).thenReturn(keyStrokeMock1);
+
+        InstructionsCommand command = view.getMenuCommand();
+
+        assertTrue(command instanceof ExitTerminal);
+    }
 }
