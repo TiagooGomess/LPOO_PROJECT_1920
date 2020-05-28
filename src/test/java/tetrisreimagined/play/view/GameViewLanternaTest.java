@@ -14,6 +14,8 @@ import tetrisreimagined.play.model.Pieces.OBlockModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.view.lantern.GameViewLanterna;
 
+import java.io.IOException;
+
 public class GameViewLanternaTest {
 
     GameViewLanterna view;
@@ -71,5 +73,16 @@ public class GameViewLanternaTest {
         Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(view.getRealWidth() - (view.getRealWidth()/3), view.getHeight()/2), "SINGLE PLAYER", SGR.BOLD);
     }
 
-    
+    @Test
+    public void testDrawBigScore() throws IOException {
+
+        view.drawBigScore(0, 0, 25);
+
+        Mockito.verify(graphics, Mockito.times(1)).setBackgroundColor(TextColor.Factory.fromString("#ff0000"));
+        Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(view.getRealWidth()/2 - 8, 5), "TETRIS REIMAGINED", SGR.BOLD);
+        Mockito.verify(graphics, Mockito.times(1)).setBackgroundColor(TextColor.Factory.fromString("#000000"));
+        Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(2, 0), "FINAL SCORE: ", SGR.BLINK);
+        Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(14, 0), "25", SGR.BLINK);
+        Mockito.verify(graphics, Mockito.times(1)).putString(new TerminalPosition(view.getRealWidth()/2 - 10, 25), "Press Enter To Continue", SGR.BOLD);
+    }
 }
