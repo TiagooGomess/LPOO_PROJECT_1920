@@ -35,7 +35,7 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
     
      
   ![ALT TEXT](https://media.giphy.com/media/hXDWAAPYo3sMDSypuv/giphy.gif) 
-> O vídeo da versão final do nosso projeto é visível no seguinte link: ![Final Video](https://vimeo.com/user116590615/review/423692187/b441fec89d)
+> O vídeo da versão final do nosso projeto é visível no seguinte link: https://vimeo.com/user116590615/review/423692187/b441fec89d
   
   
 ## Planned Features
@@ -73,12 +73,12 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 >O Command pattern permite parametrizar objetos com uma ação a executar. Baseia-se em diferentes funcionalidades para cada um deles.
 >É comum terem um método "execute" que contém todo o código necessário à execução desse determinado comando. Dada o problema apresentado no tópico acima,
 >consideramos que seria uma boa solução, uma vez que iria simplificar o código e desta forma, a ArenaController apenas executaria o comando,
->viabilizando assim o SRP (Single Responsability Principle)
+>viabilizando assim o SRP (Single Responsability Principle). Para além disso, fizemos uso do *Command Pattern* nas opções de cada Menu / Submenu.  
 
 >**Implementation:**
 ![ALT TEXT](Images/CommandPattern.png)
 
->**Consequences:** A utilização deste padrão permitiu uma maior simplificação do ArenaController ([ArenaController.java - Result](../src/main/java/tetrisreimagined/play/controller/ArenaController.java)) bem como uma maior abstração dos comandos utilizados.
+>**Consequences:** A utilização deste padrão permitiu uma maior simplificação do ArenaController ([ArenaController.java - Result](../src/main/java/tetrisreimagined/play/controller/ArenaController.java)) e dos Menus, bem como uma maior abstração dos comandos utilizados.
 
   * State Pattern
  
@@ -99,18 +99,27 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 >![ALT TEXT](Images/StateMachine.png)
 >
 # Code Smells e Sugestões de Refactoring
-  * **Long Method e Duplicate Code:** 
+* **Long Method e Duplicate Code:** 
 >   Os métodos rotatePiece de [RotateClockWise](../src/main/java/tetrisreimagined/play/controller/Commands/RotateClockWise.java) e [RotateCounterClockWise](../src/main/java/tetrisreimagined/play/controller/Commands/RotateCounterClockWise.java)  são bastante longos, pelo que os poderíamos ter dividido em vários métodos mais pequenos. Além disso, existe uma certa similaridade entre os métodos, havendo algum código repetido. Poderíamos condensar os comandos RotateClockWise e RotateCounterClockWise, ficando com um comando Rotate, que receberia no construtor qual o tipo de rotação.
-  * **If Statements:** 
+* **If Statements:** 
 >  Os if's de getCommand, na classe [GameViewLanterna](../src/main/java/tetrisreimagined/play/view/lantern/GameViewLanterna.java), poderiam ser substituídos por um switch statement.
   
-  * **Return null:** 
+* **Return null:** 
 >  No método getBlockById, na classe [PieceController](../src/main/java/tetrisreimagined/play/controller/Pieces/PieceController.java), poderíamos criar uma classe NullBlock.
 
 * **Switch Statements** 
 > No método updateScore() da classe [ArenaController](../src/main/java/tetrisreimagined/play/controller/ArenaController.java) a existência de um switch conduz a um novo smell. A existência de este tipo estrutura condicional é sempre algo de que sempre devemos desconfiar. Provavelmente posteriormente procederemos a um refactor da mesma.
     
+* **Message Chains**
+> Na classe [ArenaController](../src/main/java/tetrisreimagined/play/controller/ArenaController.java), faz-se por algumas vezes o uso de *message chains* (tamanho 3 e 4), como por exemplo: currentPieceController.getPieceModel().isInHold().
+> Este *code smell* poderia ser facilmente resolvido se no início dos métodos se declara-se um variável: PieceModel auxPieceModel = currentPieceController.getPieceModel();
   
+* **Data Class**
+> A classe [ArenaModel](../src/main/java/tetrisreimagined/play/model/ArenaModel.java) é essencialmente construída por *getters* e *setters*, sendo portanto constituída por dados. 
+> No entanto, este *code smell* não é um problema crítico, uma vez que é uma das características do MVC.
+
+
+
 # Testing
 >Os testes implementados incidem nas classes implementadas. Temos 82% das classes testadas,
 >76% nos métodos e 73% nas linhas. Vale a pena sublinhar que a maior razão pela qual estes valores
