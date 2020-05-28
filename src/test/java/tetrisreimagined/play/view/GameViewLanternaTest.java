@@ -5,11 +5,15 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.LanternaHandler;
+import tetrisreimagined.play.controller.ArenaController;
+import tetrisreimagined.play.controller.Commands.*;
 import tetrisreimagined.play.controller.Pieces.PieceController;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
@@ -18,7 +22,6 @@ import tetrisreimagined.play.view.lantern.GameViewLanterna;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GameViewLanternaTest {
@@ -173,11 +176,131 @@ public class GameViewLanternaTest {
     }
 
     @Test
-    public void testGetCommand() {
-//
-//        keyPressEvent = new KeyPressEvent();
-//
-//        KeyStroke keyStrokeMock1 = mock(KeyStroke.class);
-//        when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.EOF);
+    public void testGetCommandMoveRight() throws IOException {
+
+        ArenaModel arenaModel = new ArenaModel();
+
+        KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
+        Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.ArrowRight);
+        Mockito.when(screen.pollInput()).thenReturn(keyStrokeMock1);
+
+        PieceCommand command = view.getCommand(arenaModel);
+
+        assertTrue(command instanceof MoveRight);
+    }
+
+    @Test
+    public void testGetCommandMoveLeft() throws IOException {
+
+        ArenaModel arenaModel = new ArenaModel();
+
+        KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
+        Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.ArrowLeft);
+        Mockito.when(screen.pollInput()).thenReturn(keyStrokeMock1);
+
+        PieceCommand command = view.getCommand(arenaModel);
+
+        assertTrue(command instanceof MoveLeft);
+    }
+
+    @Test
+    public void testGetCommandMoveDown() throws IOException {
+
+        ArenaModel arenaModel = new ArenaModel();
+
+        KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
+        Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.ArrowDown);
+        Mockito.when(screen.pollInput()).thenReturn(keyStrokeMock1);
+
+        PieceCommand command = view.getCommand(arenaModel);
+
+        assertTrue(command instanceof MoveDown);
+    }
+
+    @Test
+    public void testGetCommandRotateClockWise() throws IOException {
+
+        ArenaModel arenaModel = new ArenaModel();
+
+        KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
+        Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.ArrowUp);
+        Mockito.when(screen.pollInput()).thenReturn(keyStrokeMock1);
+
+        PieceCommand command = view.getCommand(arenaModel);
+
+        assertTrue(command instanceof RotateClockWise);
+    }
+
+    @Test
+    public void testGetCommandRotateCounterClockWise() throws IOException {
+
+        ArenaModel arenaModel = new ArenaModel();
+
+        KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
+        Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Character);
+        Mockito.when(keyStrokeMock1.getCharacter()).thenReturn('z');
+        Mockito.when(screen.pollInput()).thenReturn(keyStrokeMock1);
+
+        PieceCommand command = view.getCommand(arenaModel);
+
+        assertTrue(command instanceof RotateCounterClockWise);
+    }
+
+    @Test
+    public void testGetCommandHardDrop() throws IOException {
+
+        ArenaModel arenaModel = new ArenaModel();
+
+        KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
+        Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Character);
+        Mockito.when(keyStrokeMock1.getCharacter()).thenReturn(' ');
+        Mockito.when(screen.pollInput()).thenReturn(keyStrokeMock1);
+
+        PieceCommand command = view.getCommand(arenaModel);
+
+        assertTrue(command instanceof HardDrop);
+    }
+
+    @Test
+    public void testGetCommandPauseGame() throws IOException {
+
+        ArenaModel arenaModel = new ArenaModel();
+
+        KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
+        Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Enter);
+        Mockito.when(screen.pollInput()).thenReturn(keyStrokeMock1);
+
+        PieceCommand command = view.getCommand(arenaModel);
+
+        assertTrue(command instanceof PauseGame);
+    }
+
+    @Test
+    public void testGetCommandHold() throws IOException {
+
+        ArenaModel arenaModel = new ArenaModel();
+
+        KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
+        Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Character);
+        Mockito.when(keyStrokeMock1.getCharacter()).thenReturn('c');
+        Mockito.when(screen.pollInput()).thenReturn(keyStrokeMock1);
+
+        PieceCommand command = view.getCommand(arenaModel);
+
+        assertTrue(command instanceof Hold);
+    }
+
+    @Test
+    public void testGetCommandExitTerminal() throws IOException {
+
+        ArenaModel arenaModel = new ArenaModel();
+
+        KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
+        Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Escape);
+        Mockito.when(screen.pollInput()).thenReturn(keyStrokeMock1);
+
+        PieceCommand command = view.getCommand(arenaModel);
+
+        assertTrue(command instanceof ExitTerminal);
     }
 }

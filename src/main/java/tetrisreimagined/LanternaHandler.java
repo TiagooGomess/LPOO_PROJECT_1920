@@ -19,7 +19,7 @@ import static java.awt.Font.createFont;
 
 public class LanternaHandler {
 
-    public enum KEYS {ARROW_UP, ARROW_DOWN, ARROW_RIGHT, ARROW_LEFT, ENTER, Z, SPACE, C, ESCAPE, NUM_1, NUM_2, NUM_3};
+    public enum KEYS {ARROW_UP, ARROW_DOWN, ARROW_RIGHT, ARROW_LEFT, ENTER, Z, SPACE, C, ESCAPE, NUM_1, NUM_2, NUM_3}
 
     protected Screen screen;
     protected int width;
