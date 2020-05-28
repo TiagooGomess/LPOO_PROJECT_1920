@@ -7,8 +7,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.LanternaHandler;
 import tetrisreimagined.Leaderboard.LeaderboardModel;
@@ -16,11 +15,11 @@ import tetrisreimagined.Leaderboard.LeaderboardViewLanterna;
 import tetrisreimagined.Menu.controller.MenuCommands.BackToMenu;
 import tetrisreimagined.Menu.controller.MenuCommands.DoNothing;
 import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
-import tetrisreimagined.Menu.controller.WindowCommands.StartGameSinglePlayer;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class LeaderboardViewLanternaTest {
 
@@ -28,7 +27,6 @@ public class LeaderboardViewLanternaTest {
     TerminalScreen screen;
     TextGraphics graphics;
 
-    @Before
     public void setup() {
 
         screen = Mockito.mock(TerminalScreen.class);
@@ -40,6 +38,7 @@ public class LeaderboardViewLanternaTest {
 
     @Test
     public void drawAll() throws IOException {
+        setup();
 
         LeaderboardModel model = new LeaderboardModel();
         model.readLeaderboardFile();
@@ -68,7 +67,7 @@ public class LeaderboardViewLanternaTest {
 
     @Test
     public void closeTerminal() throws IOException {
-
+        setup();
         view.closeTerminal();
 
         Mockito.verify(screen, Mockito.times(1)).close();
@@ -76,7 +75,7 @@ public class LeaderboardViewLanternaTest {
 
     @Test
     public void getCommandBackToMenu() throws IOException {
-
+        setup();
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
         Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Escape);
         Mockito.when(screen.readInput()).thenReturn(keyStrokeMock1);
@@ -88,7 +87,7 @@ public class LeaderboardViewLanternaTest {
 
     @Test
     public void getCommandDoNothing() throws IOException {
-
+        setup();
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
         Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(null);
         Mockito.when(screen.readInput()).thenReturn(keyStrokeMock1);
