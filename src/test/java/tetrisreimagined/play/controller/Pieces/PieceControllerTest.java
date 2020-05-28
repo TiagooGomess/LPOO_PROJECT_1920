@@ -1,9 +1,8 @@
-package tetrisreimagined.controller.Pieces;
+package tetrisreimagined.play.controller.Pieces;
 
 import org.junit.Before;
 import org.junit.Test;
 import tetrisreimagined.observer.Observer;
-import tetrisreimagined.play.controller.Pieces.PieceController;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Color;

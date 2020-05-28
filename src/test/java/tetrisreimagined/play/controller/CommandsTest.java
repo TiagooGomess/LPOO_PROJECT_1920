@@ -1,9 +1,8 @@
-package tetrisreimagined.controller;
+package tetrisreimagined.play.controller;
 
 import org.junit.Before;
 import org.junit.Test;
 import tetrisreimagined.observer.Observer;
-import tetrisreimagined.play.controller.ArenaController;
 import tetrisreimagined.play.controller.Commands.*;
 import tetrisreimagined.play.controller.Pieces.PieceController;
 import tetrisreimagined.play.model.ArenaModel;
