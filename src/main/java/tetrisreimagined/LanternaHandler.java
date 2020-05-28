@@ -73,4 +73,20 @@ public class LanternaHandler {
         }
     }
 
+    public LanternaHandler(Screen screen, TextGraphics graphics,  int width, int height) {
+        try {
+            this.width = width;
+            this.height = height;
+
+            this.screen = screen;
+            this.graphics = graphics;
+            this.screen.setCursorPosition(null);   // we don't need a cursor
+            this.screen.startScreen();             // screens must be started
+            this.screen.doResizeIfNecessary();     // resize screen if necessary
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

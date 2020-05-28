@@ -1,8 +1,7 @@
-package tetrisreimagined.model;
+package tetrisreimagined.play.model;
 
 import org.junit.Before;
 import org.junit.Test;
-import tetrisreimagined.play.model.Color;
 
 import java.util.ArrayList;
 import java.util.List;

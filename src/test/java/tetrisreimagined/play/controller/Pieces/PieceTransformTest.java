@@ -1,8 +1,7 @@
-package tetrisreimagined.controller.Pieces;
+package tetrisreimagined.play.controller.Pieces;
 
 
 import org.junit.Test;
-import tetrisreimagined.play.controller.Pieces.PieceTransform;
 
 import static org.junit.Assert.assertArrayEquals;
 

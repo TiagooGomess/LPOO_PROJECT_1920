@@ -12,7 +12,7 @@ public class Game {
 
     public enum BUTTON {MENU, LEADERBOARD, GAME_PLAY, MULTIPLAYER, INSTRUCTIONS, GAME_OVER}
     private GameState gameState;
-    private LanternaHandler lanternaHandler;
+    private final LanternaHandler lanternaHandler;
     private ArenaModel arena;
 
     public Game() throws IOException, InterruptedException, CloneNotSupportedException {
