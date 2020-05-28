@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import tetrisreimagined.States.GameState;
 import tetrisreimagined.play.model.ArenaModel;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class GameTest {
@@ -34,20 +35,20 @@ public class GameTest {
     @Test
     public void getLanternaHandler() {
         setup();
-        assert (handler == game.getLanternaHandler());
+        assertEquals(handler, game.getLanternaHandler());
     }
 
     @Test
     public void setGetGameState() {
         setup();
         game.setGameState(gameState);
-        assert (gameState == game.getGameState());
+        assertEquals(gameState, game.getGameState());
     }
 
     @Test
     public void setGetArena() {
         setup();
         game.setArena(arena);
-        assert(arena == game.getArena());
+        assertEquals(arena, game.getArena());
     }
 }

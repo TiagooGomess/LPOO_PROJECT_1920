@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PositionTest {
     private List<Position> positions;
@@ -111,7 +110,7 @@ public class PositionTest {
     public void positionEquals1() {
         setup();
         Position p1 = new Position(4, 7);
-        assert (p1 == positions.get(1));
+        assertEquals (p1, positions.get(1));
     }
 
     @Test
@@ -123,7 +122,8 @@ public class PositionTest {
 
     @Test
     public void positionEquals3() {
-        assertTrue(positions.get(0).equals(null));
+        setup();
+        assertFalse(positions.get(0).equals(null));
     }
 
 
