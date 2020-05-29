@@ -132,7 +132,8 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 ### Coverage Report
 
 ![ALT TEXT](Images/CoverageAgain.PNG)
-![ALT TEXT](Images/CoverageT.png)
+
+![ALT TEXT](Images/CoverageT.PNG)
 
 
 ### Mutation Report
