@@ -264,4 +264,33 @@ public class ArenaControllerTest {
             assert (0 <= arenaModel2.getCurrentPieceModel().getMinXPosition().getX());
         }
     }
+
+    @Test
+    public void pushBlocksDownTest() {
+        arenaModel2 = new ArenaModel();
+        observerMock2 = mock(Observer.class);
+        arenaController2 = new ArenaController(observerMock2, arenaModel2);
+
+        when(observerMock2.getHeight()).thenReturn(20);
+        when(observerMock2.getWidth()).thenReturn(20);
+
+        arenaModel2.addPiece(new IBlockModel());
+
+        arenaController2.pushBlocksDown(15);
+
+        // o valor de Y do dos blocos de Iblock na sua posiçao inicial era 0 ou 1;
+        // agora testamos se depois de puxar os blocos para baixo acima da linha 15,
+        // o valor de Y do dos blocos do Iblock fica em 1 ou 2.
+        for (Block block: arenaModel2.getArenaBlocks()) {
+            assert(block.getPosition().getY() == 1 || block.getPosition().getY() == 2);
+        }
+
+        arenaController2.pushBlocksDown(0);
+
+        // agora testamos se o pushBlocks não alterou o valor de Y dos blocos do Iblock,
+        // já que este se encontra numa posição abaixo da linha 0
+        for (Block block: arenaModel2.getArenaBlocks()) {
+            assert(block.getPosition().getY() == 1 || block.getPosition().getY() == 2);
+        }
+    }
 }
