@@ -1,10 +1,7 @@
 package tetrisreimagined.play.controller;
 
-import jdk.swing.interop.SwingInterOpUtils;
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
-import net.jqwik.api.constraints.IntRange;
-import net.jqwik.api.constraints.Positive;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tetrisreimagined.observer.Observer;
@@ -263,5 +260,95 @@ public class ArenaControllerTest {
             assert (observerMock2.getWidth() - 1 >= arenaModel2.getCurrentPieceModel().getMaxXPosition().getX());
             assert (0 <= arenaModel2.getCurrentPieceModel().getMinXPosition().getX());
         }
+    }
+
+    @Test
+    public void pushBlocksDownTest() {
+        arenaModel2 = new ArenaModel();
+        observerMock2 = mock(Observer.class);
+        arenaController2 = new ArenaController(observerMock2, arenaModel2);
+
+        when(observerMock2.getHeight()).thenReturn(20);
+        when(observerMock2.getWidth()).thenReturn(20);
+
+        arenaModel2.addPiece(new IBlockModel());
+
+        arenaController2.pushBlocksDown(15);
+
+        // o valor de Y do dos blocos de Iblock na sua posiçao inicial era 0 ou 1;
+        // agora testamos se depois de puxar os blocos para baixo acima da linha 15,
+        // o valor de Y do dos blocos do Iblock fica em 1 ou 2.
+        for (Block block: arenaModel2.getArenaBlocks()) {
+            assert(block.getPosition().getY() == 1 || block.getPosition().getY() == 2);
+        }
+
+        arenaController2.pushBlocksDown(0);
+
+        // agora testamos se o pushBlocks não alterou o valor de Y dos blocos do Iblock,
+        // já que este se encontra numa posição abaixo da linha 0
+        for (Block block: arenaModel2.getArenaBlocks()) {
+            assert(block.getPosition().getY() == 1 || block.getPosition().getY() == 2);
+        }
+    }
+
+    @Test
+    public void checkIfScoreTest() {
+        arenaModel2 = new ArenaModel();
+        observerMock2 = mock(Observer.class);
+        arenaController2 = new ArenaController(observerMock2, arenaModel2);
+
+        when(observerMock2.getHeight()).thenReturn(10);
+        when(observerMock2.getWidth()).thenReturn(16);
+
+        PieceModel pieceModel0 = new IBlockModel();
+        arenaModel2.addPiece(pieceModel0);
+
+        arenaController2.checkIfScore();
+
+        assertEquals(0, arenaModel2.getScore());
+
+        arenaModel2.removeArenaBlocks(arenaModel2.getArenaBlocks());
+
+        arenaController2.checkIfScore();
+
+        // Arena Vazia -> Score aumenta 2000
+        assertEquals(2000, arenaModel2.getScore());
+
+        PieceController pieceController1 = new PieceController(new IBlockModel());
+        pieceController1.setStartPosition(observerMock2);
+        arenaModel2.setCurrentPieceModel(pieceController1.getPieceModel());
+        MoveLeft moveLeft = new MoveLeft(pieceController1.getPieceModel(), observerMock2, arenaModel2);
+        MoveDown moveDown = new MoveDown(pieceController1.getPieceModel(), observerMock2, arenaModel2, false);
+
+        for (int i = 0; i < 16; i++) { // peça fica no canto inferior esquerdo
+            moveLeft.execute(pieceController1);
+            moveDown.execute(pieceController1);
+        }
+        arenaModel2.addPiece(pieceController1.getPieceModel());
+        arenaController2.checkIfScore();
+
+        // verificar se o score não mudou
+        assertEquals(2000, arenaModel2.getScore());
+
+        PieceController pieceController2 = new PieceController(new IBlockModel());
+        pieceController2.setStartPosition(observerMock2);
+        arenaModel2.setCurrentPieceModel(pieceController2.getPieceModel());
+        MoveRight moveRight = new MoveRight(pieceController2.getPieceModel(), observerMock2, arenaModel2);
+
+        for (int i = 0; i < 16; i++) { // peça fica no canto superior direito
+            moveRight.execute(pieceController2);
+        }
+        HardDrop hardDrop = new HardDrop(pieceController2.getPieceModel(), observerMock2, arenaModel2);
+        hardDrop.execute(pieceController2); // score += 2 * (Num blocos da peça) * (nível + 1)
+        arenaModel2.addPiece(pieceController2.getPieceModel());
+
+        arenaController2.checkIfScore();
+
+        // O score aumenta porque é feita uma linha (+=150), é executado um hardDrop(+=2*16),
+        // e no fim a linha desaparece e a arena fica vazia (+=2000)
+
+        int hardDropScore = 2*16;
+        int removedLineScore = 150;
+        assertEquals(2000 + hardDropScore + removedLineScore + 2000, arenaModel2.getScore());
     }
 }

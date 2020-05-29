@@ -120,7 +120,6 @@ public class ArenaController {
             default:
                 newPiece = new ZBlockModel();
         }
-        newPiece = new IBlockModel();
         if(numIteration++ == 0) {
             this.nextPieceController = new PieceController(newPiece);
             return;
@@ -156,7 +155,7 @@ public class ArenaController {
         arena.removeArenaBlocks(toRemove);
     }
 
-    private void pushBlocksDown(int line) { // ajusta os blocos, sabendo que a linha 'line' foi removida
+    public void pushBlocksDown(int line) { // ajusta os blocos, sabendo que a linha 'line' foi removida
         for (Block block: arena.getArenaBlocks()) {
             if (block.getPosition().getY() < line)
                 block.setPosition(block.getPosition().down());
