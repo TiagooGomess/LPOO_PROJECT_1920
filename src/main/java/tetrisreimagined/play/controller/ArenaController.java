@@ -23,6 +23,7 @@ public class ArenaController {
     private boolean pieceTouchedGround = false;
     private static boolean hasPieceInHold = false;
     private static boolean usedHoldInRound = false;
+    private Random random;
 
     private int numIteration = 0;
     private boolean hasFinished = false;
@@ -30,6 +31,7 @@ public class ArenaController {
     public ArenaController(Observer<ArenaModel> gui, ArenaModel arena) {
         this.gui = gui;
         this.arena = arena;
+        this.random = new Random(System.currentTimeMillis());
         nextPiece();
     }
 
@@ -94,8 +96,7 @@ public class ArenaController {
     }
 
     public void nextPiece() {
-        Random rand = new Random();
-        int nexBlockNum = rand.nextInt(7); // random int in range 0 to 6
+        int nexBlockNum = random.nextInt(7); // random int in range 0 to 6
         PieceModel newPiece;
         switch (nexBlockNum) {
             case 0:
@@ -214,5 +215,9 @@ public class ArenaController {
 
     public PieceController getCurrentPieceController() {
         return currentPieceController;
+    }
+
+    public void setRandomSeed(long seed) {
+        this.random = new Random(seed);
     }
 }

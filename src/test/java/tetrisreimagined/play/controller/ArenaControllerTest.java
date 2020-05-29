@@ -1,8 +1,14 @@
 package tetrisreimagined.play.controller;
 
+import jdk.swing.interop.SwingInterOpUtils;
+import net.jqwik.api.ForAll;
+import net.jqwik.api.Property;
+import net.jqwik.api.constraints.IntRange;
+import net.jqwik.api.constraints.Positive;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tetrisreimagined.observer.Observer;
+import tetrisreimagined.play.controller.Commands.*;
 import tetrisreimagined.play.controller.Pieces.PieceController;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
@@ -12,6 +18,7 @@ import tetrisreimagined.play.model.Position;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -159,15 +166,58 @@ public class ArenaControllerTest {
         assertFalse(arenaController.checkLine(22));
     }
 
-    @Test
-    public void checkTryMoveDown() {
-        // verifica se o y mínimo de uma peça é 0 e se o Y max de uma peça é igual a height - 1.
-        arenaController2.nextPiece();
-        assertEquals(0, arenaModel2.getCurrentPieceModel().getMinYPosition().getY());
-        int counter = 0;
-        for (int i = 0; i < 100; i++) {
-            counter = arenaController2.tryMoveDown(counter, 1);
+    public void executeRandomCommand(long seed, PieceModel pModel, Observer<ArenaModel> gui, ArenaModel gameModel, PieceController pController) {
+        Random random = new Random(seed);
+        Integer r = random.nextInt(6);
+
+        switch (r) {
+            case 0:
+                new MoveLeft(pModel, gui, gameModel).execute(pController);
+                break;
+            case 1:
+                new MoveRight(pModel, gui, gameModel).execute(pController);
+                break;
+            case 2:
+                new MoveDown(pModel, gui, gameModel, false).execute(pController);
+                break;
+            case 3:
+                new RotateClockWise(pModel, gui, gameModel).execute(pController);
+                break;
+            case 4:
+                new MoveDown(pModel, gui, gameModel, true).execute(pController);
+                break;
+            case 5:
+                new RotateCounterClockWise(pModel, gui, gameModel).execute(pController);
+                break;
         }
-        assertEquals(observerMock2.getHeight()-1, arenaModel2.getCurrentPieceModel().getMaxYPosition().getY());
+    }
+
+    @Property(tries = 250)
+    public void checkTryMoveDown(@ForAll long seed) {
+        arenaModel2 = new ArenaModel();
+        observerMock2 = mock(Observer.class);
+        arenaController2 = new ArenaController(observerMock2, arenaModel2);
+
+        when(observerMock2.getHeight()).thenReturn(20);
+        when(observerMock2.getWidth()).thenReturn(20);
+
+        arenaController2.setRandomSeed(seed);
+
+        for (int times = 0; times < 25; times++) {
+            arenaController2.nextPiece();
+            int counter = 0;
+
+            for (int i = 0; i < 25; i++) {
+                executeRandomCommand(seed, arenaController2.getCurrentPieceController().getPieceModel(), observerMock2,
+                        arenaModel2, arenaController2.getCurrentPieceController());
+                counter = arenaController2.tryMoveDown(counter, 1);
+            }
+
+            assert (0 <= arenaModel2.getCurrentPieceModel().getMinYPosition().getY());
+            assert (observerMock2.getHeight() - 1 >= arenaModel2.getCurrentPieceModel().getMaxYPosition().getY());
+
+            assert (observerMock2.getWidth() - 1 >= arenaModel2.getCurrentPieceModel().getMaxXPosition().getX());
+            assert (0 <= arenaModel2.getCurrentPieceModel().getMinXPosition().getX());
+        }
     }
 }
