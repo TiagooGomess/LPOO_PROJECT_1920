@@ -5,12 +5,12 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import tetrisreimagined.LanternaHandler;
-import tetrisreimagined.Menu.controller.WindowCommands.OpenInstructions;
-import tetrisreimagined.Menu.controller.WindowCommands.OpenLeaderboard;
-import tetrisreimagined.Menu.controller.WindowCommands.StartGameSinglePlayer;
 import tetrisreimagined.Menu.controller.MenuCommands.DoNothing;
 import tetrisreimagined.Menu.controller.MenuCommands.ExitTerminal;
 import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
+import tetrisreimagined.Menu.controller.WindowCommands.OpenInstructions;
+import tetrisreimagined.Menu.controller.WindowCommands.OpenLeaderboard;
+import tetrisreimagined.Menu.controller.WindowCommands.StartGameSinglePlayer;
 
 import java.io.IOException;
 

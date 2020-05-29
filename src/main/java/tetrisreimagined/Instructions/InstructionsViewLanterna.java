@@ -4,7 +4,6 @@ import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import tetrisreimagined.LanternaHandler;
 import tetrisreimagined.Menu.controller.MenuCommands.BackToMenu;
 import tetrisreimagined.Menu.controller.MenuCommands.DoNothing;

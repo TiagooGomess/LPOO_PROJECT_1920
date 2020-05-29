@@ -2,15 +2,15 @@ package tetrisreimagined.States;
 
 import tetrisreimagined.Game;
 import tetrisreimagined.LanternaHandler;
+import tetrisreimagined.Menu.controller.MenuCommands.DoNothing;
+import tetrisreimagined.Menu.controller.MenuCommands.ExitTerminal;
+import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
 import tetrisreimagined.Menu.controller.MenuController;
 import tetrisreimagined.Menu.controller.WindowCommands.OpenInstructions;
 import tetrisreimagined.Menu.controller.WindowCommands.OpenLeaderboard;
 import tetrisreimagined.Menu.controller.WindowCommands.StartGameSinglePlayer;
 import tetrisreimagined.Menu.model.MenuModel;
 import tetrisreimagined.Menu.view.lantern.MenuViewLanterna;
-import tetrisreimagined.Menu.controller.MenuCommands.DoNothing;
-import tetrisreimagined.Menu.controller.MenuCommands.ExitTerminal;
-import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
 import tetrisreimagined.play.model.ArenaModel;
 
 import java.io.IOException;

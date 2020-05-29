@@ -1,12 +1,12 @@
 package tetrisreimagined.Menu.controller;
 
+import tetrisreimagined.Menu.controller.MenuCommands.ExitTerminal;
+import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
 import tetrisreimagined.Menu.controller.WindowCommands.OpenInstructions;
 import tetrisreimagined.Menu.controller.WindowCommands.OpenLeaderboard;
 import tetrisreimagined.Menu.controller.WindowCommands.StartGameSinglePlayer;
 import tetrisreimagined.Menu.model.MenuModel;
 import tetrisreimagined.Menu.view.lantern.MenuViewLanterna;
-import tetrisreimagined.Menu.controller.MenuCommands.ExitTerminal;
-import tetrisreimagined.Menu.controller.MenuCommands.InstructionsCommand;
 
 import java.io.IOException;
 
