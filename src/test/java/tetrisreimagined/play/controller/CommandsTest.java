@@ -1,5 +1,6 @@
 package tetrisreimagined.play.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tetrisreimagined.observer.Observer;
 import tetrisreimagined.play.controller.Commands.*;
@@ -29,6 +30,7 @@ public class CommandsTest {
     Observer observerMock;
     PieceController pieceControllerMock;
 
+    @BeforeEach
     public void setup() {
         pieceModelMock = mock(PieceModel.class);
         arenaModelMock = mock(ArenaModel.class);
@@ -54,7 +56,6 @@ public class CommandsTest {
 
     @Test
     public void moveRight() {
-        setup();
         MoveRight moveRight = new MoveRight(pieceModelMock, observerMock, arenaModelMock);
         when(pieceControllerMock.canGoRight(observerMock, arenaModelMock)).thenReturn(true);
 
@@ -66,7 +67,6 @@ public class CommandsTest {
 
     @Test
     public void moveLeft() {
-        setup();
         MoveLeft moveLeft = new MoveLeft(pieceModelMock, observerMock, arenaModelMock);
         when(pieceControllerMock.canGoLeft(observerMock, arenaModelMock)).thenReturn(true);
 
@@ -78,7 +78,6 @@ public class CommandsTest {
 
     @Test
     public void moveDown() {
-        setup();
         MoveDown moveDown = new MoveDown(pieceModelMock, observerMock, arenaModelMock, false);
         when(pieceControllerMock.canGoDown(observerMock, arenaModelMock)).thenReturn(true);
 
@@ -90,7 +89,6 @@ public class CommandsTest {
 
     @Test
     public void hardDrop() {
-        setup();
         HardDrop hardDrop = new HardDrop(pieceModelMock, observerMock, arenaModelMock);
 
         hardDrop.execute(pieceControllerMock);
@@ -103,7 +101,6 @@ public class CommandsTest {
 
     @Test
     public void rotateClockWise() {
-        setup();
         // Mock Gui
         Observer<ArenaModel> guiMock = mock(GameViewLanterna.class);
         when(guiMock.getHeight()).thenReturn(30);
@@ -129,7 +126,6 @@ public class CommandsTest {
 
     @Test
     public void rotateCounterClockWise() {
-        setup();
         // Mock Gui
         Observer<ArenaModel> guiMock = mock(GameViewLanterna.class);
         when(guiMock.getHeight()).thenReturn(30);
@@ -155,7 +151,6 @@ public class CommandsTest {
 
     @Test
     public void hold() {
-        setup();
         ArenaModel arenaModel = new ArenaModel();
         ArenaController arenaController = new ArenaController(observerMock, arenaModel);
         arenaController.nextPiece();
@@ -187,14 +182,12 @@ public class CommandsTest {
 
     @Test
     public void doNothing() {
-        setup();
         DoNothing doNothing = new DoNothing();
         assertTrue(doNothing.execute(pieceControllerMock));
     }
 
     @Test
     public void exitTerminal() throws IOException {
-        setup();
         ExitTerminal exitTerminal = new ExitTerminal(observerMock);
         assertTrue(exitTerminal.execute(pieceControllerMock));
     }

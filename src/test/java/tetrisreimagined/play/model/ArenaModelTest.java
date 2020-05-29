@@ -1,5 +1,6 @@
 package tetrisreimagined.play.model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 
@@ -13,13 +14,13 @@ import static org.mockito.Mockito.when;
 public class ArenaModelTest {
     private ArenaModel arenaModel;
 
+    @BeforeEach
     public void setup() {
         arenaModel = new ArenaModel();
     }
 
     @Test
     public void getLevel() {
-        setup();
         arenaModel.setLevel(5);
 
         assertEquals(5, arenaModel.getLevel());
@@ -27,7 +28,6 @@ public class ArenaModelTest {
 
     @Test
     public void getScore() {
-        setup();
         arenaModel.setScore(1234);
 
         assertEquals(1234, arenaModel.getScore());
@@ -35,7 +35,6 @@ public class ArenaModelTest {
 
     @Test
     public void getCurrentPieceModel() {
-        setup();
         PieceModel pieceModelMock = mock(PieceModel.class);
         arenaModel.setCurrentPieceModel(pieceModelMock);
 
@@ -44,7 +43,6 @@ public class ArenaModelTest {
 
     @Test
     public void getNextPieceModel() {
-        setup();
         PieceModel nextPieceModelMock = mock(PieceModel.class);
         PieceModel currentPieceModelMock = mock(PieceModel.class);
         arenaModel.setNextPieceModel(nextPieceModelMock);
@@ -56,7 +54,6 @@ public class ArenaModelTest {
 
     @Test
     public void arenaIsEmpty() {
-        setup();
         assertTrue(arenaModel.arenaIsEmpty());
 
         List<Block> blocks = new ArrayList<>();
@@ -76,7 +73,6 @@ public class ArenaModelTest {
 
     @Test
     public void getArenaBlocks() {
-        setup();
         List<Block> blocks = new ArrayList<>();
         Block blockMock = mock(Block.class);
         blocks.add(blockMock);
@@ -90,7 +86,6 @@ public class ArenaModelTest {
 
     @Test
     public void positionHasBlock() {
-        setup();
         List<Block> blocks = new ArrayList<>();
 
         Block blockMock1 = mock(Block.class);

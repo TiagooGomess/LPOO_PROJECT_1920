@@ -1,5 +1,6 @@
 package tetrisreimagined.play.model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import static org.mockito.Mockito.when;
 public class BlockTest {
     private List<Block> blocks;
 
+    @BeforeEach
     public void setup() {
         blocks = new ArrayList<>();
 
@@ -51,19 +53,16 @@ public class BlockTest {
 
     @Test
     public void getId1() {
-        setup();
         assertEquals(1, blocks.get(0).getId());
     }
 
     @Test
     public void getId2() {
-        setup();
         assertEquals(2, blocks.get(1).getId());
     }
 
     @Test
     public void getPosition1() {
-        setup();
 
         Position positionMock = mock(Position.class);
         when(positionMock.getX()).thenReturn(2);
@@ -77,7 +76,6 @@ public class BlockTest {
 
     @Test
     public void getPosition2() {
-        setup();
 
         Position positionMock = mock(Position.class);
         when(positionMock.getX()).thenReturn(42);
@@ -91,7 +89,6 @@ public class BlockTest {
 
     @Test
     public void getColor1() {
-        setup();
 
         Color colorMock = mock(Color.class);
         when(colorMock.getCode()).thenReturn("#FF0FFF");
@@ -103,7 +100,6 @@ public class BlockTest {
 
     @Test
     public void getColor2() {
-        setup();
 
         Color colorMock = mock(Color.class);
         when(colorMock.getCode()).thenReturn("#FFFFFF");

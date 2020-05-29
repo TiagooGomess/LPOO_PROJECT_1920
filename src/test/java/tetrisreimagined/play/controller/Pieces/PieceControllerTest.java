@@ -1,5 +1,6 @@
 package tetrisreimagined.play.controller.Pieces;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tetrisreimagined.observer.Observer;
 import tetrisreimagined.play.model.ArenaModel;
@@ -27,7 +28,7 @@ public class PieceControllerTest {
     Observer observerMock;
     List<Block> allBlocks;
 
-
+    @BeforeEach
     public void setup() {
 
         pieceControllers = new ArrayList<>();
@@ -135,55 +136,46 @@ public class PieceControllerTest {
 
     @Test
     public void getPieceModel1() {
-        setup();
         assertEquals(pieceModelsMocks.get(0), pieceControllers.get(0).getPieceModel());
     }
 
     @Test
     public void getPieceModel2() {
-        setup();
         assertEquals(pieceModelsMocks.get(1), pieceControllers.get(1).getPieceModel());
     }
 
     @Test
     public void canGoRight1() {
-        setup();
         assertTrue(pieceControllers.get(0).canGoRight(observerMock, arenaModelMock));
     }
 
     @Test
     public void canGoRight2() {
-        setup();
         assertFalse(pieceControllers.get(1).canGoRight(observerMock, arenaModelMock));
     }
 
     @Test
     public void canGoLeft1() {
-        setup();
         assertFalse(pieceControllers.get(0).canGoLeft(observerMock, arenaModelMock));
     }
 
     @Test
     public void canGoLeft2() {
-        setup();
         assertTrue(pieceControllers.get(1).canGoLeft(observerMock, arenaModelMock));
     }
 
     @Test
     public void canGoDown1() {
-        setup();
         assertTrue(pieceControllers.get(0).canGoDown(observerMock, arenaModelMock));
     }
 
     @Test
     public void canGoDown2() {
-        setup();
         assertFalse(pieceControllers.get(1).canGoDown(observerMock, arenaModelMock));
     }
 
     @Test
     public void getBlockId() {
-        setup();
         List<Block> blocks = new ArrayList<>();
 
         Block blockMock1 = mock(Block.class);
@@ -208,7 +200,6 @@ public class PieceControllerTest {
 
     @Test
     public void getBlockById() {
-        setup();
         PieceController pieceController = new PieceController(pieceModelMock1);
         assertEquals(pieceModelMock1.getBlocks().get(2), pieceController.getBlockById(3));
 
@@ -216,7 +207,6 @@ public class PieceControllerTest {
 
     @Test
     public void pieceCanRotateClockWise() {
-        setup();
 
         // Mock Gui
         Observer<ArenaModel> guiMock = mock(GameViewLanterna.class);

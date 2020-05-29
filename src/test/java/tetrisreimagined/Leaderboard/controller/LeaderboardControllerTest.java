@@ -1,6 +1,7 @@
 package tetrisreimagined.Leaderboard.controller;
 
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.Leaderboard.LeaderboardController;
@@ -18,6 +19,7 @@ public class LeaderboardControllerTest {
     LeaderboardViewLanterna gui;
     LeaderboardController controller;
 
+    @BeforeEach
     public void setup() {
         gui = Mockito.mock(LeaderboardViewLanterna.class);
         LeaderboardModel model = Mockito.mock(LeaderboardModel.class);
@@ -27,7 +29,6 @@ public class LeaderboardControllerTest {
 
     @Test
     public void testStart() throws IOException {
-        setup();
         when(gui.getLeaderboardCommand()).thenReturn(new BackToMenu());
         assertTrue(controller.start() instanceof BackToMenu);
     }

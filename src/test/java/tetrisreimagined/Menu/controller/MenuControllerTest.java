@@ -1,5 +1,6 @@
 package tetrisreimagined.Menu.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.Menu.controller.MenuCommands.ExitTerminal;
@@ -19,6 +20,7 @@ public class MenuControllerTest {
     MenuViewLanterna gui;
     MenuController menuController;
 
+    @BeforeEach
     public void setup() {
         gui = Mockito.mock(MenuViewLanterna.class);
         MenuModel menuModel = Mockito.mock(MenuModel.class);
@@ -28,7 +30,6 @@ public class MenuControllerTest {
 
     @Test
     public void testStart() throws IOException {
-        setup();
         when(gui.getMenuCommand()).thenReturn(new StartGameSinglePlayer());
         assertTrue(menuController.start() instanceof StartGameSinglePlayer);
 

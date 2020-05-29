@@ -9,6 +9,7 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.LanternaHandler;
@@ -28,6 +29,7 @@ public class GameViewLanternaTest {
     TerminalScreen screen;
     TextGraphics graphics;
 
+    @BeforeEach
     public void setup() {
 
         screen = Mockito.mock(TerminalScreen.class);
@@ -39,7 +41,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testDrawPiece() {
-        setup();
         PieceModel pieceModel = new OBlockModel();
 
         view.drawPiece(pieceModel);
@@ -57,7 +58,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testDrawScore() {
-        setup();
         view.drawScore(0, 0, 10);
 
         Mockito.verify(graphics, Mockito.times(1)).setBackgroundColor(TextColor.Factory.fromString("#000000"));
@@ -66,7 +66,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testInitialDraw() {
-        setup();
         view.initialDraw();
 
         Mockito.verify(graphics, Mockito.times(1)).setBackgroundColor(TextColor.Factory.fromString("#ffffff"));
@@ -80,7 +79,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testDrawBigScore() throws IOException {
-        setup();
         view.drawBigScore(0, 0, 25);
 
         Mockito.verify(graphics, Mockito.times(1)).setBackgroundColor(TextColor.Factory.fromString("#ff0000"));
@@ -93,7 +91,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testDrawNextPiece() {
-        setup();
         PieceModel pieceModel = new TBlockModel();
 
         view.drawNextPiece(pieceModel, 0, 0);
@@ -105,7 +102,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testDrawHoldPiece() {
-        setup();
         PieceModel pieceModel = new TBlockModel();
 
         view.drawHoldPiece(pieceModel, 0, 0);
@@ -117,7 +113,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testDrawAll() throws IOException {
-        setup();
         ArenaModel arenaModel = new ArenaModel();
         PieceModel pieceModel1 = new OBlockModel();
         PieceModel pieceModel4 = new ZBlockModel();
@@ -166,7 +161,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testCloseTerminal() throws IOException {
-        setup();
         view.closeTerminal();
 
         Mockito.verify(screen, Mockito.times(1)).close();
@@ -174,7 +168,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testGetCommandMoveRight() throws IOException {
-        setup();
         ArenaModel arenaModel = new ArenaModel();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
@@ -188,7 +181,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testGetCommandMoveLeft() throws IOException {
-        setup();
         ArenaModel arenaModel = new ArenaModel();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
@@ -202,7 +194,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testGetCommandMoveDown() throws IOException {
-        setup();
         ArenaModel arenaModel = new ArenaModel();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
@@ -216,7 +207,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testGetCommandRotateClockWise() throws IOException {
-        setup();
         ArenaModel arenaModel = new ArenaModel();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
@@ -230,7 +220,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testGetCommandRotateCounterClockWise() throws IOException {
-        setup();
         ArenaModel arenaModel = new ArenaModel();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
@@ -245,7 +234,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testGetCommandHardDrop() throws IOException {
-        setup();
         ArenaModel arenaModel = new ArenaModel();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
@@ -260,7 +248,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testGetCommandPauseGame() throws IOException {
-        setup();
         ArenaModel arenaModel = new ArenaModel();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
@@ -274,7 +261,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testGetCommandHold() throws IOException {
-        setup();
         ArenaModel arenaModel = new ArenaModel();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
@@ -289,7 +275,6 @@ public class GameViewLanternaTest {
 
     @Test
     public void testGetCommandExitTerminal() throws IOException {
-        setup();
         ArenaModel arenaModel = new ArenaModel();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
