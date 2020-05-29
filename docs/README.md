@@ -129,7 +129,8 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 >que lidam com as peças. Foram também utilizadas diversas Mocks de modo a aprimorar os mesmos. 
 >Por fim, realizamos ***Property Based Testing - PBT***, numa pequena simulação do jogo (executando comandos aleatórios em diferentes peças)
 >em que no final verificávamos se todas as peças continuavam no perímetro da Arena.
->O mesmo é visível no seguinte link: https://github.com/FEUP-LPOO/lpoo-2020-g22/blob/b0f30581b3d9c84c1107b54aa12133f9c69ff282/src/test/java/tetrisreimagined/play/controller/ArenaControllerTest.java#L208-L261
+>O mesmo é visível no seguinte link: 
+>https://github.com/FEUP-LPOO/lpoo-2020-g22/blob/b0f30581b3d9c84c1107b54aa12133f9c69ff282/src/test/java/tetrisreimagined/play/controller/ArenaControllerTest.java#L208-L261
 
 ### Coverage Report
 
