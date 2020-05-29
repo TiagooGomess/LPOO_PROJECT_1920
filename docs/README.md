@@ -121,13 +121,15 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 
 
 # Testing
->Os testes implementados incidem nas classes implementadas. Temos 82% das classes testadas,
->76% nos métodos e 73% nas linhas. Vale a pena sublinhar que a maior razão pela qual estes valores
+>Os testes implementados incidem nas classes implementadas. Temos 96% das classes testadas,
+>88% nos métodos e 85% nas linhas. Vale a pena sublinhar que a maior razão pela qual estes valores
 >não se encontram no 100% é porque há métodos pequenos que não vale a pena serem testadas simplesmente
->porque são demasiado simples. Relativamente aos mutantes, obvitemos uma taxa de sucesso de 50%. Matamos 156 dos 310 mutantes gerados.
+>porque são demasiado simples. Relativamente aos mutantes, obtivemos uma taxa de sucesso de 65%. Matamos 371 dos 571 mutantes gerados.
 >Consideramos que este resultado se deve, sobretudo à dificuldade encontrada em realizar testes eficientes às funções
->que lidam com as peças e também relacionados com o facto de haver um ou outro ficheiro com carência de testes. 
->Foram também utilizadas diversas Mocks de modo a aprimorar os mesmos. 
+>que lidam com as peças. Foram também utilizadas diversas Mocks de modo a aprimorar os mesmos. 
+>Por fim, realizamos ***Property Based Testing - PBT***, numa pequena simulação do jogo (executando comandos aleatórios em diferentes peças)
+>em que no final verificávamos se todas as peças continuavam no perímetro da Arena.
+>O mesmo é visível no seguinte link: https://github.com/FEUP-LPOO/lpoo-2020-g22/blob/b0f30581b3d9c84c1107b54aa12133f9c69ff282/src/test/java/tetrisreimagined/play/controller/ArenaControllerTest.java#L208-L261
 
 ### Coverage Report
 
