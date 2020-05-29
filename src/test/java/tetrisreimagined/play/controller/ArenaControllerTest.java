@@ -293,4 +293,27 @@ public class ArenaControllerTest {
             assert(block.getPosition().getY() == 1 || block.getPosition().getY() == 2);
         }
     }
+
+    @Test
+    public void checkIfScoreTest() {
+        arenaModel2 = new ArenaModel();
+        observerMock2 = mock(Observer.class);
+        arenaController2 = new ArenaController(observerMock2, arenaModel2);
+
+        when(observerMock2.getHeight()).thenReturn(20);
+        when(observerMock2.getWidth()).thenReturn(20);
+
+        arenaModel2.addPiece(new IBlockModel());
+
+        arenaController2.checkIfScore();
+
+        assertEquals(0, arenaModel2.getScore());
+
+        arenaModel2.removeArenaBlocks(arenaModel2.getArenaBlocks());
+
+        arenaController2.checkIfScore();
+
+        // Arena Vazia -> Score aumenta 2000
+        assertEquals(2000, arenaModel2.getScore());
+    }
 }
