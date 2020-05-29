@@ -1,7 +1,17 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        //Needed only for SNAPSHOT versions
+        //maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    }
+    dependencies {
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.5.1'
+    }
+}
 plugins {
     id 'java'
     id 'application'
-    id 'info.solidsoft.pitest' version '1.4.6'
+    id 'info.solidsoft.pitest' version '1.5.1'
 }
 
 group 'tetrisreimagined'
@@ -27,4 +37,11 @@ dependencies {
 
 application {
     mainClassName = 'java/tetrisreimagined/Application'
+}
+
+apply plugin: 'info.solidsoft.pitest'
+
+pitest {
+    pitestVersion = "1.5.1"
+    junit5PluginVersion = '0.12'
 }

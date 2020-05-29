@@ -132,11 +132,11 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 ### Coverage Report
 
 ![ALT TEXT](Images/CoverageAgain.PNG)
-![ALT TEXT](Images/Coverage.PNG)
+![ALT TEXT](Images/Coverage.png)
 
 
 ### Mutation Report
-![ALT TEXT](Images/PITestPNG.PNG)
+![ALT TEXT](Images/PitTest.png)
   
 # Self-evaluation
 >Apesar da quarentena, este projeto foi desenvolvido com recurso a um Plug-in do IntelliJ, denominado

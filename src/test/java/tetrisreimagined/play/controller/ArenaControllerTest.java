@@ -200,10 +200,8 @@ public class ArenaControllerTest {
 
         arenaController2.removeLine(observerMock2.getHeight() - 1);
 
-        for(Block block: arenaModel2.getArenaBlocks()) {
-            System.out.println(block.getPosition().getY());
+        for(Block block: arenaModel2.getArenaBlocks())
             assertNotEquals(observerMock2.getHeight() - 1, block.getPosition().getY());
-        }
 
     }
 
@@ -233,7 +231,7 @@ public class ArenaControllerTest {
         }
     }
 
-    @Property(tries = 250)
+    @Property(tries = 100)
     public void checkTryMoveDown(@ForAll long seed) {
         arenaModel2 = new ArenaModel();
         observerMock2 = mock(Observer.class);
