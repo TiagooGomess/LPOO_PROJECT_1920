@@ -14,7 +14,7 @@ public class LeaderBoardState extends GameState {
     LeaderboardViewLanterna gui;
     LeaderboardController controller;
 
-    public LeaderBoardState(Game game, LanternaHandler lanternaHandler) throws InterruptedException, CloneNotSupportedException, IOException {
+    public LeaderBoardState(Game game, LanternaHandler lanternaHandler) {
         super(game);
         this.leaderboardModel = new LeaderboardModel();
         this.gui = new LeaderboardViewLanterna(lanternaHandler);
@@ -22,11 +22,11 @@ public class LeaderBoardState extends GameState {
     }
 
     @Override
-    public void buttonPressed(Game.BUTTON button) throws InterruptedException, CloneNotSupportedException, IOException {
+    public void buttonPressed(Game.BUTTON button) {
         game.setGameState(new MenuState(game, game.getLanternaHandler()));
     }
 
-    public InstructionsCommand updateView() throws IOException, InterruptedException, CloneNotSupportedException {
+    public InstructionsCommand updateView() throws IOException {
         leaderboardModel.readLeaderboardFile();
         InstructionsCommand command = controller.start();
 

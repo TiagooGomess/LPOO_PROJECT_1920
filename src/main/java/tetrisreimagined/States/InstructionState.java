@@ -23,11 +23,11 @@ public class InstructionState extends GameState{
     }
 
     @Override
-    public void buttonPressed(Game.BUTTON button) throws InterruptedException, CloneNotSupportedException, IOException {
+    public void buttonPressed(Game.BUTTON button) {
         game.setGameState(new MenuState(game, game.getLanternaHandler()));
     }
 
-    public InstructionsCommand updateView() throws IOException, InterruptedException, CloneNotSupportedException {
+    public InstructionsCommand updateView() throws IOException {
         InstructionsCommand command = controller.start();
 
         buttonPressed(Game.BUTTON.MENU);
