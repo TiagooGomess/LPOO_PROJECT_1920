@@ -127,7 +127,7 @@ Este projeto foi desenvolvido por Rui Pinto (up201806441@fe.up.pt) e Tiago Gomes
 >porque são demasiado simples. Relativamente aos mutantes, obvitemos uma taxa de sucesso de 50%. Matamos 156 dos 310 mutantes gerados.
 >Consideramos que este resultado se deve, sobretudo à dificuldade encontrada em realizar testes eficientes às funções
 >que lidam com as peças e também relacionados com o facto de haver um ou outro ficheiro com carência de testes. 
->Foram também utilizadas diversas Mocks de modo a aprimorar os mesmos.
+>Foram também utilizadas diversas Mocks de modo a aprimorar os mesmos. 
 
 ### Coverage Report
 

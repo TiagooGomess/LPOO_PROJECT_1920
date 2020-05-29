@@ -13,6 +13,8 @@ import tetrisreimagined.play.controller.Pieces.PieceController;
 import tetrisreimagined.play.model.ArenaModel;
 import tetrisreimagined.play.model.Block;
 import tetrisreimagined.play.model.Color;
+import tetrisreimagined.play.model.Pieces.IBlockModel;
+import tetrisreimagined.play.model.Pieces.OBlockModel;
 import tetrisreimagined.play.model.Pieces.PieceModel;
 import tetrisreimagined.play.model.Position;
 
@@ -164,6 +166,48 @@ public class ArenaControllerTest {
     @Test
     public void checkLine3() {
         assertFalse(arenaController.checkLine(22));
+    }
+
+    @Test
+    public void removeLineTest() { // We can have overlapping pieces. Doesn't matter for the test. We just want to remove the line.
+        PieceModel pModel1 = new IBlockModel();
+
+        for(int i = 0; i < observerMock2.getHeight(); i++) {
+            if(pModel1.getMaxYPosition().getY() + 1 > observerMock2.getHeight() - 1)
+                break;
+            for(Block block: pModel1.getBlocks())
+                block.setPosition(block.getPosition().down());
+        }
+
+        PieceModel pModel2 = new IBlockModel();
+
+        for(int i = 0; i < observerMock2.getHeight(); i++) {
+            if(pModel2.getMaxYPosition().getY() + 1 > observerMock2.getHeight() - 1)
+                break;
+            for(Block block: pModel2.getBlocks())
+                block.setPosition(block.getPosition().down());
+        }
+
+        PieceModel pModel3 = new OBlockModel();
+
+        for(int i = 0; i < observerMock2.getHeight(); i++) {
+            if(pModel3.getMaxYPosition().getY() + 1 > observerMock2.getHeight() - 1)
+                break;
+            for(Block block: pModel3.getBlocks())
+                block.setPosition(block.getPosition().down());
+        }
+
+        arenaModel2.addPiece(pModel1);
+        arenaModel2.addPiece(pModel2);
+        arenaModel2.addPiece(pModel3);
+
+        arenaController2.removeLine(observerMock2.getHeight() - 1);
+
+        for(Block block: arenaModel2.getArenaBlocks()) {
+            System.out.println(block.getPosition().getY());
+            assertNotEquals(observerMock2.getHeight() - 1, block.getPosition().getY());
+        }
+
     }
 
     public void executeRandomCommand(long seed, PieceModel pModel, Observer<ArenaModel> gui, ArenaModel gameModel, PieceController pController) {

@@ -120,6 +120,7 @@ public class ArenaController {
             default:
                 newPiece = new ZBlockModel();
         }
+        newPiece = new IBlockModel();
         if(numIteration++ == 0) {
             this.nextPieceController = new PieceController(newPiece);
             return;
