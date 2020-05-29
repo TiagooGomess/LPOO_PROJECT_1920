@@ -28,12 +28,12 @@ public class GameOverState extends GameState {
     }
 
     @Override
-    public void buttonPressed(Game.BUTTON button) throws InterruptedException, CloneNotSupportedException, IOException {
+    public void buttonPressed(Game.BUTTON button) {
         game.setGameState(new MenuState(game, game.getLanternaHandler()));
     }
 
     @Override
-    public InstructionsCommand updateView() throws IOException, InterruptedException, CloneNotSupportedException {
+    public InstructionsCommand updateView() throws IOException {
         this.gui.drawBigScore((game.getLanternaHandler().getWidth() / 2) - 8, game.getLanternaHandler().getHeight() / 3, game.getArena().getScore());
         writeScoreToFile(game.getArena().getScore());
 
@@ -44,7 +44,7 @@ public class GameOverState extends GameState {
     }
 
     private void readUntilEnter() throws IOException {
-        KeyStroke key = null;
+        KeyStroke key;
 
         do {
             key = this.gui.getScreen().readInput();
