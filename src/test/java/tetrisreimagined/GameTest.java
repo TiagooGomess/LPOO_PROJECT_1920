@@ -3,6 +3,7 @@ package tetrisreimagined;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tetrisreimagined.States.GameState;
 import tetrisreimagined.play.model.ArenaModel;
@@ -20,6 +21,7 @@ public class GameTest {
     TerminalScreen screen;
     TextGraphics graphics;
 
+    @BeforeEach
     public void setup() {
 
         screen = mock(TerminalScreen.class);
@@ -34,20 +36,17 @@ public class GameTest {
 
     @Test
     public void getLanternaHandler() {
-        setup();
         assertEquals(handler, game.getLanternaHandler());
     }
 
     @Test
     public void setGetGameState() {
-        setup();
         game.setGameState(gameState);
         assertEquals(gameState, game.getGameState());
     }
 
     @Test
     public void setGetArena() {
-        setup();
         game.setArena(arena);
         assertEquals(arena, game.getArena());
     }

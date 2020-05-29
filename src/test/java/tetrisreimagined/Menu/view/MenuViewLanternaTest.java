@@ -8,6 +8,7 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.LanternaHandler;
@@ -29,6 +30,7 @@ public class MenuViewLanternaTest {
     TerminalScreen screen;
     TextGraphics graphics;
 
+    @BeforeEach
     public void setup() {
 
         screen = Mockito.mock(TerminalScreen.class);
@@ -40,7 +42,6 @@ public class MenuViewLanternaTest {
 
     @Test
     public void drawAll() throws IOException {
-        setup();
 
         view.drawAll();
 
@@ -57,7 +58,6 @@ public class MenuViewLanternaTest {
 
     @Test
     public void closeTerminal() throws IOException {
-        setup();
 
         view.closeTerminal();
 
@@ -66,7 +66,6 @@ public class MenuViewLanternaTest {
 
     @Test
     public void getCommandStartGameSinglePlayer() throws IOException {
-        setup();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
         Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Character);
@@ -80,7 +79,6 @@ public class MenuViewLanternaTest {
 
     @Test
     public void getCommandOpenLeaderboard() throws IOException {
-        setup();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
         Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Character);
@@ -94,7 +92,6 @@ public class MenuViewLanternaTest {
 
     @Test
     public void getCommandOpenInstructions() throws IOException {
-        setup();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
         Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Character);
@@ -108,7 +105,6 @@ public class MenuViewLanternaTest {
 
     @Test
     public void getCommandExitTerminal() throws IOException {
-        setup();
 
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
         Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Escape);

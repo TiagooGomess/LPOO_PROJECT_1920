@@ -7,6 +7,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.LanternaHandler;
@@ -27,6 +28,7 @@ public class LeaderboardViewLanternaTest {
     TerminalScreen screen;
     TextGraphics graphics;
 
+    @BeforeEach
     public void setup() {
 
         screen = Mockito.mock(TerminalScreen.class);
@@ -38,7 +40,6 @@ public class LeaderboardViewLanternaTest {
 
     @Test
     public void drawAll() throws IOException {
-        setup();
 
         LeaderboardModel model = new LeaderboardModel();
         model.readLeaderboardFile();
@@ -67,7 +68,6 @@ public class LeaderboardViewLanternaTest {
 
     @Test
     public void closeTerminal() throws IOException {
-        setup();
         view.closeTerminal();
 
         Mockito.verify(screen, Mockito.times(1)).close();
@@ -75,7 +75,6 @@ public class LeaderboardViewLanternaTest {
 
     @Test
     public void getCommandBackToMenu() throws IOException {
-        setup();
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
         Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(KeyType.Escape);
         Mockito.when(screen.readInput()).thenReturn(keyStrokeMock1);
@@ -87,7 +86,6 @@ public class LeaderboardViewLanternaTest {
 
     @Test
     public void getCommandDoNothing() throws IOException {
-        setup();
         KeyStroke keyStrokeMock1 = Mockito.mock(KeyStroke.class);
         Mockito.when(keyStrokeMock1.getKeyType()).thenReturn(null);
         Mockito.when(screen.readInput()).thenReturn(keyStrokeMock1);

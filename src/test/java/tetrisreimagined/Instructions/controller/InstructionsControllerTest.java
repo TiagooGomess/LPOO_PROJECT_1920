@@ -1,5 +1,6 @@
 package tetrisreimagined.Instructions.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import tetrisreimagined.Instructions.InstructionsController;
@@ -18,6 +19,7 @@ public class InstructionsControllerTest {
     InstructionsViewLanterna gui;
     InstructionsController controller;
 
+    @BeforeEach
     public void setup() {
         gui = Mockito.mock(InstructionsViewLanterna.class);
         InstructionsModel model = Mockito.mock(InstructionsModel.class);
@@ -27,7 +29,6 @@ public class InstructionsControllerTest {
 
     @Test
     public void testStart() throws IOException {
-        setup();
         when(gui.getInstructionCommand()).thenReturn(new BackToMenu());
         assertTrue(controller.start() instanceof BackToMenu);
     }

@@ -1,5 +1,6 @@
 package tetrisreimagined.play.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tetrisreimagined.observer.Observer;
 import tetrisreimagined.play.controller.Pieces.PieceController;
@@ -25,6 +26,7 @@ public class ArenaControllerTest {
     ArenaModel arenaModel2;
     Observer observerMock2;
 
+    @BeforeEach
     public void setup() {
 
         Observer observerMock = mock(Observer.class);
@@ -144,25 +146,21 @@ public class ArenaControllerTest {
 
     @Test
     public void checkLine1() {
-        setup();
         assertTrue(arenaController.checkLine(20));
     }
 
     @Test
     public void checkLine2() {
-        setup();
         assertFalse(arenaController.checkLine(21));
     }
 
     @Test
     public void checkLine3() {
-        setup();
         assertFalse(arenaController.checkLine(22));
     }
 
     @Test
     public void checkTryMoveDown() {
-        setup();
         // verifica se o y mínimo de uma peça é 0 e se o Y max de uma peça é igual a height - 1.
         arenaController2.nextPiece();
         assertEquals(0, arenaModel2.getCurrentPieceModel().getMinYPosition().getY());
@@ -171,13 +169,5 @@ public class ArenaControllerTest {
             counter = arenaController2.tryMoveDown(counter, 1);
         }
         assertEquals(observerMock2.getHeight()-1, arenaModel2.getCurrentPieceModel().getMaxYPosition().getY());
-    }
-
-    @Test
-    public void moveRight() {
-        setup();
-        // verifica se uma peça é movida para a direita com o comando MoveRight
-//        arenaController2.nextPiece();
-//        arenaController2.getCurrentPieceController()
     }
 }
